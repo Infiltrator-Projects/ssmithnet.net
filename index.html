@@ -2,108 +2,153 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#080a0e">
-<meta name="description" content="Shannon Smith — technology, machines, open source, cars, audio and things worth tinkering with.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b0f">
+<meta name="description" content="Shannon Smith — ICT, technology, machines, music and things worth tinkering with.">
 <title>Shannon Smith — ssmithnet.net</title>
 <style>
 @font-face{font-family:"MB Corpo A Title Cond WEB";src:url("assets/fonts/mb-corpo-a-cond-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"MB Corpo S Title WEB";src:url("assets/fonts/mb-corpo-s-regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"MB Corpo S Title WEB";src:url("assets/fonts/mb-corpo-s-bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
-:root{--bg:#07090d;--panel:rgba(15,20,27,.88);--line:#28323d;--line2:#3c4a57;--text:#f4f7f9;--muted:#aeb9c3;--cyan:#72dcff;--green:#8be6a5;--silver:#d8dee4;--mb-s:"MB Corpo S Title WEB",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--mb-a:"MB Corpo A Title Cond WEB",system-ui,-apple-system,sans-serif}
+:root{
+  --bg:#080a0e;
+  --panel:rgba(17,21,28,.82);
+  --line:#29313c;
+  --line-strong:#394653;
+  --text:#f3f6f8;
+  --muted:#b7c0c9;
+  --cyan:#72dcff;
+  --green:#8be6a5;
+  --shadow:0 24px 70px rgba(0,0,0,.35);
+  --mb-s:"MB Corpo S Title WEB",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --mb-a:"MB Corpo A Title Cond WEB",system-ui,-apple-system,sans-serif;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;background:radial-gradient(circle at 12% 0%,#18252f 0,transparent 28%),radial-gradient(circle at 88% 12%,#13202a 0,transparent 26%),linear-gradient(180deg,#080b0f,#080a0e 42%,#06080b);color:var(--text);font:16px/1.6 var(--mb-s);font-synthesis:none;-webkit-font-smoothing:antialiased}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 10% 0%,#17232d 0,transparent 34%),radial-gradient(circle at 90% 18%,#14202a 0,transparent 30%),linear-gradient(180deg,#080a0e,#0b0f14 48%,#07090c);color:var(--text);font:17px/1.62 var(--mb-s);font-synthesis:none;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 .shell{width:min(1180px,calc(100% - 56px));margin:auto}
-nav{display:flex;justify-content:space-between;align-items:center;padding:28px 0 20px;border-bottom:1px solid rgba(40,50,61,.45)}
-.brand{font-family:var(--mb-a);font-size:25px;letter-spacing:.04em}.brand span{color:var(--cyan)}
-.navright{display:flex;align-items:center;gap:28px}.navlinks{display:flex;gap:26px;color:var(--muted);font:700 14px var(--mb-s)}.navlinks a:hover{color:var(--text)}
-.navstatus{color:var(--cyan);font:700 11px var(--mb-s);letter-spacing:.16em;text-transform:uppercase}
-.hero{padding:88px 0 92px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.72fr);gap:70px;align-items:center}
-.kicker{font:700 11px var(--mb-s);letter-spacing:.19em;text-transform:uppercase;color:var(--cyan)}
-h1{font-family:var(--mb-a);font-weight:400;font-size:clamp(60px,7vw,96px);line-height:.9;letter-spacing:-.045em;margin:15px 0 28px;max-width:760px}
-.lead{font-size:20px;line-height:1.5;color:var(--muted);max-width:650px;margin:0}
-.identity{margin-top:30px;display:flex;flex-wrap:wrap;gap:9px}.chip{padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(12,17,23,.72);font-size:12px;color:#dbe3e9}
-.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;gap:9px;padding:12px 17px;border:1px solid var(--line);border-radius:11px;background:#10151b;font:700 15px var(--mb-s)}.btn.primary{background:#ebfaff;color:#071017;border-color:#ebfaff}.btn:hover{transform:translateY(-1px);border-color:var(--line2)}
-.console{border:1px solid var(--line2);background:linear-gradient(180deg,rgba(21,28,36,.96),rgba(9,13,18,.95));border-radius:22px;overflow:hidden;box-shadow:0 28px 80px rgba(0,0,0,.34)}
-.console-top{height:42px;padding:12px 15px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.dots{display:flex;gap:7px}.dot{width:9px;height:9px;border-radius:50%;background:#556371}.console-title{font:700 10px var(--mb-s);letter-spacing:.15em;color:#7f8b96;text-transform:uppercase}
-.console-body{padding:25px 25px 27px;font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;color:#d9e2e8}.row{display:flex;gap:12px}.key{color:#7f8b96;min-width:86px}.value{color:#e7edf1}.prompt{color:var(--green)}.accent{color:var(--cyan)}
-section{padding:56px 0}.rule{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:0 0 54px}
-.section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.75fr);gap:36px;align-items:end;margin-bottom:24px}.section-head h2{font-family:var(--mb-a);font-size:40px;line-height:.98;font-weight:400;letter-spacing:-.025em;margin:7px 0 0}.section-head p{margin:0;color:var(--muted);font-size:16px;line-height:1.5}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{position:relative;padding:24px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(15,20,27,.86),rgba(10,14,19,.9));border-radius:18px;min-height:225px;transition:transform .18s ease,border-color .18s ease}.card:hover{transform:translateY(-3px);border-color:var(--line2)}.card .tag{color:var(--cyan);font:700 10px var(--mb-s);letter-spacing:.15em;text-transform:uppercase}.card h3{font-family:var(--mb-a);font-size:29px;line-height:1;margin:11px 0 13px;font-weight:400}.card p{margin:0;color:var(--muted);font-size:15px;line-height:1.55}.card .mark{position:absolute;right:20px;top:20px;color:#4c5b68;font:11px ui-monospace,monospace}
-.profile{display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,.8fr);gap:22px;align-items:stretch}.bio{padding:30px;border:1px solid var(--line);border-radius:18px;background:rgba(13,18,24,.76)}.bio h3{font-family:var(--mb-a);font-size:34px;font-weight:400;margin:0 0 12px}.bio p{margin:0;color:var(--muted);font-size:17px;line-height:1.6}.facts{display:grid;gap:12px}.fact{padding:18px 19px;border:1px solid var(--line);border-radius:16px;background:rgba(13,18,24,.72)}.fact .label{color:var(--cyan);font:700 10px var(--mb-s);letter-spacing:.14em;text-transform:uppercase}.fact .value{font-family:var(--mb-a);font-size:24px;margin-top:4px}
-.timeline{border-left:1px solid var(--line);margin-left:8px;padding-left:25px}.event{margin-bottom:28px}.event:last-child{margin-bottom:0}.event time{font:700 11px ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--cyan);letter-spacing:.1em}.event strong{display:block;font-family:var(--mb-a);font-size:27px;line-height:1.02;font-weight:400;margin-top:6px}.event p{margin:7px 0 0;color:var(--muted);font-size:15px}
-.quote{margin-top:42px;padding:28px 30px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(90deg,rgba(18,24,31,.92),rgba(10,14,19,.8));font-size:21px;line-height:1.45}.quote small{display:block;color:var(--muted);margin-top:9px;font-size:13px}
-footer{padding:72px 0 34px;color:#74818c;font-size:13px}.footerline{display:flex;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding-top:21px}
-@media(max-width:920px){.hero{grid-template-columns:1fr;gap:32px;padding-top:58px}.console{max-width:760px}.section-head,.profile{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.shell{width:min(100% - 28px,1180px)}nav{padding-top:20px}.navright{gap:0}.navlinks,.navstatus{display:none}.hero{padding:44px 0 58px}.grid{grid-template-columns:1fr}h1{font-size:clamp(54px,16vw,72px)}.lead{font-size:18px}.section-head h2{font-size:36px}.footerline{flex-direction:column}}
+nav{display:flex;justify-content:space-between;align-items:center;padding:28px 0 22px}
+.brand{font-family:var(--mb-a);font-size:25px;font-weight:400;letter-spacing:.045em}.brand span{color:var(--cyan)}
+.navlinks{display:flex;gap:28px;color:var(--muted);font:700 15px var(--mb-s)}
+.navlinks a{transition:color .18s ease}.navlinks a:hover{color:var(--text)}
+.hero{padding:76px 0 72px;display:grid;grid-template-columns:minmax(0,1.14fr) minmax(360px,.86fr);gap:56px;align-items:center}
+.kicker{color:var(--cyan);font:700 12px var(--mb-s);letter-spacing:.17em;text-transform:uppercase}
+h1{font-family:var(--mb-a);font-size:clamp(52px,5.7vw,72px);line-height:.99;letter-spacing:-.035em;margin:14px 0 24px;font-weight:400;max-width:760px}
+.lead{font-size:21px;line-height:1.55;color:var(--muted);max-width:730px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{font-family:var(--mb-s);display:inline-flex;align-items:center;justify-content:center;padding:13px 18px;border:1px solid var(--line);border-radius:12px;background:#11161d;font-weight:700;font-size:16px;transition:transform .18s ease,border-color .18s ease}
+.btn.primary{background:#e9f9ff;color:#071017;border-color:#e9f9ff}.btn:hover{transform:translateY(-1px);border-color:var(--line-strong)}
+.console{border:1px solid var(--line-strong);background:linear-gradient(180deg,rgba(20,26,34,.94),rgba(10,14,19,.93));border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.console-top{padding:12px 15px;border-bottom:1px solid var(--line);display:flex;gap:7px}.dot{width:9px;height:9px;border-radius:50%;background:#556371}
+.console-body{padding:24px;font:13px/1.78 ui-monospace,SFMono-Regular,Consolas,monospace;color:#dce4eb}.prompt{color:var(--green)}
+section{padding:58px 0}
+.section-head{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);align-items:end;gap:32px;margin-bottom:24px}
+.section-head h2{font-family:var(--mb-a);margin:6px 0 0;font-size:36px;line-height:1.02;letter-spacing:-.02em;font-weight:400}
+.section-head p{margin:0;color:var(--muted);font-size:17px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{border:1px solid var(--line);background:var(--panel);border-radius:18px;padding:24px;min-height:225px;transition:transform .18s ease,border-color .18s ease}
+.card:hover{border-color:var(--line-strong);transform:translateY(-2px)}
+.card .tag{color:var(--cyan);font:700 11px var(--mb-s);letter-spacing:.13em;text-transform:uppercase}
+.card h3{font-family:var(--mb-a);font-size:27px;line-height:1.02;margin:11px 0 12px;font-weight:400}.card p{color:var(--muted);margin:0;font-size:16px;line-height:1.58}
+.life-section{padding-top:36px;padding-bottom:30px}
+.life-grid{margin-bottom:30px}
+.story-wrap{display:grid;grid-template-columns:1fr;gap:20px;margin-top:0}
+.story-panel{border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,rgba(15,19,25,.9),rgba(9,13,18,.82));padding:28px;box-shadow:var(--shadow)}
+.story-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.72fr);align-items:end;gap:28px;margin-bottom:20px}
+.story-head .kicker{display:block;margin-bottom:9px}.story-head h2{font-family:var(--mb-a);font-size:38px;line-height:1.02;letter-spacing:-.02em;margin:0;font-weight:400}
+.story-head p{margin:0;color:var(--muted);font-size:17px;line-height:1.5}
+.story-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.story-card{border:1px solid var(--line);border-radius:18px;padding:21px 21px 20px;background:rgba(9,13,18,.72)}
+.story-card .story-tag{display:block;color:var(--cyan);font:700 11px var(--mb-s);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.story-card h3{font-family:var(--mb-a);font-size:27px;line-height:1.04;margin:0 0 11px;font-weight:400}
+.story-card p{margin:0;color:var(--muted);font-size:15.5px;line-height:1.56}
+.quote-wrap{display:flex;justify-content:center;padding-top:2px}
+.quote.compact{width:min(920px,100%);margin-top:0;padding:23px 28px;font-size:19px;line-height:1.5;border-radius:20px}
+.quote.compact small{margin-top:10px;font-size:14px}
+footer{padding:28px 0 36px;color:#7f8b96;font:14px var(--mb-s)}
+.footerline{display:flex;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding-top:22px}
+@media(max-width:900px){
+  .shell{width:min(100% - 36px,1180px)}
+  .hero{grid-template-columns:1fr;gap:30px;padding-top:52px}.console{max-width:760px}
+  .section-head,.story-head{grid-template-columns:1fr}.grid,.story-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  .shell{width:min(100% - 28px,1180px)}
+  nav{padding-top:20px}.navlinks{display:none}
+  .hero{padding:34px 0 44px}.grid,.story-grid{grid-template-columns:1fr}
+  h1{font-size:clamp(46px,13vw,60px)}.lead{font-size:18px}.section-head h2,.story-head h2{font-size:32px}
+  .card,.story-panel{min-height:0;padding:20px}.footerline{flex-direction:column}
+}
 </style>
 </head>
 <body>
 <div class="shell">
 <nav>
   <div class="brand">ssmith<span>net</span>.net</div>
-  <div class="navright">
-    <div class="navstatus">personal system / online</div>
-    <div class="navlinks"><a href="#projects">Projects</a><a href="#life">Outside</a></div>
-  </div>
+  <div class="navlinks"><a href="#now">Now</a><a href="#projects">Projects</a><a href="#life">Other things</a></div>
 </nav>
 
 <main>
 <section class="hero" id="now">
   <div>
     <div class="kicker">Personal domain · Shannon Smith</div>
-    <h1>I build things.</h1>
-    <p class="lead">Technology, machines, open source and the occasional obsession. This is the part of the internet where I put the things I am building, fixing, driving, listening to and generally making work.</p>
-    <div class="identity"><span class="chip">ICT</span><span class="chip">Open source</span><span class="chip">Automotive</span><span class="chip">Audio</span><span class="chip">Linux</span></div>
-    <div class="actions"><a class="btn primary" href="#projects">Enter the workbench</a><a class="btn" href="#life">See the other stuff</a></div>
+    <h1>Technology, machines &amp; things worth tinkering with.</h1>
+    <p class="lead">This is the personal corner of the internet belonging to Shannon Smith. ICT by profession. Builder, fixer, tinkerer and enthusiast by inclination.</p>
+    <div class="actions"><a class="btn primary" href="#projects">See what I'm building</a><a class="btn" href="#life">Go wandering</a></div>
   </div>
-  <div class="console" aria-label="System identity">
-    <div class="console-top"><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="console-title">ssmithnet / identity</div></div>
+  <div class="console" aria-label="System console">
+    <div class="console-top"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
     <div class="console-body">
       <div><span class="prompt">shannon@ssmithnet</span>:~$ whoami</div>
-      <div class="row"><span class="key">role</span><span class="value">ICT manager / technologist</span></div>
-      <div class="row"><span class="key">state</span><span class="value accent">online</span></div>
-      <div class="row"><span class="key">mode</span><span class="value">curious / building</span></div><br>
-      <div><span class="prompt">shannon@ssmithnet</span>:~$ ls ~/interests</div>
-      <div class="value">filesystem/ diagnostics/ cars/ tape/ games/ films/ music/</div><br>
-      <div><span class="prompt">shannon@ssmithnet</span>:~$ echo $RULE</div>
-      <div class="value">make useful things. keep learning.</div>
+      <div>ICT manager / technologist / tinkerer</div><br>
+      <div><span class="prompt">shannon@ssmithnet</span>:~$ status</div>
+      <div>online<br>curious<br>still building</div><br>
+      <div><span class="prompt">shannon@ssmithnet</span>:~$ echo $MISSION</div>
+      <div>make useful things. keep learning.</div>
     </div>
   </div>
 </section>
 
 <section id="projects">
-  <div class="rule"></div>
-  <div class="section-head"><div><div class="kicker">Workbench</div><h2>Things I am actually building</h2></div><p>Projects, systems and experiments that have escaped the “one day I'll get around to it” phase.</p></div>
+  <div class="section-head"><div><div class="kicker">Workbench</div><h2>Things currently occupying my brain</h2></div><p>A few of the technology projects that live somewhere between “idea” and “this actually works”.</p></div>
   <div class="grid">
-    <article class="card"><span class="mark">01</span><div class="tag">Open source</div><h3>InfiltratorFS</h3><p>A ground-up filesystem exploring snapshots, copy-on-write, crash consistency, encryption and serious storage engineering.</p></article>
-    <article class="card"><span class="mark">02</span><div class="tag">Automotive</div><h3>LINK / MBLINK</h3><p>A shared diagnostic foundation with product-specific vehicle tooling, designed across platforms rather than around one machine.</p></article>
-    <article class="card"><span class="mark">03</span><div class="tag">Infrastructure</div><h3>Systems</h3><p>Linux, Windows, monitoring, automation, identity, networking and the endless process of making computers behave properly.</p></article>
+    <article class="card"><div class="tag">Open source</div><h3>InfiltratorFS</h3><p>A ground-up filesystem project exploring snapshots, copy-on-write, crash consistency, encryption and serious storage engineering.</p></article>
+    <article class="card"><div class="tag">Automotive</div><h3>LINK / MBLINK</h3><p>Cross-platform vehicle diagnostics with a shared diagnostic core and product-specific automotive layers.</p></article>
+    <article class="card"><div class="tag">Infrastructure</div><h3>Linux &amp; Windows</h3><p>Systems, automation, monitoring, identity, packaging, networking and the perpetual pursuit of making computers behave properly.</p></article>
   </div>
 </section>
 
-<section id="life">
-  <div class="section-head"><div><div class="kicker">Outside the console</div><h2>The other machinery</h2></div><p>The things that keep the technical brain from becoming entirely technical.</p></div>
-  <div class="profile">
-    <div class="bio"><h3>Garage, tape deck, screen.</h3><p>Australian cars, open-reel audio, games, films and music. Old hardware is interesting, new hardware is interesting, and anything with an engineering story is usually worth opening up.</p></div>
-    <div class="facts"><div class="fact"><div class="label">Garage</div><div class="value">Australian muscle</div></div><div class="fact"><div class="label">Audio</div><div class="value">Open-reel tape</div></div><div class="fact"><div class="label">After hours</div><div class="value">Games · films · music</div></div></div>
+<section id="life" class="life-section">
+  <div class="section-head">
+    <div><div class="kicker">Outside the console</div><h2>The important distractions</h2></div>
+    <p>Technology isn't the only machinery worth keeping alive.</p>
   </div>
-</section>
-
-<section>
-  <div class="rule"></div>
-  <div class="timeline">
-    <div class="event"><time>THEN</time><strong>Computers became a lifelong obsession.</strong><p>Long before cloud services and app stores, there was the pleasure of making a machine do something it had not done before.</p></div>
-    <div class="event"><time>NOW</time><strong>Build it. Test it. Fix it. Publish it.</strong><p>That habit now spans real infrastructure, open-source software, diagnostics and a rather large collection of things that need tinkering.</p></div>
-    <div class="event"><time>NEXT</time><strong>Keep making interesting things.</strong><p>There is always another machine, another protocol, another bug and another ridiculous idea worth investigating.</p></div>
+  <div class="grid life-grid">
+    <article class="card"><div class="tag">Garage</div><h3>Australian muscle</h3><p>Ford Falcons, the 2004 LTD, old-school mechanical engineering and the particular satisfaction of keeping interesting cars on the road.</p></article>
+    <article class="card"><div class="tag">Audio</div><h3>Open-reel tape</h3><p>Old recording technology has a charm modern streaming interfaces have never quite managed to reproduce.</p></article>
+    <article class="card"><div class="tag">After hours</div><h3>Games, films &amp; music</h3><p>A good way to spend an evening when the servers are quiet and the workshop is closed.</p></article>
   </div>
-  <div class="quote">“I am free, no matter what rules surround me. If I find them tolerable, I tolerate them; if I find them too obnoxious, I break them. I am free because I know that I alone am morally responsible for everything I do.”<small>— Robert A. Heinlein</small></div>
+  <div class="story-wrap">
+    <div class="story-panel">
+      <div class="story-head">
+        <div><span class="kicker">Trajectory</span><h2>Then. Now. Next.</h2></div>
+        <p>A simple summary of how this corner of the internet came to exist and where it's headed.</p>
+      </div>
+      <div class="story-grid">
+        <article class="story-card"><span class="story-tag">Then</span><h3>Computers became a lifelong obsession.</h3><p>Long before “cloud” was a thing, there was the much simpler pleasure of making machines do something they hadn't done before.</p></article>
+        <article class="story-card"><span class="story-tag">Now</span><h3>Build it. Test it. Fix it. Publish it.</h3><p>These days that means real infrastructure, open-source projects, diagnostics, Linux, Windows and a healthy amount of experimentation.</p></article>
+        <article class="story-card"><span class="story-tag">Next</span><h3>Keep making interesting things.</h3><p>There is always another machine, another protocol, another bug and another ridiculous idea worth investigating.</p></article>
+      </div>
+    </div>
+    <div class="quote-wrap">
+      <div class="quote compact">“I am free, no matter what rules surround me. If I find them tolerable, I tolerate them; if I find them too obnoxious, I break them. I am free because I know that I alone am morally responsible for everything I do.”<small>— Robert A. Heinlein</small></div>
+    </div>
+  </div>
 </section>
 </main>
 
-<footer><div class="footerline"><span>© Shannon Smith · ssmithnet.net</span><span>Built as a personal corner of the internet.</span></div></footer>
+<footer><div class="footerline"><span>© Shannon Smith · ssmithnet.net</span><span>Built as a small corner of the internet, not a corporate brochure.</span></div></footer>
 </div>
 </body>
 </html>
