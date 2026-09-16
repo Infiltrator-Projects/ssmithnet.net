@@ -41,7 +41,7 @@ static void write(const fs::path& p, const string& s) {
 
 static string page_start(const string& title, const string& description, const string& active, const string& body_class = "") {
     std::ostringstream o;
-    o << "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"theme-color\" content=\"#090b0f\"><meta name=\"description\" content=\"" << esc(description) << "\"><title>" << esc(title) << " — ssmithnet.net</title><link rel=\"stylesheet\" href=\"assets/site.css?v=20260916-7\"></head><body";
+    o << "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"theme-color\" content=\"#090b0f\"><meta name=\"description\" content=\"" << esc(description) << "\"><title>" << esc(title) << " — ssmithnet.net</title><link rel=\"stylesheet\" href=\"assets/site.css?v=20260916-7\"><link rel=\"stylesheet\" href=\"assets/site-overrides.css?v=20260916-1\"></head><body";
     if (!body_class.empty()) o << " class=\"" << body_class << "\"";
     o << "><div class=\"shell\"><nav aria-label=\"Primary\"><a class=\"brand\" href=\"index.html\">ssmith<span>net</span>.net</a><div class=\"navlinks\">";
     for (const auto& n : {std::pair<string,string>{"Home","index.html"},{"Workbench","workbench.html"},{"Garage","garage.html"},{"Archive","archive.html"}})
