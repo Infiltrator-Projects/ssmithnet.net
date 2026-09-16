@@ -1,8 +1,6 @@
-#include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <map>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -16,16 +14,8 @@ struct Car {
     string tag, title, make, model, series, powertrain, description;
 };
 
-struct Project {
-    string tag, title, description, url;
-};
-
 struct Event {
     string date, title, description;
-};
-
-struct Interest {
-    string title, detail;
 };
 
 static string esc(string s) {
@@ -34,15 +24,12 @@ static string esc(string s) {
     };
     for (const auto& [a,b] : r) {
         std::size_t p = 0;
-        while ((p = s.find(a, p)) != string::npos) { s.replace(p, a.size(), b); p += b.size(); }
+        while ((p = s.find(a, p)) != string::npos) {
+            s.replace(p, a.size(), b);
+            p += b.size();
+        }
     }
     return s;
-}
-
-static string read(const fs::path& p) {
-    std::ifstream f(p, std::ios::binary);
-    if (!f) throw std::runtime_error("cannot read " + p.string());
-    std::ostringstream b; b << f.rdbuf(); return b.str();
 }
 
 static void write(const fs::path& p, const string& s) {
@@ -77,15 +64,6 @@ static string card(const Car& c) {
       << "</h3><p>" << esc(c.description) << "</p><div class=\"specs\">"
       << spec("Make",c.make) << spec("Model",c.model) << spec("Chassis / Series",c.series)
       << spec("Powertrain",c.powertrain) << "</div></article>";
-    return o.str();
-}
-
-static string workbench_card(const Project& p) {
-    std::ostringstream o;
-    o << "<article class=\"card\"><div class=\"tag\">" << esc(p.tag) << "</div><h3>" << esc(p.title)
-      << "</h3><p>" << esc(p.description) << "</p>";
-    if (!p.url.empty()) o << "<div class=\"actions\"><a class=\"btn\" href=\"" << esc(p.url) << "">Open " << esc(p.title) << "</a></div>";
-    o << "</article>";
     return o.str();
 }
 
@@ -154,9 +132,9 @@ static string render_archive() {
     return o.str() + page_end("Since the 1990s. Still here.");
 }
 
-int main(int argc, char** argv) {
-    const fs::path root = argc > 1 ? fs::path(argv[1]) : fs::current_path();
+int main() {
     try {
+        const fs::path root = fs::current_path();
         write(root / "index.html", render_home());
         write(root / "workbench.html", render_workbench());
         write(root / "garage.html", render_garage());
