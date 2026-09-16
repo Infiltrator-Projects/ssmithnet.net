@@ -29,6 +29,12 @@ jobs:
       - name: Generate site
         run: ./build/sitegen .
 
+      - name: Apply site presentation overrides
+        run: |
+          for page in index.html workbench.html garage.html archive.html; do
+            sed -i 's#</head>#<link rel="stylesheet" href="assets/site-overrides.css?v=20260916-1"></head>#' "$page"
+          done
+
       - name: Verify generated pages
         run: |
           test -s index.html
