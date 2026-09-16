@@ -9,6 +9,7 @@ on:
       - 'DESIGN.md'
       - 'README.md'
       - 'assets/**'
+      - '.github/workflows/generate-site.yml'
   workflow_dispatch:
 
 permissions:
@@ -29,12 +30,6 @@ jobs:
       - name: Generate site
         run: ./build/sitegen .
 
-      - name: Apply site presentation overrides
-        run: |
-          for page in index.html workbench.html garage.html archive.html; do
-            sed -i 's#</head>#<link rel="stylesheet" href="assets/site-overrides.css?v=20260916-1"></head>#' "$page"
-          done
-
       - name: Verify generated pages
         run: |
           test -s index.html
@@ -43,6 +38,7 @@ jobs:
           test -s archive.html
           grep -q 'E 250 CDI BlueEFFICIENCY Coupé' garage.html
           grep -q 'LINK family' index.html
+          test "$(grep -o 'site-overrides.css' index.html | wc -l)" -eq 1
 
       - name: Publish generated pages to main
         run: |
