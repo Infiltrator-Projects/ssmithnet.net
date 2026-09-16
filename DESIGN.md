@@ -48,6 +48,10 @@ Do not overuse uppercase cyan labels. They are a navigation/detail language, not
 
 Do not make the front page a summary of every other page. The home page is the front hall: it should orient and tempt exploration, while the deeper pages own their subjects.
 
+Do not make the copy explain the design. Phrases such as "the other cars get the same treatment", "this page only needs to point", or similar commentary about how the site is arranged should normally be replaced with language that describes the subject itself. The design should demonstrate the principle rather than announce it.
+
+Do not use "other" as a synonym for "less important". When grouping historic material, distinctions should describe chronology, geography or subject matter rather than imply rank.
+
 ## Information architecture
 
 ### Home
@@ -103,6 +107,8 @@ Write as though the site already has confidence. Avoid marketing language, exagg
 
 Good copy is concise, specific and slightly personal. The site can have dry humour and small surprises. It should never sound like a corporate brochure.
 
+Do not write about the site's own layout, hierarchy or design choices unless the subject genuinely calls for it. The visitor should experience the design rather than be told how it works.
+
 The user's interests should feel connected by a common philosophy rather than catalogued as a résumé.
 
 ## Interaction philosophy
@@ -138,6 +144,7 @@ Before accepting a design change, ask:
 3. Is the underlying complexity discoverable without being forced onto the visitor?
 4. Does the content live on the page where it belongs rather than being repeated everywhere?
 5. Does an older, cheaper, stranger or less fashionable object receive the same respect as an expensive or prestigious one?
-6. Does the page still feel unmistakably like Shannon's site?
+6. Does the copy describe the subject rather than explain the design?
+7. Does the page still feel unmistakably like Shannon's site?
 
 If the answer to these questions is yes, the design is moving in the right direction.
