@@ -40,24 +40,23 @@ section{padding:46px 0}
 .card .tag{color:var(--cyan);font:700 10.5px var(--mb-s);letter-spacing:.13em;text-transform:uppercase}
 .card h3{font-family:var(--mb-a);font-size:24px;line-height:1.04;margin:10px 0 11px;font-weight:400}.card p{color:var(--muted);margin:0;font-size:15px;line-height:1.55}
 .life-section{padding-top:30px;padding-bottom:26px}
-.life-grid{margin-bottom:22px}
-.story-wrap{display:grid;grid-template-columns:1fr;gap:15px;margin-top:0}
-.story-panel{border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,rgba(15,19,25,.9),rgba(9,13,18,.82));padding:23px;box-shadow:var(--shadow)}
-.story-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,.72fr);align-items:end;gap:24px;margin-bottom:17px}
-.story-head .kicker{display:block;margin-bottom:7px}.story-head h2{font-family:var(--mb-a);font-size:33px;line-height:1.03;letter-spacing:-.015em;margin:0;font-weight:400}
-.story-head p{margin:0;color:var(--muted);font-size:16px;line-height:1.48}
-.story-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.story-card{border:1px solid var(--line);border-radius:16px;padding:18px;background:rgba(9,13,18,.72)}
+.life-grid{margin-bottom:34px}
+.story-section{padding-top:4px;padding-bottom:20px}
+.story-head{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(290px,.95fr);align-items:end;gap:28px;margin-bottom:20px}
+.story-head h2{font-family:var(--mb-a);margin:5px 0 0;font-size:32px;line-height:1.04;letter-spacing:-.015em;font-weight:400}
+.story-head p{margin:0;color:var(--muted);font-size:16px;line-height:1.5}
+.story-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.story-card{border:1px solid var(--line);background:var(--panel);border-radius:17px;padding:22px;min-height:190px}
 .story-card .story-tag{display:block;color:var(--cyan);font:700 10.5px var(--mb-s);letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
 .story-card h3{font-family:var(--mb-a);font-size:22px;line-height:1.05;margin:0 0 9px;font-weight:400}
 .story-card p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.53}
-.quote-wrap{display:flex;justify-content:center;padding-top:0}
+.quote-wrap{display:flex;justify-content:center;padding:25px 0 0}
 .quote.compact{width:min(820px,100%);margin-top:0;padding:20px 25px;font-size:17px;line-height:1.48;border-radius:18px}
 .quote.compact small{margin-top:8px;font-size:13px}
 footer{padding:24px 0 32px;color:#7f8b96;font:13px var(--mb-s)}
 .footerline{display:flex;justify-content:space-between;gap:24px;border-top:1px solid var(--line);padding-top:20px}
 @media(max-width:900px){.shell{width:min(100% - 36px,1180px)}.hero{grid-template-columns:1fr;gap:28px;padding-top:46px}.console{max-width:760px}.section-head,.story-head{grid-template-columns:1fr}.grid,.story-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.shell{width:min(100% - 28px,1180px)}nav{padding-top:20px}.navlinks{display:none}.hero{padding:32px 0 38px}.grid,.story-grid{grid-template-columns:1fr}h1{font-size:clamp(44px,12vw,56px)}.lead{font-size:18px}.section-head h2,.story-head h2{font-size:30px}.card,.story-panel{min-height:0;padding:19px}.footerline{flex-direction:column}}
+@media(max-width:620px){.shell{width:min(100% - 28px,1180px)}nav{padding-top:20px}.navlinks{display:none}.hero{padding:32px 0 38px}.grid,.story-grid{grid-template-columns:1fr}h1{font-size:clamp(44px,12vw,56px)}.lead{font-size:18px}.section-head h2,.story-head h2{font-size:30px}.card,.story-card{min-height:0;padding:19px}.footerline{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -78,7 +77,11 @@ footer{padding:24px 0 32px;color:#7f8b96;font:13px var(--mb-s)}
 <section id="life" class="life-section">
   <div class="section-head"><div><div class="kicker">Outside the console</div><h2>The important distractions</h2></div><p>Technology isn't the only machinery worth keeping alive.</p></div>
   <div class="grid life-grid"><article class="card"><div class="tag">Garage</div><h3>Australian muscle</h3><p>Ford Falcons, the 2004 LTD, old-school mechanical engineering and the particular satisfaction of keeping interesting cars on the road.</p></article><article class="card"><div class="tag">Audio</div><h3>Open-reel tape</h3><p>Old recording technology has a charm modern streaming interfaces have never quite managed to reproduce.</p></article><article class="card"><div class="tag">After hours</div><h3>Games, films &amp; music</h3><p>A good way to spend an evening when the servers are quiet and the workshop is closed.</p></article></div>
-  <div class="story-wrap"><div class="story-panel"><div class="story-head"><div><span class="kicker">Trajectory</span><h2>Then. Now. Next.</h2></div><p>A simple summary of how this corner of the internet came to exist and where it's headed.</p></div><div class="story-grid"><article class="story-card"><span class="story-tag">Then</span><h3>Computers became a lifelong obsession.</h3><p>Long before “cloud” was a thing, there was the much simpler pleasure of making machines do something they hadn't done before.</p></article><article class="story-card"><span class="story-tag">Now</span><h3>Build it. Test it. Fix it. Publish it.</h3><p>These days that means real infrastructure, open-source projects, diagnostics, Linux, Windows and a healthy amount of experimentation.</p></article><article class="story-card"><span class="story-tag">Next</span><h3>Keep making interesting things.</h3><p>There is always another machine, another protocol, another bug and another ridiculous idea worth investigating.</p></article></div></div><div class="quote-wrap"><div class="quote compact">“I am free, no matter what rules surround me. If I find them tolerable, I tolerate them; if I find them too obnoxious, I break them. I am free because I know that I alone am morally responsible for everything I do.”<small>— Robert A. Heinlein</small></div></div></div>
+</section>
+<section class="story-section">
+  <div class="story-head"><div><div class="kicker">The story</div><h2>Then. Now. Next.</h2></div><p>A simple summary of how this corner of the internet came to exist and where it's headed.</p></div>
+  <div class="story-grid"><article class="story-card"><span class="story-tag">Then</span><h3>Computers became a lifelong obsession.</h3><p>Long before “cloud” was a thing, there was the much simpler pleasure of making machines do something they hadn't done before.</p></article><article class="story-card"><span class="story-tag">Now</span><h3>Build it. Test it. Fix it. Publish it.</h3><p>These days that means real infrastructure, open-source projects, diagnostics, Linux, Windows and a healthy amount of experimentation.</p></article><article class="story-card"><span class="story-tag">Next</span><h3>Keep making interesting things.</h3><p>There is always another machine, another protocol, another bug and another ridiculous idea worth investigating.</p></article></div>
+  <div class="quote-wrap"><div class="quote compact">“I am free, no matter what rules surround me. If I find them tolerable, I tolerate them; if I find them too obnoxious, I break them. I am free because I know that I alone am morally responsible for everything I do.”<small>— Robert A. Heinlein</small></div></div>
 </section>
 </main>
 <footer><div class="footerline"><span>© Shannon Smith · ssmithnet.net</span><span>Built as a small corner of the internet, not a corporate brochure.</span></div></footer>
