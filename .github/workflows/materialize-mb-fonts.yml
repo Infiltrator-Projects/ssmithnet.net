@@ -1,0 +1,65 @@
+name: Materialize MB Corpo fonts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/materialize-mb-fonts.yml'
+      - 'index.html'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download MB font package
+        run: |
+          curl -L --fail --retry 3 \
+            -o /tmp/mb-corpo-fonts.tar.xz \
+            https://raw.githubusercontent.com/Infiltrator-Projects/MBLINK/main/assets/fonts/mb-corpo-fonts.tar.xz
+
+      - name: Extract fonts
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/mbfonts
+          mkdir -p /tmp/mbfonts assets/fonts
+          tar -xJf /tmp/mb-corpo-fonts.tar.xz -C /tmp/mbfonts
+          find /tmp/mbfonts -type f -name '*.ttf' -print
+
+      - name: Convert MB fonts to WOFF2
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet fonttools brotli
+          python3 - <<'PY'
+          from pathlib import Path
+          from fontTools.ttLib import TTFont
+
+          files = list(Path('/tmp/mbfonts').rglob('*.ttf'))
+          wanted = {
+              'mb-corpo-a-cond-regular.woff2': next(p for p in files if 'mb_corpo_a_cond_regular' in p.name.lower()),
+              'mb-corpo-s-regular.woff2': next(p for p in files if 'mb_corpo_s_regular' in p.name.lower()),
+              'mb-corpo-s-bold.woff2': next(p for p in files if 'mb_corpo_s_bold' in p.name.lower()),
+          }
+          for out_name, src in wanted.items():
+              font = TTFont(str(src))
+              font.flavor = 'woff2'
+              font.save('assets/fonts/' + out_name)
+              print(src, '->', 'assets/fonts/' + out_name)
+          PY
+          file assets/fonts/*.woff2
+
+      - name: Commit fonts
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/fonts/*.woff2
+          git diff --cached --quiet && exit 0
+          git commit -m 'Add real MB Corpo webfonts [skip ci]'
+          git push
