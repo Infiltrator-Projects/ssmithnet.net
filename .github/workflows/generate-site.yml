@@ -1,4 +1,4 @@
-name: Build site
+name: Build and deploy site
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
     paths:
       - 'src/**'
       - 'tests/**'
-      - '*.html'
+      - 'CNAME'
       - 'Makefile'
       - 'DESIGN.md'
       - 'README.md'
@@ -14,40 +14,57 @@ on:
       - '.github/workflows/generate-site.yml'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 concurrency:
-  group: site-generation-main
+  group: pages
   cancel-in-progress: true
 
-permissions:
-  contents: write
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Build generator
+      - name: Build C++17 generator
         run: make sitegen
 
-      - name: Generate site
-        run: ./build/sitegen .
-
-      - name: Verify generated pages
+      - name: Validate generator and site structure
         run: make check
 
-      - name: Publish generated pages to main
+      - name: Build Pages artifact
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html workbench.html garage.html archive.html
-          if git diff --cached --quiet; then
-            echo 'No generated changes.'
-          else
-            git commit -m 'Generate site from C++ source'
-            git push
-          fi
+          rm -rf public
+          mkdir -p public
+          ./build/sitegen public
+          cp -a assets public/assets
+          cp CNAME public/CNAME
+          touch public/.nojekyll
+          test -s public/index.html
+          test -s public/workbench.html
+          test -s public/garage.html
+          test -s public/archive.html
+          test -s public/assets/site.css
+          test -s public/assets/site-overrides.css
 
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

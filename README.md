@@ -2,9 +2,11 @@
 
 Personal website for Shannon Smith — a quiet corner of the internet that has been around since the 1990s.
 
-The deployed site is deliberately boring: static HTML, local MB Corpo WOFF2 fonts, local graphics and no external runtime dependencies.
+The deployed site is deliberately boring at runtime: static HTML, local assets and no server-side application. The interesting part happens before deployment.
 
-The source is not a pile of hand-maintained HTML. `src/sitegen.cpp` is the deterministic C++ site generator. It owns the shared page structure, navigation, standardised car cards and repeated presentation logic, while the generated `index.html`, `workbench.html`, `garage.html` and `archive.html` remain the published artefacts.
+`src/sitegen.cpp` is the authoritative deterministic C++17 site generator. It owns the shared page structure, navigation, standardised car cards and repeated presentation logic for Home, Workbench, Garage and Archive.
+
+GitHub Actions builds that generator on an Ubuntu runner, validates its output, generates a clean `public/` tree, adds the local assets and custom-domain file, and deploys that tree directly as a GitHub Pages artifact. Generated HTML is therefore a deployment artefact, not source code committed back into `main`.
 
 Build locally with:
 
@@ -18,10 +20,12 @@ Validation with:
 make check
 ```
 
-GitHub Actions regenerates the published pages when the source, assets or design documentation changes. This keeps the website simple for visitors while keeping the implementation maintainable for a C++ programmer.
+Generate the four pages into an explicit directory with:
 
+```text
+./build/sitegen OUTPUT_DIRECTORY
+```
 
-`./build/sitegen OUTPUT_DIRECTORY` writes the four pages to an explicit directory.
-`make check` generates into a temporary directory, verifies parity with the committed
-pages, and checks internal links, fragments, unique IDs and page landmarks. It does
-not overwrite published pages. Use `make` after editing the C++ source.
+This is deliberately the same Pages model used by the Infiltrator Software Centre: source is built on a temporary GitHub Actions Linux runner and only the finished static artifact is served to visitors.
+
+The public site is `https://ssmithnet.net/`.
