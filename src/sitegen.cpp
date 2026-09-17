@@ -1,6 +1,8 @@
 #include <filesystem>
-#include <fstream>
+#include <cstring>
 #include <iostream>
+#include <infiltratr/escape.h>
+#include <infiltratr/posix.h>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -18,34 +20,31 @@ struct Event {
     string date, title, description;
 };
 
-static string esc(string s) {
-    const std::pair<string,string> r[] = {
-        {"&","&amp;"},{"<","&lt;"},{">","&gt;"},{"\"","&quot;"},{"'","&#39;"}
-    };
-    for (const auto& [a,b] : r) {
-        std::size_t p = 0;
-        while ((p = s.find(a, p)) != string::npos) {
-            s.replace(p, a.size(), b);
-            p += b.size();
-        }
-    }
-    return s;
+static string esc(const string& s) {
+    std::size_t required = 0;
+    if (!infiltratr_escape_html(s.c_str(), nullptr, 0, &required) || required == 0)
+        throw std::runtime_error("COMMON HTML escaping measurement failed");
+    std::vector<char> buffer(required);
+    if (!infiltratr_escape_html(s.c_str(), buffer.data(), buffer.size(), nullptr))
+        throw std::runtime_error("COMMON HTML escaping failed");
+    return string(buffer.data());
 }
 
 static void write(const fs::path& p, const string& s) {
     fs::create_directories(p.parent_path());
-    std::ofstream f(p, std::ios::binary);
-    if (!f) throw std::runtime_error("cannot open " + p.string() + " for writing");
-    f << s;
-    f.flush();
-    if (!f) throw std::runtime_error("failed to write " + p.string());
+    const int error = infiltratr_atomic_file_write_bytes(
+        p.c_str(), INFILTRATR_ATOMIC_FILE_PRESERVE_PERMISSIONS,
+        s.data(), s.size());
+    if (error != 0)
+        throw std::runtime_error("COMMON atomic write failed for " + p.string() +
+                                 ": " + std::strerror(error));
 }
 
 static string page_start(const string& title, const string& description, const string& active, const string& body_class = "") {
     const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Garage" ? "garage.html" : "archive.html";
     const string canonical = "https://ssmithnet.net/" + filename;
     std::ostringstream o;
-    o << "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"theme-color\" content=\"#090b0f\"><meta name=\"description\" content=\"" << esc(description) << "\"><title>" << esc(title) << " — ssmithnet.net</title><link rel=\"canonical\" href=\"" << canonical << "\"><meta property=\"og:type\" content=\"website\"><meta property=\"og:title\" content=\"" << esc(title) << " — ssmithnet.net\"><meta property=\"og:description\" content=\"" << esc(description) << "\"><meta property=\"og:url\" content=\"" << canonical << "\"><link rel=\"stylesheet\" href=\"assets/site.css?v=20260917-1\"><link rel=\"stylesheet\" href=\"assets/site-overrides.css?v=20260917-1\"></head><body";
+    o << "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"theme-color\" content=\"#090b0f\"><meta name=\"description\" content=\"" << esc(description) << "\"><title>" << esc(title) << " — ssmithnet.net</title><link rel=\"canonical\" href=\"" << canonical << "\"><meta property=\"og:type\" content=\"website\"><meta property=\"og:title\" content=\"" << esc(title) << " — ssmithnet.net\"><meta property=\"og:description\" content=\"" << esc(description) << "\"><meta property=\"og:url\" content=\"" << canonical << "\"><link rel=\"stylesheet\" href=\"assets/infiltrator-web-v1.css?v=common-1.18.0\"><link rel=\"stylesheet\" href=\"assets/site.css?v=20260918-1\"><link rel=\"stylesheet\" href=\"assets/site-overrides.css?v=20260918-1\"></head><body";
     if (!body_class.empty()) o << " class=\"" << body_class << "\"";
     o << "><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"shell\"><nav aria-label=\"Primary\"><a class=\"brand\" href=\"index.html\">ssmith<span>net</span>.net</a><div class=\"navlinks\">";
     for (const auto& n : {std::pair<string,string>{"Home","index.html"},{"Workbench","workbench.html"},{"Garage","garage.html"},{"Archive","archive.html"}})
