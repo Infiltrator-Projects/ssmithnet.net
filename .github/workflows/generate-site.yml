@@ -5,12 +5,18 @@ on:
     branches: [main]
     paths:
       - 'src/**'
+      - 'tests/**'
+      - '*.html'
       - 'Makefile'
       - 'DESIGN.md'
       - 'README.md'
       - 'assets/**'
       - '.github/workflows/generate-site.yml'
   workflow_dispatch:
+
+concurrency:
+  group: site-generation-main
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -31,14 +37,7 @@ jobs:
         run: ./build/sitegen .
 
       - name: Verify generated pages
-        run: |
-          test -s index.html
-          test -s workbench.html
-          test -s garage.html
-          test -s archive.html
-          grep -q 'E 250 CDI BlueEFFICIENCY Coupé' garage.html
-          grep -q 'LINK family' index.html
-          test "$(grep -o 'site-overrides.css' index.html | wc -l)" -eq 1
+        run: make check
 
       - name: Publish generated pages to main
         run: |
@@ -51,3 +50,4 @@ jobs:
             git commit -m 'Generate site from C++ source'
             git push
           fi
+

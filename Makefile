@@ -11,12 +11,8 @@ sitegen: src/sitegen.cpp
 	$(CXX) $(CXXFLAGS) $< -o build/sitegen
 
 check: sitegen
-	./build/sitegen .
-	@grep -q '<title>Shannon Smith' index.html
-	@grep -q 'E 250 CDI BlueEFFICIENCY Coupé' garage.html
-	@grep -q 'The LINK family.' workbench.html
-	@grep -q 'The old internet is part of the story.' archive.html
-	@echo "sitegen checks passed"
+	python3 tests/check_site.py
 
 clean:
 	rm -rf build
+

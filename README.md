@@ -19,3 +19,9 @@ make check
 ```
 
 GitHub Actions regenerates the published pages when the source, assets or design documentation changes. This keeps the website simple for visitors while keeping the implementation maintainable for a C++ programmer.
+
+
+`./build/sitegen OUTPUT_DIRECTORY` writes the four pages to an explicit directory.
+`make check` generates into a temporary directory, verifies parity with the committed
+pages, and checks internal links, fragments, unique IDs and page landmarks. It does
+not overwrite published pages. Use `make` after editing the C++ source.
