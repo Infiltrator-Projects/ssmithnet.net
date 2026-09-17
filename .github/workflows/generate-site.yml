@@ -35,11 +35,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build C++17 generator
-        run: make sitegen
+      - name: Checkout pinned Infiltratr Common 1.18.0
+        uses: actions/checkout@v4
+        with:
+          repository: Infiltrator-Projects/Infiltrator-Libraries
+          ref: 4d069ff28d77f39a8d1ff0056691e1222767f6b5
+          path: _common
 
-      - name: Validate generator and site structure
-        run: make check
+      - name: Build C++17 generator with COMMON
+        run: make COMMON_DIR="$GITHUB_WORKSPACE/_common" sitegen
+
+      - name: Validate generator, COMMON snapshot and site structure
+        run: make COMMON_DIR="$GITHUB_WORKSPACE/_common" check
 
       - name: Build Pages artifact
         run: |
@@ -56,19 +63,9 @@ jobs:
           test -s public/assets/site.css
           test -s public/assets/site-overrides.css
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          name: github-pages-${{ github.run_attempt }}
-          path: public
-
-      - name: Deploy Pages
+      - name: Deploy Pages through pinned COMMON
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: Infiltrator-Projects/Infiltrator-Libraries/.github/actions/deploy-pages@4d069ff28d77f39a8d1ff0056691e1222767f6b5
         with:
-          artifact_name: github-pages-${{ github.run_attempt }}
+          path: public
+          artifact-name: github-pages-${{ github.run_attempt }}
