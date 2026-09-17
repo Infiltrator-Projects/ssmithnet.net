@@ -35,8 +35,10 @@ static string esc(string s) {
 static void write(const fs::path& p, const string& s) {
     fs::create_directories(p.parent_path());
     std::ofstream f(p, std::ios::binary);
-    if (!f) throw std::runtime_error("cannot write " + p.string());
+    if (!f) throw std::runtime_error("cannot open " + p.string() + " for writing");
     f << s;
+    f.flush();
+    if (!f) throw std::runtime_error("failed to write " + p.string());
 }
 
 static string page_start(const string& title, const string& description, const string& active, const string& body_class = "") {
