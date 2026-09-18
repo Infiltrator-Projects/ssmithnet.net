@@ -35,11 +35,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Checkout pinned Infiltratr Common 1.18.0
+      - name: Checkout pinned Infiltratr Common 1.18.1
         uses: actions/checkout@v4
         with:
           repository: Infiltrator-Projects/Infiltrator-Libraries
-          ref: 0f458a7145f3a996ff19f11bf9d0893b91ae5cbb
+          ref: dcfa6fee9e9263a0dce5c137054d4adf130c2f25
           path: _common
 
       - name: Build C++17 generator with COMMON
@@ -65,7 +65,7 @@ jobs:
 
       - name: Deploy Pages through pinned COMMON
         id: deployment
-        uses: Infiltrator-Projects/Infiltrator-Libraries/.github/actions/deploy-pages@0f458a7145f3a996ff19f11bf9d0893b91ae5cbb
+        uses: Infiltrator-Projects/Infiltrator-Libraries/.github/actions/deploy-pages@dcfa6fee9e9263a0dce5c137054d4adf130c2f25
         with:
           path: public
           artifact-name: github-pages-${{ github.run_attempt }}
