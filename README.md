@@ -8,7 +8,9 @@ The deployed site is deliberately boring at runtime: static HTML, local assets a
 
 Shared neutral presentation and infrastructure come from the immutable Infiltratr Common 1.18.1 release (`dcfa6fee9e9263a0dce5c137054d4adf130c2f25`) rather than being reimplemented here. COMMON owns the canonical graphite/silver design tokens and web adapter, generic output escaping, generic durable file publication and the product-neutral GitHub Pages deployment action. This site owns its personal content, page composition, Workbench/Garage/Archive information architecture, local MB Corpo font assets, cyan/warm-material treatment and original graphics.
 
-GitHub Actions builds that generator on an Ubuntu runner, validates its output, generates a clean `public/` tree, adds the local assets and custom-domain file, and hands that directory to COMMON's reusable Pages deployment action. While the repository is still configured for legacy branch-based Pages as a compatibility fallback, generated HTML may also be kept on `main`; once the repository Pages source is switched to GitHub Actions, those checked-in generated copies can be removed.
+GitHub Pages is published from the generated GitHub Actions artifact. Actions builds the generator on an Ubuntu runner, verifies the committed COMMON 1.18.1 web snapshot before the build modifies it, validates the generated site, creates a clean `public/` tree, adds the local assets and custom-domain file, and hands that directory to COMMON's reusable Pages deployment action.
+
+The four HTML files kept on `main` are generated review mirrors, not source. Do not edit them by hand. `make check` regenerates the site and requires those mirrors to match `src/sitegen.cpp` byte-for-byte so reviewers can inspect the rendered output without creating a second source of truth.
 
 Build locally with:
 
