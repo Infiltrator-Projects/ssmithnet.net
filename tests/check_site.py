@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate deterministic C++ output and local navigation without checked-in HTML."""
+"""Validate deterministic C++ output, checked-in mirrors and local navigation."""
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
@@ -49,6 +49,12 @@ with tempfile.TemporaryDirectory(prefix="ssmithnet-check-") as directory:
         generated = generated_path.read_bytes()
         first[name] = generated
 
+        committed_path = ROOT / name
+        assert committed_path.is_file(), f"{name}: missing checked-in generated mirror"
+        assert generated == committed_path.read_bytes(), (
+            f"{name}: checked-in mirror is stale; regenerate with make"
+        )
+
         parser = Page()
         parser.feed(generated.decode("utf-8"))
         pages[name] = parser
@@ -78,4 +84,4 @@ with tempfile.TemporaryDirectory(prefix="ssmithnet-check-") as directory:
     subprocess.run([str(GENERATOR), str(out)], check=True)
     assert all(first[name] == (out / name).read_bytes() for name in PAGES), "generator output changed between identical runs"
 
-print("PASS: deterministic C++ output, page landmarks, assets and local links")
+print("PASS: deterministic C++ output, committed mirrors, page landmarks, assets and local links")
