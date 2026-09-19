@@ -22,15 +22,15 @@ inline std::string head(const std::string& title, const std::string& description
                         const std::string& canonical, const std::string& assets = "assets/") {
     return "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\">"
         "<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">"
-        "<meta name=\"theme-color\" content=\"#090b0f\"><meta name=\"color-scheme\" content=\"dark\">"
+        "<meta name=\"theme-color\" content=\"#050608\"><meta name=\"color-scheme\" content=\"dark\">"
         "<title>" + esc(title) + "</title><meta name=\"description\" content=\"" + esc(description) +
         "\"><link rel=\"canonical\" href=\"" + esc(canonical) + "\">"
         "<meta property=\"og:type\" content=\"website\"><meta property=\"og:title\" content=\"" + esc(title) +
         "\"><meta property=\"og:description\" content=\"" + esc(description) +
         "\"><meta property=\"og:url\" content=\"" + esc(canonical) +
         "\"><link rel=\"stylesheet\" href=\"" + esc(assets) + "infiltrator-web-v1.css?v=common-1.19.3\">"
-        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site.css?v=family-20260919\">"
-        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site-overrides.css?v=family-20260919\">";
+        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site.css?v=family-20260919-link\">"
+        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site-overrides.css?v=family-20260919-link\">";
 }
 inline std::string navigation(const std::string& active, const std::string& home = "") {
     std::string html = "<a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"shell\">"
