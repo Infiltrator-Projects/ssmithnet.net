@@ -17,3 +17,10 @@ Record meaningful behaviour and support changes. Internal research/refactoring n
 ## Historical identity
 
 Git history, tags and releases remain authoritative for exact historical source identity.
+
+## 2026-09-19 — Unified website family
+
+- Share metadata, navigation, footer, local fonts and control styling with Software Centre.
+- Add Software Centre to primary navigation on every page.
+- Generate and verify the download landing page with the other four pages.
+- Add a reusable output contract for both site builds.

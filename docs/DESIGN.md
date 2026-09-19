@@ -148,3 +148,9 @@ Before accepting a design change, ask:
 7. Does the page still feel unmistakably like Shannon's site?
 
 If the answer to these questions is yes, the design is moving in the right direction.
+
+## Software Centre family contract
+
+The Software Centre is the distribution surface of this same personal body of work. It uses the same wordmark, primary navigation, footer, three loaded Corpo faces, dark blue-black/cyan palette, warm separators and focus treatment. Its current page is labelled Software Centre. Search and catalogue cards are functional variations within this identity. Installation details use the same native disclosure pattern as technical notes on Workbench.
+
+The family source is `include/site-family.hpp` plus `assets/`; the repository consumes a pinned, verified snapshot. Shared identity changes require updating both consumers. Common remains the authority for neutral design primitives.

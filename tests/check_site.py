@@ -7,7 +7,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "workbench.html", "garage.html", "archive.html")
+PAGES = ("index.html", "workbench.html", "garage.html", "archive.html", "downloads/model-11-sandy/index.html")
 GENERATOR = ROOT / "build" / "sitegen"
 
 
@@ -60,7 +60,7 @@ with tempfile.TemporaryDirectory(prefix="ssmithnet-check-") as directory:
         pages[name] = parser
 
         assert parser.headings == 1, f"{name}: expected exactly one h1"
-        assert parser.current == 1, f"{name}: expected exactly one aria-current page link"
+        assert parser.current == (0 if name.startswith("downloads/") else 1), f"{name}: expected exactly one aria-current page link"
         assert parser.canonical == 1, f"{name}: expected exactly one canonical link"
         assert len(parser.ids) == len(set(parser.ids)), f"{name}: duplicate IDs"
 
@@ -70,7 +70,9 @@ with tempfile.TemporaryDirectory(prefix="ssmithnet-check-") as directory:
             if url.scheme or url.netloc:
                 continue
 
-            target = url.path or name
+            target = str((Path(name).parent / url.path)) if url.path else name
+            import posixpath
+            target = posixpath.normpath(target)
             if target in PAGES:
                 target_path = out / target
             else:

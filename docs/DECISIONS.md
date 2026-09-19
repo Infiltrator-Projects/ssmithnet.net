@@ -41,3 +41,11 @@ This file records durable engineering and presentation choices for ssmithnet.net
 **Rationale.** Repeating the same detailed content across pages makes maintenance harder and weakens information hierarchy.
 
 **Consequence.** New content is placed according to subject ownership rather than duplicated for visibility.
+
+## ADR-006 — One website family, two product surfaces
+
+**Decision.** The personal site owns the canonical website shell and assets. Package Repository consumes a pinned, byte-verified snapshot.
+
+**Rationale.** Both sites belong to Shannon Smith and must retain one identity without depending on a runtime request to the other host. Common's neutral primitives remain shared across the wider application family.
+
+**Consequence.** A shared identity change updates both consumers; deployment checks prevent independently edited snapshots. The download page also uses the canonical shell.

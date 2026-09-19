@@ -23,3 +23,5 @@ The exact source intended for release/publication must pass required automated c
 ## Regression rule
 
 Reproducible defects should gain permanent automated coverage at the narrowest layer that captures the original failure.
+
+The deterministic gate covers all five generated pages, including the download landing page. `tests/check_web_family.py .` additionally checks the common navigation, canonical/Open Graph metadata, unique landmarks, asset references and the three WOFF2 fonts. Package Repository runs this same contract against its generated `public/` tree.

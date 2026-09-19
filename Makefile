@@ -16,13 +16,14 @@ common:
 common-web:
 	cp "$(COMMON_DIR)/design/infiltrator-web-v1.css" "$(COMMON_WEB_CSS)"
 
-sitegen: common common-web src/sitegen.cpp
+sitegen: common common-web src/sitegen.cpp include/site-family.hpp
 	mkdir -p build
 	$(CXX) $(CXXFLAGS) -I"$(COMMON_DIR)/include" src/sitegen.cpp "$(COMMON_ARCHIVE)" -lm -ldl -o build/sitegen
 
 check: sitegen
 	cmp "$(COMMON_WEB_CSS)" "$(COMMON_DIR)/design/infiltrator-web-v1.css"
 	python3 tests/check_site.py
+	python3 tests/check_web_family.py .
 
 clean:
 	rm -rf build

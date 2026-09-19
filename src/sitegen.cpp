@@ -1,4 +1,5 @@
 #include <filesystem>
+#include "../include/site-family.hpp"
 #include <cstring>
 #include <iostream>
 #include <infiltratr/escape.h>
@@ -20,15 +21,7 @@ struct Event {
     string date, title, description;
 };
 
-static string esc(const string& s) {
-    std::size_t required = 0;
-    if (!infiltratr_escape_html(s.c_str(), nullptr, 0, &required) || required == 0)
-        throw std::runtime_error("COMMON HTML escaping measurement failed");
-    std::vector<char> buffer(required);
-    if (!infiltratr_escape_html(s.c_str(), buffer.data(), buffer.size(), nullptr))
-        throw std::runtime_error("COMMON HTML escaping failed");
-    return string(buffer.data());
-}
+using infiltrator_web::esc;
 
 static void write(const fs::path& p, const string& s) {
     fs::create_directories(p.parent_path());
@@ -41,20 +34,14 @@ static void write(const fs::path& p, const string& s) {
 }
 
 static string page_start(const string& title, const string& description, const string& active, const string& body_class = "") {
-    const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Garage" ? "garage.html" : "archive.html";
-    const string canonical = "https://ssmithnet.net/" + filename;
-    std::ostringstream o;
-    o << "<!doctype html><html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta name=\"theme-color\" content=\"#090b0f\"><meta name=\"description\" content=\"" << esc(description) << "\"><title>" << esc(title) << " — ssmithnet.net</title><link rel=\"canonical\" href=\"" << canonical << "\"><meta property=\"og:type\" content=\"website\"><meta property=\"og:title\" content=\"" << esc(title) << " — ssmithnet.net\"><meta property=\"og:description\" content=\"" << esc(description) << "\"><meta property=\"og:url\" content=\"" << canonical << "\"><link rel=\"stylesheet\" href=\"assets/infiltrator-web-v1.css?v=common-1.19.3\"><link rel=\"stylesheet\" href=\"assets/site.css?v=20260918-1\"><link rel=\"stylesheet\" href=\"assets/site-overrides.css?v=20260918-1\"></head><body";
-    if (!body_class.empty()) o << " class=\"" << body_class << "\"";
-    o << "><a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"shell\"><nav aria-label=\"Primary\"><a class=\"brand\" href=\"index.html\">ssmith<span>net</span>.net</a><div class=\"navlinks\">";
-    for (const auto& n : {std::pair<string,string>{"Home","index.html"},{"Workbench","workbench.html"},{"Garage","garage.html"},{"Archive","archive.html"}})
-        o << "<a" << (n.first == active ? " class=\"active\" aria-current=\"page\"" : "") << " href=\"" << n.second << "\">" << n.first << "</a>";
-    o << "</div></nav><main id=\"main\">";
-    return o.str();
+    const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Garage" ? "garage.html" : active == "Download" ? "downloads/model-11-sandy/" : "archive.html";
+    const string prefix = active == "Download" ? "../../" : "";
+    return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
+        "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
 static string page_end(const string& right) {
-    return "</main><footer><div class=\"footerline\"><span>© Shannon Smith · ssmithnet.net</span><span>" + esc(right) + "</span></div></footer></div></body></html>";
+    return "</main>" + infiltrator_web::footer(right);
 }
 
 static string spec(const string& label, const string& value) {
@@ -163,6 +150,14 @@ static string render_archive() {
     return o.str() + page_end("Since the 1990s. Still here.");
 }
 
+static string render_download() {
+    const string url = "https://github.com/Infiltrator-Projects/ssmithnet.net/releases/download/model-11-sandy-v1.0.0/Model_11_Sandy_v.1.0.0.zip";
+    auto page = page_start("Model 11 Sandy v1.0.0", "Download Model 11 Sandy v1.0.0.", "Download");
+    const auto head_end = page.find("</head>");
+    page.insert(head_end, "<meta http-equiv=\"refresh\" content=\"2;url=" + esc(url) + "\">");
+    return page + "<section class=\"page-intro\"><div class=\"kicker\">Download</div><h1>Model 11 Sandy<br>v1.0.0</h1><p class=\"lead\">Your download should begin automatically.</p><p><a class=\"text-link\" href=\"" + esc(url) + "\">Download the ZIP now <span aria-hidden=\"true\">→</span></a></p></section>" + page_end("Direct download");
+}
+
 int main(int argc, char** argv) {
     try {
         if (argc > 2) throw std::runtime_error("usage: sitegen [output-directory]");
@@ -171,6 +166,7 @@ int main(int argc, char** argv) {
         write(root / "workbench.html", render_workbench());
         write(root / "garage.html", render_garage());
         write(root / "archive.html", render_archive());
+        write(root / "downloads/model-11-sandy/index.html", render_download());
         std::cout << "Generated ssmithnet.net pages from C++ source.\n";
         return 0;
     } catch (const std::exception& ex) {
