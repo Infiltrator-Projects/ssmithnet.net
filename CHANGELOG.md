@@ -4,6 +4,10 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
+- Workbench now represents System Monitor, Defragmenter, Calendar and Calculator alongside InfiltratorFS and the LINK family.
+- Archive records the shared 2016 beginning of the five personal software projects.
+- Package Repository status is corrected from Alpha to Beta.
+- Documentation now records the actual pinned Common 1.19.3 baseline.
 - Canonical documentation baseline aligned with the Infiltrator project family.
 
 ## Policy
