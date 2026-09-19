@@ -36,7 +36,7 @@ The public site is `https://ssmithnet.net/`.
 
 ## Engineering ethos
 
-What does a personal website look like when the public runtime is kept deliberately simple and the site itself remains reproducible from owned source? ssmithnet.net treats generated static pages as an output, not as the source of truth.
+What does a personal website look like when it is built from first principles, the public runtime is kept deliberately simple, and the site remains reproducible from owned source? ssmithnet.net treats generated static pages as an output, not as the source of truth.
 
 The authoritative C++ generator owns structure, navigation and repeated presentation logic. Common contributes exact pinned first-party primitives where the contract is genuinely shared; GitHub Pages is a delivery mechanism rather than an application dependency. The site remains inspectable as ordinary static HTML and local assets, so a change in a framework or hosted runtime cannot redefine the content model.
 
