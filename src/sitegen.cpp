@@ -37,6 +37,7 @@ static string page_start(const string& title, const string& description, const s
     const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Garage" ? "garage.html" : active == "Download" ? "downloads/model-11-sandy/" : "archive.html";
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
+        "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/favicon.svg") + "\">"
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -48,12 +49,15 @@ static string spec(const string& label, const string& value) {
     return "<div class=\"spec\"><span class=\"spec-label\">" + esc(label) + "</span><span class=\"spec-value\">" + esc(value) + "</span></div>";
 }
 
-static string card(const Car& c) {
+static string historical_car(const Car& c) {
     std::ostringstream o;
-    o << "<article class=\"panel\"><div class=\"tag\">" << esc(c.tag) << "</div><h3>" << esc(c.title)
-      << "</h3><p>" << esc(c.description) << "</p><div class=\"specs\">"
-      << spec("Make",c.make) << spec("Model",c.model) << spec("Chassis / Series",c.series)
-      << spec("Powertrain",c.powertrain) << "</div></article>";
+    o << "<article class=\"garage-entry\"><div class=\"tag\">" << esc(c.tag) << "</div><h3>" << esc(c.title)
+      << "</h3><p>" << esc(c.description) << "</p><dl class=\"car-facts\">"
+      << "<div><dt>Make</dt><dd>" << esc(c.make) << "</dd></div>"
+      << "<div><dt>Model</dt><dd>" << esc(c.model) << "</dd></div>"
+      << "<div><dt>Chassis / Series</dt><dd>" << esc(c.series) << "</dd></div>"
+      << "<div><dt>Powertrain</dt><dd>" << esc(c.powertrain) << "</dd></div>"
+      << "</dl></article>";
     return o.str();
 }
 
@@ -79,12 +83,12 @@ static string render_home() {
   <div class="intro-copy"><div class="kicker">Shannon Smith · Mooroopna, Australia</div>
     <h1 id="home-title">Cars. Code.<br>And a lifelong<br><em>need to understand.</em></h1>
     <p class="lead">This domain began with a Mercedes-Benz 450SEL 6.9. These days the workshop includes a filesystem built from scratch, vehicle diagnostics, and the machines I keep coming back to.</p>
-    <a class="text-link" href="workbench.html">Inside the Workbench <span aria-hidden="true">↗</span></a>
+    <a class="text-link" href="workbench.html">Inside the Workbench <span aria-hidden="true">→</span></a>
   </div>
   <aside class="home-index" aria-label="Explore the site"><div class="index-caption">A personal collection</div>
-    <a href="workbench.html"><span class="index-no">01</span><span><strong>Workbench</strong><small>Software, filesystems &amp; vehicle diagnostics</small></span><span aria-hidden="true">↗</span></a>
-    <a href="garage.html"><span class="index-no">02</span><span><strong>Garage</strong><small>Mercedes, Falcons &amp; everything between</small></span><span aria-hidden="true">↗</span></a>
-    <a href="archive.html"><span class="index-no">03</span><span><strong>Archive</strong><small>The 6.9 page, beta years &amp; the open web</small></span><span aria-hidden="true">↗</span></a>
+    <a href="workbench.html"><span class="index-no">01</span><span><strong>Workbench</strong><small>Software, filesystems &amp; vehicle diagnostics</small></span><span aria-hidden="true">→</span></a>
+    <a href="garage.html"><span class="index-no">02</span><span><strong>Garage</strong><small>Mercedes, Falcons &amp; everything between</small></span><span aria-hidden="true">→</span></a>
+    <a href="archive.html"><span class="index-no">03</span><span><strong>Archive</strong><small>The 6.9 page, beta years &amp; the open web</small></span><span aria-hidden="true">→</span></a>
     <div class="index-foot">Personal domain. Since the 1990s.</div>
   </aside>
 </section>
@@ -97,22 +101,22 @@ static string render_home() {
 
 static string render_workbench() {
     return page_start("Workbench", "Inside InfiltratorFS, native software and the LINK vehicle-diagnostics family: storage design, desktop tools and work in progress.", "Workbench") + R"(
-<section class="page-intro"><div class="kicker">Workbench</div><h1>From the question<br>to the working machine.</h1><p class="lead">Storage, native software and vehicle diagnostics share the bench here. The common thread is the same: understand what the machine is doing, own the important behaviour, preserve the evidence, and test the result.</p><nav class="section-nav" aria-label="Workbench sections"><a href="#infiltratorfs">InfiltratorFS</a><a href="#software">Software</a><a href="#link">LINK family</a><a href="#repository">Package repository</a><a href="#principles">Working principles</a></nav></section>
-<section id="infiltratorfs" class="project-section"><div class="project-heading"><div><span class="kicker">01 / Storage</span><h2>InfiltratorFS</h2></div><span class="status-note">Active development · Format 0.18</span></div>
+<section class="page-intro"><div class="kicker">Workbench</div><h1>From the question<br>to the working machine.</h1><p class="lead">Storage, native software and vehicle diagnostics share the bench here. Each section follows the machine from design intent to working evidence.</p><nav class="section-nav" aria-label="Workbench sections"><a href="#infiltratorfs">InfiltratorFS</a><a href="#software">Software</a><a href="#link">LINK family</a><a href="#repository">Package repository</a><a href="#principles">Working principles</a></nav></section>
+<section id="infiltratorfs" class="project-section"><div class="project-heading"><div><span class="project-label">01 / Storage</span><h2>InfiltratorFS</h2></div><span class="status-note">Active development · Format 0.18</span></div>
 <div class="project-intro"><p class="large-copy">A filesystem built from scratch, with the on-disk format and recovery behaviour at the centre of the design.</p><p>The Linux path is a native kernel driver. The project also includes formatters, inspection and scrub tools, and Windows access through a driverless Explorer bridge. A native Windows filesystem driver remains future work.</p></div>
 <div class="engineering-notes"><article><span class="note-no">01</span><h3>Publish a new generation</h3><p>Copy-on-write transactions create new state while retaining earlier generations. Checksummed checkpoints provide a way to select a recoverable generation after interruption.</p></article><article><span class="note-no">02</span><h3>Share data deliberately</h3><p>Snapshots and reflinks share file data. Sparse files and paged extent metadata describe where that data lives without requiring every logical byte to occupy storage.</p></article><article><span class="note-no">03</span><h3>Verify what comes back</h3><p>CRC64 protects metadata and SHA-256 checks logical file data. Inspection and deep-scrub tools make verification an explicit operation.</p></article></div>
 <details class="technical-detail"><summary>Inside the format <span aria-hidden="true">+</span></summary><dl class="fact-list"><div><dt>Identity</dt><dd>128-bit object identifiers</dd></div><div><dt>Names</dt><dd>UTF-8 components up to 1,023 bytes</dd></div><div><dt>Compression</dt><dd>Native IAC1; LZ4 retained as a non-default representation</dd></div><div><dt>Linux integration</dt><dd>Native VFS driver installed through DKMS</dd></div></dl></details>
 <div class="work-note"><h3>The work still ahead</h3><p>Booting a real Linux installation brings mount latency, writeback and metadata costs into focus. Those remain active engineering work. Feature support and passing tests are recorded separately from claims about everyday performance.</p></div>
 <div class="resource-links"><a href="https://github.com/Infiltrator-Projects/InfiltratorFS">Source code ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/QUALIFICATION.md">Test evidence ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/ROADMAP.md">Feature status ↗</a></div></section>
-<section id="software" class="project-section"><div class="project-heading"><div><span class="kicker">02 / Native software</span><h2>The software bench.</h2></div><span class="status-note">Personal projects · Begun 2016</span></div>
+<section id="software" class="project-section"><div class="project-heading"><div><span class="project-label">02 / Native software</span><h2>The software bench.</h2></div><span class="status-note">Personal projects · Begun 2016</span></div>
 <div class="project-intro"><p class="large-copy">Four different tools, built for the same reason: understand the problem properly and own the important behaviour.</p><p>System Monitor, Defragmenter, Calendar and Calculator grew alongside InfiltratorFS as after-hours and weekend projects. They share engineering ideas and selected Common primitives, but each keeps its own domain rules and platform responsibilities.</p></div>
 <div class="family-register"><a href="https://github.com/Infiltrator-Projects/System-Monitor"><strong>System Monitor</strong><span>Linux · native system management through direct OS and hardware interfaces</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Defragmenter"><strong>Defragmenter</strong><span>Linux · offline filesystem allocation analysis, defragmentation and recovery</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Calendar"><strong>Calendar</strong><span>Cinnamon · alternative clocks, chronology, calendars and astronomy</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Calculator"><strong>Calculator</strong><span>Linux, Windows &amp; iPhone · shared calculation core with native interfaces</span><b aria-hidden="true">↗</b></a></div></section>
-<section id="link" class="project-section"><div class="project-heading"><div><span class="kicker">03 / Automotive</span><h2>The LINK family.</h2></div><span class="status-note">Shared engine · Manufacturer-specific knowledge</span></div>
+<section id="link" class="project-section"><div class="project-heading"><div><span class="project-label">03 / Automotive</span><h2>The LINK family.</h2></div><span class="status-note">Shared engine · Manufacturer-specific knowledge</span></div>
 <div class="project-intro"><p class="large-copy">One diagnostic engine, with each vehicle's knowledge in the right place.</p><p>LINK owns the common transport, OBD and UDS handling, sessions and scheduling. Mercedes, Jaguar, BMW, Audi and Ford applications add their own identities, definitions and manufacturer-specific behaviour.</p></div>
 <ol class="diagnostic-flow" aria-label="Diagnostic workflow"><li><span>01</span><strong>Connect</strong><p>Select the adapter.</p></li><li><span>02</span><strong>Identify</strong><p>Read vehicle and module identity.</p></li><li><span>03</span><strong>Match</strong><p>Use supported definitions.</p></li><li><span>04</span><strong>Select</strong><p>Choose the data to request.</p></li><li><span>05</span><strong>Observe</strong><p>Keep results tied to their source.</p></li></ol>
 <div class="family-register"><a href="https://github.com/Infiltrator-Projects/LINK"><strong>LINK</strong><span>The shared C11 diagnostic and application engine</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/MBLINK"><strong>MBLINK</strong><span>Mercedes-Benz · developed with the C207 / OM651</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Jaglink"><strong>JAGLINK</strong><span>Jaguar · X-Type / X400 knowledge</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/BMWLINK"><strong>BMWLINK</strong><span>BMW</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/AUDILINK"><strong>AUDILINK</strong><span>Audi</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/FORDLINK"><strong>FORDLINK</strong><span>Ford</span><b aria-hidden="true">↗</b></a></div>
 <details class="technical-detail"><summary>What Discover is for <span aria-hidden="true">+</span></summary><p>Discover is the specialist side of the family: module identification, read-only inventory, captures and evidence export. Shared interrogation mechanics belong in LINK; manufacturer-specific addresses and meanings belong with the vehicle application.</p><p>An unknown response stays unknown until documentation or reproducible captures establish its meaning.</p></details></section>
-<section id="repository" class="project-section"><div class="project-heading"><div><span class="kicker">04 / Distribution</span><h2>Package Repository.</h2></div><span class="status-note">Linux Mint &amp; Debian-family desktops · Beta</span></div><div class="project-intro"><p class="large-copy">One place to find the software.<br>One APT source to keep it updated.</p><p>The software centre brings the Linux applications together, including InfiltratorFS, System Monitor, Defragmenter, Calendar, Calculator and the LINK applications. Each project releases independently; the repository checks release package hashes and builds the package catalogue and APT metadata from those packages.</p></div><div class="resource-links"><a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Browse software &amp; setup instructions ↗</a><a href="https://github.com/Infiltrator-Projects/Infiltrator-Repository">Repository source ↗</a></div></section>
+<section id="repository" class="project-section"><div class="project-heading"><div><span class="project-label">04 / Distribution</span><h2>Package Repository.</h2></div><span class="status-note">Linux Mint &amp; Debian-family desktops · Beta</span></div><div class="project-intro"><p class="large-copy">One place to find the software.<br>One APT source to keep it updated.</p><p>The software centre brings the Linux applications together, including InfiltratorFS, System Monitor, Defragmenter, Calendar, Calculator and the LINK applications. Each project releases independently; the repository checks release package hashes and builds the package catalogue and APT metadata from those packages.</p></div><div class="resource-links"><a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Browse software &amp; setup instructions ↗</a><a href="https://github.com/Infiltrator-Projects/Infiltrator-Repository">Repository source ↗</a></div></section>
 <section id="principles" class="feature-row"><div><div class="kicker">Working principles</div><h2>Keep the evidence.<br>Question the result.</h2></div><div><p>A successful build proves that code compiled. A clean test proves the case it exercised. Neither automatically proves that an application behaves correctly on a real car or a filesystem handles a real desktop workload.</p><p>That gap is where much of the work happens.</p><a class="text-link" href="https://github.com/Infiltrator-Projects">The project repositories ↗</a></div></section>
 )" + page_end("The best or nothing.");
 }
@@ -124,11 +128,11 @@ static string render_garage() {
     o << spec("Make","Mercedes-Benz") << spec("Model","E 250 CDI Coupé") << spec("Chassis / Baumuster","207.303")
       << spec("Engine","2,143 cc OM651 diesel") << spec("Power","150 kW / 204 PS") << spec("Production","12 May 2011 · Euro 5") << spec("VIN","WDD2073032F129158");
     o << R"(</div><div class="meta"><span class="pill">Leather</span><span class="pill">Panoramic roof</span><span class="pill">PARKTRONIC</span><span class="pill">Heated front seats</span><span class="pill">THERMATIC climate control</span><span class="pill">Intelligent Light System</span><span class="pill">Parameter steering</span></div></div></section>)";
-    o << R"(<section><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2>The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="grid three">)";
+    o << R"(<section><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2>The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
     auto cars = historical_cars();
-    for (std::size_t i=0;i<3;i++) o << card(cars[i]);
-    o << R"(</div></section><section><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2>Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="grid three">)";
-    for (std::size_t i=3;i<cars.size();i++) o << card(cars[i]);
+    for (std::size_t i=0;i<3;i++) o << historical_car(cars[i]);
+    o << R"(</div></section><section><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2>Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="garage-register">)";
+    for (std::size_t i=3;i<cars.size();i++) o << historical_car(cars[i]);
     o << R"(</div></section><section class="feature-row"><div><div class="kicker">A recurring theme</div><h2>Different answers<br>to the same fascination.</h2></div><div><p>The 6.9 and the 1.1-litre Torana sit at very different ends of this collection. Both belong in it. So do the LPG Fords and the Peugeot diesel I ran on waste motor oil.</p><p>The current Mercedes connects the garage to the Workbench: the C207 and its OM651 diesel are the physical development vehicle for MBLINK.</p><a class="text-link" href="workbench.html#link">Follow that connection →</a></div></section><div class="center"><a class="back" href="index.html">← Back to ssmithnet.net</a></div>)";
     return o.str() + page_end("Mercedes-Benz · Australian cars · Personal history");
 }
