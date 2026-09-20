@@ -1,6 +1,6 @@
 # ssmithnet.net
 
-**Project copyright:** © 2000-2026 Shannon Smith
+**Project copyright:** © 1993-2026 Shannon Smith
 
 Personal website for Shannon Smith — a quiet corner of the internet that has been around since the 1990s.
 
