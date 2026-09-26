@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Canonical web adapter for design/infiltrator-design-v1.json. */
 /*
- * Backward compatibility: :root remains the historical graphite/night palette.
- * New consumers opt into day/night/system with data-infiltratr-theme on :root.
+ * Backward compatibility: :root remains the historical MBLINK Linux Night palette.
+ * Theme-aware consumers set data-infiltratr-theme="system|day|night" on :root.
  */
 :root,
 :root[data-infiltratr-theme="night"] {
@@ -25,7 +25,7 @@
   --infiltratr-button-foreground: #111418;
   --infiltratr-selection-background: #2B3137;
   --infiltratr-selection-foreground: #EEF1F3;
-  --infiltratr-neutral-accent: #BEC7CF;
+  --infiltratr-neutral-accent: #00ADEF;
   --infiltratr-success: #63AB7C;
   --infiltratr-warning: #D19E47;
   --infiltratr-fault: #C96B6B;
@@ -35,6 +35,21 @@
   --infiltratr-surface-hover: #171B20;
   --infiltratr-operation-hover: #2B3137;
   --infiltratr-equals-hover: #EEF1F3;
+  --infiltratr-titlebar: #202125;
+  --infiltratr-connection: #0E1115;
+  --infiltratr-connection-border: #31363B;
+  --infiltratr-heading: #E7EBEE;
+  --infiltratr-summary: #98A1A9;
+  --infiltratr-kicker: #8C949B;
+  --infiltratr-detail-label: #7E858C;
+  --infiltratr-note: #9CA4AB;
+  --infiltratr-status-border: #3B4147;
+  --infiltratr-accent-foreground: #031018;
+  --infiltratr-accent-hover: #25B8F0;
+  --infiltratr-selected-summary: #79CAE8;
+  --infiltratr-warning-muted: #C69A4C;
+  --infiltratr-warning-border: #72572F;
+  --infiltratr-success-border: #365F45;
   --infiltratr-small-radius: 6px;
   --infiltratr-control-radius: 10px;
   --infiltratr-card-radius: 12px;
@@ -47,7 +62,7 @@
 }
 
 :root[data-infiltratr-theme="day"] {
-  --infiltratr-background: #F4F5F7;
+  --infiltratr-background: #FFFFFF;
   --infiltratr-panel: #FFFFFF;
   --infiltratr-card: #F8F9FA;
   --infiltratr-surface: #ECEFF2;
@@ -61,7 +76,7 @@
   --infiltratr-button-foreground: #FFFFFF;
   --infiltratr-selection-background: #DDE2E7;
   --infiltratr-selection-foreground: #111418;
-  --infiltratr-neutral-accent: #6F7881;
+  --infiltratr-neutral-accent: #00ADEF;
   --infiltratr-success: #3A8A58;
   --infiltratr-warning: #9A6500;
   --infiltratr-fault: #B54848;
@@ -71,6 +86,21 @@
   --infiltratr-surface-hover: #F1F3F5;
   --infiltratr-operation-hover: #DDE2E7;
   --infiltratr-equals-hover: #343B42;
+  --infiltratr-titlebar: #ECEFF2;
+  --infiltratr-connection: #F8F9FA;
+  --infiltratr-connection-border: #C7CDD3;
+  --infiltratr-heading: #111418;
+  --infiltratr-summary: #59636C;
+  --infiltratr-kicker: #737D86;
+  --infiltratr-detail-label: #737D86;
+  --infiltratr-note: #59636C;
+  --infiltratr-status-border: #C7CDD3;
+  --infiltratr-accent-foreground: #031018;
+  --infiltratr-accent-hover: #25B8F0;
+  --infiltratr-selected-summary: #467AA3;
+  --infiltratr-warning-muted: #9A6500;
+  --infiltratr-warning-border: #9A6500;
+  --infiltratr-success-border: #3A8A58;
 }
 
 :root[data-infiltratr-theme="system"] {
@@ -88,7 +118,7 @@
   --infiltratr-button-foreground: #111418;
   --infiltratr-selection-background: #2B3137;
   --infiltratr-selection-foreground: #EEF1F3;
-  --infiltratr-neutral-accent: #BEC7CF;
+  --infiltratr-neutral-accent: #00ADEF;
   --infiltratr-success: #63AB7C;
   --infiltratr-warning: #D19E47;
   --infiltratr-fault: #C96B6B;
@@ -98,11 +128,26 @@
   --infiltratr-surface-hover: #171B20;
   --infiltratr-operation-hover: #2B3137;
   --infiltratr-equals-hover: #EEF1F3;
+  --infiltratr-titlebar: #202125;
+  --infiltratr-connection: #0E1115;
+  --infiltratr-connection-border: #31363B;
+  --infiltratr-heading: #E7EBEE;
+  --infiltratr-summary: #98A1A9;
+  --infiltratr-kicker: #8C949B;
+  --infiltratr-detail-label: #7E858C;
+  --infiltratr-note: #9CA4AB;
+  --infiltratr-status-border: #3B4147;
+  --infiltratr-accent-foreground: #031018;
+  --infiltratr-accent-hover: #25B8F0;
+  --infiltratr-selected-summary: #79CAE8;
+  --infiltratr-warning-muted: #C69A4C;
+  --infiltratr-warning-border: #72572F;
+  --infiltratr-success-border: #365F45;
 }
 
 @media (prefers-color-scheme: light) {
   :root[data-infiltratr-theme="system"] {
-    --infiltratr-background: #F4F5F7;
+    --infiltratr-background: #FFFFFF;
     --infiltratr-panel: #FFFFFF;
     --infiltratr-card: #F8F9FA;
     --infiltratr-surface: #ECEFF2;
@@ -116,7 +161,7 @@
     --infiltratr-button-foreground: #FFFFFF;
     --infiltratr-selection-background: #DDE2E7;
     --infiltratr-selection-foreground: #111418;
-    --infiltratr-neutral-accent: #6F7881;
+    --infiltratr-neutral-accent: #00ADEF;
     --infiltratr-success: #3A8A58;
     --infiltratr-warning: #9A6500;
     --infiltratr-fault: #B54848;
@@ -126,5 +171,20 @@
     --infiltratr-surface-hover: #F1F3F5;
     --infiltratr-operation-hover: #DDE2E7;
     --infiltratr-equals-hover: #343B42;
+    --infiltratr-titlebar: #ECEFF2;
+    --infiltratr-connection: #F8F9FA;
+    --infiltratr-connection-border: #C7CDD3;
+    --infiltratr-heading: #111418;
+    --infiltratr-summary: #59636C;
+    --infiltratr-kicker: #737D86;
+    --infiltratr-detail-label: #737D86;
+    --infiltratr-note: #59636C;
+    --infiltratr-status-border: #C7CDD3;
+    --infiltratr-accent-foreground: #031018;
+    --infiltratr-accent-hover: #25B8F0;
+    --infiltratr-selected-summary: #467AA3;
+    --infiltratr-warning-muted: #9A6500;
+    --infiltratr-warning-border: #9A6500;
+    --infiltratr-success-border: #3A8A58;
   }
 }
