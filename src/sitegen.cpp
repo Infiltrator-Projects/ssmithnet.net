@@ -65,7 +65,7 @@ static vector<Car> historical_cars() {
     return {
         {"W116","450SEL 6.9","Mercedes-Benz","450SEL 6.9","116.036","M100 · 6.8 L V8","The car behind the original Infiltrator 6.9 page and the earliest chapter of the domain."},
         {"W116","280SE","Mercedes-Benz","280SE","116.024","M110 · 2.8 L I6","The six-cylinder W116 in my garage history, alongside the 450SEL 6.9."},
-        {"C126 · 1986 · AMG","500SEC AMG","Mercedes-Benz","500SEC","126.044 · WDB1260442A171593","5.0 L V8 · AMG","The WA record lists registration 1ARK884, acquired 17 December 2002 and disposed 28 July 2022."},
+        {"C126 · 1986 · AMG","500SEC AMG","Mercedes-Benz","500SEC","126.044 · WDB1260442A171593","5.0 L V8 · AMG","The WA record lists registration 1ARK884; I acquired the car on 17 December 2002."},
         {"Ford · Tickford LPG","EL Falcon","Ford","EL Falcon","EL","Petrol / LPG · Tickford","An earlier Falcon in the Australian chapter, with Tickford-installed LPG."},
         {"Ford","XF Falcon","Ford","XF Falcon","XF","Petrol","An XF Falcon among the Australian Fords I have owned."},
         {"Ford · BA · V8 · LPG","2003 Fairmont","Ford","Fairmont","BA","5.4 L V8 · Petrol / LPG","A BA Fairmont with the 5.4-litre V8 and dual-fuel LPG."},
