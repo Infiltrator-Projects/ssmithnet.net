@@ -125,13 +125,13 @@ static string render_garage() {
     o << page_start("Garage","My Mercedes-Benz C207 and the cars I have owned: W116s, Falcons, LPG V8s, a Torana, Discovery and Peugeot diesel.","Garage","garage-page");
     o << R"(<section><div class="section-head"><div><div class="kicker">Garage</div><h1>The machines behind the stories.</h1></div><p>From the W116 that started the website to the C207 in the garage today.</p></div><p class="section-intro">The early ssmithnet.net was about Mercedes-Benz. That history is still part of the site because it explains a lot about what came later: an appreciation for things that are engineered properly, refined over time and made to last.</p><div class="panel"><div class="tag">Current · VIN verified</div><h2>E 250 CDI BlueEFFICIENCY Coupé</h2><p>The car in the garage now: a 2011 Mercedes-Benz C207.</p><div class="specs">)";
     o << spec("Make","Mercedes-Benz") << spec("Model","E 250 CDI Coupé") << spec("Chassis / Baumuster","207.303")
-      << spec("Engine","2,143 cc OM651 diesel") << spec("Power","150 kW / 204 PS") << spec("Production","12 May 2011 · Euro 5") << spec("VIN","WDD2073032F129158");
+      << spec("Engine","2,143 cc OM651 diesel") << spec("Power","150 kW / 204 PS") << spec("Transmission","722.6 · 5-speed automatic")
+      << spec("Production","12 May 2011 · Euro 5") << spec("VIN","WDD2073032F129158");
     o << R"(</div><div class="meta"><span class="pill">Leather</span><span class="pill">Panoramic roof</span><span class="pill">PARKTRONIC</span><span class="pill">Heated front seats</span><span class="pill">THERMATIC climate control</span><span class="pill">Intelligent Light System</span><span class="pill">Parameter steering</span></div></div></section>)";
     o << R"(<section><div class="section-head"><div><div class="kicker">AMG chapter</div><h2>500SEC AMG</h2></div><p>The factory car before the AMG work.</p></div><div class="panel"><div class="tag">Historic · VIN verified · AMG</div><h2>500SEC AMG</h2><p>Built at Sindelfingen as a right-hand-drive, pre-facelift C126 500SEC before its AMG conversion.</p><div class="specs">)";
     o << spec("Make","Mercedes-Benz") << spec("Model","500SEC") << spec("Chassis / Baumuster","126.044 · C126")
-      << spec("Factory engine","4,973 cc M117.963 V8") << spec("Factory power","170 kW / 231 PS · 405 Nm")
-      << spec("Factory transmission","722.311 · 4-speed automatic") << spec("Production","Approx. June 1985 · pre-facelift")
-      << spec("VIN","WDB1260442A171593");
+      << spec("Engine","4,973 cc M117.963 V8") << spec("Power","170 kW / 231 PS · 405 Nm") << spec("Transmission","722.311 · 4-speed automatic")
+      << spec("Production","Approx. June 1985 · pre-facelift") << spec("VIN","WDB1260442A171593");
     o << R"(</div><div class="meta"><span class="pill">Smoke Silver Metallic · 702U</span><span class="pill">Mushroom leather · 275A</span><span class="pill">Factory right-hand drive</span><span class="pill">Sindelfingen</span><span class="pill">Order 0553755057</span><span class="pill">WA registration 1ARK884</span><span class="pill">Acquired 17 December 2002</span></div></div></section>)";
     o << R"(<section><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2>The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
     auto cars = historical_cars();
