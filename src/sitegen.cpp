@@ -65,7 +65,6 @@ static vector<Car> historical_cars() {
     return {
         {"W116","450SEL 6.9","Mercedes-Benz","450SEL 6.9","116.036","M100 · 6.8 L V8","The car behind the original Infiltrator 6.9 page and the earliest chapter of the domain."},
         {"W116","280SE","Mercedes-Benz","280SE","116.024","M110 · 2.8 L I6","The six-cylinder W116 in my garage history, alongside the 450SEL 6.9."},
-        {"C126 · 1986 · AMG","500SEC AMG","Mercedes-Benz","500SEC","126.044 · WDB1260442A171593","5.0 L V8 · AMG","The WA record lists registration 1ARK884; I acquired the car on 17 December 2002."},
         {"Ford · Tickford LPG","EL Falcon","Ford","EL Falcon","EL","Petrol / LPG · Tickford","An earlier Falcon in the Australian chapter, with Tickford-installed LPG."},
         {"Ford","XF Falcon","Ford","XF Falcon","XF","Petrol","An XF Falcon among the Australian Fords I have owned."},
         {"Ford · BA · V8 · LPG","2003 Fairmont","Ford","Fairmont","BA","5.4 L V8 · Petrol / LPG","A BA Fairmont with the 5.4-litre V8 and dual-fuel LPG."},
@@ -128,11 +127,17 @@ static string render_garage() {
     o << spec("Make","Mercedes-Benz") << spec("Model","E 250 CDI Coupé") << spec("Chassis / Baumuster","207.303")
       << spec("Engine","2,143 cc OM651 diesel") << spec("Power","150 kW / 204 PS") << spec("Production","12 May 2011 · Euro 5") << spec("VIN","WDD2073032F129158");
     o << R"(</div><div class="meta"><span class="pill">Leather</span><span class="pill">Panoramic roof</span><span class="pill">PARKTRONIC</span><span class="pill">Heated front seats</span><span class="pill">THERMATIC climate control</span><span class="pill">Intelligent Light System</span><span class="pill">Parameter steering</span></div></div></section>)";
+    o << R"(<section><div class="section-head"><div><div class="kicker">AMG chapter</div><h2>500SEC AMG</h2></div><p>The factory car before the AMG work.</p></div><div class="panel"><div class="tag">Historic · VIN verified · AMG</div><h2>500SEC AMG</h2><p>Built at Sindelfingen as a right-hand-drive, pre-facelift C126 500SEC before its AMG conversion.</p><div class="specs">)";
+    o << spec("Make","Mercedes-Benz") << spec("Model","500SEC") << spec("Chassis / Baumuster","126.044 · C126")
+      << spec("Factory engine","4,973 cc M117.963 V8") << spec("Factory power","170 kW / 231 PS · 405 Nm")
+      << spec("Factory transmission","722.311 · 4-speed automatic") << spec("Production","Approx. June 1985 · pre-facelift")
+      << spec("VIN","WDB1260442A171593");
+    o << R"(</div><div class="meta"><span class="pill">Smoke Silver Metallic · 702U</span><span class="pill">Mushroom leather · 275A</span><span class="pill">Factory right-hand drive</span><span class="pill">Sindelfingen</span><span class="pill">Order 0553755057</span><span class="pill">WA registration 1ARK884</span><span class="pill">Acquired 17 December 2002</span></div></div></section>)";
     o << R"(<section><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2>The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
     auto cars = historical_cars();
-    for (std::size_t i=0;i<3;i++) o << historical_car(cars[i]);
+    for (std::size_t i=0;i<2;i++) o << historical_car(cars[i]);
     o << R"(</div></section><section><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2>Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="garage-register">)";
-    for (std::size_t i=3;i<cars.size();i++) o << historical_car(cars[i]);
+    for (std::size_t i=2;i<cars.size();i++) o << historical_car(cars[i]);
     o << R"(</div></section><section class="feature-row"><div><div class="kicker">A recurring theme</div><h2>Different answers<br>to the same fascination.</h2></div><div><p>The 6.9 and the 1.1-litre Torana sit at very different ends of this collection. Both belong in it. So do the LPG Fords and the Peugeot diesel I ran on waste motor oil.</p><p>The current Mercedes connects the garage to the Workbench: the C207 and its OM651 diesel are the physical development vehicle for MBLINK.</p><a class="text-link" href="workbench.html#link">Follow that connection →</a></div></section><div class="center"><a class="back" href="index.html">← Back to ssmithnet.net</a></div>)";
     return o.str() + page_end("Mercedes-Benz · Australian cars · Personal history");
 }
