@@ -29,18 +29,19 @@ inline std::string head(const std::string& title, const std::string& description
         "\"><meta property=\"og:description\" content=\"" + esc(description) +
         "\"><meta property=\"og:url\" content=\"" + esc(canonical) +
         "\"><link rel=\"stylesheet\" href=\"" + esc(assets) + "infiltrator-web-v1.css?v=common-1.19.3\">"
-        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site.css?v=family-20261016-brand-locked\">"
-        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site-overrides.css?v=family-20261016-brand-locked\">";
+        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site.css?v=family-20261016-editorial\">"
+        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site-overrides.css?v=family-20261016-editorial\">";
 }
 inline std::string navigation(const std::string& active, const std::string& home = "") {
     std::string html = "<a class=\"skip-link\" href=\"#main\">Skip to content</a><div class=\"shell\">"
         "<nav aria-label=\"Primary\"><a class=\"brand\" href=\"" + esc(home) +
-        "index.html\">ssmith<span>net</span>.net</a><div class=\"navlinks\">";
-    for (const auto& item : {std::pair<std::string,std::string>{"Home","index.html"},
-         {"Workbench","workbench.html"},{"Garage","garage.html"},{"Archive","archive.html"},
+        "index.html\"" + (active == "Home" ? " aria-current=\"page\"" : "") +
+        ">ssmith<span>net</span>.net</a><div class=\"navlinks\">";
+    for (const auto& item : {std::pair<std::string,std::string>{"Workbench","workbench.html"},
+         {"Garage","garage.html"},{"About","about.html"},
          {"Software Centre","https://infiltrator-projects.github.io/Infiltrator-Repository/"}}) {
         const auto href = item.first == "Software Centre" ? item.second : home + item.second;
-        html += "<a" + std::string(item.first == active ? " class=\"active\" aria-current=\"page\"" : "") +
+        html += "<a" + std::string(item.first == "Software Centre" ? " class=\"nav-software\"" : "") + std::string(item.first == active ? " aria-current=\"page\"" : "") +
                 " href=\"" + esc(href) + "\">" + esc(item.first) + "</a>";
     }
     return html + "</div></nav>";

@@ -36,7 +36,7 @@ This file records durable engineering and presentation choices for ssmithnet.net
 
 ## ADR-005 — Information belongs in one authoritative section
 
-**Decision.** Home teases; Workbench owns technical projects; Garage owns vehicle history; Archive owns historical site material.
+**Decision.** Home teases; Workbench owns technical projects; Garage owns vehicle history; About owns personal interests and historical site material.
 
 **Rationale.** Repeating the same detailed content across pages makes maintenance harder and weakens information hierarchy.
 

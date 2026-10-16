@@ -23,12 +23,14 @@ class Page(HTMLParser):
             if attr in a:self.links.append(a[attr])
     def handle_endtag(self,tag):
         if tag=='nav':self.in_nav=False
-pages=[root/'index.html']+[root/p for p in ('workbench.html','garage.html','archive.html','downloads/model-11-sandy/index.html') if (root/p).is_file()]
+pages=[root/'index.html']+[root/p for p in ('workbench.html','garage.html','about.html','archive.html','downloads/model-11-sandy/index.html') if (root/p).is_file()]
 for path in pages:
     p=Page();p.feed(path.read_text())
     assert p.h1==1 and p.canonical==1 and p.og,path
     assert p.skip and 'main' in p.ids and len(p.ids)==len(set(p.ids)),path
-    assert len(p.nav)==6 and 'https://infiltrator-projects.github.io/Infiltrator-Repository/' in p.nav,path
+    assert any(ref.endswith('/about.html') or ref == 'about.html' or ref == '../../about.html' for ref in p.nav), path
+    assert not any(ref.endswith('/archive.html') or ref == 'archive.html' for ref in p.nav), path
+    assert len(p.nav)==5 and 'https://infiltrator-projects.github.io/Infiltrator-Repository/' in p.nav,path
     for ref in p.links:
         u=urlsplit(ref)
         if u.scheme or u.netloc or not u.path:continue

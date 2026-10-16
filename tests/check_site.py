@@ -8,7 +8,7 @@ import tempfile
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ("index.html", "workbench.html", "garage.html", "archive.html", "downloads/model-11-sandy/index.html")
+PAGES = ("index.html", "workbench.html", "garage.html", "about.html", "archive.html", "downloads/model-11-sandy/index.html")
 GENERATOR = ROOT / "build" / "sitegen"
 
 
@@ -135,6 +135,9 @@ with tempfile.TemporaryDirectory(prefix="ssmithnet-check-") as directory:
 
     subprocess.run([str(GENERATOR), str(out)], check=True)
     assert all(first[name] == (out / name).read_bytes() for name in PAGES), "generator output changed between identical runs"
+
+assert first["archive.html"] == first["about.html"], "the legacy Archive address must retain the full canonical About content"
+assert b'href="https://ssmithnet.net/about.html"' in first["archive.html"]
 
 garage = first["garage.html"].decode("utf-8")
 cards = [GarageCard(html) for html in re.findall(r"<article\b[^>]*>.*?</article>", garage, re.S)]

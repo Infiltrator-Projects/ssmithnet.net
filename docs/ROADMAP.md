@@ -4,13 +4,13 @@ This roadmap describes direction rather than dates. Current support is defined b
 
 ## Current foundation
 
-- maintain deterministic generation of Home, Workbench, Garage and Archive pages
+- maintain deterministic generation of Home, Workbench, Garage and About pages
 - keep committed mirrors byte-aligned with generator output
 - publish only the finished static artifact
 
 ## Near-term priorities
 
-- keep content and Workbench/Garage/Archive structures current without duplicating layout logic
+- keep content and Workbench/Garage/About structures current without duplicating layout logic
 - continue consolidating genuinely neutral web mechanics in Common
 - strengthen validation whenever generator responsibilities grow
 

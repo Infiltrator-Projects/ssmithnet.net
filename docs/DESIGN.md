@@ -30,7 +30,7 @@ The official Mercedes app blue is **#00ADEF**. This is a fixed brand colour for 
 
 Use a dark blue-black foundation with controlled cool blue/cyan accents and restrained warm material notes. Black, silver, graphite, cool blue and small amounts of warm wood/leather influence are appropriate. Avoid bright multicolour palettes and avoid literal automotive theming.
 
-The existing MB Corpo/MB Head typography is part of the identity and should remain central. Typography should feel precise, mature and slightly technical without becoming sterile.
+MB Corpo A is used for display headings. MB Corpo S is used for body text, facts, technical records and controls. These existing faces remain the entire typography system. Typography should feel precise, mature and slightly technical without becoming sterile.
 
 Natural materials are a useful conceptual reference: leather, brushed metal, silver, dark wood and glass. These should influence colour, texture, depth and lighting rather than becoming literal decorative textures everywhere.
 
@@ -60,13 +60,13 @@ Do not use "other" as a synonym for "less important". When grouping historic mat
 
 ### Home
 
-The front page should establish the personality of the site, give a concise sense of what Shannon is interested in now, and provide clear routes into the deeper areas.
+The front page identifies Shannon by name, then introduces two concrete subjects: InfiltratorFS and the current E-Class. Each has a distinct route to its deeper page. The wordmark links home; primary navigation has Workbench, Garage and About, followed by the Software Centre installation destination.
 
 It should **tease rather than duplicate**.
 
-Detailed technical project information belongs in Workbench. Detailed car information belongs in Garage. The 1990s history and beta-testing material belongs in Archive.
+Detailed technical project information belongs in Workbench. Detailed car information belongs in Garage. Personal interests, the 1990s history and beta-testing material belong in About.
 
-The Heinlein quotation can remain as a personal closing statement on the home page.
+The Heinlein quotation closes About as a personal statement.
 
 ### Workbench
 
@@ -99,9 +99,9 @@ The Australian/other chapter is equally important. It includes the EL Falcon wit
 
 The Australian cars are not an "other" or lesser class. The distinction is historical and cultural, not a quality ranking.
 
-### Archive
+### About
 
-Archive owns the history of the site: the 1990s origin, the Mercedes pages that came first, beta-testing history and other older material that rewards exploration.
+About combines personal interests with the history of the site: the 1990s origin, the Mercedes pages that came first and beta-testing history. The former Archive did not contain an independent collection of archived artifacts, so it is maintained as an alias of About with an About canonical URL. This retains bookmarks without a duplicate navigation destination.
 
 Do not duplicate the full history elsewhere when it belongs here.
 
