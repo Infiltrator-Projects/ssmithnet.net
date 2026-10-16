@@ -4,6 +4,7 @@ This directory is the canonical documentation entry point for ssmithnet.net.
 
 ## Canonical baseline
 
+- [Engineering philosophy](PHILOSOPHY.md) — governing engineering and documentation standard.
 - [Architecture](ARCHITECTURE.md) — generator, static output, Common and deployment boundaries.
 - [Design](DESIGN.md) — complete visual language, information architecture, interaction and responsive rules.
 - [Decisions](DECISIONS.md) — durable engineering/presentation choices.
