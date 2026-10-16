@@ -4,6 +4,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit,unquote
 import posixpath
+import re
 import sys
 root=Path(sys.argv[1] if len(sys.argv)>1 else '.').resolve()
 class Page(HTMLParser):
@@ -39,4 +40,5 @@ css=(root/'assets/site.css').read_text()
 for font in fonts:
     assert font in css and (root/'assets/fonts'/font).read_bytes()[:4]==b'wOF2',font
 assert css.count('@font-face')==3
+assert re.search(r'--accent\s*:\s*#00adef\b',css,re.I), 'preserve the official Mercedes app blue #00ADEF'
 print(f'PASS: shared navigation, metadata, landmarks, assets and three real Corpo fonts across {len(pages)} pages')

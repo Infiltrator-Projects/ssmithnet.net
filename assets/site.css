@@ -2,8 +2,9 @@
 @font-face{font-family:"MB Corpo S";src:url("fonts/mb-corpo-s-regular.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"MB Corpo S";src:url("fonts/mb-corpo-s-bold.woff2") format("woff2");font-weight:700;font-display:swap}
 
-/* Shared identity. Page compositions follow below, with one responsive layer. */
-:root{color-scheme:dark;--bg:#090c0f;--bg2:#11161b;--surface:rgba(21,27,32,.66);--surface2:#171e24;--line:rgba(166,180,190,.19);--line-soft:rgba(166,180,190,.1);--text:#e9edf0;--muted:#b4bec5;--quiet:#929fa8;--accent:#94b5c3;--green:#a3b8a8;--wood:rgba(189,165,126,.18);--wood-strong:rgba(189,165,126,.36);--content:1120px;--radius:3px;--sans:"MB Corpo S",system-ui,sans-serif;--display:"MB Corpo A",Georgia,serif}
+/* Shared identity. Mercedes blue #00ADEF is fixed to the official MB app colour.
+   Page compositions follow below, with one responsive layer. */
+:root{color-scheme:dark;--bg:#090c0f;--bg2:#11161b;--surface:rgba(21,27,32,.66);--surface2:#171e24;--line:rgba(166,180,190,.19);--line-soft:rgba(166,180,190,.1);--text:#e9edf0;--muted:#b4bec5;--quiet:#929fa8;--accent:#00adef;--green:#a3b8a8;--wood:rgba(189,165,126,.18);--wood-strong:rgba(189,165,126,.36);--content:1120px;--radius:3px;--sans:"MB Corpo S",system-ui,sans-serif;--display:"MB Corpo A",Georgia,serif}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 15% 0,rgba(49,65,76,.25),transparent 43%),linear-gradient(180deg,#10161b,#090c0f 70%);color:var(--text);font:400 17px/1.65 var(--sans);font-synthesis:none;-webkit-font-smoothing:antialiased}
@@ -14,7 +15,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{o
 .skip-link:focus{transform:none}
 nav[aria-label="Primary"]{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:29px 0 27px;border-bottom:1px solid var(--line)}
 .brand{font:400 28px/1.1 var(--display);letter-spacing:.025em;white-space:nowrap}
-.brand span{color:#82b7cc}
+.brand span{color:var(--accent)}
 .navlinks{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:28px;color:var(--muted);font-size:15px}
 .navlinks a{padding:5px 0}
 .navlinks a:hover,.navlinks a[aria-current="page"]{color:var(--text)}
