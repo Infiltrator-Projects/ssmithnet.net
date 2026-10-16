@@ -32,7 +32,7 @@ Generate the six pages into an explicit directory with:
 ./build/sitegen OUTPUT_DIRECTORY
 ```
 
-This is deliberately the same Pages model used by the Infiltrator Software Centre: source is built on a temporary GitHub Actions Linux runner and only the finished static artifact is served to visitors.
+This is deliberately the same Pages model used by the Software Centre: source is built on a temporary GitHub Actions Linux runner and only the finished static artifact is served to visitors.
 
 The public site is `https://ssmithnet.net/`.
 

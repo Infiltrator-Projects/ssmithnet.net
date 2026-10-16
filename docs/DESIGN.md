@@ -70,9 +70,9 @@ The Heinlein quotation closes About as a personal statement.
 
 ### Workbench
 
-Workbench is the technical workshop. It should contain the serious project detail: InfiltratorFS, the LINK family and personal software/systems work that Shannon actually cares about.
+Workbench is the technical workshop. It should contain the serious project detail: InfiltratorFS, the Link family and personal software/systems work that Shannon actually cares about.
 
-LINK must be represented as an **automotive family**, not as a synonym for MBLINK. MBLINK is the Mercedes member; other make-specific projects belong underneath the shared LINK architecture.
+Link must be represented as an **automotive family**, not as a synonym for MBLink. MBLink is the Mercedes member; other make-specific projects belong underneath the shared Link architecture.
 
 Employment tooling that Shannon does not consider a personal interest should not be presented as part of his identity merely because he works with it.
 
