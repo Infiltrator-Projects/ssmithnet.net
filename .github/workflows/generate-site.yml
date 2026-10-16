@@ -66,7 +66,6 @@ jobs:
           test -s public/garage.html
           test -s public/about.html
           test -s public/archive.html
-          cp design-review.html public/design-review.html
           test -s public/assets/site.css
           test -s public/assets/site-overrides.css
           test -s public/downloads/model-11-sandy/index.html
