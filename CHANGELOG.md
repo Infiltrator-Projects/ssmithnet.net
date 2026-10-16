@@ -4,7 +4,7 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
-- Garage gives the current 2011 E 250 CDI the hero position in a compact pair of matching expandable datacards, including the historic 500 SEC AMG's UK delivery, both cars' serial numbers and the E-Class's 69 equipment codes.
+- Garage uses one vertical sequence for all vehicles, led by the current 2011 E 250 CDI. Consistent record typography, aligned specifications and full-width chapter headings carry through the Mercedes and Australian-car history. Expandable records retain the SEC's UK delivery, both cars' serial numbers and the E-Class's 69 equipment codes.
 - Workbench now represents System Monitor, Defragmenter, Calendar and Calculator alongside InfiltratorFS and the LINK family.
 - Archive records the shared 2016 beginning of the five personal software projects.
 - Package Repository status is corrected from Alpha to Beta.

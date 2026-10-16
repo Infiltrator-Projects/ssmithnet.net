@@ -61,13 +61,15 @@ static string page_end(const string& right) {
 
 static string historical_car(const Car& c) {
     std::ostringstream o;
-    o << "<article class=\"garage-entry\"><div class=\"tag\">" << esc(c.tag) << "</div><h3>" << esc(c.title)
-      << "</h3><p>" << esc(c.description) << "</p><dl class=\"car-facts\">"
+    o << "<article class=\"garage-entry garage-vehicle\"><div class=\"vehicle-overview\"><header class=\"vehicle-heading\">"
+      << "<div class=\"vehicle-status\">" << esc(c.tag) << "</div><div class=\"vehicle-title-row\"><h3>" << esc(c.title)
+      << "</h3></div><p class=\"vehicle-description\">" << esc(c.description)
+      << "</p></header><dl class=\"vehicle-specifications\">"
       << "<div><dt>Make</dt><dd>" << esc(c.make) << "</dd></div>"
       << "<div><dt>Model</dt><dd>" << esc(c.model) << "</dd></div>"
       << "<div><dt>Chassis / Series</dt><dd>" << esc(c.series) << "</dd></div>"
       << "<div><dt>Powertrain</dt><dd>" << esc(c.powertrain) << "</dd></div>"
-      << "</dl></article>";
+      << "</dl></div></article>";
     return o.str();
 }
 
@@ -143,22 +145,23 @@ static string vehicle_facts(const vector<VehicleFact>& facts, const string& clas
 
 static string vehicle_card(const VehicleRecord& car) {
     std::ostringstream o;
-    o << "<article class=\"vehicle-card vehicle-card--" << (car.current ? "hero" : "historic")
+    const string heading = car.current ? "h2" : "h3";
+    o << "<article class=\"garage-vehicle vehicle-card vehicle-card--" << (car.current ? "hero" : "historic")
       << "\" id=\"" << esc(car.id) << "\" aria-labelledby=\"" << esc(car.id) << "-title\">"
       << "<div class=\"vehicle-overview\"><header class=\"vehicle-heading\">"
       << "<div class=\"vehicle-status\"><span aria-hidden=\"true\"></span>"
       << (car.current ? "Current" : "Historic") << " · VIN verified</div>"
-      << "<div class=\"vehicle-title-row\"><h2 id=\"" << esc(car.id) << "-title\">" << esc(car.title)
-      << "</h2><span class=\"vehicle-year\">" << esc(car.year) << "</span></div>"
+      << "<div class=\"vehicle-title-row\"><" << heading << " id=\"" << esc(car.id) << "-title\">" << esc(car.title)
+      << "</" << heading << "><span class=\"vehicle-year\">" << esc(car.year) << "</span></div>"
       << "<p class=\"vehicle-subtitle\">" << esc(car.subtitle) << "</p>"
+      << "<p class=\"vehicle-description\">" << esc(car.description) << "</p>"
       << "<dl class=\"vehicle-vin\"><dt>VIN</dt><dd>" << esc(car.vin) << "</dd></dl>"
       << "<dl class=\"vehicle-delivery\"><dt>Original delivery</dt><dd>" << esc(car.market) << "</dd></dl>"
       << "</header>" << vehicle_facts(car.specifications, "vehicle-specifications") << "</div>"
-      << "<div class=\"vehicle-highlights\"><span class=\"vehicle-section-label\">At a glance</span><ul>";
+      << "<ul class=\"vehicle-highlights\" aria-label=\"Highlights\">";
     for (const auto& item : car.highlights) o << "<li>" << esc(item) << "</li>";
-    o << "</ul></div><details class=\"vehicle-record\"><summary>Full vehicle record<span aria-hidden=\"true\"></span></summary>"
-      << "<div class=\"vehicle-record-body\"><p class=\"vehicle-description\">" << esc(car.description)
-      << "</p><div class=\"vehicle-record-groups\">";
+    o << "</ul><details class=\"vehicle-record\"><summary>Full vehicle record<span aria-hidden=\"true\"></span></summary>"
+      << "<div class=\"vehicle-record-body\"><div class=\"vehicle-record-groups\">";
     for (const auto& group : {std::pair<string, const vector<VehicleFact>*>{"Factory identity", &car.identity},
                               {"Dates & delivery", &car.dates}, {"Ownership & modifications", &car.history}}) {
         o << "<section><h3>" << esc(group.first) << "</h3>" << vehicle_facts(*group.second, "vehicle-record-facts") << "</section>";
@@ -179,7 +182,7 @@ static string vehicle_card(const VehicleRecord& car) {
 static VehicleRecord current_mercedes() {
     return {
         "e250-cdi", "E 250 CDI", "BlueEFFICIENCY Coupé · C207", "2011", "WDD2073032F129158", "Australia",
-        "The Mercedes in the garage today. Built at Bremen as a right-hand-drive, pre-facelift E-Class coupé.", true,
+        "Bremen-built, right-hand-drive pre-facelift E-Class coupé.", true,
         {{"Chassis / Baumuster", "C207 · 207.303", "Right-hand drive"},
          {"Engine", "2,143 cc diesel", "OM651"},
          {"Power / torque", "150 kW · 500 Nm", "204 PS · factory specification"},
@@ -237,7 +240,7 @@ static VehicleRecord current_mercedes() {
 static VehicleRecord historic_mercedes() {
     return {
         "500-sec", "500 SEC AMG", "Factory 500 SEC · C126", "1985", "WDB1260442A171593", "United Kingdom",
-        "The UK-delivered, pre-facelift C126. Factory specifications below describe the car before its AMG conversion.", false,
+        "The UK-delivered, pre-facelift C126 before its AMG conversion.", false,
         {{"Chassis / Baumuster", "C126 · 126.044", "Right-hand drive"},
          {"Engine", "4,973 cc V8", "M117.963"},
          {"Power / torque", "170 kW · 405 Nm", "231 PS · before AMG conversion"},
@@ -260,11 +263,12 @@ static VehicleRecord historic_mercedes() {
 static string render_garage() {
     std::ostringstream o;
     auto start = page_start("Garage","My 2011 Mercedes-Benz E 250 CDI Coupé and the cars I have owned: the UK-delivered 500 SEC AMG, W116s, Falcons and more.","Garage","garage-page");
-    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=datacards-20261016-compact\">");
+    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261016-editorial\">");
     o << start;
-    o << R"(<section class="garage-feature-section" aria-labelledby="garage-title"><div class="garage-introduction"><div class="kicker">Garage</div><h1 id="garage-title">The machines behind the stories.</h1><p>From the W116 that started the website to the 2011 E-Class in the garage today.</p></div><div class="garage-featured" aria-label="Featured Mercedes-Benz vehicles">)";
-    o << vehicle_card(current_mercedes()) << vehicle_card(historic_mercedes()) << "</div></section>";
+    o << R"(<section class="garage-feature-section" aria-labelledby="garage-title"><div class="garage-introduction"><div class="kicker">Garage</div><h1 id="garage-title">The machines behind the stories.</h1><p>From the W116 that started the website to the 2011 E-Class in the garage today.</p></div>)";
+    o << vehicle_card(current_mercedes()) << "</section>";
     o << R"(<section class="garage-history" aria-labelledby="mercedes-history-title"><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2 id="mercedes-history-title">The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
+    o << vehicle_card(historic_mercedes());
     auto cars = historical_cars();
     for (std::size_t i=0;i<2;i++) o << historical_car(cars[i]);
     o << R"(</div></section><section class="garage-history" aria-labelledby="ford-history-title"><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2 id="ford-history-title">Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="garage-register">)";

@@ -135,6 +135,11 @@ with tempfile.TemporaryDirectory(prefix="ssmithnet-check-") as directory:
 
 garage = first["garage.html"].decode("utf-8")
 cards = [GarageCard(html) for html in re.findall(r"<article\b[^>]*>.*?</article>", garage, re.S)]
+vehicles = [card for card in cards if "garage-vehicle" in card.classes]
+assert len(vehicles) == 12, "the complete Garage history must retain all twelve vehicle records"
+for car in vehicles[2:]:
+    assert car.specification_labels == ["Make", "Model", "Chassis / Series", "Powertrain"]
+    assert all(car.fields.get(label) for label in car.specification_labels), "historical vehicle fields must remain complete"
 featured = [card for card in cards if "vehicle-card" in card.classes]
 assert [card.id for card in featured] == ["e250-cdi", "500-sec"], "current E-Class must lead the Mercedes records"
 current, sec = featured
@@ -163,4 +168,4 @@ assert 'href="assets/garage.css?v=' in garage
 assert all("assets/garage.css" not in content.decode("utf-8") for name, content in first.items() if name != "garage.html")
 
 print("PASS: deterministic C++ output, committed mirrors, page landmarks, assets and local links")
-print("PASS: 2011 E-Class hero, matching Mercedes fields, delivery/serial/date evidence and 69 unique equipment codes")
+print("PASS: complete twelve-car history, 2011 E-Class hero, matching fields, delivery/serial/date evidence and 69 unique equipment codes")
