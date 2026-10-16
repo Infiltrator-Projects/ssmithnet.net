@@ -138,12 +138,8 @@ footer{padding:20px 0 30px;color:var(--quiet);font-size:14px}
 
 /* About gives the personal material and the former Archive one maintained home. */
 .about-interests,.about-history{border-top:1px solid var(--line)}
-.about-interests{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px}
-.about-interests .section-heading{display:block;margin:0}
-.about-interests .section-deck{margin-top:20px}
+.about-interests .project-content{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
 .interest-entry{padding:24px 0;border-top:1px solid var(--line-soft)}
-.interest-entry:first-child{padding-top:0;border-top:0}
-.interest-entry:last-child{padding-bottom:0}
 .interest-entry h3{font-size:30px;margin-bottom:10px}
 .interest-entry p{font-size:18px;margin:0}
 .timeline{border-top:1px solid var(--line);margin-top:32px}
@@ -167,7 +163,7 @@ input[type="search"]{background:var(--surface);border:1px solid var(--line);colo
 @media(max-width:1000px){
  .shell{width:calc(100% - 56px)}
  .navlinks{gap:24px}.navlinks .nav-software{padding-left:20px}
- .home-feature,.section-heading,.vehicle-overview,.closing-note,.about-interests{column-gap:40px}
+ .home-feature,.section-heading,.vehicle-overview,.closing-note{column-gap:40px}
  .garage-entry .vehicle-heading{column-gap:40px}
  .home-intro-bottom{gap:40px}.home-intro .lead{max-width:550px}
  .destination-strip,.home-closing{gap:40px}
@@ -190,7 +186,7 @@ input[type="search"]{background:var(--surface);border:1px solid var(--line);colo
  .section-nav{gap:12px 22px;margin-top:24px;font-size:15px}
  .home-intro{padding:40px 0 36px}.home-intro h1{font-size:62px;margin-bottom:22px}
  .home-intro-bottom{display:block}.home-intro .text-link{margin-top:20px}
- .home-feature,.section-heading,.vehicle-overview,.closing-note,.about-interests{grid-template-columns:1fr;gap:22px}
+ .home-feature,.section-heading,.vehicle-overview,.closing-note{grid-template-columns:1fr;gap:22px}
  .home-feature{gap:22px}.feature-heading h2{font-size:44px}
  .feature-subtitle{font-size:25px;max-width:none}
  .feature-content>p{font-size:18px}
@@ -213,7 +209,7 @@ input[type="search"]{background:var(--surface);border:1px solid var(--line);colo
  .garage-entry{padding:27px 0}.garage-entry .vehicle-heading{display:block}
  .garage-entry h3{font-size:34px;margin:7px 0 15px}.garage-entry .vehicle-description{font-size:17px}
  .car-facts{grid-template-columns:1fr 1fr;gap:20px 24px;margin-top:22px}.car-facts dd{font-size:17px}
- .about-interests .section-deck{margin-top:14px}.interest-entry{padding:24px 0}
+ .about-interests .project-content{grid-template-columns:1fr;gap:0}.interest-entry{padding:24px 0}
  .event{grid-template-columns:1fr;gap:10px;padding:25px 0}.event h3{font-size:29px}.event p{font-size:17px}
  .quote{font-size:26px;padding-left:20px}
  .footerline{flex-direction:column;gap:9px;padding-top:20px}footer{font-size:14px;padding:14px 0 28px}
