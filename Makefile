@@ -1,6 +1,6 @@
 CXX ?= c++
 CXXFLAGS ?= -std=c++17 -O2 -Wall -Wextra -Wpedantic
-COMMON_DIR ?= ../Infiltrator-Libraries
+COMMON_DIR ?= ../Libraries
 COMMON_BUILD_DIR := $(abspath build/common)
 COMMON_ARCHIVE := $(COMMON_BUILD_DIR)/libinfiltratr-common.a
 COMMON_WEB_CSS := assets/infiltrator-web-v1.css
