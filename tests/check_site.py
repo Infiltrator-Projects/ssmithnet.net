@@ -71,7 +71,7 @@ class GarageCard(HTMLParser):
             value = " ".join("".join(self.buffer).split())
             if tag == "dt":
                 self.label = value
-                if self.list_class == "vehicle-specifications":
+                if self.list_class in ("vehicle-specifications", "car-facts"):
                     self.specification_labels.append(value)
             elif tag == "dd":
                 self.fields[self.label] = value
@@ -163,7 +163,7 @@ assert len(current.equipment) == len(set(current.equipment)) == 69
 assert {"197U", "251A", "527", "625", "901L", "R11", "VR"} <= set(current.equipment)
 assert not sec.equipment, "do not invent SEC equipment codes"
 assert "Mushroom leather" not in garage and "275A" not in garage
-assert garage.count('class="vehicle-record"') == 2 and "<script" not in garage
+assert garage.count('class="vehicle-record technical-detail"') == 2 and "<script" not in garage
 assert 'href="assets/garage.css?v=' in garage
 assert all("assets/garage.css" not in content.decode("utf-8") for name, content in first.items() if name != "garage.html")
 

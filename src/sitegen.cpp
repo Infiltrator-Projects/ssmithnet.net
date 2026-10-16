@@ -59,17 +59,19 @@ static string page_end(const string& right) {
     return "</main>" + infiltrator_web::footer(right);
 }
 
+static string spec(const string& label, const string& value) {
+    return "<div class=\"spec\"><span class=\"spec-label\">" + esc(label) + "</span><span class=\"spec-value\">" + esc(value) + "</span></div>";
+}
+
 static string historical_car(const Car& c) {
     std::ostringstream o;
-    o << "<article class=\"garage-entry garage-vehicle\"><div class=\"vehicle-overview\"><header class=\"vehicle-heading\">"
-      << "<div class=\"vehicle-status\">" << esc(c.tag) << "</div><div class=\"vehicle-title-row\"><h3>" << esc(c.title)
-      << "</h3></div><p class=\"vehicle-description\">" << esc(c.description)
-      << "</p></header><dl class=\"vehicle-specifications\">"
+    o << "<article class=\"garage-entry garage-vehicle\"><div class=\"tag\">" << esc(c.tag) << "</div><h3>" << esc(c.title)
+      << "</h3><p>" << esc(c.description) << "</p><dl class=\"car-facts\">"
       << "<div><dt>Make</dt><dd>" << esc(c.make) << "</dd></div>"
       << "<div><dt>Model</dt><dd>" << esc(c.model) << "</dd></div>"
       << "<div><dt>Chassis / Series</dt><dd>" << esc(c.series) << "</dd></div>"
       << "<div><dt>Powertrain</dt><dd>" << esc(c.powertrain) << "</dd></div>"
-      << "</dl></div></article>";
+      << "</dl></article>";
     return o.str();
 }
 
@@ -143,40 +145,29 @@ static string vehicle_facts(const vector<VehicleFact>& facts, const string& clas
     return o.str() + "</dl>";
 }
 
-static string vehicle_card(const VehicleRecord& car) {
+static string vehicle_record(const VehicleRecord& car) {
     std::ostringstream o;
-    const string heading = car.current ? "h2" : "h3";
-    o << "<article class=\"garage-vehicle vehicle-card vehicle-card--" << (car.current ? "hero" : "historic")
-      << "\" id=\"" << esc(car.id) << "\" aria-labelledby=\"" << esc(car.id) << "-title\">"
-      << "<div class=\"vehicle-overview\"><header class=\"vehicle-heading\">"
-      << "<div class=\"vehicle-status\"><span aria-hidden=\"true\"></span>"
-      << (car.current ? "Current" : "Historic") << " · VIN verified</div>"
-      << "<div class=\"vehicle-title-row\"><" << heading << " id=\"" << esc(car.id) << "-title\">" << esc(car.title)
-      << "</" << heading << "><span class=\"vehicle-year\">" << esc(car.year) << "</span></div>"
-      << "<p class=\"vehicle-subtitle\">" << esc(car.subtitle) << "</p>"
-      << "<p class=\"vehicle-description\">" << esc(car.description) << "</p>"
-      << "<dl class=\"vehicle-vin\"><dt>VIN</dt><dd>" << esc(car.vin) << "</dd></dl>"
-      << "<dl class=\"vehicle-delivery\"><dt>Original delivery</dt><dd>" << esc(car.market) << "</dd></dl>"
-      << "</header>" << vehicle_facts(car.specifications, "vehicle-specifications") << "</div>"
-      << "<ul class=\"vehicle-highlights\" aria-label=\"Highlights\">";
-    for (const auto& item : car.highlights) o << "<li>" << esc(item) << "</li>";
-    o << "</ul><details class=\"vehicle-record\"><summary>Full vehicle record<span aria-hidden=\"true\"></span></summary>"
-      << "<div class=\"vehicle-record-body\"><div class=\"vehicle-record-groups\">";
-    for (const auto& group : {std::pair<string, const vector<VehicleFact>*>{"Factory identity", &car.identity},
-                              {"Dates & delivery", &car.dates}, {"Ownership & modifications", &car.history}}) {
+    vector<VehicleFact> identity = {{"VIN", car.vin, ""}, {"Original delivery", car.market, ""}};
+    identity.insert(identity.end(), car.identity.begin(), car.identity.end());
+    o << "<details class=\"vehicle-record technical-detail\"><summary>Full vehicle record <span aria-hidden=\"true\">+</span></summary>"
+      << "<div class=\"vehicle-record-body\"><div class=\"vehicle-record-groups\">"
+      << "<section><h3>Factory identity</h3>" << vehicle_facts(car.specifications, "vehicle-specifications")
+      << vehicle_facts(identity, "vehicle-record-facts") << "</section>";
+    for (const auto& group : {std::pair<string, const vector<VehicleFact>*>{"Dates & delivery", &car.dates},
+                              {"Ownership & modifications", &car.history}}) {
         o << "<section><h3>" << esc(group.first) << "</h3>" << vehicle_facts(*group.second, "vehicle-record-facts") << "</section>";
     }
     o << "</div>";
     if (!car.equipment.empty()) {
-        o << "<details class=\"vehicle-equipment\"><summary>Factory equipment · " << car.equipment.size()
-          << " codes<span aria-hidden=\"true\"></span></summary><table><caption>" << esc(car.title)
+        o << "<details class=\"vehicle-equipment technical-detail\"><summary>Factory equipment · " << car.equipment.size()
+          << " codes <span aria-hidden=\"true\">+</span></summary><table><caption>" << esc(car.title)
           << " — factory equipment</caption><thead><tr><th scope=\"col\">Code</th><th scope=\"col\">Description</th></tr></thead><tbody>";
         for (const auto& option : car.equipment)
             o << "<tr><th scope=\"row\">" << esc(option.first) << "</th><td>" << esc(option.second) << "</td></tr>";
         o << "</tbody></table></details>";
     }
     if (!car.note.empty()) o << "<p class=\"vehicle-record-note\">" << esc(car.note) << "</p>";
-    return o.str() + "</div></details></article>";
+    return o.str() + "</div></details>";
 }
 
 static VehicleRecord current_mercedes() {
@@ -262,18 +253,27 @@ static VehicleRecord historic_mercedes() {
 
 static string render_garage() {
     std::ostringstream o;
-    auto start = page_start("Garage","My 2011 Mercedes-Benz E 250 CDI Coupé and the cars I have owned: the UK-delivered 500 SEC AMG, W116s, Falcons and more.","Garage","garage-page");
-    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261016-editorial\">");
+    auto start = page_start("Garage","My Mercedes-Benz C207 and the cars I have owned: W116s, Falcons, LPG V8s, a Torana, Discovery and Peugeot diesel.","Garage","garage-page");
+    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261016-restored\">");
     o << start;
-    o << R"(<section class="garage-feature-section" aria-labelledby="garage-title"><div class="garage-introduction"><div class="kicker">Garage</div><h1 id="garage-title">The machines behind the stories.</h1><p>From the W116 that started the website to the 2011 E-Class in the garage today.</p></div>)";
-    o << vehicle_card(current_mercedes()) << "</section>";
-    o << R"(<section class="garage-history" aria-labelledby="mercedes-history-title"><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2 id="mercedes-history-title">The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
-    o << vehicle_card(historic_mercedes());
+    o << R"(<section><div class="section-head"><div><div class="kicker">Garage</div><h1>The machines behind the stories.</h1></div><p>From the W116 that started the website to the 2011 E-Class in the garage today.</p></div><p class="section-intro">The early ssmithnet.net was about Mercedes-Benz. That history is still part of the site because it explains a lot about what came later: an appreciation for things that are engineered properly, refined over time and made to last.</p><article class="panel garage-vehicle vehicle-card vehicle-card--hero" id="e250-cdi"><div class="tag">Current · 2011 · VIN verified</div><h2>E 250 CDI BlueEFFICIENCY Coupé</h2><p>Built at Bremen as a right-hand-drive, pre-facelift C207 E 250 CDI Coupé.</p><div class="specs">)";
+    o << spec("Make","Mercedes-Benz") << spec("Model","E 250 CDI Coupé") << spec("Chassis / Baumuster","207.303 · C207")
+      << spec("Engine","2,143 cc OM651 diesel") << spec("Power","150 kW / 204 PS · 500 Nm") << spec("Transmission","722.6 · 5-speed automatic")
+      << spec("Production","12 May 2011 · pre-facelift · Euro 5") << spec("VIN","WDD2073032F129158");
+    o << R"(</div><div class="meta"><span class="pill">Obsidian Black · 197U</span><span class="pill">Black / Anthracite leather · 251A</span><span class="pill">Factory right-hand drive</span><span class="pill">Bremen</span><span class="pill">Order 0190108524</span><span class="pill">Registration YSF597</span><span class="pill">Panoramic roof</span><span class="pill">PARKTRONIC</span><span class="pill">Heated front seats</span><span class="pill">THERMATIC climate control</span><span class="pill">Intelligent Light System</span><span class="pill">Parameter steering</span></div>)";
+    o << vehicle_record(current_mercedes()) << "</article></section>";
+    o << R"(<section><div class="section-head"><div><div class="kicker">AMG chapter</div><h2>500SEC AMG</h2></div><p>The factory car before the AMG work.</p></div><article class="panel garage-vehicle vehicle-card vehicle-card--historic" id="500-sec"><div class="tag">Historic · 1985 · VIN verified · AMG</div><h2>500SEC AMG</h2><p>Built at Sindelfingen as a right-hand-drive, pre-facelift C126 500SEC before its AMG conversion.</p><div class="specs">)";
+    o << spec("Make","Mercedes-Benz") << spec("Model","500SEC") << spec("Chassis / Baumuster","126.044 · C126")
+      << spec("Engine","4,973 cc M117.963 V8") << spec("Power","170 kW / 231 PS · 405 Nm") << spec("Transmission","722.311 · 4-speed automatic")
+      << spec("Production","Approx. June 1985 · pre-facelift") << spec("VIN","WDB1260442A171593");
+    o << R"(</div><div class="meta"><span class="pill">Smoke Silver Metallic · 702U</span><span class="pill">Beige leather · 275</span><span class="pill">Factory right-hand drive</span><span class="pill">Sindelfingen</span><span class="pill">UK delivery</span><span class="pill">Order 0553755057</span><span class="pill">Registration 1ARK884</span><span class="pill">Acquired 17 December 2002</span></div>)";
+    o << vehicle_record(historic_mercedes()) << "</article></section>";
+    o << R"(<section><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2>The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
     auto cars = historical_cars();
     for (std::size_t i=0;i<2;i++) o << historical_car(cars[i]);
-    o << R"(</div></section><section class="garage-history" aria-labelledby="ford-history-title"><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2 id="ford-history-title">Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="garage-register">)";
+    o << R"(</div></section><section><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2>Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="garage-register">)";
     for (std::size_t i=2;i<cars.size();i++) o << historical_car(cars[i]);
-    o << R"(</div></section><section class="feature-row garage-connections"><div><div class="kicker">A recurring theme</div><h2>Different answers<br>to the same fascination.</h2></div><div><p>The 6.9 and the 1.1-litre Torana sit at very different ends of this collection. Both belong in it. So do the LPG Fords and the Peugeot diesel I ran on waste motor oil.</p><p>The current Mercedes connects the garage to the Workbench: the C207 and its OM651 diesel are the physical development vehicle for MBLINK.</p><a class="text-link" href="workbench.html#link">Follow that connection →</a></div></section><div class="center"><a class="back" href="index.html">← Back to ssmithnet.net</a></div>)";
+    o << R"(</div></section><section class="feature-row"><div><div class="kicker">A recurring theme</div><h2>Different answers<br>to the same fascination.</h2></div><div><p>The 6.9 and the 1.1-litre Torana sit at very different ends of this collection. Both belong in it. So do the LPG Fords and the Peugeot diesel I ran on waste motor oil.</p><p>The current Mercedes connects the garage to the Workbench: the C207 and its OM651 diesel are the physical development vehicle for MBLINK.</p><a class="text-link" href="workbench.html#link">Follow that connection →</a></div></section><div class="center"><a class="back" href="index.html">← Back to ssmithnet.net</a></div>)";
     return o.str() + page_end("Mercedes-Benz · Australian cars · Personal history");
 }
 
