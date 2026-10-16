@@ -7,6 +7,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace fs = std::filesystem;
@@ -15,6 +16,19 @@ using std::vector;
 
 struct Car {
     string tag, title, make, model, series, powertrain, description;
+};
+
+struct VehicleFact {
+    string label, value, detail;
+};
+
+struct VehicleRecord {
+    string id, title, subtitle, year, vin, market, description;
+    bool current;
+    vector<VehicleFact> specifications, identity, dates, history;
+    vector<string> highlights;
+    vector<std::pair<string, string>> equipment;
+    string note;
 };
 
 struct Event {
@@ -43,10 +57,6 @@ static string page_start(const string& title, const string& description, const s
 
 static string page_end(const string& right) {
     return "</main>" + infiltrator_web::footer(right);
-}
-
-static string spec(const string& label, const string& value) {
-    return "<div class=\"spec\"><span class=\"spec-label\">" + esc(label) + "</span><span class=\"spec-value\">" + esc(value) + "</span></div>";
 }
 
 static string historical_car(const Car& c) {
@@ -120,19 +130,142 @@ static string render_workbench() {
 )" + page_end("The best or nothing.");
 }
 
+static string vehicle_facts(const vector<VehicleFact>& facts, const string& class_name) {
+    std::ostringstream o;
+    o << "<dl class=\"" << esc(class_name) << "\">";
+    for (const auto& fact : facts) {
+        o << "<div><dt>" << esc(fact.label) << "</dt><dd>" << esc(fact.value);
+        if (!fact.detail.empty()) o << "<span class=\"vehicle-fact-detail\">" << esc(fact.detail) << "</span>";
+        o << "</dd></div>";
+    }
+    return o.str() + "</dl>";
+}
+
+static string vehicle_card(const VehicleRecord& car) {
+    std::ostringstream o;
+    o << "<article class=\"vehicle-card vehicle-card--" << (car.current ? "hero" : "historic")
+      << "\" id=\"" << esc(car.id) << "\" aria-labelledby=\"" << esc(car.id) << "-title\">"
+      << "<div class=\"vehicle-overview\"><header class=\"vehicle-heading\">"
+      << "<div class=\"vehicle-status\"><span aria-hidden=\"true\"></span>"
+      << (car.current ? "Current" : "Historic") << " · VIN verified</div>"
+      << "<div class=\"vehicle-title-row\"><h2 id=\"" << esc(car.id) << "-title\">" << esc(car.title)
+      << "</h2><span class=\"vehicle-year\">" << esc(car.year) << "</span></div>"
+      << "<p class=\"vehicle-subtitle\">" << esc(car.subtitle) << "</p>"
+      << "<p class=\"vehicle-description\">" << esc(car.description) << "</p>"
+      << "<dl class=\"vehicle-vin\"><dt>VIN</dt><dd>" << esc(car.vin) << "</dd></dl>"
+      << "<dl class=\"vehicle-delivery\"><dt>Original delivery</dt><dd>" << esc(car.market) << "</dd></dl>"
+      << "</header>" << vehicle_facts(car.specifications, "vehicle-specifications") << "</div>"
+      << "<div class=\"vehicle-highlights\"><span class=\"vehicle-section-label\">At a glance</span><ul>";
+    for (const auto& item : car.highlights) o << "<li>" << esc(item) << "</li>";
+    o << "</ul></div><details class=\"vehicle-record\"><summary>Full vehicle record<span aria-hidden=\"true\"></span></summary>"
+      << "<div class=\"vehicle-record-body\"><div class=\"vehicle-record-groups\">";
+    for (const auto& group : {std::pair<string, const vector<VehicleFact>*>{"Factory identity", &car.identity},
+                              {"Dates & delivery", &car.dates}, {"Ownership & modifications", &car.history}}) {
+        o << "<section><h3>" << esc(group.first) << "</h3>" << vehicle_facts(*group.second, "vehicle-record-facts") << "</section>";
+    }
+    o << "</div>";
+    if (!car.equipment.empty()) {
+        o << "<details class=\"vehicle-equipment\"><summary>Factory equipment · " << car.equipment.size()
+          << " codes<span aria-hidden=\"true\"></span></summary><table><caption>" << esc(car.title)
+          << " — factory equipment</caption><thead><tr><th scope=\"col\">Code</th><th scope=\"col\">Description</th></tr></thead><tbody>";
+        for (const auto& option : car.equipment)
+            o << "<tr><th scope=\"row\">" << esc(option.first) << "</th><td>" << esc(option.second) << "</td></tr>";
+        o << "</tbody></table></details>";
+    }
+    if (!car.note.empty()) o << "<p class=\"vehicle-record-note\">" << esc(car.note) << "</p>";
+    return o.str() + "</div></details></article>";
+}
+
+static VehicleRecord current_mercedes() {
+    return {
+        "e250-cdi", "E 250 CDI", "BlueEFFICIENCY Coupé · C207", "2011", "WDD2073032F129158", "Australia",
+        "The Mercedes in the garage today. Built at Bremen as a right-hand-drive, pre-facelift E-Class coupé.", true,
+        {{"Chassis / Baumuster", "C207 · 207.303", "Right-hand drive"},
+         {"Engine", "2,143 cc diesel", "OM651"},
+         {"Power / torque", "150 kW · 500 Nm", "204 PS · factory specification"},
+         {"Transmission", "5-speed automatic", "722.646"},
+         {"Paint", "Obsidian Black", "197U"},
+         {"Upholstery", "Black / Anthracite", "Leather · 251A"}},
+        {{"Make", "Mercedes-Benz", ""}, {"Model", "E 250 CDI Coupé", ""},
+         {"Engine number", "651911 30 638336", ""}, {"Transmission number", "722646 08 520376", ""},
+         {"Order number", "0 1 901 08524", ""}, {"Production number", "1789426", ""}},
+        // Keep the previously recorded production date distinct from the
+        // decoder's release/delivery dates; they describe different events.
+        {{"Production", "12 May 2011", "Previously recorded"}, {"Release", "13 May 2011", ""},
+         {"Delivery", "13 May 2011", ""}, {"Order location", "Australia Association", ""},
+         {"Factory", "Bremen", ""}, {"Emissions", "Euro 5", ""}},
+        {{"Registration", "YSF597", ""}},
+        {"Panoramic roof", "COMAND navigation", "Heated front seats", "Intelligent Light System"},
+        {{"051", "AEJ 20/2"}, {"062", "YOM 10/1 Group 2"}, {"108", "Control code marketing"},
+         {"197U", "Obsidian Black"}, {"205B", "Owners manual and service record — English"},
+         {"213", "Speed-sensitive power steering / Vario steering"}, {"230", "Parking guidance"},
+         {"236", "Adaptive rear interior light"}, {"241", "Electrically adjustable left driver seat with memory"},
+         {"250A", "Leather"}, {"251A", "Leather — Black / Anthracite"},
+         {"275", "Memory package: driver seat, steering column, mirror"}, {"283B", "Airbag label — English"},
+         {"291", "Pelvis airbag"}, {"293", "Sidebags in rear left and right"},
+         {"305B", "Head unit language — British English"}, {"310", "Dual cup holder"},
+         {"335B", "Instrument cluster / head unit language — English"},
+         {"413", "Panoramic sliding sunroof / glass sunroof"}, {"423", "5-speed automatic transmission"},
+         {"474", "Diesel particulate filter"}, {"477", "Tyre pressure loss warning"},
+         {"518", "Universal Communications Interface (UCI)"}, {"51U", "Black fabric roof interior trim"},
+         {"527", "COMAND DVD APS with navigation"}, {"580", "Air conditioner"},
+         {"600", "Headlamp cleaning equipment"}, {"608", "Automatic high beam switch (IHC)"},
+         {"619", "Cornering illumination"}, {"621", "Headlamp with ILS — left-hand traffic"},
+         {"625", "Version for Australia"}, {"668", "Freight protection packaging with tie-down hooks"},
+         {"690", "Emergency spare tyre (mini spare)"},
+         {"700", "Update of injection system series production configuration"},
+         {"736", "Black ash wood trim (2A70)"}, {"801", "AEJ 00/1 R 170 AEJ 99/2"},
+         {"810", "Premium sound system"}, {"863", "TV tuner digital to analogue"},
+         {"873", "Heated left and right front seats"}, {"901L", "Australia Association"},
+         {"919", "Aircon cooling power package"}, {"928", "Exhaust gas cleaning with Euro 5 technology"},
+         {"9XXL", "Australia / Pacific"}, {"B12", "Wheel replacement tool"}, {"F207", "Model series 207"},
+         {"FC", "Coupé"}, {"G646", "Transmission code version 46"}, {"GA", "Automatic transmission"},
+         {"HA", "Rear axle"}, {"K10", "Software control for static curve illumination"},
+         {"K11", "Adaptive stop light flashing"}, {"K13", "Service interval control code — 25,000 km"},
+         {"M014", "Engine increased performance"}, {"M22", "Displacement 2.2 litre"},
+         {"M651", "R4 diesel engine M651"}, {"NA1", "Bremen plant control code"},
+         {"NB6", "Bremen plant control code"}, {"P35", "Light package (FFO)"}, {"P64", "Front memory package"},
+         {"R", "Right-hand steering"}, {"R01", "Summer tyres"}, {"R11", "No description in supplied record"},
+         {"U01", "Rear belt status indication"}, {"U18", "Automatic child seat recognition (AKSE)"},
+         {"U60", "Pedestrian protection — active engine bonnet"},
+         {"U74", "DVD player — regional code 4, Mexico, South America"},
+         {"V56", "Speed + load index 94W"}, {"VL", "Front axle half — left"}, {"VR", "Front axle half — right"}},
+        "Factory equipment transcribed from the supplied vehicle datacard."
+    };
+}
+
+static VehicleRecord historic_mercedes() {
+    return {
+        "500-sec", "500 SEC AMG", "Factory 500 SEC · C126", "1985", "WDB1260442A171593", "United Kingdom",
+        "The UK-delivered, pre-facelift C126. Factory specifications below describe the car before its AMG conversion.", false,
+        {{"Chassis / Baumuster", "C126 · 126.044", "Right-hand drive"},
+         {"Engine", "4,973 cc V8", "M117.963"},
+         {"Power / torque", "170 kW · 405 Nm", "231 PS · before AMG conversion"},
+         {"Transmission", "4-speed automatic", "722.311"},
+         {"Paint", "Smoke Silver Metallic", "702U"},
+         {"Upholstery", "Beige leather", "275 · datacard description"}},
+        {{"Make", "Mercedes-Benz", ""}, {"Model", "500 SEC", ""},
+         {"Engine number", "117963 22 081711", ""}, {"Transmission number", "722311 02 661254", ""},
+         {"Order number", "0 5 537 55057", ""}},
+        {{"Production", "Approximately June 1985", ""}, {"Release", "Not recorded", ""},
+         {"Delivery", "Not recorded", ""}, {"Order location", "Great Britain", ""},
+         {"Factory", "Sindelfingen", ""}},
+        {{"Registration", "1ARK884", ""}, {"Acquired", "17 December 2002", ""},
+         {"Conversion", "AMG", "After factory production"}},
+        {"UK delivered", "AMG conversion", "Pre-facelift C126", "Sindelfingen"}, {},
+        "UK delivery confirmed by Shannon. Factory equipment codes are not included in the supplied SEC record."
+    };
+}
+
 static string render_garage() {
     std::ostringstream o;
-    o << page_start("Garage","My Mercedes-Benz C207 and the cars I have owned: W116s, Falcons, LPG V8s, a Torana, Discovery and Peugeot diesel.","Garage","garage-page");
-    o << R"(<section><div class="section-head"><div><div class="kicker">Garage</div><h1>The machines behind the stories.</h1></div><p>From the W116 that started the website to the C207 in the garage today.</p></div><p class="section-intro">The early ssmithnet.net was about Mercedes-Benz. That history is still part of the site because it explains a lot about what came later: an appreciation for things that are engineered properly, refined over time and made to last.</p><div class="panel"><div class="tag">Current · VIN verified</div><h2>E 250 CDI BlueEFFICIENCY Coupé</h2><p>Built at Bremen as a right-hand-drive, pre-facelift C207 E 250 CDI Coupé.</p><div class="specs">)";
-    o << spec("Make","Mercedes-Benz") << spec("Model","E 250 CDI Coupé") << spec("Chassis / Baumuster","207.303 · C207")
-      << spec("Engine","2,143 cc OM651 diesel") << spec("Power","150 kW / 204 PS · 500 Nm") << spec("Transmission","722.6 · 5-speed automatic")
-      << spec("Production","12 May 2011 · pre-facelift · Euro 5") << spec("VIN","WDD2073032F129158");
-    o << R"(</div><div class="meta"><span class="pill">Obsidian Black · 197U</span><span class="pill">Black / Anthracite leather · 251A</span><span class="pill">Factory right-hand drive</span><span class="pill">Bremen</span><span class="pill">Order 0190108524</span><span class="pill">Registration YSF597</span><span class="pill">Panoramic roof</span><span class="pill">PARKTRONIC</span><span class="pill">Heated front seats</span><span class="pill">THERMATIC climate control</span><span class="pill">Intelligent Light System</span><span class="pill">Parameter steering</span></div></div></section>)";
-    o << R"(<section><div class="section-head"><div><div class="kicker">AMG chapter</div><h2>500SEC AMG</h2></div><p>The factory car before the AMG work.</p></div><div class="panel"><div class="tag">Historic · VIN verified · AMG</div><h2>500SEC AMG</h2><p>Built at Sindelfingen as a right-hand-drive, pre-facelift C126 500SEC before its AMG conversion.</p><div class="specs">)";
-    o << spec("Make","Mercedes-Benz") << spec("Model","500SEC") << spec("Chassis / Baumuster","126.044 · C126")
-      << spec("Engine","4,973 cc M117.963 V8") << spec("Power","170 kW / 231 PS · 405 Nm") << spec("Transmission","722.311 · 4-speed automatic")
-      << spec("Production","June 1985 · pre-facelift") << spec("VIN","WDB1260442A171593");
-    o << R"(</div><div class="meta"><span class="pill">Smoke Silver Metallic · 702U</span><span class="pill">Mushroom leather · 275A</span><span class="pill">Factory right-hand drive</span><span class="pill">Sindelfingen</span><span class="pill">Order 0553755057</span><span class="pill">Registration 1ARK884</span><span class="pill">Acquired 17 December 2002</span></div></div></section>)";
+    auto start = page_start("Garage","My 2011 Mercedes-Benz E 250 CDI Coupé and the cars I have owned: the UK-delivered 500 SEC AMG, W116s, Falcons and more.","Garage","garage-page");
+    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=datacards-20261016\">");
+    o << start;
+    o << R"(<section aria-labelledby="garage-title"><div class="garage-introduction"><div class="kicker">Garage</div><h1 id="garage-title">The machines behind the stories.</h1><p>From the W116 that started the website to the 2011 E-Class in the garage today.</p></div>)";
+    o << vehicle_card(current_mercedes()) << "</section>";
+    o << R"(<section aria-labelledby="500-sec-title"><div class="vehicle-chapter">The AMG chapter</div>)";
+    o << vehicle_card(historic_mercedes()) << "</section>";
     o << R"(<section><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2>The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
     auto cars = historical_cars();
     for (std::size_t i=0;i<2;i++) o << historical_car(cars[i]);
