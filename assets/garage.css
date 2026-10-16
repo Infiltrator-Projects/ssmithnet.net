@@ -16,7 +16,7 @@
 .garage-page .vehicle-equipment th,.garage-page .vehicle-equipment td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line-soft);overflow-wrap:anywhere}
 .garage-page .vehicle-equipment th:first-child{padding-left:0}
 .garage-page .vehicle-equipment thead th{font-size:13px;color:var(--quiet);font-weight:400}
-.garage-page .vehicle-equipment tbody th{width:70px;font:400 12px/1.6 ui-monospace,"Courier New",monospace}
+.garage-page .vehicle-equipment tbody th{width:70px;font:400 12px/1.6 var(--sans)}
 .garage-page .vehicle-card .vehicle-record-note{font-size:13px;color:var(--quiet);margin-top:15px}
 @media(max-width:680px){
  .garage-page .vehicle-record-groups{grid-template-columns:1fr;gap:16px}

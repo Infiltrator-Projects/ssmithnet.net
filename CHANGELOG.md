@@ -4,7 +4,7 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
-- Recompose the website with a balanced shared type scale, readable supporting text, the fixed official Mercedes blue (#00ADEF) and consistent editorial spacing. Garage gives the current 2011 E-Class a single hero treatment and places every historical vehicle in a continuous vertical register. Native records retain verified VIN data and all 69 E-Class equipment codes.
+- Recompose the website with a balanced shared type scale, readable supporting text, the original locked MB fonts, palette and wordmark (including #00ADEF) and consistent editorial spacing. Garage gives the current 2011 E-Class a single hero treatment and places every historical vehicle in a continuous vertical register. Native records retain verified VIN data and all 69 E-Class equipment codes.
 - Workbench now represents System Monitor, Defragmenter, Calendar and Calculator alongside InfiltratorFS and the LINK family.
 - Archive records the shared 2016 beginning of the five personal software projects.
 - Package Repository status is corrected from Alpha to Beta.

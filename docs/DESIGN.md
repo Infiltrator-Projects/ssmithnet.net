@@ -24,6 +24,8 @@ Subtlety is therefore not the absence of richness. It is **richness that does no
 
 ## Visual character
 
+The existing font families, original colour palette and wordmark are locked. Preserve the MB Corpo A display and data-value roles, MB Corpo S text and label roles, their regular/bold faces and original fallback stacks. Visual refinements may change composition, spacing, sizing and hierarchy; they must not replace the branding.
+
 The official Mercedes app blue is **#00ADEF**. This is a fixed brand colour for the wordmark, accent labels, links and focus treatment. Preserve it exactly; do not desaturate or replace it as part of a visual redesign.
 
 Use a dark blue-black foundation with controlled cool blue/cyan accents and restrained warm material notes. Black, silver, graphite, cool blue and small amounts of warm wood/leather influence are appropriate. Avoid bright multicolour palettes and avoid literal automotive theming.
