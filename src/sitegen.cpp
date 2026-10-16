@@ -59,14 +59,11 @@ static string page_end(const string& right) {
     return "</main>" + infiltrator_web::footer(right);
 }
 
-static string spec(const string& label, const string& value) {
-    return "<div class=\"spec\"><span class=\"spec-label\">" + esc(label) + "</span><span class=\"spec-value\">" + esc(value) + "</span></div>";
-}
-
 static string historical_car(const Car& c) {
     std::ostringstream o;
-    o << "<article class=\"garage-entry garage-vehicle\"><div class=\"tag\">" << esc(c.tag) << "</div><h3>" << esc(c.title)
-      << "</h3><p>" << esc(c.description) << "</p><dl class=\"car-facts\">"
+    o << "<article class=\"garage-entry garage-vehicle\"><div class=\"vehicle-heading\"><div class=\"tag\">" << esc(c.tag)
+      << "</div><h3>" << esc(c.title) << "</h3><p class=\"vehicle-description\">" << esc(c.description)
+      << "</p></div><dl class=\"car-facts\">"
       << "<div><dt>Make</dt><dd>" << esc(c.make) << "</dd></div>"
       << "<div><dt>Model</dt><dd>" << esc(c.model) << "</dd></div>"
       << "<div><dt>Chassis / Series</dt><dd>" << esc(c.series) << "</dd></div>"
@@ -94,7 +91,7 @@ static string render_home() {
     return page_start("Shannon Smith", "Cars, code and a personal corner of the internet since the 1990s. Shannon Smith's projects, garage and archive.", "Home", "home-page") + R"(
 <section class="intro-hero" aria-labelledby="home-title">
   <div class="intro-copy"><div class="kicker">Shannon Smith · Mooroopna, Australia</div>
-    <h1 id="home-title">Cars. Code.<br>And a lifelong<br><em>need to understand.</em></h1>
+    <h1 id="home-title">Cars. Code.<br>And a lifelong need<br><em>to understand.</em></h1>
     <p class="lead">This domain began with a Mercedes-Benz 450SEL 6.9. These days the workshop includes a filesystem built from scratch, vehicle diagnostics, and the machines I keep coming back to.</p>
     <a class="text-link" href="workbench.html">Inside the Workbench <span aria-hidden="true">→</span></a>
   </div>
@@ -145,14 +142,15 @@ static string vehicle_facts(const vector<VehicleFact>& facts, const string& clas
     return o.str() + "</dl>";
 }
 
-static string vehicle_record(const VehicleRecord& car) {
+static string vehicle_record(const VehicleRecord& car, bool include_specifications = true) {
     std::ostringstream o;
     vector<VehicleFact> identity = {{"VIN", car.vin, ""}, {"Original delivery", car.market, ""}};
     identity.insert(identity.end(), car.identity.begin(), car.identity.end());
     o << "<details class=\"vehicle-record technical-detail\"><summary>Full vehicle record <span aria-hidden=\"true\">+</span></summary>"
       << "<div class=\"vehicle-record-body\"><div class=\"vehicle-record-groups\">"
-      << "<section><h3>Factory identity</h3>" << vehicle_facts(car.specifications, "vehicle-specifications")
-      << vehicle_facts(identity, "vehicle-record-facts") << "</section>";
+      << "<section><h3>Factory identity</h3>";
+    if (include_specifications) o << vehicle_facts(car.specifications, "vehicle-specifications");
+    o << vehicle_facts(identity, "vehicle-record-facts") << "</section>";
     for (const auto& group : {std::pair<string, const vector<VehicleFact>*>{"Dates & delivery", &car.dates},
                               {"Ownership & modifications", &car.history}}) {
         o << "<section><h3>" << esc(group.first) << "</h3>" << vehicle_facts(*group.second, "vehicle-record-facts") << "</section>";
@@ -253,33 +251,28 @@ static VehicleRecord historic_mercedes() {
 
 static string render_garage() {
     std::ostringstream o;
-    auto start = page_start("Garage","My Mercedes-Benz C207 and the cars I have owned: W116s, Falcons, LPG V8s, a Torana, Discovery and Peugeot diesel.","Garage","garage-page");
-    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261016-restored\">");
+    auto start = page_start("Garage","My current 2011 Mercedes-Benz E 250 CDI Coupé and the cars I have owned: a UK-delivered 500SEC AMG, W116s, Australian Fords and more.","Garage","garage-page");
+    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261016-composition\">");
     o << start;
-    o << R"(<section><div class="section-head"><div><div class="kicker">Garage</div><h1>The machines behind the stories.</h1></div><p>From the W116 that started the website to the 2011 E-Class in the garage today.</p></div><p class="section-intro">The early ssmithnet.net was about Mercedes-Benz. That history is still part of the site because it explains a lot about what came later: an appreciation for things that are engineered properly, refined over time and made to last.</p><article class="panel garage-vehicle vehicle-card vehicle-card--hero" id="e250-cdi"><div class="tag">Current · 2011 · VIN verified</div><h2>E 250 CDI BlueEFFICIENCY Coupé</h2><p>Built at Bremen as a right-hand-drive, pre-facelift C207 E 250 CDI Coupé.</p><div class="specs">)";
-    o << spec("Make","Mercedes-Benz") << spec("Model","E 250 CDI Coupé") << spec("Chassis / Baumuster","207.303 · C207")
-      << spec("Engine","2,143 cc OM651 diesel") << spec("Power","150 kW / 204 PS · 500 Nm") << spec("Transmission","722.6 · 5-speed automatic")
-      << spec("Production","12 May 2011 · pre-facelift · Euro 5") << spec("VIN","WDD2073032F129158");
-    o << R"(</div><div class="meta"><span class="pill">Obsidian Black · 197U</span><span class="pill">Black / Anthracite leather · 251A</span><span class="pill">Factory right-hand drive</span><span class="pill">Bremen</span><span class="pill">Order 0190108524</span><span class="pill">Registration YSF597</span><span class="pill">Panoramic roof</span><span class="pill">PARKTRONIC</span><span class="pill">Heated front seats</span><span class="pill">THERMATIC climate control</span><span class="pill">Intelligent Light System</span><span class="pill">Parameter steering</span></div>)";
-    o << vehicle_record(current_mercedes()) << "</article></section>";
-    o << R"(<section><div class="section-head"><div><div class="kicker">AMG chapter</div><h2>500SEC AMG</h2></div><p>The factory car before the AMG work.</p></div><article class="panel garage-vehicle vehicle-card vehicle-card--historic" id="500-sec"><div class="tag">Historic · 1985 · VIN verified · AMG</div><h2>500SEC AMG</h2><p>Built at Sindelfingen as a right-hand-drive, pre-facelift C126 500SEC before its AMG conversion.</p><div class="specs">)";
-    o << spec("Make","Mercedes-Benz") << spec("Model","500SEC") << spec("Chassis / Baumuster","126.044 · C126")
-      << spec("Engine","4,973 cc M117.963 V8") << spec("Power","170 kW / 231 PS · 405 Nm") << spec("Transmission","722.311 · 4-speed automatic")
-      << spec("Production","Approx. June 1985 · pre-facelift") << spec("VIN","WDB1260442A171593");
-    o << R"(</div><div class="meta"><span class="pill">Smoke Silver Metallic · 702U</span><span class="pill">Beige leather · 275</span><span class="pill">Factory right-hand drive</span><span class="pill">Sindelfingen</span><span class="pill">UK delivery</span><span class="pill">Order 0553755057</span><span class="pill">Registration 1ARK884</span><span class="pill">Acquired 17 December 2002</span></div>)";
-    o << vehicle_record(historic_mercedes()) << "</article></section>";
-    o << R"(<section><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2>The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
-    auto cars = historical_cars();
+    const auto current = current_mercedes();
+    const auto sec = historic_mercedes();
+    o << R"(<section class="page-intro garage-intro"><div class="kicker">Garage</div><h1>The machines behind the stories.</h1><p class="lead">From the W116 that started the website to the 2011 E-Class in the garage today.</p></section><section class="garage-current" aria-labelledby="e250-title"><article class="garage-vehicle vehicle-card vehicle-card--hero" id="e250-cdi"><div class="vehicle-header"><header class="vehicle-heading"><div class="kicker">In the garage · 2011</div><h2 id="e250-title">E 250 CDI</h2><p class="vehicle-subtitle">BlueEFFICIENCY Coupé</p><p class="vehicle-description">Built at Bremen as a right-hand-drive, pre-facelift C207 E-Class coupé. The Mercedes in the garage today, and the development vehicle for MBLINK.</p></header><dl class="vehicle-provenance"><div><dt>Original delivery</dt><dd>Australia</dd></div><div><dt>VIN</dt><dd class="vin">WDD2073032F129158</dd></div></dl></div>)";
+    o << vehicle_facts(current.specifications, "vehicle-specifications") << vehicle_record(current, false) << "</article></section>";
+    o << R"(<section class="garage-chapter" aria-labelledby="mercedes-history"><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2 id="mercedes-history">The cars that started it.</h2></div><p>The original subject of ssmithnet.net, and a lasting part of the story.</p></div><div class="garage-register"><article class="garage-entry garage-vehicle vehicle-card vehicle-card--historic" id="500-sec"><div class="vehicle-heading"><div class="tag">1985 · C126 · AMG</div><h3>500SEC AMG</h3><p class="vehicle-description">A right-hand-drive 500SEC, built at Sindelfingen before its AMG conversion.</p><p class="vehicle-origin">UK delivery · Smoke Silver · Beige leather</p></div>)";
+    o << vehicle_facts({{"Make", "Mercedes-Benz", ""}, {"Model", "500SEC", ""},
+                        {"Chassis / Series", "126.044 · C126", ""}, {"Powertrain", "4,973 cc M117.963 V8", ""}}, "car-facts")
+      << vehicle_record(sec) << "</article>";
+    const auto cars = historical_cars();
     for (std::size_t i=0;i<2;i++) o << historical_car(cars[i]);
-    o << R"(</div></section><section><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2>Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="garage-register">)";
+    o << R"(</div></section><section class="garage-chapter" aria-labelledby="australian-history"><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2 id="australian-history">Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="garage-register">)";
     for (std::size_t i=2;i<cars.size();i++) o << historical_car(cars[i]);
-    o << R"(</div></section><section class="feature-row"><div><div class="kicker">A recurring theme</div><h2>Different answers<br>to the same fascination.</h2></div><div><p>The 6.9 and the 1.1-litre Torana sit at very different ends of this collection. Both belong in it. So do the LPG Fords and the Peugeot diesel I ran on waste motor oil.</p><p>The current Mercedes connects the garage to the Workbench: the C207 and its OM651 diesel are the physical development vehicle for MBLINK.</p><a class="text-link" href="workbench.html#link">Follow that connection →</a></div></section><div class="center"><a class="back" href="index.html">← Back to ssmithnet.net</a></div>)";
+    o << R"(</div></section><section class="feature-row garage-connections"><div><div class="kicker">A recurring theme</div><h2>Different answers<br>to the same fascination.</h2></div><div><p>The 6.9 and the 1.1-litre Torana sit at very different ends of this collection. Both belong in it. So do the LPG Fords and the Peugeot diesel I ran on waste motor oil.</p><a class="text-link" href="workbench.html#link">The C207 and MBLINK →</a></div></section><div class="center"><a class="back" href="index.html">← Back to ssmithnet.net</a></div>)";
     return o.str() + page_end("Mercedes-Benz · Australian cars · Personal history");
 }
 
 static string render_archive() {
     std::ostringstream o;
-    o << page_start("Archive","The origins of ssmithnet.net: the Infiltrator 450SEL 6.9 page, Windows ME and Solaris beta testing, and a personal place on the web.","Archive");
+    o << page_start("Archive","The origins of ssmithnet.net: the Infiltrator 450SEL 6.9 page, Windows ME and Solaris beta testing, and a personal place on the web.","Archive","archive-page");
     vector<Event> e = {
         {"c. 1996","The 6.9 page","The Infiltrator 450SEL 6.9 page becomes the seed of ssmithnet.net and its Mercedes-Benz history."},
         {"1990s–2000s","Cars, web pages, experiments.","The domain remains a personal place for cars and whatever else is worth putting online."},

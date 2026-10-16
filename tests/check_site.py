@@ -44,6 +44,7 @@ class GarageCard(HTMLParser):
         self.classes = []
         self.fields = {}
         self.specification_labels = []
+        self.history_labels = []
         self.equipment = []
         self.list_class = ""
         self.capture = None
@@ -71,8 +72,10 @@ class GarageCard(HTMLParser):
             value = " ".join("".join(self.buffer).split())
             if tag == "dt":
                 self.label = value
-                if self.list_class in ("vehicle-specifications", "car-facts"):
+                if self.list_class == "vehicle-specifications":
                     self.specification_labels.append(value)
+                elif self.list_class == "car-facts":
+                    self.history_labels.append(value)
             elif tag == "dd":
                 self.fields[self.label] = value
             elif tag == "th":
@@ -137,9 +140,9 @@ garage = first["garage.html"].decode("utf-8")
 cards = [GarageCard(html) for html in re.findall(r"<article\b[^>]*>.*?</article>", garage, re.S)]
 vehicles = [card for card in cards if "garage-vehicle" in card.classes]
 assert len(vehicles) == 12, "the complete Garage history must retain all twelve vehicle records"
-for car in vehicles[2:]:
-    assert car.specification_labels == ["Make", "Model", "Chassis / Series", "Powertrain"]
-    assert all(car.fields.get(label) for label in car.specification_labels), "historical vehicle fields must remain complete"
+for car in vehicles[1:]:
+    assert car.history_labels == ["Make", "Model", "Chassis / Series", "Powertrain"]
+    assert all(car.fields.get(label) for label in car.history_labels), "historical vehicle fields must remain complete"
 featured = [card for card in cards if "vehicle-card" in card.classes]
 assert [card.id for card in featured] == ["e250-cdi", "500-sec"], "current E-Class must lead the Mercedes records"
 current, sec = featured
