@@ -4,6 +4,8 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
+- Shared blue section labels use a readable 14px size across Home, Workbench, Garage, Archive and the download page; supporting status, chapter-number and date labels use 12px. The family stylesheet version changes together on every page.
+
 - Garage restores its established composition, typography and historical registers, with the current 2011 E 250 CDI leading. Corrected SEC upholstery and UK delivery remain visible; native disclosures retain the complete VIN records and 69 E-Class equipment codes without changing the page layout.
 - Workbench now represents System Monitor, Defragmenter, Calendar and Calculator alongside InfiltratorFS and the LINK family.
 - Archive records the shared 2016 beginning of the five personal software projects.
