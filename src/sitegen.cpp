@@ -151,14 +151,14 @@ static string vehicle_card(const VehicleRecord& car) {
       << "<div class=\"vehicle-title-row\"><h2 id=\"" << esc(car.id) << "-title\">" << esc(car.title)
       << "</h2><span class=\"vehicle-year\">" << esc(car.year) << "</span></div>"
       << "<p class=\"vehicle-subtitle\">" << esc(car.subtitle) << "</p>"
-      << "<p class=\"vehicle-description\">" << esc(car.description) << "</p>"
       << "<dl class=\"vehicle-vin\"><dt>VIN</dt><dd>" << esc(car.vin) << "</dd></dl>"
       << "<dl class=\"vehicle-delivery\"><dt>Original delivery</dt><dd>" << esc(car.market) << "</dd></dl>"
       << "</header>" << vehicle_facts(car.specifications, "vehicle-specifications") << "</div>"
       << "<div class=\"vehicle-highlights\"><span class=\"vehicle-section-label\">At a glance</span><ul>";
     for (const auto& item : car.highlights) o << "<li>" << esc(item) << "</li>";
     o << "</ul></div><details class=\"vehicle-record\"><summary>Full vehicle record<span aria-hidden=\"true\"></span></summary>"
-      << "<div class=\"vehicle-record-body\"><div class=\"vehicle-record-groups\">";
+      << "<div class=\"vehicle-record-body\"><p class=\"vehicle-description\">" << esc(car.description)
+      << "</p><div class=\"vehicle-record-groups\">";
     for (const auto& group : {std::pair<string, const vector<VehicleFact>*>{"Factory identity", &car.identity},
                               {"Dates & delivery", &car.dates}, {"Ownership & modifications", &car.history}}) {
         o << "<section><h3>" << esc(group.first) << "</h3>" << vehicle_facts(*group.second, "vehicle-record-facts") << "</section>";
@@ -260,18 +260,16 @@ static VehicleRecord historic_mercedes() {
 static string render_garage() {
     std::ostringstream o;
     auto start = page_start("Garage","My 2011 Mercedes-Benz E 250 CDI Coupé and the cars I have owned: the UK-delivered 500 SEC AMG, W116s, Falcons and more.","Garage","garage-page");
-    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=datacards-20261016\">");
+    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=datacards-20261016-compact\">");
     o << start;
-    o << R"(<section aria-labelledby="garage-title"><div class="garage-introduction"><div class="kicker">Garage</div><h1 id="garage-title">The machines behind the stories.</h1><p>From the W116 that started the website to the 2011 E-Class in the garage today.</p></div>)";
-    o << vehicle_card(current_mercedes()) << "</section>";
-    o << R"(<section aria-labelledby="500-sec-title"><div class="vehicle-chapter">The AMG chapter</div>)";
-    o << vehicle_card(historic_mercedes()) << "</section>";
-    o << R"(<section><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2>The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
+    o << R"(<section class="garage-feature-section" aria-labelledby="garage-title"><div class="garage-introduction"><div class="kicker">Garage</div><h1 id="garage-title">The machines behind the stories.</h1><p>From the W116 that started the website to the 2011 E-Class in the garage today.</p></div><div class="garage-featured" aria-label="Featured Mercedes-Benz vehicles">)";
+    o << vehicle_card(current_mercedes()) << vehicle_card(historic_mercedes()) << "</div></section>";
+    o << R"(<section class="garage-history" aria-labelledby="mercedes-history-title"><div class="section-head"><div><div class="kicker">Mercedes-Benz</div><h2 id="mercedes-history-title">The cars that started it.</h2></div><p>The original subject of ssmithnet.net.</p></div><div class="garage-register mercedes">)";
     auto cars = historical_cars();
     for (std::size_t i=0;i<2;i++) o << historical_car(cars[i]);
-    o << R"(</div></section><section><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2>Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="garage-register">)";
+    o << R"(</div></section><section class="garage-history" aria-labelledby="ford-history-title"><div class="section-head"><div><div class="kicker">Australian Fords &amp; further afield</div><h2 id="ford-history-title">Beyond the three-pointed star.</h2></div><p>Falcons, LPG V8s, a little Torana and two very different diesels.</p></div><div class="garage-register">)";
     for (std::size_t i=2;i<cars.size();i++) o << historical_car(cars[i]);
-    o << R"(</div></section><section class="feature-row"><div><div class="kicker">A recurring theme</div><h2>Different answers<br>to the same fascination.</h2></div><div><p>The 6.9 and the 1.1-litre Torana sit at very different ends of this collection. Both belong in it. So do the LPG Fords and the Peugeot diesel I ran on waste motor oil.</p><p>The current Mercedes connects the garage to the Workbench: the C207 and its OM651 diesel are the physical development vehicle for MBLINK.</p><a class="text-link" href="workbench.html#link">Follow that connection →</a></div></section><div class="center"><a class="back" href="index.html">← Back to ssmithnet.net</a></div>)";
+    o << R"(</div></section><section class="feature-row garage-connections"><div><div class="kicker">A recurring theme</div><h2>Different answers<br>to the same fascination.</h2></div><div><p>The 6.9 and the 1.1-litre Torana sit at very different ends of this collection. Both belong in it. So do the LPG Fords and the Peugeot diesel I ran on waste motor oil.</p><p>The current Mercedes connects the garage to the Workbench: the C207 and its OM651 diesel are the physical development vehicle for MBLINK.</p><a class="text-link" href="workbench.html#link">Follow that connection →</a></div></section><div class="center"><a class="back" href="index.html">← Back to ssmithnet.net</a></div>)";
     return o.str() + page_end("Mercedes-Benz · Australian cars · Personal history");
 }
 
