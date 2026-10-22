@@ -25,3 +25,10 @@
  .garage-page .vehicle-equipment tbody th{width:66px}
  .garage-page .vehicle-equipment th,.garage-page .vehicle-equipment td{padding-right:6px;padding-left:10px}
 }
+
+/* Original owner photographs: one composition, no extra card treatment. */
+.garage-page .vehicle-photo-pair{display:grid;grid-template-columns:1.55fr 1fr;gap:24px;align-items:start;margin:30px 0 10px}
+.garage-page .vehicle-photo-pair figure{margin:0;min-width:0}
+.garage-page .vehicle-photo-pair img{display:block;width:100%;height:auto;border:1px solid var(--line-soft)}
+.garage-page .vehicle-photo-pair figcaption{margin-top:10px;font:400 14px/1.5 var(--sans);color:var(--quiet)}
+@media(max-width:720px){.garage-page .vehicle-photo-pair{grid-template-columns:1fr;gap:22px}}

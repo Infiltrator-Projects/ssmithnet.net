@@ -168,6 +168,17 @@ assert current.fields["Production"].startswith("12 May 2011"), "do not replace p
 assert len(current.equipment) == len(set(current.equipment)) == 69
 assert {"197U", "251A", "527", "625", "901L", "R11", "VR"} <= set(current.equipment)
 assert not sec.equipment, "do not invent SEC equipment codes"
+
+# Keep the owner's original photographs with the historical SEC, not elsewhere.
+sec_markup = garage.split('id="500-sec"', 1)[1].split("</article>", 1)[0]
+assert sec_markup.count("<figure>") == 2
+for filename, dimensions in (("500sec-amg-side.jpg", 'width="1021" height="409"'),
+                             ("500sec-amg-front.jpg", 'width="660" height="507"')):
+    assert sec_markup.count(f'src="assets/photos/{filename}"') == 1
+    assert dimensions in sec_markup
+    assert (ROOT / "assets" / "photos" / filename).stat().st_size > 0
+assert sec_markup.count('alt="') == 2
+
 assert "Mushroom leather" not in garage and "275A" not in garage
 assert garage.count('class="vehicle-record technical-detail"') == 2 and "<script" not in garage
 assert 'href="assets/garage.css?v=' in garage

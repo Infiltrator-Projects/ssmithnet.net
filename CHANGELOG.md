@@ -4,6 +4,8 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
+- Publish the two original photographs of the 1985 500SEC AMG in its Garage record with responsive sizing, captions and accessible alternative text.
+
 - Reorganise the complete visitor experience around Home, Workbench, Garage and About. Preserve the Archive address as a canonicalised About alias. Home introduces real projects and the current car; detailed interests and site history live in About. Recompose every page with the original MB faces and colours, readable fact typography and one consistent historical vehicle register.
 
 - Recompose the website with a balanced shared type scale, readable supporting text, the original locked MB fonts, palette and wordmark (including #00ADEF) and consistent editorial spacing. Garage gives the current 2011 E-Class a single hero treatment and places every historical vehicle in a continuous vertical register. Native records retain verified VIN data and all 69 E-Class equipment codes.

@@ -229,7 +229,7 @@ static VehicleRecord historic_mercedes() {
 static string render_garage() {
     std::ostringstream o;
     auto start = page_start("Garage", "The current 2011 Mercedes-Benz E 250 CDI Coupé, its full factory datacard, and my complete vehicle history.", "Garage", "garage-page");
-    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261016-editorial\">");
+    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261022-sec-photos\">");
     o << start;
     const auto current = current_mercedes();
     const auto sec = historic_mercedes();
@@ -238,6 +238,7 @@ static string render_garage() {
     o << R"(<section class="garage-chapter" aria-labelledby="mercedes-history"><header class="chapter-heading"><p class="eyebrow">The garage history</p><h2 id="mercedes-history">Mercedes-Benz.</h2><p>The C126, the W116s, and the 450SEL 6.9 that started this website.</p></header><div class="garage-register"><article class="garage-entry garage-vehicle vehicle-card vehicle-card--historic" id="500-sec"><div class="vehicle-heading"><div class="tag">1985 · C126 · AMG</div><h3>500SEC AMG</h3><p class="vehicle-description">A right-hand-drive 500SEC, built at Sindelfingen before its AMG conversion.</p><p class="vehicle-origin">UK delivery · Smoke Silver · Beige leather</p></div>)";
     o << vehicle_facts({{"Make", "Mercedes-Benz", ""}, {"Model", "500SEC", ""},
                         {"Chassis / Series", "126.044 · C126", ""}, {"Powertrain", "4,973 cc M117.963 V8", ""}}, "car-facts")
+      << R"(<div class="vehicle-photo-pair" aria-label="Photographs of the 500SEC AMG"><figure><img src="assets/photos/500sec-amg-side.jpg" width="1021" height="409" loading="lazy" decoding="async" alt="Smoke Silver 500SEC AMG photographed from the side, showing the AMG bodywork and five-spoke wheels"><figcaption>500SEC AMG · three-quarter side view</figcaption></figure><figure><img src="assets/photos/500sec-amg-front.jpg" width="660" height="507" loading="lazy" decoding="async" alt="Front of the Smoke Silver 500SEC AMG with Western Australian registration 1ARK884"><figcaption>500SEC AMG · 1ARK884</figcaption></figure></div>)"
       << vehicle_record(sec) << "</article>";
     const auto cars = historical_cars();
     for (std::size_t i = 0; i < 2; ++i) o << historical_car(cars[i]);
