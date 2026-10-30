@@ -8,6 +8,7 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <iterator>
 #include <map>
 #include <regex>
 #include <set>
@@ -124,22 +125,6 @@ string fragment(const string& url) {
     if (start == string::npos) return "";
     const size_t end = url.find('?', start);
     return url.substr(start + 1, end == string::npos ? string::npos : end - start - 1);
-}
-string unquote(const string& value) {
-    string out;
-    for (size_t i = 0; i < value.size(); ++i) {
-        if (value[i] == '%' && i + 2 < value.size()) {
-            const string part = value.substr(i + 1, 2);
-            if (std::isxdigit(static_cast<unsigned char>(part[0])) &&
-                std::isxdigit(static_cast<unsigned char>(part[1]))) {
-                out.push_back(static_cast<char>(std::stoi(part, nullptr, 16)));
-                i += 2;
-                continue;
-            }
-        }
-        out.push_back(value[i]);
-    }
-    return out;
 }
 void execute_sitegen(const fs::path& generator, const fs::path& output) {
     const pid_t child = fork();
@@ -259,7 +244,7 @@ void validate_garage(const fs::path& root, const string& garage) {
     require(current.equipment.size() == 69 &&
             std::set<string>(current.equipment.begin(), current.equipment.end()).size() == 69,
             "E-Class must retain 69 unique equipment codes");
-    for (const string& code : {"197U", "251A", "527", "625", "901L", "R11", "VR"})
+    for (const char* code : {"197U", "251A", "527", "625", "901L", "R11", "VR"})
         require(std::find(current.equipment.begin(), current.equipment.end(), code) != current.equipment.end(),
                 "Missing factory equipment code " + code);
     require(sec.equipment.empty(), "Do not fabricate SEC equipment codes");
