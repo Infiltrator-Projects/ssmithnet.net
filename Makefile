@@ -24,9 +24,13 @@ build/check-web-family: tests/check_web_family.cpp
 	mkdir -p build
 	$(CXX) $(CXXFLAGS) tests/check_web_family.cpp -o build/check-web-family
 
-check: sitegen build/check-web-family
+build/check-site: tests/check_site.cpp
+	mkdir -p build
+	$(CXX) $(CXXFLAGS) tests/check_site.cpp -o build/check-site
+
+check: sitegen build/check-web-family build/check-site
 	cmp "$(COMMON_WEB_CSS)" "$(COMMON_DIR)/design/infiltrator-web-v1.css"
-	python3 tests/check_site.py
+	./build/check-site .
 	./build/check-web-family .
 
 clean:
