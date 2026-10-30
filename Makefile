@@ -20,10 +20,14 @@ sitegen: common common-web src/sitegen.cpp include/site-family.hpp
 	mkdir -p build
 	$(CXX) $(CXXFLAGS) -I"$(COMMON_DIR)/include" src/sitegen.cpp "$(COMMON_ARCHIVE)" -lm -ldl -o build/sitegen
 
-check: sitegen
+build/check-web-family: tests/check_web_family.cpp
+	mkdir -p build
+	$(CXX) $(CXXFLAGS) tests/check_web_family.cpp -o build/check-web-family
+
+check: sitegen build/check-web-family
 	cmp "$(COMMON_WEB_CSS)" "$(COMMON_DIR)/design/infiltrator-web-v1.css"
 	python3 tests/check_site.py
-	python3 tests/check_web_family.py .
+	./build/check-web-family .
 
 clean:
 	rm -rf build
