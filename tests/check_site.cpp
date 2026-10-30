@@ -246,7 +246,7 @@ void validate_garage(const fs::path& root, const string& garage) {
             "E-Class must retain 69 unique equipment codes");
     for (const char* code : {"197U", "251A", "527", "625", "901L", "R11", "VR"})
         require(std::find(current.equipment.begin(), current.equipment.end(), code) != current.equipment.end(),
-                "Missing factory equipment code " + code);
+                string("Missing factory equipment code ") + code);
     require(sec.equipment.empty(), "Do not fabricate SEC equipment codes");
     const size_t id_pos = garage.find("id=\"500-sec\"");
     require(id_pos != string::npos, "SEC record missing");
