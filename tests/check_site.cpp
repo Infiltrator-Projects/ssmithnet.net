@@ -287,18 +287,23 @@ void validate_garage(const fs::path& root, const string& garage) {
         }
         return hits;
     };
-    require(count("<figure>") == 2 && count("alt=\"") == 2,
-            "SEC must retain exactly two accessible original photographs");
+    require(count("<figure>") == 2 && count("alt=\"") == 2 &&
+            count("class=\"vehicle-photo-pair\"") == 1,
+            "SEC must mirror the E 250 two-photo gallery layout");
     const std::array<std::pair<string,string>, 2> photos{{
-        {"500sec-amg-side.jpg", "width=\"1021\" height=\"409\""},
-        {"500sec-amg-front.jpg", "width=\"660\" height=\"507\""}
+        {"500sec-amg-three-quarter.webp", "width=\"1021\" height=\"409\""},
+        {"500sec-amg-front.webp", "width=\"520\" height=\"400\""}
     }};
     for (const auto& [filename, dimensions] : photos) {
         require(count("src=\"assets/photos/" + filename + "\"") == 1 &&
                 markup.find(dimensions) != string::npos &&
-                fs::file_size(root / "assets/photos" / filename) > 0,
-                "SEC original photo or dimensions missing: " + filename);
+                fs::exists(root / "assets/photos" / filename) &&
+                fs::file_size(root / "assets/photos" / filename) > 1000,
+                "SEC optimised photo or dimensions missing: " + filename);
     }
+    require(fs::is_regular_file(root / "assets/photos/500sec-amg-side.jpg") &&
+            fs::is_regular_file(root / "assets/photos/500sec-amg-front.jpg"),
+            "Original unmodified SEC photographic sources must remain available");
     require(garage.find("Mushroom leather") == string::npos &&
             garage.find("275A") == string::npos,
             "Removed unsupported factory equipment returned");
@@ -310,7 +315,7 @@ void validate_garage(const fs::path& root, const string& garage) {
             "Technical record structure or script-free policy changed");
     require(garage.find("href=\"assets/garage.css?v=") != string::npos,
             "Garage stylesheet missing");
-    std::cout << "PASS: complete twelve-car Garage history, Mercedes datacards, original SEC photos and 69 unique codes\n";
+    std::cout << "PASS: complete twelve-car Garage history, Mercedes datacards, standardised SEC photos and 69 unique codes\n";
 }
 void validate(const fs::path& root) {
     const fs::path generator = root / "build/sitegen";

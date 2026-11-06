@@ -5,9 +5,9 @@ COMMON_BUILD_DIR := $(abspath build/common)
 COMMON_ARCHIVE := $(COMMON_BUILD_DIR)/libinfiltratr-common.a
 COMMON_WEB_CSS := assets/infiltrator-web-v1.css
 
-.PHONY: all clean check sitegen common common-web
+.PHONY: all clean check sitegen common common-web gallery-photos
 
-all: sitegen
+all: sitegen gallery-photos
 	./build/sitegen .
 
 common:
@@ -28,7 +28,10 @@ build/check-site: tests/check_site.cpp
 	mkdir -p build
 	$(CXX) $(CXXFLAGS) tests/check_site.cpp -o build/check-site
 
-check: sitegen build/check-web-family build/check-site
+gallery-photos: tools/prepare_garage_photos.py
+	python3 tools/prepare_garage_photos.py
+
+check: sitegen gallery-photos build/check-web-family build/check-site
 	cmp "$(COMMON_WEB_CSS)" "$(COMMON_DIR)/design/infiltrator-web-v1.css"
 	./build/check-site .
 	./build/check-web-family .
