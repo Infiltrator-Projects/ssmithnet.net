@@ -263,7 +263,7 @@ void validate_garage(const fs::path& root, const string& garage) {
             e250_count("class=\"vehicle-photo-pair\"") == 1,
             "E 250 CDI must mirror the SEC two-photo layout");
     const std::array<std::pair<string,string>, 2> e250_photos{{
-        {"e250-cdi-grille.webp", "width=\"640\" height=\"256\""},
+        {"e250-cdi-three-quarter.webp", "width=\"1021\" height=\"409\""},
         {"e250-cdi-front.webp", "width=\"520\" height=\"400\""}
     }};
     for (const auto& [filename, dimensions] : e250_photos) {
@@ -273,6 +273,7 @@ void validate_garage(const fs::path& root, const string& garage) {
                 fs::file_size(root / "assets/photos" / filename) > 1000,
                 "E 250 CDI photo missing, empty or wrong dimensions: " + filename);
     }
+    require(e250_count("e250-cdi-grille") == 0, "Unwanted E 250 grille-only photo was reintroduced");
     require(sec.equipment.empty(), "Do not fabricate SEC equipment codes");
     const size_t id_pos = garage.find("id=\"500-sec\"");
     require(id_pos != string::npos, "SEC record missing");
