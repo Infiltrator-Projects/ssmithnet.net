@@ -85,8 +85,8 @@ static string historical_car(const Car& c) {
 
 static vector<Car> historical_cars() {
     return {
-        {"W116","450SEL 6.9","Mercedes-Benz","450SEL 6.9","116.036","M100 · 6.8 L V8","The car behind the original Infiltrator 6.9 page and the earliest chapter of the domain."},
-        {"W116","280SE","Mercedes-Benz","280SE","116.024","M110 · 2.8 L I6","The six-cylinder W116 in my garage history, alongside the 450SEL 6.9."},
+        {"W116","450SEL 6.9","Mercedes-Benz","450SEL 6.9","116.036 · V116","6,834 cc M100.985 V8","The car behind the original Infiltrator 6.9 page and the earliest chapter of the domain."},
+        {"W116","280SE","Mercedes-Benz","280SE","116.024 · W116","2,746 cc M110 I6","The six-cylinder W116 in my garage history, alongside the 450SEL 6.9."},
         {"Ford · Tickford LPG","EL Falcon","Ford","EL Falcon","EL","Petrol / LPG · Tickford","An earlier Falcon in the Australian chapter, with Tickford-installed LPG."},
         {"Ford","XF Falcon","Ford","XF Falcon","XF","Petrol","An XF Falcon among the Australian Fords I have owned."},
         {"Ford · BA · V8 · LPG","2003 Fairmont","Ford","Fairmont","BA","5.4 L V8 · Petrol / LPG","A BA Fairmont with the 5.4-litre V8 and dual-fuel LPG."},

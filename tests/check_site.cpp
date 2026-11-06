@@ -210,6 +210,13 @@ void validate_garage(const fs::path& root, const string& garage) {
             featured[1].id == "500-sec" && featured[2].id == "450sel-69" &&
             featured[3].id == "280-se",
             "Mercedes featured cards must remain in E 250, 500SEC, 450SEL 6.9, 280SE order");
+    require(featured[1].fields.at("Chassis / Series") == "126.044 · C126" &&
+            featured[1].fields.at("Powertrain") == "4,973 cc M117.963 V8" &&
+            featured[2].fields.at("Chassis / Series") == "116.036 · V116" &&
+            featured[2].fields.at("Powertrain") == "6,834 cc M100.985 V8" &&
+            featured[3].fields.at("Chassis / Series") == "116.024 · W116" &&
+            featured[3].fields.at("Powertrain") == "2,746 cc M110 I6",
+            "Mercedes chassis and powertrain formatting must remain consistent");
     const auto& current = featured[0];
     const auto& sec = featured[1];
     require(current.classes.count("vehicle-card--hero") == 1 &&
