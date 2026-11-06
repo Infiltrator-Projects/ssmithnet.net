@@ -206,8 +206,9 @@ void validate_garage(const fs::path& root, const string& garage) {
                     "Historical vehicle field missing: " + label);
         }
     }
-    require(featured.size() == 2 && featured[0].id == "e250-cdi" &&
-            featured[1].id == "500-sec", "2011 E-Class must lead the two Mercedes cards");
+    require(featured.size() == 3 && featured[0].id == "e250-cdi" &&
+            featured[1].id == "500-sec" && featured[2].id == "280-se",
+            "Mercedes featured cards must remain in E 250, 500SEC, 280SE order");
     const auto& current = featured[0];
     const auto& sec = featured[1];
     require(current.classes.count("vehicle-card--hero") == 1 &&
