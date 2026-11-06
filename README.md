@@ -12,6 +12,8 @@ Shared neutral presentation and infrastructure come from the immutable Common re
 
 GitHub Pages is published from the generated GitHub Actions artifact. Actions builds the generator on an Ubuntu runner, verifies the committed Common web snapshot before the build modifies it, validates the generated site, creates a clean `public/` tree, adds the local assets and custom-domain file, and hands that directory to COMMON's reusable Pages deployment action.
 
+The XF Falcon S-Pack gallery uses the beige 1985 XF reference photograph supplied during the site revision and a clearly identified illustrative front reconstruction. It keeps the original car's observed front-left direction in the main image, rather than reversing the view, and follows the standard two-photo gallery dimensions (1021×409 and 520×400). Neither is represented as an original owner photograph.
+
 The original 500SEC AMG photographs are retained unchanged as `assets/photos/500sec-amg-side.jpg` and `assets/photos/500sec-amg-front.jpg`. The build prepares two faithful, lightly colour-corrected and sharpened WebP delivery images using `tools/prepare_garage_photos.py` with pinned Pillow, standardised to the E 250 gallery sizes (1021×409 and 520×400). The generated WebP files are not tracked in Git. No details of the vehicle or photographic background are synthesised.
 
 The six HTML files kept on `main` are generated review mirrors, not source. Do not edit them by hand. `make check` regenerates the site and requires those mirrors to match `src/sitegen.cpp` byte-for-byte so reviewers can inspect the rendered output without creating a second source of truth.

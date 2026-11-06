@@ -313,6 +313,29 @@ void validate_garage(const fs::path& root, const string& garage) {
     require(fs::is_regular_file(root / "assets/photos/500sec-amg-side.jpg") &&
             fs::is_regular_file(root / "assets/photos/500sec-amg-front.jpg"),
             "Original unmodified SEC photographic sources must remain available");
+    const size_t xf_pos = garage.find("id=\"xf-s-pack\"");
+    require(xf_pos != string::npos, "Beige 1985 XF S-Pack gallery missing");
+    const size_t xf_end = garage.find("</article>", xf_pos);
+    require(xf_end != string::npos, "XF S-Pack article not closed");
+    const string xf_markup = garage.substr(xf_pos, xf_end - xf_pos);
+    require(xf_markup.find("1985") != string::npos &&
+            xf_markup.find("XF Falcon S-Pack") != string::npos &&
+            xf_markup.find("neither shows the actual car I owned") != string::npos,
+            "XF S-Pack year, model or illustrative-image disclosure missing");
+    for (const auto& [filename, dimensions] :
+         std::array<std::pair<string, string>, 2>{{
+            {"xf-s-pack-three-quarter.webp", "width=\"1021\" height=\"409\""},
+            {"xf-s-pack-front.webp", "width=\"520\" height=\"400\""}
+         }}) {
+        require(xf_markup.find("src=\"assets/photos/" + filename + "\"") != string::npos &&
+                xf_markup.find(dimensions) != string::npos &&
+                fs::is_regular_file(root / "assets/photos" / filename) &&
+                fs::file_size(root / "assets/photos" / filename) > 1000,
+                "XF S-Pack standardised photograph missing: " + filename);
+    }
+    require(xf_markup.find("three-quarter side view") != string::npos &&
+            xf_markup.find("front view") != string::npos,
+            "XF S-Pack photographs must follow the standard Garage arrangement");
     // Every referenced photo must exist in the committed source tree.
     // The GitHub Pages source-branch publisher cannot see build-only assets.
     const std::regex gallery_ref(R"photo(src="(assets/photos/[^"]+)")photo");
