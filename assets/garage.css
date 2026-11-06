@@ -32,3 +32,6 @@
 .garage-page .vehicle-photo-pair img{display:block;width:100%;height:auto;border:1px solid var(--line-soft)}
 .garage-page .vehicle-photo-pair figcaption{margin-top:10px;font:400 14px/1.5 var(--sans);color:var(--quiet)}
 @media(max-width:720px){.garage-page .vehicle-photo-pair{grid-template-columns:1fr;gap:22px}}
+
+/* Compact attribution immediately below historic reconstructed vehicle descriptions. */
+.garage-page .vehicle-reconstruction-note{font:400 13px/1.5 var(--sans);color:var(--quiet);margin:6px 0 0}

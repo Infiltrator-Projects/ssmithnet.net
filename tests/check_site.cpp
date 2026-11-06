@@ -206,9 +206,10 @@ void validate_garage(const fs::path& root, const string& garage) {
                     "Historical vehicle field missing: " + label);
         }
     }
-    require(featured.size() == 3 && featured[0].id == "e250-cdi" &&
-            featured[1].id == "500-sec" && featured[2].id == "280-se",
-            "Mercedes featured cards must remain in E 250, 500SEC, 280SE order");
+    require(featured.size() == 4 && featured[0].id == "e250-cdi" &&
+            featured[1].id == "500-sec" && featured[2].id == "450sel-69" &&
+            featured[3].id == "280-se",
+            "Mercedes featured cards must remain in E 250, 500SEC, 450SEL 6.9, 280SE order");
     const auto& current = featured[0];
     const auto& sec = featured[1];
     require(current.classes.count("vehicle-card--hero") == 1 &&
@@ -328,8 +329,27 @@ void validate_garage(const fs::path& root, const string& garage) {
                 se_markup.find(dimensions) != string::npos,
                 "280SE gallery image missing or incorrectly sized: " + filename);
     }
-    require(se_markup.find("Reconstructed likeness") != string::npos,
-            "280SE reconstruction must not be presented as an archival photograph");
+    require(se_markup.find("class=\"vehicle-reconstruction-note\"") != string::npos &&
+            se_markup.find("Illustrative reconstruction") != string::npos &&
+            se_markup.find("Illustrative reconstruction") < se_markup.find("</div><dl class=\"car-facts\""),
+            "280SE reconstruction note must appear directly below the description");
+    const size_t sel69_start = garage.find("id=\"450sel-69\"");
+    require(sel69_start != string::npos, "450SEL 6.9 illustrated entry missing");
+    const size_t sel69_end = garage.find("</article>", sel69_start);
+    require(sel69_end != string::npos, "450SEL 6.9 entry not closed");
+    const string sel69_markup = garage.substr(sel69_start, sel69_end - sel69_start);
+    require(sel69_markup.find("vehicle-reconstruction-note") != string::npos &&
+            sel69_markup.find("fully optioned") != string::npos,
+            "450SEL 6.9 recreation attribution missing");
+    const std::array<std::pair<string, string>, 2> sel69_photos{{
+        {"450sel-69-side-view.webp", "width=\"1021\" height=\"409\""},
+        {"450sel-69-front-view.webp", "width=\"520\" height=\"400\""}
+    }};
+    for (const auto& [filename, dimensions] : sel69_photos) {
+        require(sel69_markup.find("src=\"assets/photos/" + filename + "\"") != string::npos &&
+                sel69_markup.find(dimensions) != string::npos,
+                "450SEL 6.9 missing gallery image or dimensions: " + filename);
+    }
     require(garage.find("Mushroom leather") == string::npos &&
             garage.find("275A") == string::npos,
             "Removed unsupported factory equipment returned");

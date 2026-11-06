@@ -61,18 +61,24 @@ static string page_end(const string& right) {
 
 static string historical_car(const Car& c) {
     const bool is_280se = c.model == "280SE";
+    const bool is_69 = c.model == "450SEL 6.9";
     std::ostringstream o;
     o << "<article class=\"garage-entry garage-vehicle";
     if (is_280se) o << " vehicle-card vehicle-card--historic\" id=\"280-se";
+    if (is_69) o << " vehicle-card vehicle-card--historic\" id=\"450sel-69";
     o << "\"><div class=\"vehicle-heading\"><div class=\"tag\">" << esc(c.tag)
       << "</div><h3>" << esc(c.title) << "</h3><p class=\"vehicle-description\">" << esc(c.description)
-      << "</p></div><dl class=\"car-facts\">"
+      << "</p>";
+    if (is_280se) o << R"(<p class="vehicle-reconstruction-note">Illustrative reconstruction of my former white 280SE with original-style hubcaps and WA plates; not an original photograph.</p>)";
+    if (is_69) o << R"(<p class="vehicle-reconstruction-note">Illustrative reconstruction of my fully optioned, yellow-beige Australian 450SEL 6.9; not an original photograph.</p>)";
+    o << "</div><dl class=\"car-facts\">"
       << "<div><dt>Make</dt><dd>" << esc(c.make) << "</dd></div>"
       << "<div><dt>Model</dt><dd>" << esc(c.model) << "</dd></div>"
       << "<div><dt>Chassis / Series</dt><dd>" << esc(c.series) << "</dd></div>"
       << "<div><dt>Powertrain</dt><dd>" << esc(c.powertrain) << "</dd></div>"
       << "</dl>";
-    if (is_280se) o << R"(<div class="vehicle-photo-pair" aria-label="Reconstructed images of the white Mercedes-Benz 280SE"><figure><img src="assets/photos/280se-side-view.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Reconstructed white W116 Mercedes-Benz 280SE standard-wheelbase saloon in three-quarter side view, with original-style hubcaps and Western Australian number-plate format"><figcaption>280SE · three-quarter side view</figcaption></figure><figure><img src="assets/photos/280se-front-view.webp" width="660" height="507" loading="lazy" decoding="async" alt="Reconstructed head-on view of the white Mercedes-Benz W116 280SE, showing its chrome grille, European headlights and Western Australian-style registration plate"><figcaption>280SE · front view</figcaption></figure></div><p class="vehicle-record-note">Reconstructed likeness of my former white 280SE, with original-style colour-matched hubcaps and Western Australian registration format. These are not original photographs; the registration characters are obscured.</p>)";
+    if (is_69) o << R"(<div class="vehicle-photo-pair" aria-label="Reconstructed photographs of the yellow-beige Mercedes-Benz 450SEL 6.9"><figure><img src="assets/photos/450sel-69-side-view.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Reconstruction of a fully optioned right-hand-drive W116 450SEL 6.9 in pale ochre yellow-beige, front three-quarter view with original chrome trim and alloy wheels; no exterior front or quarter-panel 6.9 emblems"><figcaption>450SEL 6.9 · three-quarter side view</figcaption></figure><figure><img src="assets/photos/450sel-69-front-view.webp" width="520" height="400" loading="lazy" decoding="async" alt="Reconstruction of a pale yellow-beige Australian W116 450SEL 6.9 straight on, with right-hand steering, European headlamps and unbadged grille"><figcaption>450SEL 6.9 · front view</figcaption></figure></div>)";
+    if (is_280se) o << R"(<div class="vehicle-photo-pair" aria-label="Reconstructed images of the white Mercedes-Benz 280SE"><figure><img src="assets/photos/280se-side-view.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Reconstructed white W116 Mercedes-Benz 280SE standard-wheelbase saloon in three-quarter side view, with original-style hubcaps and Western Australian number-plate format"><figcaption>280SE · three-quarter side view</figcaption></figure><figure><img src="assets/photos/280se-front-view.webp" width="660" height="507" loading="lazy" decoding="async" alt="Reconstructed head-on view of the white Mercedes-Benz W116 280SE, showing its chrome grille, European headlights and Western Australian-style registration plate"><figcaption>280SE · front view</figcaption></figure></div>)";
     o << "</article>";
     return o.str();
 }
@@ -234,7 +240,7 @@ static VehicleRecord historic_mercedes() {
 static string render_garage() {
     std::ostringstream o;
     auto start = page_start("Garage", "The current 2011 Mercedes-Benz E 250 CDI Coupé, its full factory datacard, and my complete vehicle history.", "Garage", "garage-page");
-    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261022-sec-photos\">");
+    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261106-6point9\">");
     o << start;
     const auto current = current_mercedes();
     const auto sec = historic_mercedes();
