@@ -247,6 +247,32 @@ void validate_garage(const fs::path& root, const string& garage) {
     for (const char* code : {"197U", "251A", "527", "625", "901L", "R11", "VR"})
         require(std::find(current.equipment.begin(), current.equipment.end(), code) != current.equipment.end(),
                 string("Missing factory equipment code ") + code);
+    const size_t e250_pos = garage.find("id=\"e250-cdi\"");
+    require(e250_pos != string::npos, "E 250 CDI record missing");
+    const size_t e250_end = garage.find("</article>", e250_pos);
+    require(e250_end != string::npos, "E 250 CDI record not closed");
+    const string e250_markup = garage.substr(e250_pos, e250_end - e250_pos);
+    const auto e250_count = [&](const string& token) {
+        size_t hits = 0, offset = 0;
+        while ((offset = e250_markup.find(token, offset)) != string::npos) {
+            ++hits; offset += token.size();
+        }
+        return hits;
+    };
+    require(e250_count("<figure>") == 2 && e250_count("alt=\"") == 2 &&
+            e250_count("class=\"vehicle-photo-pair\"") == 1,
+            "E 250 CDI must mirror the SEC two-photo layout");
+    const std::array<std::pair<string,string>, 2> e250_photos{{
+        {"e250-cdi-grille.webp", "width=\"640\" height=\"256\""},
+        {"e250-cdi-front.webp", "width=\"520\" height=\"400\""}
+    }};
+    for (const auto& [filename, dimensions] : e250_photos) {
+        require(e250_count("src=\"assets/photos/" + filename + "\"") == 1 &&
+                e250_markup.find(dimensions) != string::npos &&
+                fs::exists(root / "assets/photos" / filename) &&
+                fs::file_size(root / "assets/photos" / filename) > 1000,
+                "E 250 CDI photo missing, empty or wrong dimensions: " + filename);
+    }
     require(sec.equipment.empty(), "Do not fabricate SEC equipment codes");
     const size_t id_pos = garage.find("id=\"500-sec\"");
     require(id_pos != string::npos, "SEC record missing");
