@@ -291,19 +291,44 @@ void validate_garage(const fs::path& root, const string& garage) {
             count("class=\"vehicle-photo-pair\"") == 1,
             "SEC must mirror the E 250 two-photo gallery layout");
     const std::array<std::pair<string,string>, 2> photos{{
-        {"500sec-amg-three-quarter.webp", "width=\"1021\" height=\"409\""},
-        {"500sec-amg-front.webp", "width=\"520\" height=\"400\""}
+        {"500sec-amg-side.jpg", "width=\"1021\" height=\"409\""},
+        {"500sec-amg-front.jpg", "width=\"520\" height=\"400\""}
     }};
     for (const auto& [filename, dimensions] : photos) {
         require(count("src=\"assets/photos/" + filename + "\"") == 1 &&
                 markup.find(dimensions) != string::npos &&
                 fs::exists(root / "assets/photos" / filename) &&
                 fs::file_size(root / "assets/photos" / filename) > 1000,
-                "SEC optimised photo or dimensions missing: " + filename);
+                "SEC displayed photo or dimensions missing: " + filename);
     }
     require(fs::is_regular_file(root / "assets/photos/500sec-amg-side.jpg") &&
             fs::is_regular_file(root / "assets/photos/500sec-amg-front.jpg"),
             "Original unmodified SEC photographic sources must remain available");
+    // Every referenced photo must exist in the committed source tree.
+    // The GitHub Pages source-branch publisher cannot see build-only assets.
+    const std::regex gallery_ref(R"photo(src="(assets/photos/[^"]+)")photo");
+    for (std::sregex_iterator it(garage.begin(), garage.end(), gallery_ref), last; it != last; ++it) {
+        const auto relative = (*it)[1].str();
+        require(fs::is_regular_file(root / relative) &&
+                fs::file_size(root / relative) > 1000,
+                "Garage references a missing published photograph: " + relative);
+    }
+    const size_t se_start = garage.find("id=\"280-se\"");
+    require(se_start != string::npos, "280SE section missing");
+    const size_t se_end = garage.find("</article>", se_start);
+    require(se_end != string::npos, "280SE section not closed");
+    const string se_markup = garage.substr(se_start, se_end - se_start);
+    const std::array<std::pair<string, string>, 2> se_photos{{
+        {"280se-side-view.webp", "width=\"1021\" height=\"409\""},
+        {"280se-front-view.webp", "width=\"660\" height=\"507\""}
+    }};
+    for (const auto& [filename, dimensions] : se_photos) {
+        require(se_markup.find("src=\"assets/photos/" + filename + "\"") != string::npos &&
+                se_markup.find(dimensions) != string::npos,
+                "280SE gallery image missing or incorrectly sized: " + filename);
+    }
+    require(se_markup.find("Reconstructed likeness") != string::npos,
+            "280SE reconstruction must not be presented as an archival photograph");
     require(garage.find("Mushroom leather") == string::npos &&
             garage.find("275A") == string::npos,
             "Removed unsupported factory equipment returned");
