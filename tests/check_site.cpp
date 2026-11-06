@@ -313,6 +313,30 @@ void validate_garage(const fs::path& root, const string& garage) {
     require(fs::is_regular_file(root / "assets/photos/500sec-amg-side.jpg") &&
             fs::is_regular_file(root / "assets/photos/500sec-amg-front.jpg"),
             "Original unmodified SEC photographic sources must remain available");
+    const size_t el_pos = garage.find("id=\"el-falcon\"");
+    require(el_pos != string::npos, "EL Falcon entry missing");
+    const size_t el_end = garage.find("</article>", el_pos);
+    require(el_end != string::npos, "EL Falcon article not closed");
+    const string el_markup = garage.substr(el_pos, el_end - el_pos);
+    require(el_markup.find("Tickford") != string::npos &&
+            el_markup.find("taxi yellow") != string::npos &&
+            el_markup.find("privately owned") != string::npos &&
+            el_markup.find("neither is a photograph of my actual car") != string::npos,
+            "EL Falcon colour, provenance, or original LPG description missing");
+    for (const auto& [filename, dimensions] :
+         std::array<std::pair<string, string>, 2>{{
+            {"el-falcon-three-quarter.webp", "width=\"1021\" height=\"409\""},
+            {"el-falcon-front.webp", "width=\"520\" height=\"400\""}
+         }}) {
+        require(el_markup.find("src=\"assets/photos/" + filename + "\"") != string::npos &&
+                el_markup.find(dimensions) != string::npos &&
+                fs::is_regular_file(root / "assets/photos" / filename) &&
+                fs::file_size(root / "assets/photos" / filename) > 1000,
+                "EL Falcon standardised gallery photo missing: " + filename);
+    }
+    require(el_markup.find("three-quarter side view") != string::npos &&
+            el_markup.find("front view") != string::npos,
+            "EL Falcon gallery must match the existing two-photo arrangement");
     const size_t xf_pos = garage.find("id=\"xf-s-pack\"");
     require(xf_pos != string::npos, "Beige 1985 XF S-Pack gallery missing");
     const size_t xf_end = garage.find("</article>", xf_pos);

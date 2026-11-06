@@ -63,17 +63,20 @@ static string historical_car(const Car& c) {
     const bool is_280se = c.model == "280SE";
     const bool is_69 = c.model == "450SEL 6.9";
     const bool is_xf = c.model == "XF Falcon S-Pack";
+    const bool is_el = c.model == "EL Falcon";
     std::ostringstream o;
     o << "<article class=\"garage-entry garage-vehicle";
     if (is_280se) o << " vehicle-card vehicle-card--historic\" id=\"280-se";
     if (is_69) o << " vehicle-card vehicle-card--historic\" id=\"450sel-69";
     if (is_xf) o << "\" id=\"xf-s-pack";
+    if (is_el) o << "\" id=\"el-falcon";
     o << "\"><div class=\"vehicle-heading\"><div class=\"tag\">" << esc(c.tag)
       << "</div><h3>" << esc(c.title) << "</h3><p class=\"vehicle-description\">" << esc(c.description)
       << "</p>";
     if (is_280se) o << R"(<p class="vehicle-reconstruction-note">Illustrative reconstruction of my former white 280SE with original-style hubcaps and WA plates; not an original photograph.</p>)";
     if (is_69) o << R"(<p class="vehicle-reconstruction-note">Illustrative reconstruction of my fully optioned, yellow-beige Australian 450SEL 6.9; not an original photograph.</p>)";
     if (is_xf) o << R"(<p class="vehicle-reconstruction-note">Representative photograph of a beige XF S-Pack and a reconstructed head-on view; neither shows the actual car I owned.</p>)";
+    if (is_el) o << R"(<p class="vehicle-reconstruction-note">Illustrative reconstructions of a yellow EL Falcon; neither is a photograph of my actual car.</p>)";
     o << "</div><dl class=\"car-facts\">"
       << "<div><dt>Make</dt><dd>" << esc(c.make) << "</dd></div>"
       << "<div><dt>Model</dt><dd>" << esc(c.model) << "</dd></div>"
@@ -83,6 +86,7 @@ static string historical_car(const Car& c) {
     if (is_69) o << R"(<div class="vehicle-photo-pair" aria-label="Reconstructed photographs of the yellow-beige Mercedes-Benz 450SEL 6.9"><figure><img src="assets/photos/450sel-69-side-view.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Reconstruction of a fully optioned right-hand-drive W116 450SEL 6.9 in pale ochre yellow-beige, front three-quarter view with original chrome trim and alloy wheels; no exterior front or quarter-panel 6.9 emblems"><figcaption>450SEL 6.9 · three-quarter side view</figcaption></figure><figure><img src="assets/photos/450sel-69-front-view.webp" width="520" height="400" loading="lazy" decoding="async" alt="Reconstruction of a pale yellow-beige Australian W116 450SEL 6.9 straight on, with right-hand steering, European headlamps and unbadged grille"><figcaption>450SEL 6.9 · front view</figcaption></figure></div>)";
     if (is_280se) o << R"(<div class="vehicle-photo-pair" aria-label="Reconstructed images of the white Mercedes-Benz 280SE"><figure><img src="assets/photos/280se-side-view.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Reconstructed white W116 Mercedes-Benz 280SE standard-wheelbase saloon in three-quarter side view, with original-style hubcaps and Western Australian number-plate format"><figcaption>280SE · three-quarter side view</figcaption></figure><figure><img src="assets/photos/280se-front-view.webp" width="660" height="507" loading="lazy" decoding="async" alt="Reconstructed head-on view of the white Mercedes-Benz W116 280SE, showing its chrome grille, European headlights and Western Australian-style registration plate"><figcaption>280SE · front view</figcaption></figure></div>)";
     if (is_xf) o << R"(<div class="vehicle-photo-pair" aria-label="Reference images of the beige Ford XF Falcon S-Pack"><figure><img src="assets/photos/xf-s-pack-three-quarter.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Beige XF Falcon S-Pack photographed from the front-left three-quarter angle, nose pointing left, showing the body-coloured Ford grille and five-spoke-style alloy wheels"><figcaption>XF Falcon S-Pack · three-quarter side view</figcaption></figure><figure><img src="assets/photos/xf-s-pack-front.webp" width="520" height="400" loading="lazy" decoding="async" alt="Illustrative head-on view of a beige XF Falcon S-Pack with body-coloured horizontal grille, blue Ford oval, rectangular headlights and black bumper"><figcaption>XF Falcon S-Pack · front view</figcaption></figure></div>)";
+    if (is_el) o << R"(<div class="vehicle-photo-pair" aria-label="Illustrative views of a Victorian taxi-yellow Ford EL Falcon"><figure><img src="assets/photos/el-falcon-three-quarter.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Illustrative Victorian taxi-yellow EL Falcon four-door sedan from the front-left three-quarter angle, with oval Ford grille and standard wheel covers, without taxi signs"><figcaption>EL Falcon · three-quarter side view</figcaption></figure><figure><img src="assets/photos/el-falcon-front.webp" width="520" height="400" loading="lazy" decoding="async" alt="Illustrative head-on view of a Victorian taxi-yellow Ford EL Falcon showing the oval grille, rounded headlights and regular bumper, without taxi markings"><figcaption>EL Falcon · front view</figcaption></figure></div>)";
     o << "</article>";
     return o.str();
 }
@@ -91,7 +95,7 @@ static vector<Car> historical_cars() {
     return {
         {"W116","450SEL 6.9","Mercedes-Benz","450SEL 6.9","116.036 · W116","6,834 cc M100.985 V8","The car behind the original Infiltrator 6.9 page and the earliest chapter of the domain."},
         {"W116","280SE","Mercedes-Benz","280SE","116.024 · W116","2,746 cc M110 I6","The six-cylinder W116 in my garage history, alongside the 450SEL 6.9."},
-        {"Ford · Tickford LPG","EL Falcon","Ford","EL Falcon","EL","Petrol / LPG · Tickford","An earlier Falcon in the Australian chapter, with Tickford-installed LPG."},
+        {"Ford · EL · Taxi yellow · Tickford LPG","EL Falcon","Ford","EL Falcon","EL","Petrol / LPG · Tickford","My EL Falcon in Victorian taxi yellow, but only the colour — it was a privately owned Falcon with Tickford-installed LPG."},
         {"1985 · Ford · XF · S-Pack","XF Falcon S-Pack","Ford","XF Falcon S-Pack","XF","Petrol","The beige 1985 XF Falcon S-Pack I owned."},
         {"Ford · BA · V8 · LPG","2003 Fairmont","Ford","Fairmont","BA","5.4 L V8 · Petrol / LPG","A BA Fairmont with the 5.4-litre V8 and dual-fuel LPG."},
         {"Holden","LC Torana","Holden","Torana","LC","1.1 L I4","The little 1.1-litre four-cylinder version I had."},
