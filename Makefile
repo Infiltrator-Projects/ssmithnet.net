@@ -28,10 +28,15 @@ build/check-site: tests/check_site.cpp
 	mkdir -p build
 	$(CXX) $(CXXFLAGS) tests/check_site.cpp -o build/check-site
 
-gallery-photos: tools/prepare_garage_photos.py
-	python3 tools/prepare_garage_photos.py
+build/prepare-garage-photos: tools/prepare_garage_photos.cpp
+	mkdir -p build
+	$(CXX) $(CXXFLAGS) -Werror $(shell pkg-config --cflags libjpeg libwebp) $< -o $@ $(shell pkg-config --libs libjpeg libwebp)
+
+gallery-photos: build/prepare-garage-photos
+	./build/prepare-garage-photos assets/photos
 
 check: sitegen gallery-photos build/check-web-family build/check-site
+	@! find src tools tests -type f -name '*.py' | grep -q . || { echo 'Python source is forbidden in website-owned code' >&2; exit 1; }
 	cmp "$(COMMON_WEB_CSS)" "$(COMMON_DIR)/design/infiltrator-web-v1.css"
 	./build/check-site .
 	./build/check-web-family .
