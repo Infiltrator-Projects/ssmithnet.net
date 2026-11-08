@@ -275,7 +275,8 @@ static void encode_webp(const Image& im,const fs::path& target) {
 static void prepare(const fs::path& dir,const char* source,const char* output,
                     int width,int height,double contrast,double saturation,double brightness) {
     int exif=1;
-    auto image=auto_orient(decode_jpeg(dir/source,exif),exif);
+    auto original=decode_jpeg(dir/source,exif);
+    auto image=auto_orient(original,exif);
     enhance(image,contrast,saturation,brightness);
     auto resized=fit(image,width,height);
     sharpen(resized);
