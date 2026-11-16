@@ -603,7 +603,7 @@ static string render_garage() {
 }
 
 static string render_about() {
-    return page_start("About", "The history of Shannon Smith's personal website since 1993, the Mercedes-Benz 450SEL 6.9, software work and other interests.", "About", "about-page") + R"ABOUT(
+    return page_start("About", "The history of Shannon Smith and a personal website begun in 1993, with the Mercedes-Benz 450SEL 6.9, software work and other interests.", "About", "about-page") + R"ABOUT(
 <section class="page-intro">
   <p class="eyebrow">About · Online since 1993</p>
   <h1>A place of my own.</h1>
