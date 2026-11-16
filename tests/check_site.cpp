@@ -831,6 +831,13 @@ void validate(const fs::path& root) {
             system_css.find(".about-page .about-interests .project-content{padding:0;border:0") != string::npos,
             "Page-specific CSS must follow generic layouts; retired About cards must not bleed through");
 
+    require(system_css.find(".workbench-intro .workbench-directory{grid-template-columns:repeat(3") == string::npos &&
+            system_css.find(".projects-page .repository-browser{border-top:1px") == string::npos &&
+            system_css.find(".projects-page .repository-browser{padding-top:31px") == string::npos &&
+            system_css.find(".repo-group--compact summary::after{display:none}") == string::npos &&
+            system_css.find(".projects-page .repo-group--compact summary::after{display:block;flex:none;align-self:center}") != string::npos &&
+            system_css.find(".about-page .about-interests .interest-entry{border:0;border-left:2px") != string::npos,
+            "Editorial CSS must not resurrect obsolete panels or hide compact disclosure controls");
     require(workbench_page.find("class=\"family-register\"") == string::npos &&
             workbench_page.find("class=\"engineering-map\"") != string::npos &&
             workbench_page.find("class=\"engineering-process\"") != string::npos &&

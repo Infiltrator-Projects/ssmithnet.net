@@ -147,12 +147,10 @@ nav[aria-label="Primary"] .navlinks .nav-software{border-left:0;padding-left:0}
 .home-editorial-copy p a,.about-interests .interest-entry a,.about-history .event a,.project-content p a{color:var(--accent);text-underline-offset:4px;text-decoration:underline;text-decoration-color:rgba(39,220,233,.38)}
 .home-editorial-copy p a:hover,.about-interests .interest-entry a:hover,.about-history .event a:hover,.project-content p a:hover{text-decoration-color:var(--accent)}
 .home-editorial-copy .text-link{margin-top:4px}
-.workbench-intro .workbench-directory{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .workbench-context{border-left:3px solid var(--accent);padding:15px 21px;margin:27px 0;background:rgba(14,54,64,.3);border-radius:0 7px 7px 0}
 .workbench-context>strong{font:720 18px/1.4 var(--sans);color:var(--text)}
 .workbench-context p{margin:8px 0 0;font:400 15px/1.6 var(--sans);color:var(--muted)}
 .project-content .project-boundary{padding-top:20px;margin-top:22px;border-top:1px solid var(--line-soft);font:400 14px/1.6 var(--sans);color:var(--muted)}
-.workbench-page .project-content{max-width:1160px}
 .workbench-page .project-content>p{max-width:var(--measure)}
 .workbench-page .project-content .workbench-context p{max-width:var(--measure)}
 .workbench-page .project-content>p+p{margin-top:16px}
@@ -256,7 +254,6 @@ input[type="search"]{border-radius:7px}
 .projects-intro .lead{max-width:980px}
 .workbench-index-link{margin:17px 0 0}
 .workbench-index-link a{display:inline-flex;align-items:center;min-height:44px;padding:9px 0;border-bottom:1px solid var(--accent);font:700 15px/1.5 var(--sans);color:var(--accent)}
-.projects-page .repository-browser{border-top:1px solid var(--line);padding-top:48px}
 .repository-browser-header{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr);align-items:end;gap:26px;margin-bottom:24px}
 .repository-browser-header h2{margin:0 0 13px}
 .repository-browser-header p:not(.eyebrow){max-width:830px;margin:0;color:var(--muted)}
@@ -319,7 +316,6 @@ input[type="search"]{border-radius:7px}
 @media(max-width:550px){
   .repo-grid,.repo-group--compact .repo-grid{grid-template-columns:minmax(0,1fr)}
   .repo-group--compact summary{padding:18px;gap:10px;flex-wrap:wrap}
-  .repo-group--compact summary::after{display:none}
   .repo-group--compact .repo-grid{padding:0 12px 14px}
   .repo-entry{min-height:0}
   .repository-families-nav a{font-size:12px}
@@ -336,7 +332,6 @@ input[type="search"]{border-radius:7px}
 }
 @media(max-width:860px){
   .home-editorial{grid-template-columns:1fr;gap:10px}
-  .workbench-intro .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}
 
   .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}
   .garage-jump-links{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -361,8 +356,6 @@ input[type="search"]{border-radius:7px}
   .home-editorial{padding:28px 0 49px!important;gap:13px}
   .home-editorial-heading h2{font-size:32px}
   .home-editorial-copy p{font-size:15px}
-  .workbench-intro .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .workbench-intro .workbench-directory a{min-height:0}
 
   .workbench-directory{grid-template-columns:1fr 1fr;gap:8px}
   .workbench-directory a{padding:13px;min-height:105px}
@@ -438,7 +431,6 @@ input[type="search"]{border-radius:7px}
   .hub-tile .hub-content>span{font-size:12px}
 }
 @media(max-width:380px){
-  .workbench-intro .workbench-directory{grid-template-columns:minmax(0,1fr)}
   .repository-search-control{flex-wrap:wrap}
   .repository-search-control button{min-height:42px}
 }
@@ -488,7 +480,6 @@ input[type="search"]{border-radius:7px}
 .projects-utility-nav{display:flex;flex-wrap:wrap;gap:8px 22px;margin:18px 0 0}
 .projects-utility-nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--accent);font:650 13px/1.4 var(--sans)}
 .projects-utility-nav a:hover{text-decoration:underline;text-underline-offset:4px}
-.projects-page .repository-browser{padding-top:31px;border-top:0}
 .projects-page .repository-browser-header{padding:22px 24px;border:1px solid var(--line);border-radius:9px;background:rgba(19,35,45,.7);align-items:center;margin-bottom:21px}
 .projects-page .repository-browser-header h2{font:735 24px/1.2 var(--sans)}
 .projects-page .repository-browser-header p:not(.eyebrow){font-size:14px;line-height:1.55}
@@ -518,7 +509,7 @@ input[type="search"]{border-radius:7px}
 
 /* About: personal narrative, not a duplicate site-map or nested card gallery. */
 .about-page .about-interests .project-content{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;grid-template-columns:repeat(2,minmax(0,1fr))}
-.about-page .about-interests .interest-entry{background:rgba(13,28,37,.52);padding:21px 23px}
+.about-page .about-interests .interest-entry{border:0;border-left:2px solid var(--line);border-radius:0;background:transparent;padding:4px 22px 7px}
 .about-page .about-interests .interest-entry p{max-width:63ch}
 .about-page .about-history .timeline{margin-top:24px}
 .about-page .about-history .event{grid-template-columns:155px minmax(0,1fr);gap:24px;padding:24px 0}
@@ -533,9 +524,9 @@ input[type="search"]{border-radius:7px}
 .projects-page .repository-browser{border-top:0;padding-top:23px}
 .projects-page .repo-group-heading h3{font-size:clamp(22px,2.2vw,28px)}
 .projects-page .repo-grid{gap:10px}
-.projects-page .repo-entry{border-radius:6px}
+.projects-page .repo-entry{border-radius:6px;box-shadow:none}
 .projects-page .repo-group--compact summary{min-height:65px}
-.projects-page .repo-group--compact summary::after{display:block}
+.projects-page .repo-group--compact summary::after{display:block;flex:none;align-self:center}
 @media(max-width:860px){
   .about-page .about-interests .project-content{grid-template-columns:1fr}
   .about-page .about-history .event{grid-template-columns:120px minmax(0,1fr);gap:16px}

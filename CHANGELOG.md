@@ -1,3 +1,9 @@
+## 17 November 2026 — CSS clarification
+
+- Removed superseded responsive Workbench and Projects CSS declarations, reducing cascade conflicts after the editorial redesign.
+- Kept expand/collapse affordances visible for compact Projects families on narrow screens and simplified About interest presentation.
+- Updated the stylesheet cache key on all generated pages and strengthened the native regression checks. Desktop and phone screenshot review remains outstanding.
+
 # Changelog
 
 This file records user-visible, compatibility, architecture and validation changes for ssmithnet.net.

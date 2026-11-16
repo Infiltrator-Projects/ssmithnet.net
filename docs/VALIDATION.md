@@ -69,3 +69,7 @@ Workbench must contain no `family-register` GitHub-card grids; its editorial lay
 The reviewed Workbench, Projects and About pages now each have a distinct purpose. Workbench retains technical explanations and source-category exits without website self-commentary; Projects is the complete repository lookup and no longer repeats a second jump to the search box; About tells the personal story and no longer reproduces the website's four-section navigation cards. The introductory copy, the About common-thread section, the 104-Git index and the Daytona presentation are all retained appropriately.
 
 The editorial Workbench/Projects CSS was previously declared before older generic catalogue rules. It has been moved after the base rules and responsive adjustments, and the dead About map/old Projects statistics styles were removed. Regression checks enforce that cascade order, the absence of the duplicate About navigation grid and the preserved Workbench/Projects separation. Exact browser visual review remains distinct from native generator tests.
+
+## Editorial CSS maintenance — 17 November 2026
+
+Removed superseded Workbench directory, Projects browser and compact-disclosure rules. Projects keeps a visible expand affordance at phone width, and About's interest material uses flat editorial rails rather than inset card decoration. Generated pages and the C++ generator share the new stylesheet cache key. Native checks cover the selectors and output equivalence; actual browser viewport screenshots are still required before claiming visual certification.
