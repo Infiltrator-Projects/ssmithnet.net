@@ -53,8 +53,8 @@ static string page_start(const string& title, const string& description, const s
     const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Garage" ? "garage.html" : active == "Download" ? "downloads/model-11-sandy/" : "about.html";
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
-        "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/favicon.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-4") + "\">" +
+        "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-5") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 

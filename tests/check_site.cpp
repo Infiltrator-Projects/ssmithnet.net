@@ -532,7 +532,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-4") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-5") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -608,6 +608,22 @@ void validate(const fs::path& root) {
             home.find("workbench.html#revox-b77") != string::npos &&
             home.find("At a glance") != string::npos,
             "Workbench register or real website summary missing");
+    const string brand_icon = read(root / "assets/brand-2026.svg");
+    require(brand_icon == read(root / "assets/favicon.svg"),
+            "Legacy favicon and canonical brand mark must remain identical");
+    require(brand_icon.find("viewBox=\"0 0 64 48\"") != string::npos &&
+            brand_icon.find("#27dce9") != string::npos &&
+            brand_icon.find("twin-slash") != string::npos,
+            "Browser tab icon no longer matches the twin-slash brand identity");
+    const string branding_css = read(root / "assets/site-redesign.css");
+    require(branding_css.find("background:url(\"brand-2026.svg\")") != string::npos,
+            "Header and footer must use the browser-tab logo artwork");
+    for (const auto& [relative, content] : first) {
+        const string icon_path = relative.rfind("downloads/", 0) == 0
+            ? "../../assets/brand-2026.svg" : "assets/brand-2026.svg";
+        require(content.find("rel=\"icon\" type=\"image/svg+xml\" href=\"" + icon_path + "\"") != string::npos,
+                relative + ": old tab favicon unexpectedly retained");
+    }
     const string garage = first.at("garage.html");
     validate_garage(root, garage);
     for (const auto& [relative, content] : first)

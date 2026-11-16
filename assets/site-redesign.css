@@ -288,3 +288,28 @@ nav[aria-label="Primary"] .navlinks a[aria-current="page"]{color:#fff;box-shadow
  .hub-tile,.ui-action,.vehicle-teaser{transition:none}
  .hub-tile:hover,.ui-action:hover{transform:none}
 }
+
+
+/* One visual identity for the masthead, footer and browser favicon. */
+nav[aria-label="Primary"] .brand::before,
+.site-footer .footer-brand::before {
+  content:"";
+  display:inline-block;
+  vertical-align:-.17em;
+  background:url("brand-2026.svg") center / contain no-repeat;
+  border:0;
+  border-left:0;
+  border-right:0;
+  transform:none;
+  border-radius:0;
+  box-shadow:none;
+  filter:none;
+}
+nav[aria-label="Primary"] .brand::before {width:40px;height:27px;margin:0 13px 0 0}
+.site-footer .footer-brand::before {width:31px;height:23px;margin:0 11px 0 0}
+nav[aria-label="Primary"] .brand span,
+.site-footer .footer-brand span {color:#27dce9}
+@media(max-width:670px) {
+  nav[aria-label="Primary"] .brand::before {width:33px;height:23px;margin-right:9px}
+  .site-footer .footer-brand::before {width:29px;height:21px}
+}
