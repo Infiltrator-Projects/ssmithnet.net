@@ -35,3 +35,67 @@
 
 /* Compact attribution immediately below historic reconstructed vehicle descriptions. */
 .garage-page .vehicle-reconstruction-note{font:400 13px/1.5 var(--sans);color:var(--quiet);margin:6px 0 0}
+
+
+/* Garage editorial refresh: a single chronological register below the hero.
+ * No client scripts, cropped-out vehicle details, or duplicated visual systems.
+ */
+.garage-page .garage-current{padding:26px 0 62px}
+.garage-page .garage-nav{gap:10px;margin:0 0 42px}
+.garage-page .garage-nav a{display:inline-flex;align-items:center;min-height:42px;padding:9px 16px;border:1px solid var(--line);border-radius:6px;background:rgba(19,25,31,.76);font-size:15px;transition:border-color .15s,background-color .15s}
+.garage-page .garage-nav a:hover,.garage-page .garage-nav a:focus-visible{border-color:var(--accent);background:rgba(0,173,239,.08)}
+.garage-page .vehicle-card--hero>.vehicle-heading{border-left:3px solid var(--accent);padding:2px 0 4px 24px}
+.garage-page .vehicle-card--hero h1{letter-spacing:-.025em}
+.garage-page .vehicle-card--hero .vehicle-description{max-width:790px;line-height:1.55}
+.garage-page .vehicle-overview{gap:40px;margin-top:34px;padding-top:25px}
+.garage-page .hero-key-facts{gap:22px}
+.garage-page .hero-key-facts>div{min-width:0}
+.garage-page .hero-key-facts dd{font-variant-numeric:tabular-nums}
+.garage-page .vehicle-story{max-width:610px}
+.garage-page .garage-chapter{padding:56px 0 48px}
+.garage-page .chapter-heading{margin-bottom:38px;max-width:950px}
+.garage-page .chapter-heading h2{font-size:clamp(38px,5vw,62px);line-height:1.1;margin:0 0 18px}
+.garage-page .chapter-heading p:last-child{font-size:19px;line-height:1.6;max-width:850px}
+.garage-page .garage-register{display:grid;gap:26px;border:0}
+.garage-page .garage-entry{padding:30px 34px 26px;margin:0;border:1px solid var(--line);border-radius:9px;background:linear-gradient(140deg,rgba(25,31,37,.84),rgba(10,13,17,.96));box-shadow:0 18px 40px rgba(0,0,0,.08)}
+.garage-page .garage-entry .vehicle-heading{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);grid-template-rows:auto auto auto;column-gap:44px;row-gap:4px;align-items:start}
+.garage-page .garage-entry .tag{grid-column:1;grid-row:1;font-weight:700;font-size:13px;letter-spacing:.065em;text-transform:uppercase;color:var(--accent)}
+.garage-page .garage-entry h3{grid-column:1;grid-row:2;font-size:clamp(32px,3.2vw,44px);line-height:1.1;margin:4px 0 0}
+.garage-page .garage-entry .year-marker{grid-column:1;grid-row:3;justify-self:start;font-size:14px;letter-spacing:.02em;line-height:1.4;color:var(--text);margin:8px 0 0;padding:6px 10px;border-radius:4px;background:rgba(89,112,127,.17);border:1px solid var(--line-soft)}
+.garage-page .garage-entry .vehicle-description{grid-column:2;grid-row:1/3;font-size:19px;line-height:1.55;max-width:650px;color:var(--text)}
+.garage-page .garage-entry .vehicle-origin{grid-column:2;grid-row:3;font-size:14px;line-height:1.5;color:var(--quiet);margin:4px 0 0}
+.garage-page .garage-entry .vehicle-reconstruction-note{grid-column:2;grid-row:3;max-width:650px;margin:4px 0 0;font:400 14px/1.5 var(--sans);color:var(--quiet)}
+.garage-page .garage-entry .car-facts{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px 26px;border-top:1px solid var(--line-soft);margin:25px 0 0;padding-top:19px}
+.garage-page .garage-entry .car-facts dt{font-size:13px;letter-spacing:.035em}
+.garage-page .garage-entry .car-facts dd{font-size:17px;line-height:1.45;margin-top:5px}
+.garage-page .vehicle-photo-pair{grid-template-columns:minmax(0,1.43fr) minmax(0,.90fr);gap:18px;margin:26px 0 8px;align-items:start}
+.garage-page .vehicle-photo-pair figure{min-width:0}
+.garage-page .garage-photo-link{display:block;overflow:hidden;background:rgba(4,6,8,.82);border:1px solid var(--line);border-radius:6px;transition:border-color .15s}
+.garage-page .garage-photo-link:hover,.garage-page .garage-photo-link:focus-visible{border-color:var(--accent)}
+.garage-page .vehicle-photo-pair img{width:100%;height:auto;border:0;object-fit:contain;background:rgba(4,6,8,.82)}
+.garage-page .vehicle-photo-pair figure:first-child img{aspect-ratio:1.9}
+.garage-page .vehicle-photo-pair figure:last-child img{aspect-ratio:1.25}
+.garage-page .vehicle-photo-pair figcaption{font-size:13px;line-height:1.5;color:var(--muted);margin:9px 0 0}
+.garage-page .vehicle-photo-pair figcaption::after{content:" · View full image";color:var(--quiet)}
+.garage-page .garage-entry .vehicle-record{margin-top:25px}
+@media(max-width:760px){
+ .garage-page .garage-current{padding-bottom:38px}
+ .garage-page .garage-nav{margin-bottom:30px}
+ .garage-page .garage-nav a{min-height:40px;font-size:14px}
+ .garage-page .vehicle-card--hero>.vehicle-heading{padding-left:16px}
+ .garage-page .vehicle-overview{grid-template-columns:1fr;gap:25px}
+ .garage-page .garage-entry{padding:22px 19px;gap:0}
+ .garage-page .garage-entry .vehicle-heading{grid-template-columns:1fr;grid-template-rows:auto;row-gap:3px}
+ .garage-page .garage-entry .vehicle-heading>*{grid-column:1!important;grid-row:auto!important}
+ .garage-page .garage-entry h3{margin:5px 0 4px}
+ .garage-page .garage-entry .year-marker{margin:3px 0 13px}
+ .garage-page .garage-entry .vehicle-description{font-size:18px}
+ .garage-page .garage-entry .vehicle-origin,.garage-page .garage-entry .vehicle-reconstruction-note{margin:8px 0 0}
+ .garage-page .garage-entry .car-facts{grid-template-columns:1fr 1fr;gap:15px 18px}
+ .garage-page .vehicle-photo-pair{grid-template-columns:1fr;gap:20px}
+ .garage-page .vehicle-photo-pair figure:first-child img{aspect-ratio:auto}
+ .garage-page .vehicle-photo-pair figure:last-child img{aspect-ratio:auto}
+}
+@media(prefers-reduced-motion:reduce){
+ .garage-page .garage-photo-link,.garage-page .garage-nav a{transition:none}
+}

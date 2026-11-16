@@ -195,6 +195,27 @@ void validate_garage(const fs::path& root, const string& garage) {
         if (car.classes.count("vehicle-card")) featured.push_back(car);
     }
     require(vehicles.size() == 12, "Garage must retain all twelve vehicle records");
+    // Full manufacture-year ordering where documented, with remaining vehicles
+    // grouped by visibly labelled model era. Keep chronological order across makes.
+    const std::array<string,12> chronology{{
+        "e250-cdi","ba-ltd","ba-fairmont","discovery-2","au-fairmont",
+        "el-falcon","peugeot-405-gld","500-sec","xf-s-pack",
+        "450sel-69","280-se","lc-torana"
+    }};
+    size_t previous_position = 0;
+    for (size_t i = 0; i < chronology.size(); ++i) {
+        const auto position = garage.find("id=\"" + chronology[i] + "\"");
+        require(position != string::npos && (i == 0 || position > previous_position),
+                "Garage chronology changed at " + chronology[i]);
+        previous_position = position;
+    }
+    require(garage.find("id=\"vehicle-history\"") != string::npos &&
+            garage.find("model generation rather than a verified manufacture year") != string::npos,
+            "Chronological register or model-era disclosure missing");
+    require(garage.find("class=\"year-marker\"") != string::npos &&
+            garage.find("class=\"garage-photo-link\"") != string::npos,
+            "Historical year markers or full-size photograph links missing");
+
     const std::vector<string> history{
         "Make", "Model", "Chassis / Series", "Powertrain"};
     for (size_t i = 1; i < vehicles.size(); ++i) {
