@@ -604,10 +604,11 @@ void validate(const fs::path& root) {
             browser_review.find("../downloads/model-11-sandy/index.html") != string::npos,
             "The responsive review shell must load real generated pages from its subdirectory");
     const string responsive_css = read(root / "assets/site-redesign.css");
-    require(responsive_css.find("@media(max-width:520px)") != string::npos &&
-            responsive_css.find(".home-page .history-facts") != string::npos &&
-            responsive_css.find("grid-template-columns:minmax(0,1fr)") != string::npos,
-            "Narrow viewport history card regression rules are missing");
+    require(responsive_css.find("@media(max-width:600px)") != string::npos &&
+            responsive_css.find(".home-editorial{padding:28px 0 49px!important") != string::npos &&
+            responsive_css.find(".workbench-intro .workbench-directory{grid-template-columns:1fr}") != string::npos &&
+            responsive_css.find(".about-structure-grid{grid-template-columns:1fr}") != string::npos,
+            "Responsive editorial sections must stack cleanly on phones");
     require(first.at("archive.html") == first.at("about.html"),
             "Legacy Archive must contain full canonical About content");
     require(first.at("archive.html").find("href=\"https://ssmithnet.net/about.html\"") != string::npos,
