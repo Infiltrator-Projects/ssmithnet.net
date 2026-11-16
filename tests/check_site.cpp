@@ -532,6 +532,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
+        require(generated.find("site-redesign.css?v=20261116-2") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -570,6 +571,17 @@ void validate(const fs::path& root) {
             "Legacy Archive must contain full canonical About content");
     require(first.at("archive.html").find("href=\"https://ssmithnet.net/about.html\"") != string::npos,
             "Legacy Archive must point to canonical About URL");
+    const string home = first.at("index.html");
+    require(home.find("Projects, cars,") != string::npos &&
+            home.find("ReVox B77 Mk II") != string::npos &&
+            home.find("assets/photos/revox-b77-mkii-dbx224.webp") != string::npos &&
+            home.find("2002 Discovery II") != string::npos,
+            "Refreshed homepage content missing or contains wrong garage history");
+    require(first.at("workbench.html").find("id=\"revox-b77\"") != string::npos,
+            "ReVox hardware section is not reachable from the homepage");
+    require(fs::is_regular_file(root / "assets/photos/revox-b77-mkii-dbx224.webp") &&
+            fs::file_size(root / "assets/photos/revox-b77-mkii-dbx224.webp") > 10000,
+            "ReVox illustration is missing from published sources");
     const string garage = first.at("garage.html");
     validate_garage(root, garage);
     for (const auto& [relative, content] : first)

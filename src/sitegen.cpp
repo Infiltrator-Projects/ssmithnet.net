@@ -53,7 +53,8 @@ static string page_start(const string& title, const string& description, const s
     const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Garage" ? "garage.html" : active == "Download" ? "downloads/model-11-sandy/" : "about.html";
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
-        "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/favicon.svg") + "\">"
+        "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/favicon.svg") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-2") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -124,22 +125,76 @@ static vector<Car> historical_cars() {
 }
 
 static string render_home() {
-    return page_start("Shannon Smith", "Shannon Smith's personal website: Infiltrator software, a Mercedes-Benz E-Class and a garage history stretching back to the 450SEL 6.9.", "Home", "home-page") + R"(
-<section class="home-intro" aria-labelledby="home-title"><p class="eyebrow">Mooroopna, Victoria · A personal website</p><h1 id="home-title">Shannon Smith.</h1><div class="home-intro-bottom"><p class="lead">I build software, enjoy machinery, and like to understand how things work.</p><a class="text-link" href="about.html">A little about me <span aria-hidden="true">→</span></a></div></section>
-<section class="home-feature" aria-labelledby="home-workbench"><div class="feature-heading"><p class="eyebrow">On the workbench</p><h2 id="home-workbench"><a href="workbench.html#infiltratorfs">InfiltratorFS</a></h2><p class="feature-subtitle">A filesystem, built from first principles.</p></div><div class="feature-content"><p>What survives a crash? How should old versions be retained? InfiltratorFS follows those questions into the on-disk format, recovery tools and a native Linux driver.</p><ul class="feature-notes"><li>Copy-on-write generations</li><li>Checksummed data &amp; metadata</li><li>Native Linux integration</li></ul><a class="text-link" href="workbench.html">Inside the Workbench <span aria-hidden="true">→</span></a></div></section>
-<section class="home-feature" aria-labelledby="home-garage"><div class="feature-heading"><p class="eyebrow">In the garage · 2011</p><h2 id="home-garage"><a href="garage.html">E 250 CDI</a></h2><p class="feature-subtitle">Mercedes-Benz BlueEFFICIENCY Coupé.</p></div><div class="feature-content"><p>The C207 in the garage today, finished in Obsidian Black. It is also the development vehicle for MBLink, where the software and automotive interests meet.</p><dl class="inline-facts"><div><dt>Series</dt><dd>C207</dd></div><div><dt>Engine</dt><dd>OM651 diesel</dd></div><div><dt>Original delivery</dt><dd>Australia</dd></div></dl><a class="text-link" href="garage.html">The car &amp; the garage history <span aria-hidden="true">→</span></a></div></section>
-<section class="home-closing"><p>This address began with a Mercedes-Benz 450SEL 6.9 in the 1990s. Cars, code, open-reel tape and watches have all found a place here since.</p><a class="text-link" href="about.html#the-site">The story of ssmithnet.net <span aria-hidden="true">→</span></a></section>
-)" + page_end("A personal corner of the internet, since the 1990s.");
+    return page_start("Shannon Smith", "Shannon Smith's personal website: Infiltrator software, a Mercedes-Benz E-Class and a garage history stretching back to the 450SEL 6.9.", "Home", "home-page") + R"site(
+<section class="landing-hero" aria-labelledby="home-title">
+  <div class="landing-hero-copy">
+    <p class="eyebrow">Shannon Smith · Mooroopna, Victoria</p>
+    <h1 id="home-title">Projects, cars,<br>software and <span>machines.</span></h1>
+    <p class="landing-intro">A personal corner of the internet for building software, driving interesting machinery and keeping the old technology working.</p>
+    <div class="landing-actions"><a class="ui-action ui-action-primary" href="workbench.html">Explore the Workbench <span aria-hidden="true">↗</span></a><a class="ui-action ui-action-secondary" href="garage.html">Visit the Garage <span aria-hidden="true">→</span></a></div>
+  </div>
+  <div class="hero-accent" aria-hidden="true"><span class="hero-wave"></span><span class="hero-wave-copy"></span></div>
+</section>
+<section class="landing-hubs" aria-label="Explore the site">
+  <a class="hub-tile" href="workbench.html"><span class="hub-symbol" aria-hidden="true">⌘</span><strong>Workbench</strong><span>Filesystems, native applications, diagnostics and analogue hardware.</span><b aria-hidden="true">↗</b></a>
+  <a class="hub-tile" href="garage.html"><span class="hub-symbol" aria-hidden="true">◇</span><strong>Garage</strong><span>My current Mercedes, former cars and their stories.</span><b aria-hidden="true">↗</b></a>
+  <a class="hub-tile" href="https://infiltrator-projects.github.io/Infiltrator-Repository/"><span class="hub-symbol" aria-hidden="true">⌘</span><strong>Software Centre</strong><span>Downloadable tools, applications and packages.</span><b aria-hidden="true">↗</b></a>
+  <a class="hub-tile" href="about.html"><span class="hub-symbol" aria-hidden="true">◎</span><strong>About</strong><span>The site, its history and the interests behind it.</span><b aria-hidden="true">↗</b></a>
+</section>
+<section class="landing-showcase" aria-label="Featured collections">
+  <article class="home-revox">
+    <div class="showcase-description">
+      <p class="eyebrow">Featured hardware · Open-reel audio</p>
+      <h2>ReVox B77 Mk II <span>+ dbx 224</span></h2>
+      <p>Magnetic tape, illuminated meters and carefully made mechanics. My B77 Mk II sits with a dbx 224 Type II noise-reduction unit — a very different sort of machine from the ones on my software bench.</p>
+      <a class="ui-action ui-action-outline" href="workbench.html#revox-b77">Explore the tape setup <span aria-hidden="true">↗</span></a>
+    </div>
+    <figure class="revox-preview">
+      <img src="assets/photos/revox-b77-mkii-dbx224.webp" width="1200" height="900" decoding="async" alt="Clean illustration of my ReVox B77 Mk II reel-to-reel recorder above a dbx Model 224, with two BASF reels and illuminated VU meters">
+      <figcaption>Illustrative redraw based on my own ReVox and dbx equipment.</figcaption>
+    </figure>
+  </article>
+  <aside class="home-garage-panel" aria-labelledby="home-garage-title">
+    <div class="panel-heading"><p class="eyebrow">Garage · Fourteen cars</p><h2 id="home-garage-title">The garage.</h2></div>
+    <a class="vehicle-teaser" href="garage.html#e250-cdi"><img src="assets/photos/e250-cdi-three-quarter.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Black Mercedes-Benz E 250 CDI Coupé"><span><strong>2011 E 250 CDI</strong><small>Current car · C207 · OM651</small></span><b aria-hidden="true">→</b></a>
+    <a class="vehicle-teaser" href="garage.html#discovery-2"><img src="assets/photos/discovery-2-three-quarter.webp" width="642" height="348" loading="lazy" decoding="async" alt="Dark 2002 Land Rover Discovery II"><span><strong>2002 Discovery II</strong><small>Former car · Diesel 4WD</small></span><b aria-hidden="true">→</b></a>
+    <a class="vehicle-teaser" href="garage.html#450sel-69"><img src="assets/photos/450sel-69-side-view.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Yellow-beige Mercedes-Benz 450SEL 6.9 reconstruction"><span><strong>450SEL 6.9</strong><small>The car that started the site</small></span><b aria-hidden="true">→</b></a>
+    <a class="panel-link" href="garage.html#vehicle-history">Explore all fourteen cars <span aria-hidden="true">→</span></a>
+  </aside>
+</section>
+<section class="landing-lower" aria-label="Software and site history">
+  <article class="home-focus">
+    <p class="eyebrow">On the software bench</p><h2>InfiltratorFS.</h2>
+    <p>Designing a filesystem from first principles means asking what survives a crash, how previous generations are retained, and how the resulting state can be checked.</p>
+    <div class="focus-tags"><span>Copy-on-write</span><span>Checksummed</span><span>Native Linux</span></div>
+    <a class="panel-link" href="workbench.html#infiltratorfs">Explore InfiltratorFS <span aria-hidden="true">→</span></a>
+  </article>
+  <article class="home-history">
+    <p class="eyebrow">A little history</p><h2>Since the 1990s.</h2>
+    <p>This address began with a Mercedes-Benz 450SEL 6.9. Cars, software, watches, open-reel audio and a curiosity about the way things work have shared the same home since.</p>
+    <div class="history-facts"><div><strong>14</strong><span>Vehicles in the garage history</span></div><div><strong>C++17</strong><span>Generated static website</span></div></div>
+    <a class="panel-link" href="about.html#the-site">The story of this site <span aria-hidden="true">→</span></a>
+  </article>
+</section>
+)site" + page_end("A personal corner of the internet, since the 1990s.");
 }
 
 static string render_workbench() {
     return page_start("Workbench", "InfiltratorFS, native desktop applications and the Link vehicle-diagnostics family. Software projects by Shannon Smith.", "Workbench", "workbench-page") + R"(
-<section class="page-intro"><p class="eyebrow">Workbench</p><h1>Software, from<br> first principles.</h1><p class="lead">Filesystems, native applications and vehicle diagnostics. Personal projects, begun in 2016 and still being built.</p><nav class="section-nav" aria-label="Workbench sections"><a href="#infiltratorfs">Storage</a><a href="#software">Desktop software</a><a href="#link">Vehicle diagnostics</a></nav></section>
+<section class="page-intro"><p class="eyebrow">Workbench</p><h1>Software, machines,<br> first principles.</h1><p class="lead">Filesystems, native applications, vehicle diagnostics and a place for analogue hardware. Personal projects, still being built.</p><nav class="section-nav" aria-label="Workbench sections"><a href="#infiltratorfs">Storage</a><a href="#software">Desktop software</a><a href="#link">Vehicle diagnostics</a><a href="#revox-b77">Analogue audio</a></nav></section>
 <section id="infiltratorfs" class="project-section"><header class="section-heading"><p class="eyebrow">Storage</p><h2>InfiltratorFS</h2><p class="section-deck">A filesystem with its on-disk format and recovery behaviour at the centre of the design.</p></header>
 <div class="project-content"><p>The Linux path is a native kernel driver. The project also includes formatters, inspection and scrub tools, and Windows access through a driverless Explorer bridge. A native Windows filesystem driver remains future work.</p><dl class="inline-facts"><div><dt>Format</dt><dd>0.18</dd></div><div><dt>Writes</dt><dd>Copy-on-write</dd></div><div><dt>Integrity</dt><dd>Checksummed</dd></div></dl><div class="resource-links"><a href="https://github.com/Infiltrator-Projects/InfiltratorFS">Source code ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/QUALIFICATION.md">Test evidence ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/ROADMAP.md">Feature status ↗</a></div>
 <details class="technical-detail"><summary>Inside the filesystem <span aria-hidden="true">+</span></summary><div class="engineering-notes"><article><h3>Retain earlier generations</h3><p>Copy-on-write transactions create new state while retaining earlier generations. Checksummed checkpoints provide a way to select a recoverable generation after interruption.</p></article><article><h3>Share data deliberately</h3><p>Snapshots and reflinks share file data. Sparse files and paged extent metadata describe where that data lives without requiring every logical byte to occupy storage.</p></article><article><h3>Verify what comes back</h3><p>CRC64 protects metadata and SHA-256 checks logical file data. Inspection and deep-scrub tools make verification an explicit operation.</p></article></div><dl class="fact-list"><div><dt>Object identity</dt><dd>128-bit identifiers</dd></div><div><dt>Names</dt><dd>UTF-8 components up to 1,023 bytes</dd></div><div><dt>Compression</dt><dd>Native IAC1; LZ4 retained as a non-default representation</dd></div><div><dt>Linux integration</dt><dd>Native VFS driver installed through DKMS</dd></div></dl><h3>The work still ahead</h3><p>Booting a real Linux installation brings mount latency, writeback and metadata costs into focus. Those remain active engineering work. Feature support and passing tests are recorded separately from claims about everyday performance.</p></details></div></section>
 <section id="software" class="project-section"><header class="section-heading"><p class="eyebrow">Native applications</p><h2>Desktop software.</h2><p class="section-deck">Tools for understanding and working with the machine.</p></header><div class="project-content"><p>System Monitor, Defragmenter, Calendar and Calculator grew alongside InfiltratorFS as after-hours and weekend projects. They share selected Common primitives, while each owns its domain rules and platform responsibilities.</p><div class="family-register"><a href="https://github.com/Infiltrator-Projects/System-Monitor"><strong>System Monitor</strong><span>Native Linux system management through direct OS and hardware interfaces.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Defragmenter"><strong>Defragmenter</strong><span>Filesystem allocation analysis, defragmentation and recovery on Linux.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Calendar"><strong>Calendar</strong><span>Alternative clocks, chronology, calendars and astronomy for Cinnamon.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Calculator"><strong>Calculator</strong><span>A shared calculation core with native Linux, Windows and iPhone interfaces.</span><b aria-hidden="true">↗</b></a></div></div></section>
 <section id="link" class="project-section"><header class="section-heading"><p class="eyebrow">Vehicle diagnostics</p><h2>The Link family.</h2><p class="section-deck">A shared diagnostic engine. Knowledge specific to each manufacturer.</p></header><div class="project-content"><p>Link owns the common transport, OBD and UDS handling, sessions and scheduling. Mercedes, Jaguar, BMW, Audi and Ford applications add their own identities, definitions and manufacturer-specific behaviour.</p><p>MBLink is developed with <a class="inline-link" href="garage.html">my C207 E-Class</a>.</p><div class="family-register"><a href="https://github.com/Infiltrator-Projects/Link"><strong>Link</strong><span>The shared C11 diagnostic and application engine.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/MBLink"><strong>MBLink</strong><span>Mercedes-Benz · C207 / OM651 development vehicle.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/JAGLink"><strong>JAGLink</strong><span>Jaguar · X-Type / X400 knowledge.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/BMWLink"><strong>BMWLink</strong><span>BMW</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/AUDILink"><strong>AUDILink</strong><span>Audi</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/FORDLink"><strong>FORDLink</strong><span>Ford</span><b aria-hidden="true">↗</b></a></div><details class="technical-detail"><summary>Discover &amp; the diagnostic workflow <span aria-hidden="true">+</span></summary><p>Connect the adapter, identify the vehicle and modules, match supported definitions, then select the data to request. Results stay tied to their source.</p><p>Discover is the specialist side of the family: module identification, read-only inventory, captures and evidence export. Shared interrogation mechanics belong in Link; manufacturer-specific addresses and meanings belong with the vehicle application.</p><p>An unknown response stays unknown until documentation or reproducible captures establish its meaning.</p></details></div></section>
+
+<section id="revox-b77" class="project-section analog-section">
+  <header class="section-heading"><p class="eyebrow">Analogue audio</p><h2>ReVox B77 Mk II.</h2><p class="section-deck">Open-reel tape, mechanical engineering and the sound of magnetic recording.</p></header>
+  <div class="analog-feature-body">
+    <figure><img src="assets/photos/revox-b77-mkii-dbx224.webp" width="1200" height="900" loading="lazy" decoding="async" alt="Illustrated ReVox B77 Mk II recorder with BASF reels, paired with dbx 224 noise reduction"><figcaption>Clean illustrative redraw of my actual equipment, rather than an original photograph.</figcaption></figure>
+    <div><p class="eyebrow">My tape equipment</p><h3>B77 Mk II + dbx Model 224</h3><p>My ReVox B77 Mk II reel-to-reel deck is paired with a dbx Model 224 simultaneous encode/decode Type II tape noise-reduction system. The original hardware photographs have been redrawn here to show the machine without the surrounding room.</p><dl class="analog-specs"><div><dt>Recorder</dt><dd>ReVox B77 Mk II</dd></div><div><dt>Noise reduction</dt><dd>dbx Model 224 · Type II</dd></div><div><dt>Format</dt><dd>Open-reel magnetic tape</dd></div></dl></div>
+  </div>
+</section>
 <section id="repository" class="destination-strip"><div><p class="eyebrow">Downloads &amp; installation</p><h2>The Software Centre.</h2><p>Browse the Linux applications, inspect package details and add the APT repository to Linux Mint.</p></div><a class="text-link" href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Browse applications ↗</a></section>
 <section id="principles" class="closing-note"><h2>Keep the evidence.<br>Question the result.</h2><p>A successful build proves that code compiled. A clean test proves the case it exercised. Neither automatically proves behaviour on a real car or a real desktop workload. That gap is where much of the work happens.</p></section>
 )" + page_end("The best or nothing.");
