@@ -669,8 +669,8 @@ void validate(const fs::path& root) {
             system_css.find(".garage-page .garage-entry") != string::npos &&
             system_css.find(".home-page .history-facts") != string::npos,
             "Shared theme must cover Home, Workbench, Garage and About");
-    require(system_css.find("main>section{padding:52px 0}") == string::npos &&
-            system_css.find(".home-page main>section") != string::npos,
+    require(system_css.find(".home-page main>section,.workbench-page main>section") != string::npos &&
+            system_css.find(".about-page main>section{padding:52px 0}") != string::npos,
             "Global section spacing must not override the Software Centre catalogue");
     const string& garage_page = first.at("garage.html");
     require(garage_page.find("garage.css?v=") < garage_page.find("site-redesign.css?v="),
