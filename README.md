@@ -2,7 +2,7 @@
 
 **Project copyright:** © 1993-2026 Shannon Smith
 
-Personal website for Shannon Smith — a quiet corner of the internet that has been around since the 1990s.
+Personal website for Shannon Smith — a quiet corner of the internet founded in 1993.
 
 The deployed site is deliberately boring at runtime: static HTML, local assets and no server-side application. The interesting part happens before deployment.
 

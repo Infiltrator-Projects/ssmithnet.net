@@ -111,7 +111,7 @@ static vector<Car> historical_cars() {
         {"Peugeot · 405 · GLD", "405 GLD", "Peugeot", "405 GLD", "405", "Diesel · waste motor oil", "A white Peugeot 405 GLD with black interior. Its most memorable mechanical detail was running the diesel engine on waste motor oil.", "peugeot-405-gld", "Late 1980s–1990s · model era", 1992},
         {"1985 · Mercedes-Benz · C126 · AMG", "500SEC AMG", "Mercedes-Benz", "500SEC", "126.044 · C126", "4,973 cc M117.963 V8", "Smoke Silver over beige leather, right-hand drive and UK delivered. Built at Sindelfingen in 1985 before its AMG conversion, this C126 was a particularly distinctive Mercedes.", "500-sec", "1985 · factory record", 1985},
         {"1985 · Ford · XF · S-Pack", "XF Falcon S-Pack", "Ford", "XF Falcon S-Pack", "XF", "Petrol", "My beige 1985 XF Falcon S-Pack. Square-edged Australian Ford styling and the straightforward character of the XF era.", "xf-s-pack", "1985 · recorded year", 1985},
-        {"Mercedes-Benz · W116 · 6.9", "450SEL 6.9", "Mercedes-Benz", "450SEL 6.9", "116.036 · W116", "6,834 cc M100.985 V8", "The fully optioned, yellow-beige Australian 450SEL 6.9 with the M100 V8. This was the car behind the original Infiltrator page in the 1990s, and the beginning of the website story.", "450sel-69", "1975–1980 · model era", 1978},
+        {"Mercedes-Benz · W116 · 6.9", "450SEL 6.9", "Mercedes-Benz", "450SEL 6.9", "116.036 · W116", "6,834 cc M100.985 V8", "The fully optioned, yellow-beige Australian 450SEL 6.9 with the M100 V8. This was the car behind the original Infiltrator website, which I began in 1993.", "450sel-69", "1975–1980 · model era", 1978},
         {"Ford · XC · blue ute", "XC Falcon ute (1 of 2)", "Ford", "Falcon ute", "XC", "Six-cylinder", "One of two blue, six-cylinder XC Falcon utes I owned. A utility-bodied Ford alongside the Falcon sedans in my garage history.", "xc-falcon-ute-1", "1976–1979 · model era", 1978},
         {"Ford · XC · blue ute", "XC Falcon ute (2 of 2)", "Ford", "Falcon ute", "XC", "Six-cylinder", "The other blue XC Falcon ute I owned, also with a six-cylinder engine. These were two separate vehicles; their individual build years are not recorded.", "xc-falcon-ute-2", "1976–1979 · model era", 1978},
         {"Mercedes-Benz · W116 · 280SE", "280SE", "Mercedes-Benz", "280SE", "116.024 · W116", "2,746 cc M110 I6", "My white, six-cylinder W116 280SE with traditional hubcaps. A more understated companion to the 450SEL 6.9 in my Mercedes history.", "280-se", "1972–1980 · model era", 1977},
@@ -175,17 +175,17 @@ static string render_home() {
   </article>
   <article class="home-history">
     <p class="eyebrow">At a glance</p><h2>Cars, code and history.</h2>
-    <p>A personal website that grew from a Mercedes into a place for building software, working with machinery and preserving older technology.</p>
+    <p>A personal website I began in 1993 with my Mercedes-Benz 450SEL 6.9, which grew to include software, machinery and older technology.</p>
     <div class="history-facts">
       <div><strong>14</strong><span>Vehicles in the garage history</span></div>
-      <div><strong>1990s</strong><span>The original 450SEL 6.9 website</span></div>
-      <div><strong>2016</strong><span>Native software projects began</span></div>
+      <div><strong>1993</strong><span>My website began</span></div>
+      <div><strong>6.9</strong><span>The original Mercedes-Benz story</span></div>
       <div><strong>C++17</strong><span>Native static website generator</span></div>
     </div>
     <a class="panel-link" href="about.html#the-site">The story of this site <span aria-hidden="true">→</span></a>
   </article>
 </section>
-)site" + page_end("A personal corner of the internet, since the 1990s.");
+)site" + page_end("A personal corner of the internet, since 1993.");
 }
 
 static string render_workbench() {
@@ -351,26 +351,26 @@ static string render_garage() {
             o << historical_car(car);
         }
     }
-    o << R"(</div></section><section class="destination-strip"><div><p class="eyebrow">Where it began</p><h2>The original 6.9 page.</h2><p>The W116 was the first subject of ssmithnet.net in the 1990s.</p></div><a class="text-link" href="about.html#the-site">The story of the site <span aria-hidden="true">→</span></a></section>)";
+    o << R"(</div></section><section class="destination-strip"><div><p class="eyebrow">Where it began</p><h2>The original 6.9 page.</h2><p>The W116 450SEL 6.9 was the subject of the original site, which began in 1993.</p></div><a class="text-link" href="about.html#the-site">The story of the site <span aria-hidden="true">→</span></a></section>)";
     return o.str() + page_end("A personal garage history.");
 }
 
 static string render_about() {
     std::ostringstream o;
     o << page_start("About", "About Shannon Smith: software, cars, open-reel tape, watches and a personal website that began with the Infiltrator 450SEL 6.9 page.", "About", "about-page");
-    o << R"(<section class="page-intro"><p class="eyebrow">About</p><h1>A place of my own.</h1><p class="lead">I'm Shannon Smith, in Mooroopna, Victoria. Software, cars and an interest in how things work have kept this corner of the internet busy since the 1990s.</p></section>
+    o << R"(<section class="page-intro"><p class="eyebrow">About</p><h1>A place of my own.</h1><p class="lead">I'm Shannon Smith, in Mooroopna, Victoria. Software, cars and an interest in how things work have been part of my website since 1993.</p></section>
 <section class="about-interests"><header class="section-heading"><h2>Beyond the keyboard.</h2><p class="section-deck">The same interest in engineering, on a different scale.</p></header><div class="project-content"><article class="interest-entry"><h3>Open-reel tape.</h3><p>Tape decks and analogue audio sit alongside the music itself. Mechanical engineering is part of the appeal.</p></article><article class="interest-entry"><h3>On the wrist.</h3><p>A Cosmograph Daytona 126500LN in Oystersteel. Another way to enjoy a precisely made machine.</p></article><article class="interest-entry"><h3>Off the clock.</h3><p>Music, films and games have their place here too. The garage has its <a class="inline-link" href="garage.html">own collection of stories</a>.</p></article></div></section>
 <section id="the-site" class="about-history"><header class="section-heading"><p class="eyebrow">ssmithnet.net</p><h2>Before the feed,<br>there was a home page.</h2><p class="section-deck">An address that stayed while the interests grew.</p></header><div class="timeline">)";
     const vector<Event> events = {
-        {"c. 1996", "The Infiltrator 6.9 page", "A Mercedes-Benz 450SEL 6.9 was the original subject. The page became the seed of ssmithnet.net and its Mercedes-Benz history."},
+        {"1993", "The Infiltrator website begins", "I started my website in 1993 with the Mercedes-Benz 450SEL 6.9 as its original subject. The site has grown considerably since then."},
         {"Beta years", "Windows, Solaris & games", "Voluntary beta testing included Microsoft Windows ME, the Solaris beta team and EA game projects. Windows ME testing included a Beta Tester of the Month award."},
-        {"2016", "The software workshop", "System Monitor, Calendar, Defragmenter, InfiltratorFS and Calculator began as personal after-hours and weekend projects."},
+        {"Software projects", "The workshop grows", "My projects expanded to include System Monitor, Calendar, Defragmenter, InfiltratorFS, Calculator and vehicle diagnostics."},
         {"Today", "The work continues", "Cars now share the domain with InfiltratorFS, native software and the Link diagnostic family. It remains a personal website."}
     };
     for (const auto& event : events)
         o << "<article class=\"event\"><span class=\"era\">" << esc(event.date) << "</span><div><h3>" << esc(event.title) << "</h3><p>" << esc(event.description) << "</p></div></article>";
     o << R"(</div></section><section class="quote-section"><p class="eyebrow">A personal principle</p><blockquote class="quote">“I am free, no matter what rules surround me. If I find them tolerable, I tolerate them; if I find them too obnoxious, I break them. I am free because I know that I alone am morally responsible for everything I do.”<cite>— Robert A. Heinlein</cite></blockquote></section>)";
-    return o.str() + page_end("Since the 1990s. Still here.");
+    return o.str() + page_end("Since 1993. Still here.");
 }
 
 static string render_download() {

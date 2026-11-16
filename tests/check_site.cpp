@@ -588,8 +588,10 @@ void validate(const fs::path& root) {
             home.find("assets/graphics/ui-about.svg") != string::npos,
             "Homepage destination icons missing");
     require(home.find("software, and<br><span>machines.</span>") != string::npos &&
-            home.find("1990s") != string::npos &&
-            home.find("2016") != string::npos,
+            home.find("<strong>1993</strong>") != string::npos &&
+            home.find("My website began") != string::npos &&
+            home.find("<strong>6.9</strong>") != string::npos &&
+            home.find("2016") == string::npos,
             "Homepage visual hierarchy or grounded site history missing");
     for (const char* filename : {"ui-workbench.svg", "ui-garage.svg", "ui-code.svg", "ui-about.svg", "audio-waveform.svg"}) {
         const fs::path asset = root / "assets/graphics" / filename;
@@ -624,6 +626,15 @@ void validate(const fs::path& root) {
         require(content.find("rel=\"icon\" type=\"image/svg+xml\" href=\"" + icon_path + "\"") != string::npos,
                 relative + ": old tab favicon unexpectedly retained");
     }
+    const string about = first.at("about.html");
+    require(about.find("<span class=\"era\">1993</span>") != string::npos &&
+            about.find("I started my website in 1993") != string::npos &&
+            about.find("c. 1996") == string::npos &&
+            about.find("<span class=\"era\">2016</span>") == string::npos,
+            "Website's original 1993 starting year must be consistent across About");
+    require(home.find("since 1993.") != string::npos &&
+            first.at("garage.html").find("began in 1993.") != string::npos,
+            "Homepage and Garage must preserve the 1993 founding year");
     const string garage = first.at("garage.html");
     validate_garage(root, garage);
     for (const auto& [relative, content] : first)
