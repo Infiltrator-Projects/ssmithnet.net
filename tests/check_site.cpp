@@ -361,6 +361,30 @@ void validate_garage(const fs::path& root, const string& garage) {
             xf_markup.find("front view") != string::npos,
             "XF S-Pack photographs must follow the standard Garage arrangement");
 
+    // The LC Torana must use both supplied views, without cropping away the visor
+    // or mislabelling illustrative references as original owner photographs.
+    const size_t torana_start = garage.find("id=\"lc-torana\"");
+    require(torana_start != string::npos, "LC Torana gallery section missing");
+    const size_t torana_end = garage.find("</article>", torana_start);
+    require(torana_end != string::npos, "LC Torana gallery section is unclosed");
+    const string torana_markup = garage.substr(torana_start, torana_end - torana_start);
+    require(torana_markup.find("Reference images supplied for this LC Torana entry.") != string::npos &&
+            torana_markup.find("vehicle-photo-pair") != string::npos &&
+            torana_markup.find("external windscreen sun visor") != string::npos &&
+            torana_markup.find("central Holden grille badge") != string::npos,
+            "LC Torana images, attribution or identifying details missing");
+    for (const auto& [filename, dimensions] :
+         std::array<std::pair<string, string>, 2>{{
+            {"lc-torana-three-quarter.webp", "width=\"1021\" height=\"510\""},
+            {"lc-torana-front.webp", "width=\"520\" height=\"510\""}
+         }}) {
+        require(torana_markup.find("src=\"assets/photos/" + filename + "\"") != string::npos &&
+                torana_markup.find(dimensions) != string::npos &&
+                fs::is_regular_file(root / "assets/photos" / filename) &&
+                fs::file_size(root / "assets/photos" / filename) > 1000,
+                "LC Torana gallery image missing or dimensions wrong: " + filename);
+    }
+
     // The supplied Discovery II and Peugeot 405 GLD images must be committed
     // and rendered in the same side/front format as the other garage entries.
     const std::array<std::array<string, 4>, 2> supplied_galleries{{
