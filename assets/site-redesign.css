@@ -39,7 +39,7 @@ nav[aria-label="Primary"] .navlinks a:hover,nav[aria-label="Primary"] .navlinks 
 nav[aria-label="Primary"] .navlinks .nav-software{border-left:0;padding-left:0}
 .skip-link{z-index:90}
 /* A single rhythm and section grammar across all editorial pages. */
-main>section{padding:52px 0}
+.home-page main>section,.workbench-page main>section,.garage-page main>section,.about-page main>section{padding:52px 0}
 .page-intro{position:relative;padding:66px 0 57px;border-bottom:1px solid var(--line)}
 .page-intro h1{max-width:1000px;margin:12px 0 24px}
 .page-intro .lead{max-width:790px}
@@ -271,7 +271,7 @@ input[type="search"]{border-radius:7px}
   nav[aria-label="Primary"] .brand::before{width:30px;height:24px;margin-right:8px}
   nav[aria-label="Primary"] .navlinks{justify-content:flex-start;gap:2px 18px;font-size:13px}
   nav[aria-label="Primary"] .navlinks a{min-height:39px}
-  main>section{padding:36px 0}
+  .home-page main>section,.workbench-page main>section,.garage-page main>section,.about-page main>section{padding:36px 0}
   .page-intro{padding:40px 0 37px}
   .page-intro h1{font-size:clamp(39px,10vw,51px)}
   .page-intro .lead{font-size:17px}

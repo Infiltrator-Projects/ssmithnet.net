@@ -545,7 +545,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-system1") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-system2") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -584,7 +584,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261116-system1") != string::npos,
+        require(content.find("site-redesign.css?v=20261116-system2") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -669,6 +669,9 @@ void validate(const fs::path& root) {
             system_css.find(".garage-page .garage-entry") != string::npos &&
             system_css.find(".home-page .history-facts") != string::npos,
             "Shared theme must cover Home, Workbench, Garage and About");
+    require(system_css.find("main>section{padding:52px 0}") == string::npos &&
+            system_css.find(".home-page main>section") != string::npos,
+            "Global section spacing must not override the Software Centre catalogue");
     const string& garage_page = first.at("garage.html");
     require(garage_page.find("garage.css?v=") < garage_page.find("site-redesign.css?v="),
             "The shared theme must be the final stylesheet on Garage");
