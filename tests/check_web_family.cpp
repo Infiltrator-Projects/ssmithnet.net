@@ -49,8 +49,18 @@ struct Page {
     int h1 = 0, canonical = 0;
     bool og = false, skip = false;
 };
+// Inline JavaScript and CSS may contain literal HTML snippets, for example
+// catalogue markup generated into a modal. Those are source text, not page tags.
+// Preserve the outer <script>/<style> elements (and their src/href attributes),
+// but exclude their raw bodies from the HTML element/link validation pass.
+std::string markup_without_embedded_code(const std::string& html) {
+    static const std::regex bodies(
+        R"((<(?:script|style)\b[^>]*>)[\s\S]*?(</(?:script|style)\s*>))",
+        std::regex::icase);
+    return std::regex_replace(html, bodies, "$1$2");
+}
 Page inspect(const fs::path& path) {
-    const std::string html = read(path);
+    const std::string html = markup_without_embedded_code(read(path));
     static const std::regex tags(R"tag(<\s*(/?)\s*([a-zA-Z][a-zA-Z0-9-]*)\b([^<>]*)>)tag");
     Page result;
     bool in_primary_nav = false;
@@ -96,6 +106,13 @@ void validate_links(const fs::path& page, const Page& result) {
     }
 }
 void check(const fs::path& root) {
+    // Regression: JS templates must never become phantom local resource links.
+    const std::string sample = R"test(<script>const card = '<a href="not-a-real-file">Fake</a>';</script><style>.a::after{content:'<img src="not-real.png">'}</style><a href="index.html">Real</a>)test";
+    const std::string safe = markup_without_embedded_code(sample);
+    require(safe.find("not-a-real-file") == std::string::npos &&
+            safe.find("not-real.png") == std::string::npos &&
+            safe.find("href=\"index.html\"") != std::string::npos,
+            "Embedded script/style HTML must not be treated as links");
     const std::array<std::string, 6> possible{
         "index.html", "workbench.html", "garage.html", "about.html",
         "archive.html", "downloads/model-11-sandy/index.html"};
