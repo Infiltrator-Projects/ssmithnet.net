@@ -313,3 +313,45 @@ nav[aria-label="Primary"] .brand span,
   nav[aria-label="Primary"] .brand::before {width:33px;height:23px;margin-right:9px}
   .site-footer .footer-brand::before {width:29px;height:21px}
 }
+
+
+/* Responsive pass: small phone widths have insufficient space for two verbose
+   history columns. Avoid the three/four-line word stacks seen on iOS. */
+.home-page .history-facts > div,
+.home-page .bench-register a,
+.home-page .hub-tile .hub-content,
+.garage-page .garage-entry,
+.garage-page .garage-entry .car-facts > div {
+  min-width:0;
+}
+@media(max-width:520px) {
+  .home-page .history-facts {
+    grid-template-columns:minmax(0,1fr);
+    margin-top:15px;
+  }
+  .home-page .history-facts > div {
+    min-height:0;
+    padding:12px 0;
+    border-top:1px solid var(--ui-line);
+    border-left:0;
+  }
+  .home-page .history-facts > div:nth-child(even) {
+    border-left:0;
+    padding-left:0;
+  }
+  .home-page .history-facts strong {
+    font-size:25px;
+    margin-bottom:4px;
+  }
+  .home-page .history-facts span {
+    display:block;
+    font-size:14px;
+    line-height:1.5;
+  }
+  .garage-page .garage-entry .car-facts {
+    grid-template-columns:minmax(0,1fr);
+  }
+  .garage-page .garage-entry .car-facts dd {
+    overflow-wrap:break-word;
+  }
+}

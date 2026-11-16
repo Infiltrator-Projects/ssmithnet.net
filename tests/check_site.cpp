@@ -532,7 +532,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-5") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-6") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -567,6 +567,34 @@ void validate(const fs::path& root) {
     for (const auto& relative : pages)
         require(first.at(relative) == read(output / relative),
                 relative + ": site generator changed between identical runs");
+    // Historical identity and navigation must agree across all published pages.
+    for (const auto& [relative, content] : first) {
+        require(content.find("Online since 1993.") != string::npos,
+                relative + ": shared 1993 founding history missing");
+        require(content.find("site-redesign.css?v=20261116-6") != string::npos,
+                relative + ": updated mobile presentation was not referenced");
+    }
+    const string design_doc = read(root / "docs/DESIGN.md");
+    require(design_doc.find("Peugeot 405 GLD") != string::npos &&
+            design_doc.find("Peugeot 504") == string::npos &&
+            design_doc.find("two separate blue six-cylinder XC Falcon utes") != string::npos &&
+            design_doc.find("1993") != string::npos,
+            "Historical design documentation contradicts recorded vehicle or site identity");
+    const string validation_doc = read(root / "docs/VALIDATION.md");
+    require(validation_doc.find("fourteen-car history") != string::npos &&
+            validation_doc.find("check_site.cpp") != string::npos &&
+            validation_doc.find("check_web_family.cpp") != string::npos,
+            "Validation document must describe the current native tests and garage");
+    const string browser_review = read(root / "tests/browser-review.html");
+    require(browser_review.find("href=\"../assets/site.css") != string::npos &&
+            browser_review.find("src=\"../index.html") != string::npos &&
+            browser_review.find("../downloads/model-11-sandy/index.html") != string::npos,
+            "The responsive review shell must load real generated pages from its subdirectory");
+    const string responsive_css = read(root / "assets/site-redesign.css");
+    require(responsive_css.find("@media(max-width:520px)") != string::npos &&
+            responsive_css.find(".home-page .history-facts") != string::npos &&
+            responsive_css.find("grid-template-columns:minmax(0,1fr)") != string::npos,
+            "Narrow viewport history card regression rules are missing");
     require(first.at("archive.html") == first.at("about.html"),
             "Legacy Archive must contain full canonical About content");
     require(first.at("archive.html").find("href=\"https://ssmithnet.net/about.html\"") != string::npos,

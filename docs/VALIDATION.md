@@ -8,7 +8,7 @@ Compilation, deterministic regression tests, platform integration and human visu
 
 - .github/workflows/generate-site.yml
 
-tests/check_site.py validates generated-site structure and the Make validation path ensures committed review mirrors match generator output.
+`tests/check_site.cpp` validates generated-site structure and all six committed review mirrors against the native generator. `make check` also runs the shared contract in `tests/check_web_family.cpp`.
 
 ## Manual/environment evidence
 
@@ -24,14 +24,20 @@ The exact source intended for release/publication must pass required automated c
 
 Reproducible defects should gain permanent automated coverage at the narrowest layer that captures the original failure.
 
-The deterministic gate covers all six generated pages, including About, its legacy Archive alias and the download landing page. `tests/check_web_family.py .` additionally checks the common navigation, canonical/Open Graph metadata, unique landmarks, asset references and the three WOFF2 fonts. Package Repository runs this same contract against its generated `public/` tree.
+The deterministic gate covers all six generated pages, including About, its legacy Archive alias and the download landing page. `tests/check_web_family.cpp` additionally checks shared navigation, canonical/Open Graph metadata, unique landmarks, local asset references and the three WOFF2 fonts. Package Repository runs this same contract against its generated `public/` tree.
 
-Garage checks preserve the complete twelve-car history, keep the current 2011 E-Class as the first and only hero vehicle, require consistent field order on both documented Mercedes records and the historical vehicles, and cover factory serial numbers, UK/Australian delivery, distinct production/release/delivery dates and all 69 unique E-Class equipment codes. Native disclosures expose the full records without a JavaScript dependency. The original 500SEC photographs are local assets; regression tests verify their references, dimensions and alternatives within the historic record. The shared type scale, spacing and page compositions are owned by `assets/site.css`; `assets/garage.css` owns only the expanded VIN record details. Historical records share the Make/Model/Chassis/Powertrain fields, while the current car has a separate hero composition. Shared changes require updating the Software Centre family pin.
+Garage checks preserve the complete fourteen-car history (the current E 250 CDI and thirteen former vehicles), keep the current 2011 E-Class as the first and only hero vehicle, require consistent field order on both documented Mercedes records and the historical vehicles, and cover factory serial numbers, UK/Australian delivery, distinct production/release/delivery dates and all 69 unique E-Class equipment codes. Native disclosures expose the full records without a JavaScript dependency. The original 500SEC photographs are local assets; regression tests verify their references, dimensions and alternatives within the historic record. The baseline type scale is in `assets/site.css`, the current home/inner-page treatment in `assets/site-redesign.css`, and Garage-specific composition and detail styling in `assets/garage.css`. Historical records share the Make/Model/Chassis/Powertrain fields, while the current car has a separate hero composition. Shared changes require updating the Software Centre family pin.
 
-The browser review shell in `tests/browser-review.html` gives the actual pages fixed 320, 390, 768 and 1280 CSS-pixel viewports without changing their content. It is a review artifact, is not linked from the site and is removed from the publication workflow after review. Layout checks must distinguish iframe viewport rendering from a physical mobile-browser test.
+The browser review shell in `tests/browser-review.html` uses relative paths to the actual generated pages at selected CSS-pixel viewport widths. It is a manual inspection tool rather than an automated screenshot proof. It is a review artifact, is not linked from the site and is removed from the publication workflow after review. Layout checks must distinguish iframe viewport rendering from a physical mobile-browser test.
 
 ## Browser evidence — 16 October 2026
 
 Chrome desktop rendering was reviewed at 1363 × 936. The four primary pages were also rendered inside real browser frames at 320, 390 and 768 CSS pixels. Document widths matched their available viewport widths without horizontal overflow. Review covered the Home reading order, Workbench project links and disclosures, Garage history and the expanded E-Class record/equipment table, and About interests, timeline and quotation. The narrow-screen review caught and corrected word spacing around a hidden desktop line break.
 
-Software Centre review covered the shared identity, phone-width catalogue, search narrowing to MBLink and its package dialog. The original three WOFF2 files were compared byte-for-byte with the prior site assets. Automated checks preserve all twelve vehicles and 69 unique E-Class equipment codes. This is desktop Chrome and fixed CSS viewport evidence; no physical-device or Safari result is claimed.
+Software Centre review covered the shared identity, phone-width catalogue, search narrowing to MBLink and its package dialog. The original three WOFF2 files were compared byte-for-byte with the prior site assets. That October session checked the then-current twelve-car site and 69 unique E-Class equipment codes; the present native regression checks preserve fourteen cars. The older screenshots do not certify the current redesign, and no physical-device or Safari result is claimed.
+
+## Website-wide 1993 and mobile regression checks — 16 November 2026
+
+The owner-confirmed website start is **1993**. The homepage, Garage and About timeline include it explicitly, and all generated pages share the footer identifying the site as online since 1993. No build or design documentation should invent a 2016 beginning for the website or its whole software portfolio. Regression tests verify the generated mirrors, site-wide footer and individual historical sections; responsive CSS adds a one-column history/facts layout at narrow phone widths.
+
+The automated build proves output consistency, source-to-mirror equivalence, local link targets and asset presence. It does **not** establish pixel-perfect agreement with a design mockup or actual iOS rendering; visual browser review remains a separate required step.

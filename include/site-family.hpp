@@ -49,7 +49,7 @@ inline std::string navigation(const std::string& active, const std::string& home
 inline std::string footer(const std::string& note) {
     return "<footer class=\"site-footer\"><div class=\"footer-overview\"><div class=\"footer-identity\">"
            "<a class=\"footer-brand\" href=\"https://ssmithnet.net/index.html\">ssmith<span>net</span>.net</a>"
-           "<p>Software, cars, open-reel audio and the things that keep them running.</p></div>"
+           "<p>Online since 1993. Software, cars, open-reel audio and the things that keep them running.</p></div>"
            "<nav aria-label=\"Footer\" class=\"footer-navigation\">"
            "<a href=\"https://ssmithnet.net/workbench.html\">Workbench</a>"
            "<a href=\"https://ssmithnet.net/garage.html\">Garage</a>"

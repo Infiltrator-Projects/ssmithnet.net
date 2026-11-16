@@ -93,15 +93,15 @@ Historical vehicles should use a standardised data-card model so that different 
 
 Add another field only where it represents a genuinely meaningful difference. A hero vehicle may legitimately expose additional verified information.
 
-The historical Mercedes chapter includes the W116 450SEL 6.9, W116 280SE, and C126 500SEC that was AMG.
+The historic Mercedes entries include the W116 450SEL 6.9, W116 280SE and C126 500SEC AMG. All appear in the same chronological register as the other makes.
 
-The Australian/other chapter is equally important. It includes the EL Falcon with Tickford-installed LPG, XF Falcon, 2003 BA Fairmont 5.4 V8 with LPG dual fuel, LC Torana with 1.1-litre four-cylinder engine, 2004 BA LTD 5.4 V8 with LPG dual fuel, AU Series II Fairmont 4.0-litre with LPG dual fuel, Land Rover Discovery 2 TDI and Peugeot 504 Diesel that Shannon ran on waste motor oil.
+The entire historic garage is one newest-to-oldest register, without splitting makes into preferred and lesser categories. Alongside the Mercedes entries are the EL Falcon with Tickford-installed LPG, 1985 XF Falcon S-Pack, 2003 BA Fairmont 5.4 V8 with petrol/LPG dual fuel, LC Torana with a 1.1-litre four-cylinder engine, 2004 BA LTD 5.4 V8 with petrol/LPG dual fuel, a 2002 AU Fairmont 4.0-litre with petrol/LPG dual fuel, a 2002 Land Rover Discovery II diesel, two separate blue six-cylinder XC Falcon utes and the white Peugeot 405 GLD with black interior, which Shannon ran on waste motor oil. Where a particular vehicle's individual build year is unknown, the visible year range must be identified as its model era rather than a verified manufacture date.
 
-The Australian cars are not an "other" or lesser class. The distinction is historical and cultural, not a quality ranking.
+Australian cars are not an "other" or lesser class: every historical car appears on equal footing, with the same record fields and gallery treatment where images exist.
 
 ### About
 
-About combines personal interests with the history of the site: the 1990s origin, the Mercedes pages that came first and beta-testing history. The former Archive did not contain an independent collection of archived artifacts, so it is maintained as an alias of About with an About canonical URL. This retains bookmarks without a duplicate navigation destination.
+About combines personal interests with the history of the site: its 1993 beginning with the Mercedes-Benz 450SEL 6.9, the later automotive and software work, and beta-testing history. The former Archive did not contain an independent collection of archived artifacts, so it is maintained as an alias of About with an About canonical URL. This retains bookmarks without a duplicate navigation destination.
 
 Do not duplicate the full history elsewhere when it belongs here.
 
