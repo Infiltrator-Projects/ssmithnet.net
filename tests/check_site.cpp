@@ -546,7 +546,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-polish1") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261117-distinct1") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -585,7 +585,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261116-polish1") != string::npos,
+        require(content.find("site-redesign.css?v=20261117-distinct1") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -805,9 +805,24 @@ void validate(const fs::path& root) {
             project_html.find("clear.addEventListener('click'") != string::npos,
             "Complete catalogue must support description/family search, clearing and no-results feedback");
     require(home.find("href=\"projects.html\"") != string::npos &&
-            first.at("workbench.html").find("href=\"projects.html\"") != string::npos &&
-            first.at("workbench.html").find("104 repositories") != string::npos,
-            "Project catalogue is not discoverable from both Home and Workbench");
+            workbench_page.find("href=\"projects.html\"") != string::npos &&
+            workbench_page.find("href=\"projects.html#group-foundations\"") != string::npos,
+            "Project index must remain discoverable from Home and engineering chapters");
+    require(workbench_page.find("class=\"family-register\"") == string::npos &&
+            workbench_page.find("class=\"engineering-map\"") != string::npos &&
+            workbench_page.find("class=\"engineering-process\"") != string::npos &&
+            workbench_page.find("class=\"engineering-note\"") != string::npos &&
+            workbench_page.find("Engineering journal") != string::npos,
+            "Workbench is for architecture and reasoning, not a duplicate GitHub card catalogue");
+    require(project_html.find("<h1>Repository directory.</h1>") != string::npos &&
+            project_html.find("class=\"projects-index-meta\"") != string::npos &&
+            project_html.find("class=\"projects-utility-nav\"") != string::npos &&
+            project_html.find("class=\"projects-endnote\"") != string::npos &&
+            project_html.find("A whole workshop.") == string::npos,
+            "Projects must function as a directory rather than another Workbench landing page");
+    require(system_css.find(".workbench-page .project-content{max-width:1100px") != string::npos &&
+            system_css.find(".projects-page .repository-browser-header{padding:22px 24px") != string::npos,
+            "Engineering journal and source directory must have distinct visual grammar");
     const string garage = first.at("garage.html");
     require(garage.find("id=\"garage-index\"") != string::npos,
             "Garage index anchor missing");

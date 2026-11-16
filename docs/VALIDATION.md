@@ -59,3 +59,7 @@ Home is an introduction, not a duplicate project register or a second timeline. 
 ## UI consistency regression — 16 November 2026
 
 Check shared navigation at 320, 375, 390, 430, 768 and 1280 CSS pixels. In particular, verify the two-row five-link mobile menu, compact Workbench chapter directory, readable text measure, horizontal Garage car index (all thirteen entries remain reachable), compact 220px desktop / 170px mobile Daytona, and Projects search with names, descriptions, families, Clear and empty results. The native source/mirror tests assert link targets and critical UI structure but are not substitutes for actual browser screenshots or touch-device tests.
+
+## Workbench / Projects structural separation — 17 November 2026
+
+Workbench must contain no `family-register` GitHub-card grids; its editorial layout must preserve all six anchored chapters and the engineering architecture, diagnostic process and design-note components. Projects must retain all 104 dated public repository links, the eight group counts, functional search, clear and empty states, and the compact source-directory heading. Native regression tests check both the content separation and page-specific CSS. Shared navigation and exact generated HTML mirrors remain mandatory; browser screenshots remain a separate visual check.

@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-polish1") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-distinct1") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -179,13 +179,13 @@ static string render_home() {
 static string render_projects() {
     return page_start("Projects", "All 104 publicly visible Infiltrator-Projects GitHub repositories: operating systems, applications, diagnostics, calendar and clock modules, filesystem engines, games and publishing.", "Projects", "projects-page") + R"CATALOG(
 <section class="page-intro projects-intro">
-  <p class="eyebrow">Workbench · GitHub portfolio</p><h1>More than one project.<br><span>A whole workshop.</span></h1>
-  <p class="lead">From InfiltratorOS and its filesystem engines to native applications, vehicle diagnostics, historical calendars, clocks and games. This is the full public repository collection, not just the headline projects.</p>
-  <div class="projects-facts"><span><strong>104</strong> public repositories</span><span><strong>8</strong> project families</span><span>Snapshot · 16 November 2026</span></div>
-  <nav class="section-nav projects-navigation" aria-label="Project catalogue links"><a href="#directory">Browse and search</a><a href="workbench.html">Featured work</a><a href="https://github.com/Infiltrator-Projects">Live GitHub organisation</a></nav>
+  <p class="eyebrow">Source index · Infiltrator-Projects</p><h1>Repository directory.</h1>
+  <p class="lead">Find the source for applications, libraries, boot components, filesystem engines, calendars, clocks and games. For the engineering decisions behind them, read the <a href="workbench.html">Workbench journal</a>.</p>
+  <p class="projects-index-meta"><strong>104 public repositories</strong><span>8 families</span><span>Inventory captured 16 November 2026</span></p>
+  <nav class="projects-utility-nav" aria-label="Repository directory actions"><a href="#directory">Go to search ↓</a><a href="workbench.html">Engineering journal ↗</a><a href="https://github.com/Infiltrator-Projects">GitHub organisation ↗</a></nav>
 </section>
 <section class="repository-browser" id="directory" aria-labelledby="directory-title">
-  <div class="repository-browser-header"><div><p class="eyebrow">Every public Git</p><h2 id="directory-title">The repository index.</h2><p>All 104 repositories are linked below. Calendar, clock and filesystem modules are kept together in expandable families so the individual repositories remain discoverable without an endless wall of links.</p></div>
+  <div class="repository-browser-header"><div><p class="eyebrow">Browse and filter</p><h2 id="directory-title">Find source code.</h2><p>Search by name or description, or jump directly to a family. Individual calendar, clock and filesystem engines are grouped into expandable sections.</p></div>
     <div class="repository-search"><label for="repository-search">Find a repository</label><div class="repository-search-control"><input id="repository-search" type="search" placeholder="Name, purpose or family" autocomplete="off" aria-controls="repo-families" aria-describedby="repository-search-help"><button id="repository-clear" type="button" hidden>Clear</button></div><span class="repository-search-help" id="repository-search-help">Search titles, descriptions or project families.</span><output id="repository-count" role="status" aria-live="polite">104 repositories</output></div>
   </div>
   <nav class="repository-families-nav" aria-label="Jump to project family"><a href="#group-foundations">Operating system &amp; foundations <span>9</span></a><a href="#group-applications">Applications &amp; utilities <span>7</span></a><a href="#group-diagnostics">Vehicle diagnostics <span>6</span></a><a href="#group-creative">Games &amp; creative work <span>3</span></a><a href="#group-publishing">Sites &amp; publishing <span>2</span></a><a href="#group-calendar-modules">Calendar systems <span>31</span></a><a href="#group-clock-modules">Clock &amp; timekeeping modules <span>23</span></a><a href="#group-filesystem-modules">Filesystem engines <span>23</span></a></nav>
@@ -314,7 +314,7 @@ static string render_projects() {
   <div class="repository-empty" id="repository-empty" role="status" hidden><strong>No matching repositories.</strong><p>Try another term or clear the search to see all 104 projects.</p></div>
   <p class="repository-disclosure">Inventory of publicly visible <a href="https://github.com/Infiltrator-Projects">Infiltrator-Projects</a> repositories captured on 16 November 2026. Different repositories have different levels of development and qualification: appearing here does not imply a release or complete functionality. GitHub remains the live source for additions and current status.</p>
 </section>
-<section class="destination-strip projects-outro"><div><p class="eyebrow">Featured engineering work</p><h2>Go deeper in the Workbench.</h2><p>Explore the major projects in more detail, or visit the Software Centre for published Linux packages.</p></div><div class="projects-outro-links"><a class="text-link" href="workbench.html">Workbench ↗</a><a class="text-link" href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre ↗</a></div></section>
+<section class="projects-endnote"><p>Repositories are source code, not necessarily installable releases. <a href="workbench.html">Read the engineering journal</a> for design explanations, or visit the <a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre</a> for published packages.</p></section>
 <script>
 (() => {
   const field = document.getElementById('repository-search');
@@ -361,9 +361,9 @@ static string render_projects() {
 static string render_workbench() {
     return page_start("Workbench", "How the Infiltrator software, operating-system components, filesystems, diagnostic applications and creative work fit together, with an analogue ReVox workshop.", "Workbench", "workbench-page") + R"WORKBENCH(
 <section class="page-intro workbench-intro">
-  <p class="eyebrow">Workbench · How the projects fit together</p>
-  <h1>Engineering work,<br>from the interface down.</h1>
-  <p class="lead">The software projects are not one application split into dozens of repositories. Some are independent products, some own reusable engines, and others own a single calendar, clock or filesystem format. This is where the major systems, their boundaries and the work still ahead are explained.</p>
+  <p class="eyebrow">Workbench · Engineering journal</p>
+  <h1>Inside the engineering.</h1>
+  <p class="lead">Design decisions, system boundaries, experiments and what the tests actually establish. These are the stories behind the software and machinery—not another list of repositories.</p>
   <nav class="workbench-directory" id="workbench-topics" aria-label="Workbench sections">
     <a href="#platform"><small>01 · Foundation</small><strong>InfiltratorOS</strong><span>Boot, kernel, Libraries and native file handling</span></a>
     <a href="#infiltratorfs"><small>02 · Storage</small><strong>InfiltratorFS</strong><span>Format, recovery and integrity</span></a>
@@ -372,7 +372,7 @@ static string render_workbench() {
     <a href="#creative"><small>05 · Simulation</small><strong>Games & creative</strong><span>City building, racing and character stories</span></a>
     <a href="#revox-b77"><small>06 · Audio</small><strong>ReVox B77 Mk II</strong><span>Open-reel mechanics and dbx processing</span></a>
   </nav>
-  <p class="workbench-index-link"><a href="projects.html">Find all 104 repositories and their source links <span aria-hidden="true">↗</span></a></p>
+  <p class="workbench-index-link"><a href="projects.html">Looking for source code? Browse Projects <span aria-hidden="true">↗</span></a></p>
 </section>
 <section id="platform" class="project-section">
   <header class="section-heading"><p class="eyebrow">Foundation · Operating system</p><h2>InfiltratorOS is more than a desktop theme.</h2><p class="section-deck">A collection of individually owned components intended to work as one operating environment.</p></header>
@@ -380,14 +380,12 @@ static string render_workbench() {
     <p>InfiltratorOS is the integration point, not a duplicate home for every subsystem. Its current deliverable is an amd64 integration package for a Debian/Linux Mint environment. It establishes the layout, shared resources and installation sequence for independently maintained components. A completed standalone operating system and graphical Setup installer are still future milestones.</p>
     <p>The architectural split matters. <strong>Libraries</strong> supplies portable C11 mechanisms and public contracts. <strong>Boot</strong> handles the firmware-stage selection of operating systems and uses filesystem-specific Common V2 shared objects. The separate <strong>Kernel</strong> repository tracks the native-kernel development path, with a qualified QEMU milestone but no claim that the resulting kernel is ready for everyday hardware. <strong>Files</strong> is a native file manager, and <strong>Software</strong> owns application discovery, package operations and update workflows.</p>
     <div class="workbench-context"><strong>Why separate repositories?</strong><p>Ownership stays explicit: a filesystem repository defines the behaviour of its format, the common layer defines the interface, and the loader or application consumes the capability. The old central Filesystems repository is transitional while the engines move to their independent homes.</p></div>
-    <div class="family-register">
-      <a href="https://github.com/Infiltrator-Projects/InfiltratorOS"><strong>InfiltratorOS</strong><span>Integration, installation and system composition.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/Libraries"><strong>Libraries</strong><span>Portable C11 code, shared contracts and native adapters.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/Boot"><strong>Boot</strong><span>Firmware-stage discovery and filesystem module loading.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/Kernel"><strong>Kernel</strong><span>Kernel source, build milestones and hardware qualification work.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/Files"><strong>Files</strong><span>Native browsing and file-operation workflows.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/Software"><strong>Software</strong><span>Graphical installation, updates and software inventory.</span><b aria-hidden="true">↗</b></a>
+    <div class="engineering-map" aria-label="The responsibilities within InfiltratorOS">
+      <div><span class="engineering-step">01 · Contracts</span><h3>Libraries</h3><p>Portable C11 facilities and the Common V2 interfaces used by format engines and their clients.</p></div>
+      <div><span class="engineering-step">02 · System layers</span><h3>Boot, Kernel and InfiltratorOS</h3><p>Separate boot, kernel and installation responsibilities. Passing one component test does not qualify the whole operating environment.</p></div>
+      <div><span class="engineering-step">03 · User tools</span><h3>Files and Software</h3><p>File operations, package discovery and updates belong in applications rather than firmware or filesystem code.</p></div>
     </div>
+    <p class="workbench-source-link"><a href="projects.html#group-foundations">See the operating-system source repositories <span aria-hidden="true">↗</span></a></p>
     <p class="project-boundary">Builds, emulated boots and component tests are evidence of particular milestones, not proof that every subsystem is ready for a general-purpose installation. Current qualification is maintained in each repository.</p>
   </div>
 <a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
@@ -411,15 +409,9 @@ static string render_workbench() {
   <div class="project-content">
     <p><strong>System Monitor</strong> examines the running machine through native system interfaces. <strong>Defragmenter</strong> inspects offline filesystem allocation and restricts write operations to explicitly qualified formats. <strong>Calendar</strong> is a Cinnamon panel clock and calendar that can use 31 independently owned calendar systems and 23 clock modules, rather than hard-coding all those rules into one desktop application.</p>
     <p><strong>Calculator</strong>, <strong>Files</strong> and <strong>Software</strong> address different daily tasks: calculation, file operations and package management. <strong>RunnerScope</strong> follows self-hosted GitHub Actions runners; <strong>PowerShell-HAL</strong> inserts generated commands for inspection rather than executing them automatically. They can share neutral facilities from Libraries while retaining their own product behaviour and release evidence.</p>
-    <div class="family-register">
-      <a href="https://github.com/Infiltrator-Projects/System-Monitor"><strong>System Monitor</strong><span>Native inspection of system and hardware state.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/Defragmenter"><strong>Defragmenter</strong><span>Offline analysis, recovery and qualified defragmentation.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/Calendar"><strong>Calendar</strong><span>Cinnamon calendar, historical systems and clocks.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/Calculator"><strong>Calculator</strong><span>Native cross-platform calculation.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/RunnerScope"><strong>RunnerScope</strong><span>Self-hosted GitHub runner monitoring.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/PowerShell-HAL"><strong>PowerShell-HAL</strong><span>Editable PowerShell assistance, without automatic execution.</span><b aria-hidden="true">↗</b></a>
-    </div>
-    <p class="project-boundary">The individually owned calendar, clock and filesystem repositories are available in the <a href="projects.html">complete Projects catalogue</a>. Those modules are building blocks, not claims of dozens of separately finished desktop products.</p>
+    <div class="engineering-note"><p class="eyebrow">The important boundary</p><h3>One application should not secretly reimplement another engine.</h3><p>Defragmenter can analyse an allocation map, but a filesystem module must own its actual format and writes. Calendar owns the user interface, while the separate time and calendar modules own their rules. The native tools can share low-level facilities without becoming a single inseparable program.</p><p>That separation is also a testing boundary: a successful interface build is not evidence that an unfamiliar filesystem's write path is qualified.</p></div>
+    <p class="workbench-source-link"><a href="projects.html#group-applications">Browse application source <span aria-hidden="true">↗</span></a> · <a href="projects.html#group-calendar-modules">Calendar modules <span aria-hidden="true">↗</span></a> · <a href="projects.html#group-clock-modules">Clock modules <span aria-hidden="true">↗</span></a></p>
+    <p class="project-boundary">The project directory lists every module separately, but the technical qualification remains with the application and its engine. A repository is not automatically an installable product.</p>
   </div>
 <a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
@@ -428,14 +420,12 @@ static string render_workbench() {
   <div class="project-content">
     <p><strong>Link</strong> owns the common C11 engine for transport, framing, standard OBD-II, UDS sequencing, telemetry and evidence handling. The manufacturer repositories then provide vehicle identity, module definitions and knowledge specific to Mercedes-Benz, Jaguar, BMW, Audi and Ford. This avoids having five incompatible copies of the same underlying diagnostic machinery.</p>
     <p><strong>MBLink</strong> uses <a class="inline-link" href="garage.html#e250-cdi">my C207 E 250 CDI</a> as a real development and evidence vehicle, but the Mercedes-Benz product is not restricted to that model. Discover targets where enabled concentrate on read-only ECU identification, inventory and capture. An unknown value remains unknown until documentation or reproducible evidence supports its interpretation; a newly recognised module does not automatically authorise a new kind of diagnostic request.</p>
-    <div class="family-register">
-      <a href="https://github.com/Infiltrator-Projects/Link"><strong>Link</strong><span>The shared automotive engine and contracts.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/MBLink"><strong>MBLink</strong><span>Mercedes-Benz diagnostics and discovery.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/JAGLink"><strong>JAGLink</strong><span>Jaguar application and manufacturer definitions.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/BMWLink"><strong>BMWLink</strong><span>BMW application and manufacturer definitions.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/AUDILink"><strong>AUDILink</strong><span>Audi application and manufacturer definitions.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/FORDLink"><strong>FORDLink</strong><span>Ford application and manufacturer definitions.</span><b aria-hidden="true">↗</b></a>
+    <div class="engineering-process" aria-label="Read-only vehicle diagnostics workflow">
+      <div><span class="engineering-step">01</span><h3>Identify</h3><p>Establish the adapter, vehicle identity and the protocols the target actually supports.</p></div>
+      <div><span class="engineering-step">02</span><h3>Collect</h3><p>Use supported read-only requests to record ECU identity, inventory and diagnostic responses.</p></div>
+      <div><span class="engineering-step">03</span><h3>Interpret</h3><p>Apply manufacturer-specific definitions only where evidence supports them; preserve unknown responses as unknown.</p></div>
     </div>
+    <p class="workbench-source-link"><a href="projects.html#group-diagnostics">Explore Link and manufacturer repositories <span aria-hidden="true">↗</span></a></p>
     <details class="technical-detail"><summary>What Discover is for <span aria-hidden="true">+</span></summary><p>The workflow begins with connection and identification, continues through supported module discovery and read-only data requests, and retains captures for interpretation. Reusable interrogation mechanisms belong to Link; Mercedes, Jaguar, BMW, Audi or Ford-specific meanings stay with the corresponding product. This boundary matters whenever a car produces a response the software cannot yet explain.</p></details>
   </div>
 <a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
@@ -445,11 +435,8 @@ static string render_workbench() {
   <div class="project-content">
     <p><strong>Egypt</strong> is an original city-building simulation centred on the Nile, work, movement, production and visibly functioning settlements; its repository documents an early native executable shell rather than a completed game. <strong>Backyard Racer</strong> develops the garage, classifieds, car-building and racing loop as one simulation, with vehicle state and progression owned by the game. <strong>Character Profiler</strong> is a separate iPhone story-bible application that treats characters, relationships and portable archives as durable data.</p>
     <p>These are intentionally separate projects, not hidden modules of InfiltratorOS. Their designs draw on the strengths of older software without claiming to be a reproduction of someone else's program.</p>
-    <div class="family-register">
-      <a href="https://github.com/Infiltrator-Projects/Egypt"><strong>Egypt</strong><span>Nile-based city-building and civilisation simulation.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/backyard-racer"><strong>Backyard Racer</strong><span>Hands-on automotive garage and street-racing simulation.</span><b aria-hidden="true">↗</b></a>
-      <a href="https://github.com/Infiltrator-Projects/Character-Profiler"><strong>Character Profiler</strong><span>Native iOS character and story development.</span><b aria-hidden="true">↗</b></a>
-    </div>
+    <div class="engineering-note"><p class="eyebrow">The design question</p><h3>What must the simulation remember?</h3><p>In Egypt, work and materials must remain coherent as settlements develop. In Backyard Racer, a vehicle's condition and changes have to survive beyond a single race. In Character Profiler, characters and relationships need a durable, portable archive. These projects have different interfaces, but each depends on consistent state underneath.</p></div>
+    <p class="workbench-source-link"><a href="projects.html#group-creative">Find the creative project sources <span aria-hidden="true">↗</span></a></p>
   </div>
 <a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
@@ -466,7 +453,7 @@ static string render_workbench() {
   </div>
 <a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
-<section id="repository" class="destination-strip"><div><p class="eyebrow">Publishing is a different job</p><h2>Code is not the same as an installable release.</h2><p>The <a href="projects.html">Projects catalogue</a> maps every public source repository. The <strong>Software Centre</strong> is the distribution surface for approved Linux packages, installation information and the APT repository. It does not imply that every source module has a user-installable application.</p></div><a class="text-link" href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Browse the Software Centre ↗</a></section>
+<section id="repository" class="workbench-pathways" aria-labelledby="workbench-pathways-title"><div><p class="eyebrow">From the notes to the code</p><h2 id="workbench-pathways-title">What do you want to inspect?</h2><p>Workbench explains why and how. Projects gives you the source. The Software Centre is for the packages actually published for installation.</p></div><div class="workbench-pathway-links"><a href="projects.html">Find GitHub repositories <span aria-hidden="true">↗</span></a><a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Find installable packages <span aria-hidden="true">↗</span></a></div></section>
 <section id="principles" class="closing-note"><h2>Verify the work,<br>not just the build.</h2><p>A successful compilation proves a particular build. A deterministic unit test proves the cases it exercised. A boot in QEMU, a mount on test media and a real vehicle capture each establish different evidence. The repositories record those boundaries, and the unfinished work is part of the story.</p></section>
 )WORKBENCH" + page_end("The best or nothing.");
 }

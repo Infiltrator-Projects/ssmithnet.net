@@ -4,6 +4,8 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
+- Differentiate Workbench from Projects: replace Workbench's four GitHub-card grids with engineering diagrams and design notes, present Workbench as an editorial technical journal, and reduce Projects to a functional 104-repository search directory with its own distinct visual layout.
+
 - Polish navigation and readability across the entire website: compact mobile Workbench directory, Garage horizontal car jump list and thirteen return links, six Workbench chapter links, five-link two-row mobile header, readable engineering text widths, and footer return navigation. Extend Projects search to descriptions/families with clear and empty states.
 
 - Reduce the About page Daytona picture to a compact 220px illustration (170px on narrow screens), so it supports rather than overwhelms the surrounding personal interests.
