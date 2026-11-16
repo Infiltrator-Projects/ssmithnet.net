@@ -360,6 +360,37 @@ void validate_garage(const fs::path& root, const string& garage) {
     require(xf_markup.find("three-quarter side view") != string::npos &&
             xf_markup.find("front view") != string::npos,
             "XF S-Pack photographs must follow the standard Garage arrangement");
+
+    // The supplied Discovery II and Peugeot 405 GLD images must be committed
+    // and rendered in the same side/front format as the other garage entries.
+    const std::array<std::array<string, 4>, 2> supplied_galleries{{
+        { "discovery-2", "Discovery 2 TDI", "discovery-2-three-quarter.webp", "discovery-2-front.webp" },
+        { "peugeot-405-gld", "405 GLD", "peugeot-405-gld-three-quarter.webp", "peugeot-405-gld-front.webp" }
+    }};
+    for (const auto& gallery : supplied_galleries) {
+        const string id = gallery[0];
+        const size_t pos = garage.find("id=\"" + id + "\"");
+        require(pos != string::npos, "Supplied gallery is missing: " + id);
+        const size_t end = garage.find("</article>", pos);
+        require(end != string::npos, "Supplied gallery article not closed: " + id);
+        const string markup = garage.substr(pos, end - pos);
+        require(markup.find("<h3>" + gallery[1] + "</h3>") != string::npos &&
+                markup.find("vehicle-reconstruction-note") != string::npos,
+                "Supplied gallery vehicle identity or attribution missing: " + id);
+        for (size_t i = 2; i < 4; ++i) {
+            const string filename = gallery[i];
+            require(markup.find("src=\"assets/photos/" + filename + "\"") != string::npos &&
+                    fs::is_regular_file(root / "assets/photos" / filename) &&
+                    fs::file_size(root / "assets/photos" / filename) > 1000,
+                    "Supplied gallery image missing: " + filename);
+        }
+        require(markup.find("width=\"642\" height=\"348\"") != string::npos &&
+                markup.find("width=\"642\" height=\"387\"") != string::npos,
+                "Supplied gallery photo dimensions must match supplied images: " + id);
+    }
+    require(garage.find("504 Diesel") == string::npos &&
+            garage.find("white Peugeot 405 GLD with black interior") != string::npos,
+            "Peugeot garage history must identify the white 405 GLD, not a 504");
     // Every referenced photo must exist in the committed source tree.
     // The GitHub Pages source-branch publisher cannot see build-only assets.
     const std::regex gallery_ref(R"photo(src="(assets/photos/[^"]+)")photo");
