@@ -50,11 +50,11 @@ static void write(const fs::path& p, const string& s) {
 }
 
 static string page_start(const string& title, const string& description, const string& active, const string& body_class = "") {
-    const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Garage" ? "garage.html" : active == "Download" ? "downloads/model-11-sandy/" : "about.html";
+    const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Projects" ? "projects.html" : active == "Garage" ? "garage.html" : active == "Download" ? "downloads/model-11-sandy/" : "about.html";
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-system2") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-portfolio1") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -171,7 +171,7 @@ static string render_home() {
       <a href="workbench.html#link"><span class="bench-number">02</span><span class="bench-copy"><strong>The Link diagnostics family</strong><small>Native vehicle diagnostics developed with my Mercedes.</small></span><b aria-hidden="true">↗</b></a>
       <a href="workbench.html#software"><span class="bench-number">03</span><span class="bench-copy"><strong>Desktop software</strong><small>Native system tools, calendars and interfaces.</small></span><b aria-hidden="true">↗</b></a>
     </div>
-    <a class="panel-link" href="workbench.html">Explore the full Workbench <span aria-hidden="true">→</span></a>
+    <a class="panel-link" href="workbench.html">Explore the full Workbench <span aria-hidden="true">→</span></a><a class="panel-link" href="projects.html">Browse all 104 public Git repositories <span aria-hidden="true">↗</span></a>
   </article>
   <article class="home-history">
     <p class="eyebrow">At a glance</p><h2>Cars, code and history.</h2>
@@ -180,7 +180,7 @@ static string render_home() {
       <div><strong>14</strong><span>Vehicles in the garage history</span></div>
       <div><strong>1993</strong><span>My website began</span></div>
       <div><strong>6.9</strong><span>The original Mercedes-Benz story</span></div>
-      <div><strong>C++17</strong><span>Native static website generator</span></div>
+      <div><strong>104</strong><span>Public GitHub repositories · Nov 2026</span></div>
     </div>
     <a class="panel-link" href="about.html#the-site">The story of this site <span aria-hidden="true">→</span></a>
   </article>
@@ -188,9 +188,174 @@ static string render_home() {
 )site" + page_end("A personal corner of the internet, since 1993.");
 }
 
+static string render_projects() {
+    return page_start("Projects", "All 104 publicly visible Infiltrator-Projects GitHub repositories: operating systems, applications, diagnostics, calendar and clock modules, filesystem engines, games and publishing.", "Projects", "projects-page") + R"CATALOG(
+<section class="page-intro projects-intro">
+  <p class="eyebrow">Workbench · GitHub portfolio</p><h1>More than one project.<br><span>A whole workshop.</span></h1>
+  <p class="lead">From InfiltratorOS and its filesystem engines to native applications, vehicle diagnostics, historical calendars, clocks and games. This is the full public repository collection, not just the headline projects.</p>
+  <div class="projects-facts"><span><strong>104</strong> public repositories</span><span><strong>8</strong> project families</span><span>Snapshot · 16 November 2026</span></div>
+  <nav class="section-nav projects-navigation" aria-label="Project catalogue links"><a href="#directory">Browse and search</a><a href="workbench.html">Featured work</a><a href="https://github.com/Infiltrator-Projects">Live GitHub organisation</a></nav>
+</section>
+<section class="repository-browser" id="directory" aria-labelledby="directory-title">
+  <div class="repository-browser-header"><div><p class="eyebrow">Every public Git</p><h2 id="directory-title">The repository index.</h2><p>All 104 repositories are linked below. Calendar, clock and filesystem modules are kept together in expandable families so the individual repositories remain discoverable without an endless wall of links.</p></div>
+    <div class="repository-search"><label for="repository-search">Find a repository</label><input id="repository-search" type="search" placeholder="Search repository names" autocomplete="off" aria-controls="repo-families"><output id="repository-count" role="status" aria-live="polite">104 repositories</output></div>
+  </div>
+  <nav class="repository-families-nav" aria-label="Jump to project family"><a href="#group-foundations">Operating system &amp; foundations <span>9</span></a><a href="#group-applications">Applications &amp; utilities <span>7</span></a><a href="#group-diagnostics">Vehicle diagnostics <span>6</span></a><a href="#group-creative">Games &amp; creative work <span>3</span></a><a href="#group-publishing">Sites &amp; publishing <span>2</span></a><a href="#group-calendar-modules">Calendar systems <span>31</span></a><a href="#group-clock-modules">Clock &amp; timekeeping modules <span>23</span></a><a href="#group-filesystem-modules">Filesystem engines <span>23</span></a></nav>
+  <div id="repo-families" class="repository-families">
+<section class="repo-group" id="group-foundations" data-repo-group><header class="repo-group-heading"><div><h3>Operating system &amp; foundations</h3><p>Common libraries, OS integration, the boot environment, file management and InfiltratorFS.</p></div><span class="repo-group-count">9 repositories</span></header><div class="repo-grid">
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Boot" data-repo-name="Boot"><strong>Boot</strong><span>Firmware-stage boot manager and Common V2 filesystem support.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Files" data-repo-name="Files"><strong>Files</strong><span>Native file-management project.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Filesystems" data-repo-name="Filesystems"><strong>Filesystems</strong><span>Transitional catalogue; engines are owned by the separate filesystem repositories.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/InfiltratorFS" data-repo-name="InfiltratorFS"><strong>InfiltratorFS</strong><span>Original copy-on-write filesystem, checksums and recovery tools.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/InfiltratorOS" data-repo-name="InfiltratorOS"><strong>InfiltratorOS</strong><span>Operating-system integration and orchestration; not yet a completed standalone OS.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Kernel" data-repo-name="Kernel"><strong>Kernel</strong><span>Kernel source and build work; not yet a qualified bootable release.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Libraries" data-repo-name="Libraries"><strong>Libraries</strong><span>C11 shared foundations, host contracts and filesystem ABI definitions.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Software" data-repo-name="Software"><strong>Software</strong><span>Graphical package management, updates and repositories.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/System-Settings" data-repo-name="System-Settings"><strong>System-Settings</strong><span>System settings and configuration project.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+</div></section>
+<section class="repo-group" id="group-applications" data-repo-group><header class="repo-group-heading"><div><h3>Applications &amp; utilities</h3><p>Native tools for desktops, system management, calculations, scheduling and development.</p></div><span class="repo-group-count">7 repositories</span></header><div class="repo-grid">
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Calculator" data-repo-name="Calculator"><strong>Calculator</strong><span>Native cross-platform calculator.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Calendar" data-repo-name="Calendar"><strong>Calendar</strong><span>Cinnamon calendar and clock with alternative time systems.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Defragmenter" data-repo-name="Defragmenter"><strong>Defragmenter</strong><span>Offline allocation analysis, recovery and qualified defragmentation.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/PowerShell-HAL" data-repo-name="PowerShell-HAL"><strong>PowerShell-HAL</strong><span>Natural language to editable PowerShell command insertion.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/RunnerScope" data-repo-name="RunnerScope"><strong>RunnerScope</strong><span>Desktop monitor for self-hosted GitHub Actions runners.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Slicer" data-repo-name="Slicer"><strong>Slicer</strong><span>Source repository and project notes.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/System-Monitor" data-repo-name="System-Monitor"><strong>System-Monitor</strong><span>Native Linux system and hardware inspection.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+</div></section>
+<section class="repo-group" id="group-diagnostics" data-repo-group><header class="repo-group-heading"><div><h3>Vehicle diagnostics</h3><p>The shared Link engine and separate Mercedes-Benz, Jaguar, BMW, Audi and Ford applications.</p></div><span class="repo-group-count">6 repositories</span></header><div class="repo-grid">
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/AUDILink" data-repo-name="AUDILink"><strong>AUDILink</strong><span>Audi diagnostic application built on Link.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/BMWLink" data-repo-name="BMWLink"><strong>BMWLink</strong><span>BMW diagnostic application built on Link.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/FORDLink" data-repo-name="FORDLink"><strong>FORDLink</strong><span>Ford diagnostic application built on Link.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/JAGLink" data-repo-name="JAGLink"><strong>JAGLink</strong><span>Jaguar diagnostic application built on Link.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Link" data-repo-name="Link"><strong>Link</strong><span>Shared C11 vehicle-diagnostics engine.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/MBLink" data-repo-name="MBLink"><strong>MBLink</strong><span>Mercedes-Benz diagnostic application built on Link.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+</div></section>
+<section class="repo-group" id="group-creative" data-repo-group><header class="repo-group-heading"><div><h3>Games &amp; creative work</h3><p>Original vehicle and civilisation simulations alongside character-development software.</p></div><span class="repo-group-count">3 repositories</span></header><div class="repo-grid">
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/backyard-racer" data-repo-name="backyard-racer"><strong>backyard-racer</strong><span>Car building, garage management and street-racing simulation.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Character-Profiler" data-repo-name="Character-Profiler"><strong>Character-Profiler</strong><span>iPhone character-development and story-bible app.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Egypt" data-repo-name="Egypt"><strong>Egypt</strong><span>Original Egyptian city-building and civilisation simulation.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+</div></section>
+<section class="repo-group" id="group-publishing" data-repo-group><header class="repo-group-heading"><div><h3>Sites &amp; publishing</h3><p>The website and the independent package publishing and APT repository system.</p></div><span class="repo-group-count">2 repositories</span></header><div class="repo-grid">
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/Infiltrator-Repository" data-repo-name="Infiltrator-Repository"><strong>Infiltrator-Repository</strong><span>Verified APT publishing pipeline and Software Centre.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry" href="https://github.com/Infiltrator-Projects/ssmithnet.net" data-repo-name="ssmithnet.net"><strong>ssmithnet.net</strong><span>This personal site and its native C++ generator.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+</div></section>
+<details class="repo-group repo-group--compact" id="group-calendar-modules" data-repo-group><summary><span class="repo-group-text"><strong>Calendar systems</strong><span>31 independently owned calendar modules, not 31 separately released desktop applications.</span></span><span class="repo-group-count">31 repositories</span></summary><div class="repo-grid repo-grid--compact">
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Armenian-Traditional" data-repo-name="Calendar-Armenian-Traditional"><strong>Calendar-Armenian-Traditional</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Bahai" data-repo-name="Calendar-Bahai"><strong>Calendar-Bahai</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Buddhist" data-repo-name="Calendar-Buddhist"><strong>Calendar-Buddhist</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Byzantine" data-repo-name="Calendar-Byzantine"><strong>Calendar-Byzantine</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Chinese" data-repo-name="Calendar-Chinese"><strong>Calendar-Chinese</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Coptic" data-repo-name="Calendar-Coptic"><strong>Calendar-Coptic</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Dangi" data-repo-name="Calendar-Dangi"><strong>Calendar-Dangi</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Egyptian-Nabonassar" data-repo-name="Calendar-Egyptian-Nabonassar"><strong>Calendar-Egyptian-Nabonassar</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Ethiopian" data-repo-name="Calendar-Ethiopian"><strong>Calendar-Ethiopian</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Ethiopic-Amete-Alem" data-repo-name="Calendar-Ethiopic-Amete-Alem"><strong>Calendar-Ethiopic-Amete-Alem</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-French-Republican" data-repo-name="Calendar-French-Republican"><strong>Calendar-French-Republican</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Gregorian" data-repo-name="Calendar-Gregorian"><strong>Calendar-Gregorian</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Hebrew" data-repo-name="Calendar-Hebrew"><strong>Calendar-Hebrew</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Indian" data-repo-name="Calendar-Indian"><strong>Calendar-Indian</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-International-Fixed" data-repo-name="Calendar-International-Fixed"><strong>Calendar-International-Fixed</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Islamic" data-repo-name="Calendar-Islamic"><strong>Calendar-Islamic</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Islamic-Civil" data-repo-name="Calendar-Islamic-Civil"><strong>Calendar-Islamic-Civil</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Islamic-TBLA" data-repo-name="Calendar-Islamic-TBLA"><strong>Calendar-Islamic-TBLA</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Islamic-Umalqura" data-repo-name="Calendar-Islamic-Umalqura"><strong>Calendar-Islamic-Umalqura</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-ISO-Week" data-repo-name="Calendar-ISO-Week"><strong>Calendar-ISO-Week</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Japanese" data-repo-name="Calendar-Japanese"><strong>Calendar-Japanese</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Julian" data-repo-name="Calendar-Julian"><strong>Calendar-Julian</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Mayan" data-repo-name="Calendar-Mayan"><strong>Calendar-Mayan</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Minguo" data-repo-name="Calendar-Minguo"><strong>Calendar-Minguo</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Persian" data-repo-name="Calendar-Persian"><strong>Calendar-Persian</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Positivist" data-repo-name="Calendar-Positivist"><strong>Calendar-Positivist</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Revised-Julian" data-repo-name="Calendar-Revised-Julian"><strong>Calendar-Revised-Julian</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Roman" data-repo-name="Calendar-Roman"><strong>Calendar-Roman</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Swedish-Historical" data-repo-name="Calendar-Swedish-Historical"><strong>Calendar-Swedish-Historical</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-Thai-Buddhist-Solar" data-repo-name="Calendar-Thai-Buddhist-Solar"><strong>Calendar-Thai-Buddhist-Solar</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Calendar-World" data-repo-name="Calendar-World"><strong>Calendar-World</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+</div></details>
+<details class="repo-group repo-group--compact" id="group-clock-modules" data-repo-group><summary><span class="repo-group-text"><strong>Clock &amp; timekeeping modules</strong><span>23 modules for alternative, historical and standard systems of time.</span></span><span class="repo-group-count">23 repositories</span></summary><div class="repo-grid repo-grid--compact">
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Babylonian-Ancient" data-repo-name="Clock-Babylonian-Ancient"><strong>Clock-Babylonian-Ancient</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Babylonian-Hours" data-repo-name="Clock-Babylonian-Hours"><strong>Clock-Babylonian-Hours</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Binary" data-repo-name="Clock-Binary"><strong>Clock-Binary</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Chinese-Ke" data-repo-name="Clock-Chinese-Ke"><strong>Clock-Chinese-Ke</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Chinese-Time" data-repo-name="Clock-Chinese-Time"><strong>Clock-Chinese-Time</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Decimal" data-repo-name="Clock-Decimal"><strong>Clock-Decimal</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Hexadecimal" data-repo-name="Clock-Hexadecimal"><strong>Clock-Hexadecimal</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Indian-Ghati" data-repo-name="Clock-Indian-Ghati"><strong>Clock-Indian-Ghati</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Internet" data-repo-name="Clock-Internet"><strong>Clock-Internet</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Italian-Hours" data-repo-name="Clock-Italian-Hours"><strong>Clock-Italian-Hours</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Japanese-Temporal" data-repo-name="Clock-Japanese-Temporal"><strong>Clock-Japanese-Temporal</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Japanese-Temporal-Early" data-repo-name="Clock-Japanese-Temporal-Early"><strong>Clock-Japanese-Temporal-Early</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Julian" data-repo-name="Clock-Julian"><strong>Clock-Julian</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Mean-Solar" data-repo-name="Clock-Mean-Solar"><strong>Clock-Mean-Solar</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Modified-Julian" data-repo-name="Clock-Modified-Julian"><strong>Clock-Modified-Julian</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Nuremberg-Hours" data-repo-name="Clock-Nuremberg-Hours"><strong>Clock-Nuremberg-Hours</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Nuremberg-Solar" data-repo-name="Clock-Nuremberg-Solar"><strong>Clock-Nuremberg-Solar</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Roman-Temporal" data-repo-name="Clock-Roman-Temporal"><strong>Clock-Roman-Temporal</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Sidereal" data-repo-name="Clock-Sidereal"><strong>Clock-Sidereal</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Solar" data-repo-name="Clock-Solar"><strong>Clock-Solar</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Standard-12" data-repo-name="Clock-Standard-12"><strong>Clock-Standard-12</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Standard-24" data-repo-name="Clock-Standard-24"><strong>Clock-Standard-24</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Clock-Unix" data-repo-name="Clock-Unix"><strong>Clock-Unix</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+</div></details>
+<details class="repo-group repo-group--compact" id="group-filesystem-modules" data-repo-group><summary><span class="repo-group-text"><strong>Filesystem engines</strong><span>23 independently owned filesystem repositories; presence does not mean read/write qualification.</span></span><span class="repo-group-count">23 repositories</span></summary><div class="repo-grid repo-grid--compact">
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-APFS" data-repo-name="Filesystem-APFS"><strong>Filesystem-APFS</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-Btrfs" data-repo-name="Filesystem-Btrfs"><strong>Filesystem-Btrfs</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-exFAT" data-repo-name="Filesystem-exFAT"><strong>Filesystem-exFAT</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-EXT2" data-repo-name="Filesystem-EXT2"><strong>Filesystem-EXT2</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-EXT3" data-repo-name="Filesystem-EXT3"><strong>Filesystem-EXT3</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-EXT4" data-repo-name="Filesystem-EXT4"><strong>Filesystem-EXT4</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-FAT12" data-repo-name="Filesystem-FAT12"><strong>Filesystem-FAT12</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-FAT16" data-repo-name="Filesystem-FAT16"><strong>Filesystem-FAT16</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-FAT32" data-repo-name="Filesystem-FAT32"><strong>Filesystem-FAT32</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-FFS" data-repo-name="Filesystem-FFS"><strong>Filesystem-FFS</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-HFS" data-repo-name="Filesystem-HFS"><strong>Filesystem-HFS</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-HFSPlus" data-repo-name="Filesystem-HFSPlus"><strong>Filesystem-HFSPlus</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-Minix" data-repo-name="Filesystem-Minix"><strong>Filesystem-Minix</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-NTFS" data-repo-name="Filesystem-NTFS"><strong>Filesystem-NTFS</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-OFS" data-repo-name="Filesystem-OFS"><strong>Filesystem-OFS</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-PFS3" data-repo-name="Filesystem-PFS3"><strong>Filesystem-PFS3</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-SFS" data-repo-name="Filesystem-SFS"><strong>Filesystem-SFS</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-SFS2" data-repo-name="Filesystem-SFS2"><strong>Filesystem-SFS2</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-Swap" data-repo-name="Filesystem-Swap"><strong>Filesystem-Swap</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-UFS1" data-repo-name="Filesystem-UFS1"><strong>Filesystem-UFS1</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-UFS2" data-repo-name="Filesystem-UFS2"><strong>Filesystem-UFS2</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-XFS" data-repo-name="Filesystem-XFS"><strong>Filesystem-XFS</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+<a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-ZFS" data-repo-name="Filesystem-ZFS"><strong>Filesystem-ZFS</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
+</div></details>
+  </div>
+  <p class="repository-disclosure">Inventory of publicly visible <a href="https://github.com/Infiltrator-Projects">Infiltrator-Projects</a> repositories captured on 16 November 2026. Different repositories have different levels of development and qualification: appearing here does not imply a release or complete functionality. GitHub remains the live source for additions and current status.</p>
+</section>
+<section class="destination-strip projects-outro"><div><p class="eyebrow">Featured engineering work</p><h2>Go deeper in the Workbench.</h2><p>Explore the major projects in more detail, or visit the Software Centre for published Linux packages.</p></div><div class="projects-outro-links"><a class="text-link" href="workbench.html">Workbench ↗</a><a class="text-link" href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre ↗</a></div></section>
+<script>
+(() => {
+  const field = document.getElementById('repository-search');
+  const entries = Array.from(document.querySelectorAll('.repo-entry'));
+  const groups = Array.from(document.querySelectorAll('[data-repo-group]'));
+  const status = document.getElementById('repository-count');
+  if (!field || !status) return;
+  field.addEventListener('input', () => {
+    const search = field.value.trim().toLocaleLowerCase();
+    let found = 0;
+    for (const item of entries) {
+      const match = item.dataset.repoName.toLocaleLowerCase().includes(search);
+      item.hidden = !match;
+      if (match) ++found;
+    }
+    for (const group of groups) {
+      const hasMatch = Array.from(group.querySelectorAll('.repo-entry')).some(item => !item.hidden);
+      group.hidden = !hasMatch;
+      if (group.tagName === 'DETAILS') group.open = search.length > 0 && hasMatch;
+    }
+    status.textContent = search ? found + ' matching repositories' : entries.length + ' repositories';
+  });
+})();
+</script>
+)CATALOG" + page_end("104 public repositories · snapshot 16 November 2026.");
+}
+
 static string render_workbench() {
     return page_start("Workbench", "InfiltratorFS, native desktop applications and the Link vehicle-diagnostics family. Software projects by Shannon Smith.", "Workbench", "workbench-page") + R"(
-<section class="page-intro"><p class="eyebrow">Workbench</p><h1>Software, machines,<br> first principles.</h1><p class="lead">Filesystems, native applications, vehicle diagnostics and a place for analogue hardware. Personal projects, still being built.</p><nav class="workbench-directory" aria-label="Workbench sections"><a href="#infiltratorfs"><small>01 · Storage</small><strong>InfiltratorFS</strong><span>Filesystem, recovery and integrity</span></a><a href="#software"><small>02 · Applications</small><strong>Desktop software</strong><span>Tools and native interfaces</span></a><a href="#link"><small>03 · Vehicles</small><strong>Link diagnostics</strong><span>Cross-make diagnostic software</span></a><a href="#revox-b77"><small>04 · Audio</small><strong>ReVox B77 Mk II</strong><span>Open-reel analogue machines</span></a></nav></section>
+<section class="page-intro"><p class="eyebrow">Workbench</p><h1>Software, machines,<br> first principles.</h1><p class="lead">Filesystems, native applications, vehicle diagnostics and a place for analogue hardware. Personal projects, still being built.</p><nav class="workbench-directory" aria-label="Workbench sections"><a href="#infiltratorfs"><small>01 · Storage</small><strong>InfiltratorFS</strong><span>Filesystem, recovery and integrity</span></a><a href="#software"><small>02 · Applications</small><strong>Desktop software</strong><span>Tools and native interfaces</span></a><a href="#link"><small>03 · Vehicles</small><strong>Link diagnostics</strong><span>Cross-make diagnostic software</span></a><a href="#revox-b77"><small>04 · Audio</small><strong>ReVox B77 Mk II</strong><span>Open-reel analogue machines</span></a></nav><p class="workbench-index-link"><a href="projects.html">Browse the complete 104-repository GitHub collection <span aria-hidden="true">↗</span></a></p></section>
 <section id="infiltratorfs" class="project-section"><header class="section-heading"><p class="eyebrow">Storage</p><h2>InfiltratorFS</h2><p class="section-deck">A filesystem with its on-disk format and recovery behaviour at the centre of the design.</p></header>
 <div class="project-content"><p>The Linux path is a native kernel driver. The project also includes formatters, inspection and scrub tools, and Windows access through a driverless Explorer bridge. A native Windows filesystem driver remains future work.</p><dl class="inline-facts"><div><dt>Format</dt><dd>0.18</dd></div><div><dt>Writes</dt><dd>Copy-on-write</dd></div><div><dt>Integrity</dt><dd>Checksummed</dd></div></dl><div class="resource-links"><a href="https://github.com/Infiltrator-Projects/InfiltratorFS">Source code ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/QUALIFICATION.md">Test evidence ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/ROADMAP.md">Feature status ↗</a></div>
 <details class="technical-detail"><summary>Inside the filesystem <span aria-hidden="true">+</span></summary><div class="engineering-notes"><article><h3>Retain earlier generations</h3><p>Copy-on-write transactions create new state while retaining earlier generations. Checksummed checkpoints provide a way to select a recoverable generation after interruption.</p></article><article><h3>Share data deliberately</h3><p>Snapshots and reflinks share file data. Sparse files and paged extent metadata describe where that data lives without requiring every logical byte to occupy storage.</p></article><article><h3>Verify what comes back</h3><p>CRC64 protects metadata and SHA-256 checks logical file data. Inspection and deep-scrub tools make verification an explicit operation.</p></article></div><dl class="fact-list"><div><dt>Object identity</dt><dd>128-bit identifiers</dd></div><div><dt>Names</dt><dd>UTF-8 components up to 1,023 bytes</dd></div><div><dt>Compression</dt><dd>Native IAC1; LZ4 retained as a non-default representation</dd></div><div><dt>Linux integration</dt><dd>Native VFS driver installed through DKMS</dd></div></dl><h3>The work still ahead</h3><p>Booting a real Linux installation brings mount latency, writeback and metadata costs into focus. Those remain active engineering work. Feature support and passing tests are recorded separately from claims about everyday performance.</p></details></div></section>
@@ -204,6 +369,7 @@ static string render_workbench() {
     <div><p class="eyebrow">My tape equipment</p><h3>B77 Mk II + dbx Model 224</h3><p>My ReVox B77 Mk II reel-to-reel deck is paired with a dbx Model 224 simultaneous encode/decode Type II tape noise-reduction system. The original hardware photographs have been redrawn here to show the machine without the surrounding room.</p><dl class="analog-specs"><div><dt>Recorder</dt><dd>ReVox B77 Mk II</dd></div><div><dt>Noise reduction</dt><dd>dbx Model 224 · Type II</dd></div><div><dt>Format</dt><dd>Open-reel magnetic tape</dd></div></dl></div>
   </div>
 </section>
+<section id="all-projects" class="destination-strip portfolio-teaser"><div><p class="eyebrow">The wider software portfolio</p><h2>104 repositories. Eight project families.</h2><p>InfiltratorOS, Boot, core libraries, games and utilities sit alongside 31 calendar, 23 clock and 23 independent filesystem modules. Read the full GitHub portfolio without mistaking individual source modules for finished applications.</p></div><a class="text-link" href="projects.html">Explore the complete catalogue ↗</a></section>
 <section id="repository" class="destination-strip"><div><p class="eyebrow">Downloads &amp; installation</p><h2>The Software Centre.</h2><p>Browse the Linux applications, inspect package details and add the APT repository to Linux Mint.</p></div><a class="text-link" href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Browse applications ↗</a></section>
 <section id="principles" class="closing-note"><h2>Keep the evidence.<br>Question the result.</h2><p>A successful build proves that code compiled. A clean test proves the case it exercised. Neither automatically proves behaviour on a real car or a real desktop workload. That gap is where much of the work happens.</p></section>
 )" + page_end("The best or nothing.");
@@ -395,6 +561,7 @@ int main(int argc, char** argv) {
         const fs::path root = argc == 2 ? fs::absolute(argv[1]) : fs::current_path();
         write(root / "index.html", render_home());
         write(root / "workbench.html", render_workbench());
+        write(root / "projects.html", render_projects());
         write(root / "garage.html", render_garage());
         // The old Archive address remains a full, canonicalised alias for bookmarks.
         const auto about = render_about();

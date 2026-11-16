@@ -45,3 +45,9 @@ The automated build proves output consistency, source-to-mirror equivalence, loc
 ## Complete-site design integration — 16 November 2026
 
 A single authored presentation layer now serves Home, Workbench, Garage, About, the Archive alias and the download page. The independently hosted Software Centre must be pinned to the same assets and validate with the native shared website checker. Generator/mirror equivalence and repository build tests are required for both repositories; visual review at phone, tablet and desktop sizes is a separate acceptance step and is not implied by passing builds.
+
+## Complete GitHub portfolio snapshot — 16 November 2026
+
+The generator now publishes `projects.html` from the native C++ source with direct links to all 104 public Infiltrator-Projects repositories inventoried at the snapshot date. The page distinguishes 27 core/application/diagnostic/creative/publishing projects from 31 calendar, 23 clock and 23 filesystem modules. Each category has an explicit purpose and module presence is not presented as release qualification. A search field progressively filters prerendered links, so browsing the Git repos still works without JavaScript.
+
+`data/github-portfolio-2026-11-16.tsv` is retained as the exact name/category audit manifest. The native site test verifies all 104 names, one direct link per repository, the family counts, page navigation, determinism and an exact source/generated mirror match. The shared family checker now expects a six-link navigation including Projects on the personal site and the Software Centre.

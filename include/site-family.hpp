@@ -38,7 +38,7 @@ inline std::string navigation(const std::string& active, const std::string& home
         "index.html\"" + (active == "Home" ? " aria-current=\"page\"" : "") +
         ">ssmith<span>net</span>.net</a><div class=\"navlinks\">";
     for (const auto& item : {std::pair<std::string,std::string>{"Workbench","workbench.html"},
-         {"Garage","garage.html"},{"About","about.html"},
+         {"Projects","projects.html"},{"Garage","garage.html"},{"About","about.html"},
          {"Software Centre","https://infiltrator-projects.github.io/Infiltrator-Repository/"}}) {
         const auto href = item.first == "Software Centre" ? item.second : home + item.second;
         html += "<a" + std::string(item.first == "Software Centre" ? " class=\"nav-software\"" : "") + std::string(item.first == active ? " aria-current=\"page\"" : "") +
@@ -52,6 +52,7 @@ inline std::string footer(const std::string& note) {
            "<p>Online since 1993. Software, cars, open-reel audio and the things that keep them running.</p></div>"
            "<nav aria-label=\"Footer\" class=\"footer-navigation\">"
            "<a href=\"https://ssmithnet.net/workbench.html\">Workbench</a>"
+           "<a href=\"https://ssmithnet.net/projects.html\">Projects</a>"
            "<a href=\"https://ssmithnet.net/garage.html\">Garage</a>"
            "<a href=\"https://ssmithnet.net/about.html\">About</a>"
            "<a href=\"https://github.com/Infiltrator-Projects\">GitHub</a>"

@@ -113,8 +113,8 @@ void check(const fs::path& root) {
             safe.find("not-real.png") == std::string::npos &&
             safe.find("href=\"index.html\"") != std::string::npos,
             "Embedded script/style HTML must not be treated as links");
-    const std::array<std::string, 6> possible{
-        "index.html", "workbench.html", "garage.html", "about.html",
+    const std::array<std::string, 7> possible{
+        "index.html", "workbench.html", "projects.html", "garage.html", "about.html",
         "archive.html", "downloads/model-11-sandy/index.html"};
     require(fs::is_regular_file(root / possible[0]), "Missing homepage");
     unsigned checked = 0;
@@ -141,10 +141,16 @@ void check(const fs::path& root) {
                 relative + ": About missing from primary navigation");
         require(!std::any_of(page.nav.begin(), page.nav.end(), has_archive),
                 relative + ": legacy Archive must not be in primary navigation");
-        require(page.nav.size() == 5 &&
+        require(std::any_of(page.nav.begin(), page.nav.end(),
+                   [](const std::string& ref) {
+                       return ref == "projects.html" || ref == "../../projects.html" ||
+                           ref == "https://ssmithnet.net/projects.html";
+                   }),
+                relative + ": Projects absent from site-family navigation");
+        require(page.nav.size() == 6 &&
                 std::find(page.nav.begin(), page.nav.end(),
                    "https://infiltrator-projects.github.io/Infiltrator-Repository/") != page.nav.end(),
-                relative + ": five-link website family navigation mismatch");
+                relative + ": six-link website family navigation mismatch");
         validate_links(page_path, page);
         const auto content = read(page_path);
         require(content.find("@@HEAD@@") == std::string::npos &&

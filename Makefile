@@ -16,7 +16,7 @@ common:
 common-web:
 	cp "$(COMMON_DIR)/design/infiltrator-web-v1.css" "$(COMMON_WEB_CSS)"
 
-sitegen: common common-web src/sitegen.cpp include/site-family.hpp
+sitegen: common common-web src/sitegen.cpp include/site-family.hpp data/github-portfolio-2026-11-16.tsv
 	mkdir -p build
 	$(CXX) $(CXXFLAGS) -I"$(COMMON_DIR)/include" src/sitegen.cpp "$(COMMON_ARCHIVE)" -lm -ldl -o build/sitegen
 

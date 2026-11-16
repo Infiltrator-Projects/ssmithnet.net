@@ -54,3 +54,9 @@ The project prefers durable, understandable machinery over fashionable web stack
 `include/site-family.hpp` and `assets/` are the canonical identity shared with Package Repository: page metadata, wordmark, cross-site navigation, footer, three local Corpo faces, colour/spacing conventions and accessible controls. The repository consumes an immutable, byte-verified snapshot, keeping both sites self-contained at runtime. Personal editorial composition and catalogue-specific behaviour remain with their respective products.
 
 `tests/check_web_family.cpp` is the shared output contract. It validates navigation, metadata, landmarks, local resources and actual WOFF2 assets on both published trees. A change to the family is complete when the repository snapshot and its pinned source commit are updated and both sites pass this check. Common supplies neutral primitives underneath the family; its exact revision belongs to the build and deployment configuration linked above.
+
+## Full project portfolio
+
+The [Projects catalogue](projects.html) provides a dated, searchable index of all **104 public repositories** visible in `Infiltrator-Projects` on **16 November 2026**. This includes 31 Calendar modules, 23 Clock modules and 23 independently owned Filesystem engines, plus the operating-system, applications, diagnostic, creative and publishing projects. The repo names and editorial grouping are preserved in `data/github-portfolio-2026-11-16.tsv`. A module's presence is not a qualification or release claim. Current status belongs to the linked GitHub source.
+
+The homepage and Workbench introduce featured work and link to the catalogue. The native C++ generator owns the generated HTML; no live GitHub API call is needed to browse the static page. Review both the curated portfolio and the source snapshot when repositories are added or renamed.

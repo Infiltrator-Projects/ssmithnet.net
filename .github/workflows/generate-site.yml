@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'src/**'
+      - 'data/**'
       - 'include/**'
       - 'tests/**'
       - 'CNAME'
@@ -69,6 +70,7 @@ jobs:
           touch public/.nojekyll
           test -s public/index.html
           test -s public/workbench.html
+          test -s public/projects.html
           test -s public/garage.html
           test -s public/about.html
           test -s public/archive.html

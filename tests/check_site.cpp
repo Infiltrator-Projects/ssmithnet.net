@@ -23,8 +23,8 @@ namespace fs = std::filesystem;
 namespace {
 using std::string;
 using Attrs = std::map<string, string>;
-const std::array<string, 6> pages{
-    "index.html", "workbench.html", "garage.html", "about.html",
+const std::array<string, 7> pages{
+    "index.html", "workbench.html", "projects.html", "garage.html", "about.html",
     "archive.html", "downloads/model-11-sandy/index.html"
 };
 void require(bool yes, const string& why) {
@@ -545,7 +545,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-system2") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-portfolio1") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -584,7 +584,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261116-system2") != string::npos,
+        require(content.find("site-redesign.css?v=20261116-portfolio1") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -704,6 +704,54 @@ void validate(const fs::path& root) {
             "About reading order or anchors missing");
     require(home.find("href=\"workbench.html#software\"") != string::npos,
             "Homepage should introduce distinct workbench subjects rather than duplicate its hardware feature");
+    // Compare every visible repository to the retained GitHub organisation snapshot.
+    const string project_html = first.at("projects.html");
+    const string catalogue_manifest = read(root / "data/github-portfolio-2026-11-16.tsv");
+    std::set<string> repository_names;
+    std::map<string, size_t> family_counts;
+    std::istringstream inventory(catalogue_manifest);
+    string inventory_line;
+    while (std::getline(inventory, inventory_line)) {
+        if (inventory_line.empty() || inventory_line[0] == '#') continue;
+        const auto tab = inventory_line.find('\t');
+        require(tab != string::npos, "Invalid repository snapshot row");
+        const string category = inventory_line.substr(0, tab);
+        const string name = inventory_line.substr(tab + 1);
+        require(!name.empty() && std::regex_match(name, std::regex(R"([A-Za-z0-9_.-]+)")),
+                "Invalid or unsafe repository name in the snapshot");
+        require(repository_names.insert(name).second, "Duplicate GitHub repository " + name);
+        ++family_counts[category];
+        const string link = "href=\"https://github.com/Infiltrator-Projects/" + name + "\"";
+        const string marker = "data-repo-name=\"" + name + "\"";
+        require(project_html.find(link) != string::npos && project_html.find(marker) != string::npos,
+                "Portfolio omits the actual repository " + name);
+        require(project_html.find(marker, project_html.find(marker) + marker.size()) == string::npos,
+                "Portfolio repeats repository " + name);
+    }
+    const std::array<std::pair<string,size_t>,8> expected_families{{
+        {"foundations",9}, {"applications",7}, {"diagnostics",6},
+        {"creative",3}, {"publishing",2}, {"calendar-modules",31},
+        {"clock-modules",23}, {"filesystem-modules",23}
+    }};
+    require(repository_names.size() == 104 && family_counts.size() == expected_families.size(),
+            "Portfolio must contain all 104 public repositories in eight groups");
+    for (const auto& [group, count] : expected_families) {
+        require(family_counts[group] == count &&
+                project_html.find("id=\"group-" + group + "\"") != string::npos,
+                "Portfolio family missing or has the wrong count: " + group);
+    }
+    const std::regex repository_entry(R"(data-repo-name=")");
+    const size_t entries = static_cast<size_t>(std::distance(
+        std::sregex_iterator(project_html.begin(), project_html.end(), repository_entry),
+        std::sregex_iterator()));
+    require(entries == 104 && project_html.find("id=\"repository-search\"") != string::npos &&
+            project_html.find("id=\"repository-count\"") != string::npos &&
+            project_html.find("addEventListener('input'") != string::npos,
+            "Full catalogue, search controls or progressive enhancement missing");
+    require(home.find("href=\"projects.html\"") != string::npos &&
+            first.at("workbench.html").find("href=\"projects.html\"") != string::npos &&
+            first.at("workbench.html").find("104 repositories") != string::npos,
+            "Project catalogue is not discoverable from both Home and Workbench");
     const string garage = first.at("garage.html");
     validate_garage(root, garage);
     for (const auto& [relative, content] : first)
