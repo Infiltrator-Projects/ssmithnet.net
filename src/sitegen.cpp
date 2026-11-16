@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-watch1") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-watch2") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -634,7 +634,7 @@ static string render_about() {
       <p>The attraction is familiar: mechanical precision, carefully finished metal and an instrument whose design reflects its purpose. It's another form of engineering that I enjoy living with, rather than just looking at on a screen.</p>
     </div>
     <figure>
-      <img src="assets/photos/daytona-reverse-panda.webp" width="800" height="800" loading="lazy" decoding="async" alt="Close-up of an Oystersteel Daytona with black dial, silver chronograph subdials, black tachymeter bezel and stainless-steel bracelet">
+      <img src="assets/photos/daytona-reverse-panda.webp" width="220" height="220" loading="lazy" decoding="async" alt="Close-up of an Oystersteel Daytona with black dial, silver chronograph subdials, black tachymeter bezel and stainless-steel bracelet">
       <figcaption>My reverse-panda Daytona · Image supplied for this website.</figcaption>
     </figure>
   </article>

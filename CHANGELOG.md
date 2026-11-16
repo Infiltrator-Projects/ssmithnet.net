@@ -4,6 +4,8 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
+- Reduce the About page Daytona picture to a compact 220px illustration (170px on narrow screens), so it supports rather than overwhelms the surrounding personal interests.
+
 - Rework content across the entire site: remove duplicate homepage project/history summaries, expand Workbench into six source-grounded areas, provide a substantial About narrative, and enrich Garage entries while respecting the separation between the source catalogue and package downloads.
 
 - Replace accumulated homepage-only CSS patches with a single responsive visual system for the entire website family; unify typography, navigation, project records, vehicle galleries and site history, and prepare the Software Centre to use the same pinned assets.

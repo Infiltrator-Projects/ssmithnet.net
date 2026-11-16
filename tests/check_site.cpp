@@ -546,7 +546,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-watch1") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-watch2") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -585,7 +585,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261116-watch1") != string::npos,
+        require(content.find("site-redesign.css?v=20261116-watch2") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -691,9 +691,15 @@ void validate(const fs::path& root) {
             "Optimised reverse-panda Daytona image is missing or empty");
     require(first.at("about.html").find("id=\"daytona\"") != string::npos &&
             first.at("about.html").find("src=\"assets/photos/daytona-reverse-panda.webp\"") != string::npos &&
-            first.at("about.html").find("width=\"800\" height=\"800\"") != string::npos &&
+            first.at("about.html").find("width=\"220\" height=\"220\"") != string::npos &&
             first.at("about.html").find("My reverse-panda Daytona.") != string::npos,
             "About must display the supplied Daytona picture with responsive dimensions");
+    // The owner's watch is a supporting interest, not a full-width hero.
+    require(system_css.find(".watch-feature{display:grid;grid-template-columns:minmax(0,1fr) 220px") != string::npos &&
+            system_css.find(".watch-feature img{display:block;width:100%;max-width:220px") != string::npos &&
+            system_css.find(".watch-feature figure{width:100%;max-width:220px") != string::npos &&
+            system_css.find(".watch-feature figure{max-width:170px;justify-self:start}") != string::npos,
+            "Daytona must remain proportionate to About content on desktop and phone");
     const string about = first.at("about.html");
     require(about.find("<span class=\"era\">1993</span>") != string::npos &&
             about.find("It began with a Mercedes-Benz 450SEL 6.9 in 1993") != string::npos &&
