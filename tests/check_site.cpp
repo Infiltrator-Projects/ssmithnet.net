@@ -717,7 +717,7 @@ void validate(const fs::path& root) {
             "Workbench must explain all six project subjects");
     require(workbench_page.find("integration package") != string::npos &&
             workbench_page.find("0.19</dd>") != string::npos &&
-            workbench_page.find("qualified bootable release") != string::npos,
+            workbench_page.find("qualified QEMU milestone") != string::npos,
             "Workbench must describe verified development limitations and current format");
     require(about.find("id=\"how-it-fits\"") != string::npos &&
             about.find("Beta Tester of the Month") != string::npos,
