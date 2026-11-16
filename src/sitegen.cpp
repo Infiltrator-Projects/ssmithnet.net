@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-portfolio1") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-editorial1") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -103,19 +103,19 @@ static string historical_car(const Car& c) {
 
 static vector<Car> historical_cars() {
     vector<Car> cars{
-        {"2004 · Ford · BA · LTD", "2004 LTD", "Ford", "LTD", "BA", "5.4 L V8 · Petrol / LPG", "A long-wheelbase BA LTD with the 5.4-litre V8 and dual-fuel petrol and LPG. The big, comfortable end of my Australian Ford history.", "ba-ltd", "2004 · recorded year", 2004},
-        {"2003 · Ford · BA · Fairmont", "2003 Fairmont", "Ford", "Fairmont", "BA", "5.4 L V8 · Petrol / LPG", "The 2003 BA Fairmont paired a 5.4-litre V8 with petrol and LPG. Another V8 Ford, but in the more familiar Fairmont body.", "ba-fairmont", "2003 · recorded year", 2003},
-        {"2002 · Land Rover · Discovery II", "Discovery 2 TDI", "Land Rover", "Discovery 2", "Discovery II", "TDI diesel", "A diesel four-wheel drive among the saloons and coupes. The Discovery II brought a boxy, practical Land Rover into the garage.", "discovery-2", "2002 · recorded year", 2002},
-        {"2002 · Ford · AU Series II · Fairmont", "Fairmont", "Ford", "Fairmont", "AU Series II", "4.0 L · Petrol / LPG", "An AU Series II Fairmont with the 4.0-litre six-cylinder engine and dual-fuel petrol and LPG. A different kind of Falcon from the later V8s.", "au-fairmont", "2002 · recorded year", 2002},
+        {"2004 · Ford · BA · LTD", "2004 LTD", "Ford", "LTD", "BA", "5.4 L V8 · Petrol / LPG", "A long-wheelbase BA LTD with the 5.4-litre V8 and dual-fuel petrol/LPG. This was the luxury end of the large Australian Fords I owned, following the earlier BA Fairmont. The combination of a big V8 and LPG is a detail worth recording rather than reducing it to a generic model listing.", "ba-ltd", "2004 · recorded year", 2004},
+        {"2003 · Ford · BA · Fairmont", "2003 Fairmont", "Ford", "Fairmont", "BA", "5.4 L V8 · Petrol / LPG", "My 2003 BA Fairmont combined the 5.4-litre V8 with petrol/LPG dual fuel. It belongs to the same broad Ford era as the later LTD, but the two cars were different ownership entries—not one vehicle listed under two trims.", "ba-fairmont", "2003 · recorded year", 2003},
+        {"2002 · Land Rover · Discovery II", "Discovery 2 TDI", "Land Rover", "Discovery 2", "Discovery II", "TDI diesel", "The 2002 Land Rover Discovery II was the diesel four-wheel-drive exception to a garage otherwise dominated by saloons, coupés and Australian Fords. It brought a very different purpose and layout to the collection, and is one of the entries for which reference images have been supplied.", "discovery-2", "2002 · recorded year", 2002},
+        {"2002 · Ford · AU Series II · Fairmont", "Fairmont", "Ford", "Fairmont", "AU Series II", "4.0 L · Petrol / LPG", "My 2002 AU Series II Fairmont had the 4.0-litre six-cylinder with petrol/LPG dual fuel. Together with the later V8 Fairmont and LTD, it shows how different the same Australian Ford family could be in engine, body and character. It is a separate 2002 car, not the 2003 BA.", "au-fairmont", "2002 · recorded year", 2002},
         {"Ford · EL · Tickford LPG", "EL Falcon", "Ford", "EL Falcon", "EL", "Petrol / LPG · Tickford", "Victorian taxi yellow paint, but not a taxi: this was my privately owned EL Falcon with Tickford-installed LPG. Only the colour came from the cab rank.", "el-falcon", "1996–1998 · model era", 1997},
-        {"Peugeot · 405 · GLD", "405 GLD", "Peugeot", "405 GLD", "405", "Diesel · waste motor oil", "A white Peugeot 405 GLD with black interior. Its most memorable mechanical detail was running the diesel engine on waste motor oil.", "peugeot-405-gld", "Late 1980s–1990s · model era", 1992},
+        {"Peugeot · 405 · GLD", "405 GLD", "Peugeot", "405 GLD", "405", "Diesel · waste motor oil", "This was a white Peugeot 405 GLD diesel with a black interior—not a 504. Its place in the history is memorable for the fuel experiment: I ran it on waste motor oil. That experience makes it a particular mechanical story rather than simply another name among the sedans.", "peugeot-405-gld", "Late 1980s–1990s · model era", 1992},
         {"1985 · Mercedes-Benz · C126 · AMG", "500SEC AMG", "Mercedes-Benz", "500SEC", "126.044 · C126", "4,973 cc M117.963 V8", "Smoke Silver over beige leather, right-hand drive and UK delivered. Built at Sindelfingen in 1985 before its AMG conversion, this C126 was a particularly distinctive Mercedes.", "500-sec", "1985 · factory record", 1985},
-        {"1985 · Ford · XF · S-Pack", "XF Falcon S-Pack", "Ford", "XF Falcon S-Pack", "XF", "Petrol", "My beige 1985 XF Falcon S-Pack. Square-edged Australian Ford styling and the straightforward character of the XF era.", "xf-s-pack", "1985 · recorded year", 1985},
+        {"1985 · Ford · XF · S-Pack", "XF Falcon S-Pack", "Ford", "XF Falcon S-Pack", "XF", "Petrol", "My beige 1985 XF Falcon S-Pack sits between the larger V8 Mercedes stories and the later Falcons. It represents another side of the Australian car history: a familiar, square-edged Ford whose particular S-Pack identity matters more here than a long list of generic XF specifications.", "xf-s-pack", "1985 · recorded year", 1985},
         {"Mercedes-Benz · W116 · 6.9", "450SEL 6.9", "Mercedes-Benz", "450SEL 6.9", "116.036 · W116", "6,834 cc M100.985 V8", "The fully optioned, yellow-beige Australian 450SEL 6.9 with the M100 V8. This was the car behind the original Infiltrator website, which I began in 1993.", "450sel-69", "1975–1980 · model era", 1978},
         {"Ford · XC · blue ute", "XC Falcon ute (1 of 2)", "Ford", "Falcon ute", "XC", "Six-cylinder", "One of two blue, six-cylinder XC Falcon utes I owned. A utility-bodied Ford alongside the Falcon sedans in my garage history.", "xc-falcon-ute-1", "1976–1979 · model era", 1978},
         {"Ford · XC · blue ute", "XC Falcon ute (2 of 2)", "Ford", "Falcon ute", "XC", "Six-cylinder", "The other blue XC Falcon ute I owned, also with a six-cylinder engine. These were two separate vehicles; their individual build years are not recorded.", "xc-falcon-ute-2", "1976–1979 · model era", 1978},
         {"Mercedes-Benz · W116 · 280SE", "280SE", "Mercedes-Benz", "280SE", "116.024 · W116", "2,746 cc M110 I6", "My white, six-cylinder W116 280SE with traditional hubcaps. A more understated companion to the 450SEL 6.9 in my Mercedes history.", "280-se", "1972–1980 · model era", 1977},
-        {"Holden · LC · 1.1 litre", "LC Torana", "Holden", "Torana", "LC", "1.1 L I4", "The little 1.1-litre four-cylinder LC Torana I owned. A compact Holden at the opposite end of the scale from the big V8 sedans.", "lc-torana", "1969–1972 · model era", 1970},
+        {"Holden · LC · 1.1 litre", "LC Torana", "Holden", "Torana", "LC", "1.1 L I4", "My LC Torana was the small 1.1-litre four-cylinder car in a history that also includes large V8 Mercedes-Benz and Ford models. That contrast is the reason it belongs in the same record: the smallest and simplest machines can be as individually memorable as the grandest.", "lc-torana", "1969–1972 · model era", 1970},
     };
     // Confirmed vehicle years are used where known. Unknown individual build years
     // are positioned by their series period and labelled "model era" in the UI.
@@ -130,7 +130,7 @@ static string render_home() {
   <div class="landing-hero-copy">
     <p class="eyebrow">Shannon Smith · Mooroopna, Victoria</p>
     <h1 id="home-title">Projects, cars,<br>software, and<br><span>machines.</span></h1>
-    <p class="landing-intro">A personal corner of the internet for building software, driving interesting machinery and keeping the old technology working.</p>
+    <p class="landing-intro">A personal website since 1993. I build software from the foundations upwards, document the cars I've owned and keep the mechanical and analogue things that interest me in view.</p>
     <div class="landing-actions"><a class="ui-action ui-action-primary" href="workbench.html">Explore the Workbench <span aria-hidden="true">↗</span></a><a class="ui-action ui-action-secondary" href="garage.html">Visit the Garage <span aria-hidden="true">→</span></a></div>
   </div>
   <div class="hero-accent" aria-hidden="true"><span class="hero-wave"></span><span class="hero-wave-copy"></span></div>
@@ -138,7 +138,7 @@ static string render_home() {
 <section class="landing-hubs" aria-label="Explore the site">
   <a class="hub-tile hub-tile-primary" href="workbench.html"><img class="hub-symbol" src="assets/graphics/ui-workbench.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Workbench</strong><span>Filesystems, native applications, diagnostics and analogue hardware.</span></span><b aria-hidden="true">↗</b></a>
   <a class="hub-tile" href="garage.html"><img class="hub-symbol" src="assets/graphics/ui-garage.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Garage</strong><span>My current Mercedes, former cars and their stories.</span></span><b aria-hidden="true">↗</b></a>
-  <a class="hub-tile" href="https://infiltrator-projects.github.io/Infiltrator-Repository/"><img class="hub-symbol" src="assets/graphics/ui-code.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Software Centre</strong><span>Downloadable tools, applications and packages.</span></span><b aria-hidden="true">↗</b></a>
+  <a class="hub-tile" href="projects.html"><img class="hub-symbol" src="assets/graphics/ui-code.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Projects</strong><span>The full source catalogue: applications, modules, games and infrastructure.</span></span><b aria-hidden="true">↗</b></a>
   <a class="hub-tile" href="about.html"><img class="hub-symbol" src="assets/graphics/ui-about.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>About</strong><span>The site, its history and the interests behind it.</span></span><b aria-hidden="true">↗</b></a>
 </section>
 <section class="landing-showcase" aria-label="Featured collections">
@@ -146,7 +146,7 @@ static string render_home() {
     <div class="showcase-description">
       <p class="eyebrow">Featured hardware · Open-reel audio</p>
       <h2>ReVox B77 Mk II <span>+ dbx 224</span></h2>
-      <p>Magnetic tape, illuminated meters and carefully made mechanics. My B77 Mk II sits with a dbx 224 Type II noise-reduction unit — a very different sort of machine from the ones on my software bench.</p>
+      <p>My B77 Mk II and its dbx 224 are here because tape remains a hands-on piece of engineering: transport mechanics, recording levels, signal processing and a sound you can physically handle. The Workbench has the equipment story.</p>
       <a class="ui-action ui-action-outline" href="workbench.html#revox-b77">Explore the tape setup <span aria-hidden="true">↗</span></a>
     </div>
     <figure class="revox-preview">
@@ -162,28 +162,16 @@ static string render_home() {
     <a class="panel-link" href="garage.html#vehicle-history">Explore all fourteen cars <span aria-hidden="true">→</span></a>
   </aside>
 </section>
-<section class="landing-lower" aria-label="Software and site history">
-  <article class="home-focus">
-    <p class="eyebrow">From the workbench</p>
-    <h2>Things I build and keep running.</h2>
-    <div class="bench-register">
-      <a href="workbench.html#infiltratorfs"><span class="bench-number">01</span><span class="bench-copy"><strong>InfiltratorFS</strong><small>Copy-on-write generations, checked data and recovery work.</small></span><b aria-hidden="true">↗</b></a>
-      <a href="workbench.html#link"><span class="bench-number">02</span><span class="bench-copy"><strong>The Link diagnostics family</strong><small>Native vehicle diagnostics developed with my Mercedes.</small></span><b aria-hidden="true">↗</b></a>
-      <a href="workbench.html#software"><span class="bench-number">03</span><span class="bench-copy"><strong>Desktop software</strong><small>Native system tools, calendars and interfaces.</small></span><b aria-hidden="true">↗</b></a>
-    </div>
-    <a class="panel-link" href="workbench.html">Explore the full Workbench <span aria-hidden="true">→</span></a><a class="panel-link" href="projects.html">Browse all 104 public Git repositories <span aria-hidden="true">↗</span></a>
-  </article>
-  <article class="home-history">
-    <p class="eyebrow">At a glance</p><h2>Cars, code and history.</h2>
-    <p>A personal website I began in 1993 with my Mercedes-Benz 450SEL 6.9, which grew to include software, machinery and older technology.</p>
-    <div class="history-facts">
-      <div><strong>14</strong><span>Vehicles in the garage history</span></div>
-      <div><strong>1993</strong><span>My website began</span></div>
-      <div><strong>6.9</strong><span>The original Mercedes-Benz story</span></div>
-      <div><strong>104</strong><span>Public GitHub repositories · Nov 2026</span></div>
-    </div>
-    <a class="panel-link" href="about.html#the-site">The story of this site <span aria-hidden="true">→</span></a>
-  </article>
+<section class="home-editorial" aria-labelledby="home-editorial-title">
+  <div class="home-editorial-heading">
+    <p class="eyebrow">One place, many lines of work</p>
+    <h2 id="home-editorial-title">The workshop has grown.<br>The address has stayed.</h2>
+  </div>
+  <div class="home-editorial-copy">
+    <p>In 1993 this website started with my Mercedes-Benz 450SEL 6.9. It did not begin as a software storefront or a list of repositories. Since then the interests have expanded, but they still belong together: how systems are designed, how machines behave and what remains useful over time.</p>
+    <p>Here, <a href="workbench.html">Workbench</a> is where I explain the engineering, <a href="projects.html">Projects</a> is the complete GitHub source inventory, <a href="garage.html">Garage</a> records the vehicles, and <a href="about.html">About</a> tells the longer story. The <a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre</a> is specifically for published packages.</p>
+    <a class="text-link" href="about.html#the-site">Read how the site began <span aria-hidden="true">↗</span></a>
+  </div>
 </section>
 )site" + page_end("A personal corner of the internet, since 1993.");
 }
@@ -354,25 +342,110 @@ static string render_projects() {
 }
 
 static string render_workbench() {
-    return page_start("Workbench", "InfiltratorFS, native desktop applications and the Link vehicle-diagnostics family. Software projects by Shannon Smith.", "Workbench", "workbench-page") + R"(
-<section class="page-intro"><p class="eyebrow">Workbench</p><h1>Software, machines,<br> first principles.</h1><p class="lead">Filesystems, native applications, vehicle diagnostics and a place for analogue hardware. Personal projects, still being built.</p><nav class="workbench-directory" aria-label="Workbench sections"><a href="#infiltratorfs"><small>01 · Storage</small><strong>InfiltratorFS</strong><span>Filesystem, recovery and integrity</span></a><a href="#software"><small>02 · Applications</small><strong>Desktop software</strong><span>Tools and native interfaces</span></a><a href="#link"><small>03 · Vehicles</small><strong>Link diagnostics</strong><span>Cross-make diagnostic software</span></a><a href="#revox-b77"><small>04 · Audio</small><strong>ReVox B77 Mk II</strong><span>Open-reel analogue machines</span></a></nav><p class="workbench-index-link"><a href="projects.html">Browse the complete 104-repository GitHub collection <span aria-hidden="true">↗</span></a></p></section>
-<section id="infiltratorfs" class="project-section"><header class="section-heading"><p class="eyebrow">Storage</p><h2>InfiltratorFS</h2><p class="section-deck">A filesystem with its on-disk format and recovery behaviour at the centre of the design.</p></header>
-<div class="project-content"><p>The Linux path is a native kernel driver. The project also includes formatters, inspection and scrub tools, and Windows access through a driverless Explorer bridge. A native Windows filesystem driver remains future work.</p><dl class="inline-facts"><div><dt>Format</dt><dd>0.18</dd></div><div><dt>Writes</dt><dd>Copy-on-write</dd></div><div><dt>Integrity</dt><dd>Checksummed</dd></div></dl><div class="resource-links"><a href="https://github.com/Infiltrator-Projects/InfiltratorFS">Source code ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/QUALIFICATION.md">Test evidence ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/ROADMAP.md">Feature status ↗</a></div>
-<details class="technical-detail"><summary>Inside the filesystem <span aria-hidden="true">+</span></summary><div class="engineering-notes"><article><h3>Retain earlier generations</h3><p>Copy-on-write transactions create new state while retaining earlier generations. Checksummed checkpoints provide a way to select a recoverable generation after interruption.</p></article><article><h3>Share data deliberately</h3><p>Snapshots and reflinks share file data. Sparse files and paged extent metadata describe where that data lives without requiring every logical byte to occupy storage.</p></article><article><h3>Verify what comes back</h3><p>CRC64 protects metadata and SHA-256 checks logical file data. Inspection and deep-scrub tools make verification an explicit operation.</p></article></div><dl class="fact-list"><div><dt>Object identity</dt><dd>128-bit identifiers</dd></div><div><dt>Names</dt><dd>UTF-8 components up to 1,023 bytes</dd></div><div><dt>Compression</dt><dd>Native IAC1; LZ4 retained as a non-default representation</dd></div><div><dt>Linux integration</dt><dd>Native VFS driver installed through DKMS</dd></div></dl><h3>The work still ahead</h3><p>Booting a real Linux installation brings mount latency, writeback and metadata costs into focus. Those remain active engineering work. Feature support and passing tests are recorded separately from claims about everyday performance.</p></details></div></section>
-<section id="software" class="project-section"><header class="section-heading"><p class="eyebrow">Native applications</p><h2>Desktop software.</h2><p class="section-deck">Tools for understanding and working with the machine.</p></header><div class="project-content"><p>System Monitor, Defragmenter, Calendar and Calculator grew alongside InfiltratorFS as after-hours and weekend projects. They share selected Common primitives, while each owns its domain rules and platform responsibilities.</p><div class="family-register"><a href="https://github.com/Infiltrator-Projects/System-Monitor"><strong>System Monitor</strong><span>Native Linux system management through direct OS and hardware interfaces.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Defragmenter"><strong>Defragmenter</strong><span>Filesystem allocation analysis, defragmentation and recovery on Linux.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Calendar"><strong>Calendar</strong><span>Alternative clocks, chronology, calendars and astronomy for Cinnamon.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/Calculator"><strong>Calculator</strong><span>A shared calculation core with native Linux, Windows and iPhone interfaces.</span><b aria-hidden="true">↗</b></a></div></div></section>
-<section id="link" class="project-section"><header class="section-heading"><p class="eyebrow">Vehicle diagnostics</p><h2>The Link family.</h2><p class="section-deck">A shared diagnostic engine. Knowledge specific to each manufacturer.</p></header><div class="project-content"><p>Link owns the common transport, OBD and UDS handling, sessions and scheduling. Mercedes, Jaguar, BMW, Audi and Ford applications add their own identities, definitions and manufacturer-specific behaviour.</p><p>MBLink is developed with <a class="inline-link" href="garage.html">my C207 E-Class</a>.</p><div class="family-register"><a href="https://github.com/Infiltrator-Projects/Link"><strong>Link</strong><span>The shared C11 diagnostic and application engine.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/MBLink"><strong>MBLink</strong><span>Mercedes-Benz · C207 / OM651 development vehicle.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/JAGLink"><strong>JAGLink</strong><span>Jaguar · X-Type / X400 knowledge.</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/BMWLink"><strong>BMWLink</strong><span>BMW</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/AUDILink"><strong>AUDILink</strong><span>Audi</span><b aria-hidden="true">↗</b></a><a href="https://github.com/Infiltrator-Projects/FORDLink"><strong>FORDLink</strong><span>Ford</span><b aria-hidden="true">↗</b></a></div><details class="technical-detail"><summary>Discover &amp; the diagnostic workflow <span aria-hidden="true">+</span></summary><p>Connect the adapter, identify the vehicle and modules, match supported definitions, then select the data to request. Results stay tied to their source.</p><p>Discover is the specialist side of the family: module identification, read-only inventory, captures and evidence export. Shared interrogation mechanics belong in Link; manufacturer-specific addresses and meanings belong with the vehicle application.</p><p>An unknown response stays unknown until documentation or reproducible captures establish its meaning.</p></details></div></section>
-
-<section id="revox-b77" class="project-section analog-section">
-  <header class="section-heading"><p class="eyebrow">Analogue audio</p><h2>ReVox B77 Mk II.</h2><p class="section-deck">Open-reel tape, mechanical engineering and the sound of magnetic recording.</p></header>
-  <div class="analog-feature-body">
-    <figure><img src="assets/photos/revox-b77-mkii-dbx224.webp" width="1200" height="900" loading="lazy" decoding="async" alt="Illustrated ReVox B77 Mk II recorder with BASF reels, paired with dbx 224 noise reduction"><figcaption>Clean illustrative redraw of my actual equipment, rather than an original photograph.</figcaption></figure>
-    <div><p class="eyebrow">My tape equipment</p><h3>B77 Mk II + dbx Model 224</h3><p>My ReVox B77 Mk II reel-to-reel deck is paired with a dbx Model 224 simultaneous encode/decode Type II tape noise-reduction system. The original hardware photographs have been redrawn here to show the machine without the surrounding room.</p><dl class="analog-specs"><div><dt>Recorder</dt><dd>ReVox B77 Mk II</dd></div><div><dt>Noise reduction</dt><dd>dbx Model 224 · Type II</dd></div><div><dt>Format</dt><dd>Open-reel magnetic tape</dd></div></dl></div>
+    return page_start("Workbench", "How the Infiltrator software, operating-system components, filesystems, diagnostic applications and creative work fit together, with an analogue ReVox workshop.", "Workbench", "workbench-page") + R"WORKBENCH(
+<section class="page-intro workbench-intro">
+  <p class="eyebrow">Workbench · How the projects fit together</p>
+  <h1>Engineering work,<br>from the interface down.</h1>
+  <p class="lead">The software projects are not one application split into dozens of repositories. Some are independent products, some own reusable engines, and others own a single calendar, clock or filesystem format. This is where the major systems, their boundaries and the work still ahead are explained.</p>
+  <nav class="workbench-directory" aria-label="Workbench sections">
+    <a href="#platform"><small>01 · Foundation</small><strong>InfiltratorOS</strong><span>Boot, kernel, Libraries and native file handling</span></a>
+    <a href="#infiltratorfs"><small>02 · Storage</small><strong>InfiltratorFS</strong><span>Format, recovery and integrity</span></a>
+    <a href="#software"><small>03 · Applications</small><strong>Desktop tools</strong><span>Monitor, defragment, calculate and manage</span></a>
+    <a href="#link"><small>04 · Vehicles</small><strong>Link diagnostics</strong><span>Protocols and manufacturer knowledge</span></a>
+    <a href="#creative"><small>05 · Simulation</small><strong>Games & creative</strong><span>City building, racing and character stories</span></a>
+    <a href="#revox-b77"><small>06 · Audio</small><strong>ReVox B77 Mk II</strong><span>Open-reel mechanics and dbx processing</span></a>
+  </nav>
+  <p class="workbench-index-link"><a href="projects.html">Find all 104 repositories and their source links <span aria-hidden="true">↗</span></a></p>
+</section>
+<section id="platform" class="project-section">
+  <header class="section-heading"><p class="eyebrow">Foundation · Operating system</p><h2>InfiltratorOS is more than a desktop theme.</h2><p class="section-deck">A collection of individually owned components intended to work as one operating environment.</p></header>
+  <div class="project-content">
+    <p>InfiltratorOS is the integration point, not a duplicate home for every subsystem. Its current deliverable is an amd64 integration package for a Debian/Linux Mint environment. It establishes the layout, shared resources and installation sequence for independently maintained components. A completed standalone operating system and graphical Setup installer are still future milestones.</p>
+    <p>The architectural split matters. <strong>Libraries</strong> supplies portable C11 mechanisms and public contracts. <strong>Boot</strong> handles the firmware-stage selection of operating systems and uses filesystem-specific Common V2 shared objects. The separate <strong>Kernel</strong> repository tracks the native-kernel development path, with a qualified QEMU milestone but no claim that the resulting kernel is ready for everyday hardware. <strong>Files</strong> is a native file manager, and <strong>Software</strong> owns application discovery, package operations and update workflows.</p>
+    <div class="workbench-context"><strong>Why separate repositories?</strong><p>Ownership stays explicit: a filesystem repository defines the behaviour of its format, the common layer defines the interface, and the loader or application consumes the capability. The old central Filesystems repository is transitional while the engines move to their independent homes.</p></div>
+    <div class="family-register">
+      <a href="https://github.com/Infiltrator-Projects/InfiltratorOS"><strong>InfiltratorOS</strong><span>Integration, installation and system composition.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/Libraries"><strong>Libraries</strong><span>Portable C11 code, shared contracts and native adapters.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/Boot"><strong>Boot</strong><span>Firmware-stage discovery and filesystem module loading.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/Kernel"><strong>Kernel</strong><span>Kernel source, build milestones and hardware qualification work.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/Files"><strong>Files</strong><span>Native browsing and file-operation workflows.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/Software"><strong>Software</strong><span>Graphical installation, updates and software inventory.</span><b aria-hidden="true">↗</b></a>
+    </div>
+    <p class="project-boundary">Builds, emulated boots and component tests are evidence of particular milestones, not proof that every subsystem is ready for a general-purpose installation. Current qualification is maintained in each repository.</p>
   </div>
 </section>
-<section id="all-projects" class="destination-strip portfolio-teaser"><div><p class="eyebrow">The wider software portfolio</p><h2>104 repositories. Eight project families.</h2><p>InfiltratorOS, Boot, core libraries, games and utilities sit alongside 31 calendar, 23 clock and 23 independent filesystem modules. Read the full GitHub portfolio without mistaking individual source modules for finished applications.</p></div><a class="text-link" href="projects.html">Explore the complete catalogue ↗</a></section>
-<section id="repository" class="destination-strip"><div><p class="eyebrow">Downloads &amp; installation</p><h2>The Software Centre.</h2><p>Browse the Linux applications, inspect package details and add the APT repository to Linux Mint.</p></div><a class="text-link" href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Browse applications ↗</a></section>
-<section id="principles" class="closing-note"><h2>Keep the evidence.<br>Question the result.</h2><p>A successful build proves that code compiled. A clean test proves the case it exercised. Neither automatically proves behaviour on a real car or a real desktop workload. That gap is where much of the work happens.</p></section>
-)" + page_end("The best or nothing.");
+<section id="infiltratorfs" class="project-section">
+  <header class="section-heading"><p class="eyebrow">Storage · Original format</p><h2>InfiltratorFS.</h2><p class="section-deck">What should survive a crash, and how can the filesystem prove what survived?</p></header>
+  <div class="project-content">
+    <p>InfiltratorFS is a clean-sheet filesystem with its own persistent format, transactions, allocation model and recovery rules. The filesystem itself owns these decisions; Linux, Windows and future systems are adapters to its behaviour rather than alternative implementations of the format.</p>
+    <p>Copy-on-write transactions publish new generations without immediately destroying earlier state. Checkpoints, snapshots and reflinks provide ways to retain or share data; sparse files and extent metadata make allocation explicit. CRC64 and SHA-256 form separate metadata and logical-data integrity mechanisms. Inspection, checking and scrub tools expose verification rather than assuming that a successful write call settles the question.</p>
+    <dl class="inline-facts"><div><dt>Current on-disk format</dt><dd>0.19</dd></div><div><dt>Transactions</dt><dd>Generation-based CoW</dd></div><div><dt>Qualification</dt><dd>Platform-specific evidence</dd></div></dl>
+    <p>The Linux path includes a native VFS driver and the project has a driverless Windows Explorer access bridge. The experimental Common V2 module shares the portable format engine with a hosted implementation and a read-only BOOT profile. A production-qualified firmware installation and a native Windows filesystem driver are not yet established.</p>
+    <div class="resource-links"><a href="https://github.com/Infiltrator-Projects/InfiltratorFS">Source repository ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/QUALIFICATION.md">Qualification evidence ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/ROADMAP.md">Roadmap ↗</a></div>
+    <details class="technical-detail"><summary>More on the filesystem's design <span aria-hidden="true">+</span></summary>
+      <div class="engineering-notes"><article><h3>Keep identity stable</h3><p>Objects carry 128-bit identifiers and the namespace supports UTF-8 names. The transaction and extent model separates logical identity from where bytes happen to be stored.</p></article><article><h3>Share without guessing</h3><p>Reflinks, snapshots and sparse allocation require explicit rules about ownership, history and future writes. A shared extent is a deliberate state, not an accidental consequence of copying.</p></article><article><h3>Test failures as well as success</h3><p>Disposable-image tests can inject I/O interruptions. Mounted Linux performance, writeback behaviour, recovery and the firmware bridge have distinct qualification boundaries.</p></article></div>
+    </details>
+  </div>
+</section>
+<section id="software" class="project-section">
+  <header class="section-heading"><p class="eyebrow">Applications · Practical tools</p><h2>Software that does a specific job.</h2><p class="section-deck">Not every capability belongs inside the operating system itself.</p></header>
+  <div class="project-content">
+    <p><strong>System Monitor</strong> examines the running machine through native system interfaces. <strong>Defragmenter</strong> inspects offline filesystem allocation and restricts write operations to explicitly qualified formats. <strong>Calendar</strong> is a Cinnamon panel clock and calendar that can use 31 independently owned calendar systems and 23 clock modules, rather than hard-coding all those rules into one desktop application.</p>
+    <p><strong>Calculator</strong>, <strong>Files</strong> and <strong>Software</strong> address different daily tasks: calculation, file operations and package management. <strong>RunnerScope</strong> follows self-hosted GitHub Actions runners; <strong>PowerShell-HAL</strong> inserts generated commands for inspection rather than executing them automatically. They can share neutral facilities from Libraries while retaining their own product behaviour and release evidence.</p>
+    <div class="family-register">
+      <a href="https://github.com/Infiltrator-Projects/System-Monitor"><strong>System Monitor</strong><span>Native inspection of system and hardware state.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/Defragmenter"><strong>Defragmenter</strong><span>Offline analysis, recovery and qualified defragmentation.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/Calendar"><strong>Calendar</strong><span>Cinnamon calendar, historical systems and clocks.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/Calculator"><strong>Calculator</strong><span>Native cross-platform calculation.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/RunnerScope"><strong>RunnerScope</strong><span>Self-hosted GitHub runner monitoring.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/PowerShell-HAL"><strong>PowerShell-HAL</strong><span>Editable PowerShell assistance, without automatic execution.</span><b aria-hidden="true">↗</b></a>
+    </div>
+    <p class="project-boundary">The individually owned calendar, clock and filesystem repositories are available in the <a href="projects.html">complete Projects catalogue</a>. Those modules are building blocks, not claims of dozens of separately finished desktop products.</p>
+  </div>
+</section>
+<section id="link" class="project-section">
+  <header class="section-heading"><p class="eyebrow">Vehicle diagnostics · Shared engine</p><h2>Link and its manufacturer families.</h2><p class="section-deck">An adapter returns bytes. A diagnostic product must establish what they actually mean.</p></header>
+  <div class="project-content">
+    <p><strong>Link</strong> owns the common C11 engine for transport, framing, standard OBD-II, UDS sequencing, telemetry and evidence handling. The manufacturer repositories then provide vehicle identity, module definitions and knowledge specific to Mercedes-Benz, Jaguar, BMW, Audi and Ford. This avoids having five incompatible copies of the same underlying diagnostic machinery.</p>
+    <p><strong>MBLink</strong> uses <a class="inline-link" href="garage.html#e250-cdi">my C207 E 250 CDI</a> as a real development and evidence vehicle, but the Mercedes-Benz product is not restricted to that model. Discover targets where enabled concentrate on read-only ECU identification, inventory and capture. An unknown value remains unknown until documentation or reproducible evidence supports its interpretation; a newly recognised module does not automatically authorise a new kind of diagnostic request.</p>
+    <div class="family-register">
+      <a href="https://github.com/Infiltrator-Projects/Link"><strong>Link</strong><span>The shared automotive engine and contracts.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/MBLink"><strong>MBLink</strong><span>Mercedes-Benz diagnostics and discovery.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/JAGLink"><strong>JAGLink</strong><span>Jaguar application and manufacturer definitions.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/BMWLink"><strong>BMWLink</strong><span>BMW application and manufacturer definitions.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/AUDILink"><strong>AUDILink</strong><span>Audi application and manufacturer definitions.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/FORDLink"><strong>FORDLink</strong><span>Ford application and manufacturer definitions.</span><b aria-hidden="true">↗</b></a>
+    </div>
+    <details class="technical-detail"><summary>What Discover is for <span aria-hidden="true">+</span></summary><p>The workflow begins with connection and identification, continues through supported module discovery and read-only data requests, and retains captures for interpretation. Reusable interrogation mechanisms belong to Link; Mercedes, Jaguar, BMW, Audi or Ford-specific meanings stay with the corresponding product. This boundary matters whenever a car produces a response the software cannot yet explain.</p></details>
+  </div>
+</section>
+<section id="creative" class="project-section">
+  <header class="section-heading"><p class="eyebrow">Simulation · Creative tools</p><h2>Games are engineering projects too.</h2><p class="section-deck">Different user experiences, but the same need for coherent models and clear cause and effect.</p></header>
+  <div class="project-content">
+    <p><strong>Egypt</strong> is an original city-building simulation centred on the Nile, work, movement, production and visibly functioning settlements; its repository documents an early native executable shell rather than a completed game. <strong>Backyard Racer</strong> develops the garage, classifieds, car-building and racing loop as one simulation, with vehicle state and progression owned by the game. <strong>Character Profiler</strong> is a separate iPhone story-bible application that treats characters, relationships and portable archives as durable data.</p>
+    <p>These are intentionally separate projects, not hidden modules of InfiltratorOS. Their designs draw on the strengths of older software without claiming to be a reproduction of someone else's program.</p>
+    <div class="family-register">
+      <a href="https://github.com/Infiltrator-Projects/Egypt"><strong>Egypt</strong><span>Nile-based city-building and civilisation simulation.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/backyard-racer"><strong>Backyard Racer</strong><span>Hands-on automotive garage and street-racing simulation.</span><b aria-hidden="true">↗</b></a>
+      <a href="https://github.com/Infiltrator-Projects/Character-Profiler"><strong>Character Profiler</strong><span>Native iOS character and story development.</span><b aria-hidden="true">↗</b></a>
+    </div>
+  </div>
+</section>
+<section id="revox-b77" class="project-section analog-section">
+  <header class="section-heading"><p class="eyebrow">Analogue · Real hardware</p><h2>ReVox B77 Mk II and dbx 224.</h2><p class="section-deck">A different way of seeing an engineering system work.</p></header>
+  <div class="analog-feature-body">
+    <figure><img src="assets/photos/revox-b77-mkii-dbx224.webp" width="1200" height="900" loading="lazy" decoding="async" alt="Illustrated ReVox B77 Mk II recorder with BASF reels, paired with dbx 224 noise reduction"><figcaption>A clean redraw based on my own recorder and dbx unit, not an original photograph.</figcaption></figure>
+    <div><p class="eyebrow">The equipment</p><h3>Open-reel recording, with separate noise reduction.</h3>
+      <p>The ReVox B77 Mk II is a two-channel open-reel tape recorder. Its moving reels, transport controls and VU meters make the recording process visible in a way that software often conceals. There are separate left and right line inputs and outputs on the back of my machine.</p>
+      <p>The dbx Model 224 is an external Type II encode/decode noise-reduction unit. It is part of the recording and playback signal path, not a replacement for the recorder's mechanical transport. The two machines have different jobs, but their settings and connections matter together.</p>
+      <p>The image here is an illustration of my actual equipment. The website's hardware section is about the machines and their operation, rather than a sales listing or a claim that the redraw is a documentary photograph.</p>
+      <dl class="analog-specs"><div><dt>Recorder</dt><dd>ReVox B77 Mk II</dd></div><div><dt>Noise reduction</dt><dd>dbx 224 · Type II</dd></div><div><dt>Connections</dt><dd>Two-channel line input and output</dd></div></dl>
+    </div>
+  </div>
+</section>
+<section id="repository" class="destination-strip"><div><p class="eyebrow">Publishing is a different job</p><h2>Code is not the same as an installable release.</h2><p>The <a href="projects.html">Projects catalogue</a> maps every public source repository. The <strong>Software Centre</strong> is the distribution surface for approved Linux packages, installation information and the APT repository. It does not imply that every source module has a user-installable application.</p></div><a class="text-link" href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Browse the Software Centre ↗</a></section>
+<section id="principles" class="closing-note"><h2>Verify the work,<br>not just the build.</h2><p>A successful compilation proves a particular build. A deterministic unit test proves the cases it exercised. A boot in QEMU, a mount on test media and a real vehicle capture each establish different evidence. The repositories record those boundaries, and the unfinished work is part of the story.</p></section>
+)WORKBENCH" + page_end("The best or nothing.");
 }
 
 static string vehicle_facts(const vector<VehicleFact>& facts, const string& class_name) {
@@ -501,7 +574,7 @@ static string render_garage() {
     const auto sec = historic_mercedes();
     o << R"(<section class="garage-current" aria-labelledby="e250-title"><nav class="section-nav garage-nav" aria-label="Garage sections"><a href="#e250-cdi">Current car</a><a href="#vehicle-history">All previous cars</a><a href="#450sel-69">The original 6.9</a></nav><article class="garage-vehicle vehicle-card vehicle-card--hero" id="e250-cdi"><header class="vehicle-heading"><p class="eyebrow">In the garage · Mercedes-Benz · 2011</p><h1 id="e250-title">E 250 CDI</h1><p class="vehicle-subtitle">BlueEFFICIENCY Coupé</p><p class="vehicle-description">A Bremen-built E-Class coupe in Obsidian Black, with black leather and the OM651 diesel. My current Mercedes, and the car behind MBLink.</p></header><div class="vehicle-overview"><dl class="hero-key-facts"><div><dt>Power</dt><dd>150 <span>kW</span></dd></div><div><dt>Torque</dt><dd>500 <span>Nm</span></dd></div><div><dt>Engine</dt><dd>2.143 <span>litre diesel</span></dd></div></dl><div class="vehicle-story"><p>Originally delivered to Australia, this right-hand-drive, pre-facelift C207 brings two interests together: Mercedes engineering and my <a class="inline-link" href="workbench.html#link">MBLink</a> diagnostic software.</p><p class="equipment-preview">Panoramic roof · COMAND navigation · Heated front seats · Intelligent Light System</p></div></div><div class="vehicle-photo-pair" aria-label="Photographs of the 2011 Mercedes-Benz E 250 CDI Coupé"><figure><a class="garage-photo-link" href="assets/photos/e250-cdi-three-quarter.webp" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/e250-cdi-three-quarter.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Obsidian Black E 250 CDI Coupé photographed from the front three-quarter angle, showing its coupé profile and five-spoke wheels"></a><figcaption>E 250 CDI · three-quarter side view</figcaption></figure><figure><a class="garage-photo-link" href="assets/photos/e250-cdi-front.webp" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/e250-cdi-front.webp" width="520" height="400" loading="lazy" decoding="async" alt="Front of the Obsidian Black 2011 E 250 CDI Coupé with Victorian registration YSF597"></a><figcaption>E 250 CDI · YSF597</figcaption></figure></div>)";
     o << vehicle_record(current) << "</article></section>";
-    o << R"(<section class="garage-chapter" id="vehicle-history" aria-labelledby="vehicle-history-title"><header class="chapter-heading"><p class="eyebrow">The earlier cars · newest to oldest</p><h2 id="vehicle-history-title">A garage history, in order.</h2><p>From Australian Fords and diesels to the Mercedes that began this site. Exact build dates are not recorded for every car; where necessary, the position and label reflect the model generation rather than a verified manufacture year.</p></header>)";
+    o << R"(<section class="garage-chapter" id="vehicle-history" aria-labelledby="vehicle-history-title"><header class="chapter-heading"><p class="eyebrow">The earlier cars · newest to oldest</p><h2 id="vehicle-history-title">A garage history, in order.</h2><p>This is a record of vehicles I owned, not a timeline of when I bought them. They are ordered by known manufacture year where recorded; otherwise the model-era label explains the position. The photos are identified individually as original, supplied reference material or illustrative reconstructions.</p></header>)";
     const auto cars = historical_cars();
     o << R"(<nav class="garage-jump" aria-label="Jump to a previous car"><div class="garage-jump-heading"><strong>Find a car</strong><span>Thirteen previous vehicles · newest to oldest</span></div><div class="garage-jump-links">)";
     for (const auto& car : cars) {
@@ -525,26 +598,47 @@ static string render_garage() {
             o << historical_car(car);
         }
     }
-    o << R"(</div></section><section class="destination-strip"><div><p class="eyebrow">Where it began</p><h2>The original 6.9 page.</h2><p>The W116 450SEL 6.9 was the subject of the original site, which began in 1993.</p></div><a class="text-link" href="about.html#the-site">The story of the site <span aria-hidden="true">→</span></a></section>)";
+    o << R"(</div></section><section class="destination-strip"><div><p class="eyebrow">The vehicle and the code</p><h2>From driving to diagnostics.</h2><p>The current E 250 CDI is also my MBLink development and evidence vehicle. The diagnostic tools are documented in the Workbench; the Garage preserves the cars themselves and what is known about them.</p></div><a class="text-link" href="workbench.html#link">How MBLink fits together <span aria-hidden="true">→</span></a></section>)";
     return o.str() + page_end("A personal garage history.");
 }
 
 static string render_about() {
-    std::ostringstream o;
-    o << page_start("About", "About Shannon Smith: software, cars, open-reel tape, watches and a personal website that began with the Infiltrator 450SEL 6.9 page.", "About", "about-page");
-    o << R"(<section class="page-intro"><p class="eyebrow">About</p><h1>A place of my own.</h1><p class="lead">I'm Shannon Smith, in Mooroopna, Victoria. Software, cars and an interest in how things work have been part of my website since 1993.</p><nav class="section-nav" aria-label="About sections"><a href="#interests">Interests</a><a href="#the-site">Site history</a><a href="#principles">Principles</a></nav></section>
-<section id="interests" class="about-interests"><header class="section-heading"><h2>Beyond the keyboard.</h2><p class="section-deck">The same interest in engineering, on a different scale.</p></header><div class="project-content"><article class="interest-entry"><h3>Open-reel tape.</h3><p>Tape decks and analogue audio sit alongside the music itself. Mechanical engineering is part of the appeal.</p></article><article class="interest-entry"><h3>On the wrist.</h3><p>A Cosmograph Daytona 126500LN in Oystersteel. Another way to enjoy a precisely made machine.</p></article><article class="interest-entry"><h3>Off the clock.</h3><p>Music, films and games have their place here too. The garage has its <a class="inline-link" href="garage.html">own collection of stories</a>.</p></article></div></section>
-<section id="the-site" class="about-history"><header class="section-heading"><p class="eyebrow">ssmithnet.net</p><h2>Before the feed,<br>there was a home page.</h2><p class="section-deck">An address that stayed while the interests grew.</p></header><div class="timeline">)";
-    const vector<Event> events = {
-        {"1993", "The Infiltrator website begins", "I started my website in 1993 with the Mercedes-Benz 450SEL 6.9 as its original subject. The site has grown considerably since then."},
-        {"Beta years", "Windows, Solaris & games", "Voluntary beta testing included Microsoft Windows ME, the Solaris beta team and EA game projects. Windows ME testing included a Beta Tester of the Month award."},
-        {"Software projects", "The workshop grows", "My projects expanded to include System Monitor, Calendar, Defragmenter, InfiltratorFS, Calculator and vehicle diagnostics."},
-        {"Today", "The work continues", "Cars now share the domain with InfiltratorFS, native software and the Link diagnostic family. It remains a personal website."}
-    };
-    for (const auto& event : events)
-        o << "<article class=\"event\"><span class=\"era\">" << esc(event.date) << "</span><div><h3>" << esc(event.title) << "</h3><p>" << esc(event.description) << "</p></div></article>";
-    o << R"(</div></section><section id="principles" class="quote-section"><p class="eyebrow">A personal principle</p><blockquote class="quote">“I am free, no matter what rules surround me. If I find them tolerable, I tolerate them; if I find them too obnoxious, I break them. I am free because I know that I alone am morally responsible for everything I do.”<cite>— Robert A. Heinlein</cite></blockquote></section>)";
-    return o.str() + page_end("Since 1993. Still here.");
+    return page_start("About", "The history of Shannon Smith's personal website since 1993, the Mercedes-Benz 450SEL 6.9, software work and other interests.", "About", "about-page") + R"ABOUT(
+<section class="page-intro">
+  <p class="eyebrow">About · Online since 1993</p>
+  <h1>A place of my own.</h1>
+  <p class="lead">I'm Shannon Smith, in Mooroopna, Victoria. This is my personal website, not the front page of a company or a single software product. It began with a Mercedes-Benz 450SEL 6.9 in 1993. The interests grew from there, and the address remained a place to bring them together.</p>
+  <nav class="section-nav" aria-label="About sections"><a href="#the-site">The site's history</a><a href="#interests">Other interests</a><a href="#how-it-fits">How the sections connect</a><a href="#principles">A principle</a></nav>
+</section>
+<section id="the-site" class="about-history">
+  <header class="section-heading"><p class="eyebrow">The original site</p><h2>From one Mercedes<br>to a lifetime of projects.</h2><p class="section-deck">An ongoing personal record, rather than a succession of unrelated websites.</p></header>
+  <p class="about-section-intro">The history below is about what the site has been used for, not a claim that every project dates back to 1993. I keep the vehicle story, software source and other machines under the same name because the connections between them matter.</p>
+  <div class="timeline">
+    <article class="event"><span class="era">1993</span><div><h3>The 450SEL 6.9 and the Infiltrator website.</h3><p>The original subject was my Mercedes-Benz W116 450SEL 6.9. Its engineering, specification and character gave the site something worth documenting. That beginning matters: the web page was personal first, and it still is. The <a href="garage.html#450sel-69">Garage</a> retains that vehicle alongside the others I have owned.</p></div></article>
+    <article class="event"><span class="era">Beta-testing years</span><div><h3>Windows, Solaris and games.</h3><p>I was involved in voluntary beta testing of Microsoft Windows ME, Solaris and EA game projects. The Windows ME work included a Beta Tester of the Month award. Testing meant spending time with unfinished software and reporting what actually happened—not merely judging its intended feature list.</p></div></article>
+    <article class="event"><span class="era">The software workshop</span><div><h3>From applications to their foundations.</h3><p>The software work expanded to include System Monitor, Defragmenter, Calendar, Calculator, vehicle diagnostics and InfiltratorFS. More recently the structure has grown into separately owned operating-system components, shared libraries, filesystem engines and specialist modules. These are different layers of work, not dozens of names for the same application.</p></div></article>
+    <article class="event"><span class="era">Today</span><div><h3>One website, several kinds of evidence.</h3><p>Some pages are about source code; others are about cars, recorded factory details or physical audio equipment. The current Mercedes E 250 CDI links the Garage directly to MBLink development, while the B77 and dbx 224 are reminders that hardware can be interesting in its own right. The purpose is to keep the material accessible in its proper context.</p></div></article>
+  </div>
+</section>
+<section id="interests" class="about-interests">
+  <header class="section-heading"><p class="eyebrow">Away from the code</p><h2>Machines, music<br>and other interests.</h2><p class="section-deck">The website is wider than the software projects.</p></header>
+  <div class="project-content">
+    <article class="interest-entry"><h3>Open-reel tape.</h3><p>My ReVox B77 Mk II and dbx 224 combine mechanical transport, analogue recording and signal processing. The sound matters, but so does the physical machinery and understanding how it works. Their own equipment story belongs in the <a href="workbench.html#revox-b77">Workbench</a>.</p></article>
+    <article class="interest-entry"><h3>Watches and precision.</h3><p>A Cosmograph Daytona 126500LN in Oystersteel is another example of enjoying the design and precision of a physical machine—different in scale from a car or tape recorder, but not entirely different in appeal.</p></article>
+    <article class="interest-entry"><h3>Films, games and cars.</h3><p>Music, movies and games sit alongside the software work. Original games such as <a href="https://github.com/Infiltrator-Projects/Egypt">Egypt</a> and <a href="https://github.com/Infiltrator-Projects/backyard-racer">Backyard Racer</a> also connect creative interests back to programming. The vehicle history has its own <a href="garage.html">Garage</a>.</p></article>
+  </div>
+</section>
+<section id="how-it-fits" class="about-structure">
+  <header class="section-heading"><p class="eyebrow">Finding your way</p><h2>Why the site has<br>separate sections.</h2><p class="section-deck">The sections do different jobs, even when the subjects overlap.</p></header>
+  <div class="about-structure-grid">
+    <article><h3><a href="workbench.html">Workbench</a></h3><p>The long-form engineering explanations: why a design exists, where ownership lies, what a component currently does and what has not yet been qualified. This is where a filesystem or diagnostic protocol deserves more than a two-line project blurb.</p></article>
+    <article><h3><a href="projects.html">Projects</a></h3><p>The full public GitHub directory. Repositories are grouped by what they own, including calendar, clock and filesystem modules. It is a source catalogue, not a claim that every Git is a finished application.</p></article>
+    <article><h3><a href="garage.html">Garage</a></h3><p>The current Mercedes and a chronological record of thirteen earlier vehicles, with exact specifications where they are known and model-era dates clearly distinguished where individual manufacture dates are missing.</p></article>
+    <article><h3><a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre</a></h3><p>The distribution side: published Linux packages, repository trust and installation through APT. That is intentionally different from the complete source index, which also includes experiments, libraries and work still in development.</p></article>
+  </div>
+</section>
+<section id="principles" class="quote-section"><p class="eyebrow">A personal principle</p><blockquote class="quote">“I am free, no matter what rules surround me. If I find them tolerable, I tolerate them; if I find them too obnoxious, I break them. I am free because I know that I alone am morally responsible for everything I do.”<cite>— Robert A. Heinlein</cite></blockquote></section>
+)ABOUT" + page_end("Since 1993. Still here.");
 }
 
 static string render_download() {

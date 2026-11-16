@@ -4,6 +4,8 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
+- Rework content across the entire site: remove duplicate homepage project/history summaries, expand Workbench into six source-grounded areas, provide a substantial About narrative, and enrich Garage entries while respecting the separation between the source catalogue and package downloads.
+
 - Replace accumulated homepage-only CSS patches with a single responsive visual system for the entire website family; unify typography, navigation, project records, vehicle galleries and site history, and prepare the Software Centre to use the same pinned assets.
 
 - Audit all generated pages and the shared presentation: keep the established 1993 origin visible in every page footer, correct the 405 GLD and fourteen-car documentation, and improve narrow-screen history/fact layouts and the local browser review shell.

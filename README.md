@@ -6,7 +6,7 @@ Personal website for Shannon Smith — a quiet corner of the internet founded in
 
 The deployed site is deliberately boring at runtime: static HTML, local assets and no server-side application. The interesting part happens before deployment.
 
-`src/sitegen.cpp` is the authoritative deterministic C++17 site generator. It owns the shared page structure, navigation, standardised car cards and repeated presentation logic for Home, Workbench, Garage, About and the download landing page.
+`src/sitegen.cpp` is the authoritative deterministic C++17 site generator. It owns the shared page structure, navigation, standardised car cards and repeated presentation logic for Home, Workbench, Projects, Garage, About and the download landing page.
 
 Shared neutral presentation and infrastructure come from the immutable Common revision owned by [Makefile](Makefile) and [the Pages workflow](.github/workflows/generate-site.yml) rather than being reimplemented here. COMMON owns the canonical graphite/silver design tokens and web adapter, generic output escaping, generic durable file publication and the product-neutral GitHub Pages deployment action. This site owns its personal content, page composition, Workbench/Garage/About information architecture, local MB Corpo font assets, cyan/warm-material treatment and original graphics.
 
@@ -60,3 +60,7 @@ The project prefers durable, understandable machinery over fashionable web stack
 The [Projects catalogue](projects.html) provides a dated, searchable index of all **104 public repositories** visible in `Infiltrator-Projects` on **16 November 2026**. This includes 31 Calendar modules, 23 Clock modules and 23 independently owned Filesystem engines, plus the operating-system, applications, diagnostic, creative and publishing projects. The repo names and editorial grouping are preserved in `data/github-portfolio-2026-11-16.tsv`. A module's presence is not a qualification or release claim. Current status belongs to the linked GitHub source.
 
 The homepage and Workbench introduce featured work and link to the catalogue. The native C++ generator owns the generated HTML; no live GitHub API call is needed to browse the static page. Review both the curated portfolio and the source snapshot when repositories are added or renamed.
+
+## Editorial ownership (16 November 2026)
+
+**Home** introduces the site without duplicating its projects or its full history. **Workbench** owns substantial engineering explanation across InfiltratorOS, InfiltratorFS, native applications, diagnostics, games and audio. **Projects** contains the full source repository inventory; it is not an app store. **Garage** preserves chronological vehicle records and identifies photo provenance. **About** owns the 1993 origin, beta-testing history and personal interests. **Software Centre** is the separate release and package distribution surface. **Archive** intentionally aliases About and the Model 11 Sandy page is a short download redirect. Use cross-links instead of repeating complete sections.

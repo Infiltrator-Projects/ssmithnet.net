@@ -110,7 +110,7 @@ nav[aria-label="Primary"] .navlinks .nav-software{border-left:0;padding-left:0}
 .hero-wave{position:absolute;inset:3% 0;width:100%;height:94%;background:url("graphics/audio-waveform.svg") center/100% auto no-repeat;opacity:.91;mask-image:linear-gradient(90deg,transparent 0%,black 13%,black 88%,transparent 100%)}
 .hero-wave-copy,.hero-wave::before{display:none}
 .landing-hubs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:0 0 23px!important}
-.hub-tile,.home-revox,.home-garage-panel,.home-focus,.home-history{min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--ui-card);box-shadow:0 15px 34px rgba(0,0,0,.10)}
+.hub-tile,.home-revox,.home-garage-panel{min-width:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--ui-card);box-shadow:0 15px 34px rgba(0,0,0,.10)}
 .hub-tile{position:relative;display:grid;grid-template-columns:42px minmax(0,1fr);gap:13px;align-items:start;min-height:139px;padding:23px 20px;transition:transform .16s,border-color .16s}
 .hub-tile-primary{border-color:var(--accent)}
 .hub-tile:hover{transform:translateY(-2px);border-color:var(--accent)}
@@ -138,21 +138,30 @@ nav[aria-label="Primary"] .navlinks .nav-software{border-left:0;padding-left:0}
 .vehicle-teaser strong{display:block;font:700 15px/1.28 var(--sans)}
 .vehicle-teaser small{display:block;font:400 12px/1.4 var(--sans);color:var(--muted);margin-top:4px}
 .vehicle-teaser b{color:var(--accent);font-size:18px}
-.landing-lower{display:grid;grid-template-columns:1.1fr 1fr;gap:17px;padding:0 0 59px!important}
-.home-focus,.home-history{padding:26px 28px;min-height:330px}
-.landing-lower h2{font:740 clamp(25px,2.45vw,33px)/1.18 var(--sans);margin:10px 0 16px}
-.landing-lower p:not(.eyebrow){font:400 15px/1.58 var(--sans)}
-.bench-register{display:grid;margin:13px 0}
-.bench-register a{display:grid;grid-template-columns:28px minmax(0,1fr) 17px;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line-soft)}
-.bench-number{font:700 11px var(--sans);color:var(--accent)}
-.bench-copy strong{display:block;font:700 16px/1.3 var(--sans)}
-.bench-copy small{display:block;color:var(--muted);font:400 13px/1.45 var(--sans);margin-top:3px}
-.bench-register b{color:var(--accent)}
-.history-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:19px 0 15px}
-.history-facts>div{min-width:0;padding:13px 15px 12px 0;border-top:1px solid var(--line)}
-.history-facts>div:nth-child(even){padding-left:19px;border-left:1px solid var(--line)}
-.history-facts strong{display:block;font:750 26px/1.17 var(--sans);margin:0 0 5px}
-.history-facts span{display:block;font:400 13px/1.45 var(--sans);color:var(--muted)}
+
+/* A single editorial closing note replaces duplicated homepage project/history cards. */
+.home-editorial{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:22px 55px;padding:41px 0 72px!important;border-top:1px solid var(--line)}
+.home-editorial-heading h2{font:740 clamp(31px,3.3vw,48px)/1.13 var(--sans);margin:12px 0}
+.home-editorial-copy{display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.home-editorial-copy p{font:400 16px/1.7 var(--sans);margin:0;max-width:715px}
+.home-editorial-copy p a,.about-structure a,.about-interests .interest-entry a,.about-history .event a,.project-content p a{color:var(--accent);text-underline-offset:4px;text-decoration:underline;text-decoration-color:rgba(39,220,233,.38)}
+.home-editorial-copy p a:hover,.about-structure a:hover,.about-interests .interest-entry a:hover,.about-history .event a:hover,.project-content p a:hover{text-decoration-color:var(--accent)}
+.home-editorial-copy .text-link{margin-top:4px}
+.workbench-intro .workbench-directory{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.workbench-context{border-left:3px solid var(--accent);padding:15px 21px;margin:27px 0;background:rgba(14,54,64,.3);border-radius:0 7px 7px 0}
+.workbench-context>strong{font:720 18px/1.4 var(--sans);color:var(--text)}
+.workbench-context p{margin:8px 0 0;font:400 15px/1.6 var(--sans);color:var(--muted)}
+.project-content .project-boundary{padding-top:20px;margin-top:22px;border-top:1px solid var(--line-soft);font:400 14px/1.6 var(--sans);color:var(--muted)}
+.workbench-page .project-content>p{max-width:1040px}
+.workbench-page .project-content>p+p{margin-top:16px}
+.workbench-page .project-section{scroll-margin-top:26px}
+.about-section-intro{font:400 17px/1.65 var(--sans);max-width:945px;margin:0 0 27px}
+.about-structure{border-top:1px solid var(--line);padding:55px 0}
+.about-structure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.about-structure-grid article{padding:23px 27px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ui-card)}
+.about-structure-grid h3{font-size:24px;margin:0 0 12px}
+.about-structure-grid p{font:400 15px/1.65 var(--sans);margin:0}
+.about-history .event p{max-width:1040px}
 /* Garage: current vehicle is the editorial lead, the others a common archive. */
 .garage-current{padding:29px 0 53px}
 .garage-nav{margin:0 0 35px}
@@ -236,7 +245,6 @@ input[type="search"]{border-radius:7px}
 .projects-facts strong{font-size:19px;color:var(--text)}
 .workbench-index-link{margin:17px 0 0}
 .workbench-index-link a{display:inline-flex;align-items:center;min-height:44px;padding:9px 0;border-bottom:1px solid var(--accent);font:700 15px/1.5 var(--sans);color:var(--accent)}
-.home-focus>.panel-link{margin-right:15px}
 .projects-page .repository-browser{border-top:1px solid var(--line);padding-top:48px}
 .repository-browser-header{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr);align-items:end;gap:26px;margin-bottom:24px}
 .repository-browser-header h2{margin:0 0 13px}
@@ -310,6 +318,10 @@ input[type="search"]{border-radius:7px}
   .vehicle-teaser img{height:65px}
 }
 @media(max-width:860px){
+  .home-editorial{grid-template-columns:1fr;gap:10px}
+  .workbench-intro .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .about-structure-grid{grid-template-columns:1fr}
+
   .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}
   .garage-jump-links{grid-template-columns:repeat(3,minmax(0,1fr))}
   .shell{width:calc(100% - 42px)}
@@ -322,7 +334,6 @@ input[type="search"]{border-radius:7px}
   .landing-hubs{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .landing-showcase{grid-template-columns:1fr}
   .home-garage-panel{display:block}
-  .landing-lower{grid-template-columns:1fr}
   .section-heading{grid-template-columns:1fr;gap:10px}
   .section-heading>.eyebrow{grid-column:1}
   .project-content{padding:27px}
@@ -331,6 +342,13 @@ input[type="search"]{border-radius:7px}
   .about-interests .project-content{grid-template-columns:1fr}
 }
 @media(max-width:600px){
+  .home-editorial{padding:28px 0 49px!important;gap:13px}
+  .home-editorial-heading h2{font-size:32px}
+  .home-editorial-copy p{font-size:15px}
+  .workbench-intro .workbench-directory{grid-template-columns:1fr}
+  .workbench-intro .workbench-directory a{min-height:0}
+  .about-structure-grid article{padding:20px}
+
   .workbench-directory{grid-template-columns:1fr 1fr;gap:8px}
   .workbench-directory a{padding:13px;min-height:105px}
   .workbench-directory strong{font-size:16px}
@@ -364,8 +382,6 @@ input[type="search"]{border-radius:7px}
   .vehicle-teaser{grid-template-columns:88px minmax(0,1fr) 12px}
   .vehicle-teaser strong{font-size:14px}
   .vehicle-teaser small{font-size:11px}
-  .home-focus,.home-history{padding:23px 21px;min-height:0}
-  .landing-lower h2{font-size:28px}
   .family-register{grid-template-columns:1fr}
   .family-register a{min-height:0}
   .inline-facts{grid-template-columns:1fr}
@@ -393,10 +409,6 @@ input[type="search"]{border-radius:7px}
 }
 /* Narrow phones get readable history statistics rather than two 100px columns. */
 @media(max-width:520px){
-  .home-page .history-facts{grid-template-columns:minmax(0,1fr)}
-  .home-page .history-facts>div,.home-page .history-facts>div:nth-child(even){min-height:0;padding:11px 0;border-left:0;border-top:1px solid var(--line)}
-  .home-page .history-facts strong{font-size:24px}
-  .home-page .history-facts span{font-size:14px;line-height:1.5}
   .garage-page .garage-entry .car-facts{grid-template-columns:minmax(0,1fr)}
   .garage-page .garage-entry .car-facts dd{overflow-wrap:anywhere}
   .garage-page .vehicle-card--hero h1{font-size:clamp(45px,12vw,64px)}

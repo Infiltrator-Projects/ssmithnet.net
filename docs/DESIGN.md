@@ -58,7 +58,7 @@ Do not use "other" as a synonym for "less important". When grouping historic mat
 
 ### Home
 
-The front page identifies Shannon by name, then introduces the Workbench, Garage, Software Centre and About through direct destinations. A featured ReVox B77 Mk II and dbx 224, a small garage preview, and a concise set of real projects invite deeper exploration. The wordmark links home, while the primary navigation remains identical on every published destination.
+The front page introduces Workbench, Garage, Projects and About. Software Centre remains in the common navigation for released packages. Its featured ReVox redraw and Garage preview are visual entry points, not duplicate long-form stories. One closing editorial note establishes the 1993 continuity, replacing duplicated project lists and statistics.
 
 It should **tease rather than duplicate**.
 
@@ -68,7 +68,7 @@ The Heinlein quotation closes About as a personal statement.
 
 ### Workbench
 
-Workbench is the technical workshop. It should contain the serious project detail: InfiltratorFS, the Link family and personal software/systems work that Shannon actually cares about.
+Workbench is the technical workshop: InfiltratorOS and Boot/Kernel/Libraries/Files, InfiltratorFS, native applications, Link diagnostics, games and creative software, and ReVox/dbx audio. Explain actual responsibilities, verified milestones and unfinished work using the repositories' own documentation. Projects owns the full list of source repositories.
 
 Link must be represented as an **automotive family**, not as a synonym for MBLink. MBLink is the Mercedes member; other make-specific projects belong underneath the shared Link architecture.
 
@@ -99,7 +99,7 @@ Australian cars are not an "other" or lesser class: every historical car appears
 
 ### About
 
-About combines personal interests with the history of the site: its 1993 beginning with the Mercedes-Benz 450SEL 6.9, the later automotive and software work, and beta-testing history. The former Archive did not contain an independent collection of archived artifacts, so it is maintained as an alias of About with an About canonical URL. This retains bookmarks without a duplicate navigation destination.
+About owns the personal narrative: the website's 1993 beginning with the 450SEL 6.9, voluntary beta testing, later software, interests and how the sections connect. Garage documents the original car but should not repeat the site's origin story at the bottom. The former Archive did not contain an independent collection of archived artifacts, so it is maintained as an alias of About with an About canonical URL. This retains bookmarks without a duplicate navigation destination.
 
 Do not duplicate the full history elsewhere when it belongs here.
 

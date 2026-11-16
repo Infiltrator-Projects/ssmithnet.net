@@ -466,7 +466,7 @@ void validate_garage(const fs::path& root, const string& garage) {
                 "Supplied gallery photo dimensions must match supplied images: " + id);
     }
     require(garage.find("504 Diesel") == string::npos &&
-            garage.find("white Peugeot 405 GLD with black interior") != string::npos,
+            garage.find("white Peugeot 405 GLD diesel with a black interior") != string::npos,
             "Peugeot garage history must identify the white 405 GLD, not a 504");
     // Every referenced photo must exist in the committed source tree.
     // The GitHub Pages source-branch publisher cannot see build-only assets.
@@ -545,7 +545,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-portfolio1") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-editorial1") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -584,7 +584,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261116-portfolio1") != string::npos,
+        require(content.find("site-redesign.css?v=20261116-editorial1") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -629,9 +629,8 @@ void validate(const fs::path& root) {
             home.find("assets/graphics/ui-about.svg") != string::npos,
             "Homepage destination icons missing");
     require(home.find("software, and<br><span>machines.</span>") != string::npos &&
-            home.find("<strong>1993</strong>") != string::npos &&
-            home.find("My website began") != string::npos &&
-            home.find("<strong>6.9</strong>") != string::npos &&
+            home.find("class=\"home-editorial\"") != string::npos &&
+            home.find("In 1993 this website started") != string::npos &&
             home.find("2016") == string::npos,
             "Homepage visual hierarchy or grounded site history missing");
     for (const char* filename : {"ui-workbench.svg", "ui-garage.svg", "ui-code.svg", "ui-about.svg", "audio-waveform.svg"}) {
@@ -646,11 +645,11 @@ void validate(const fs::path& root) {
                 content.find("class=\"footer-brand\"") != string::npos,
                 relative + ": revised website footer missing");
     }
-    require(home.find("class=\"bench-register\"") != string::npos &&
-            home.find("workbench.html#link") != string::npos &&
-            home.find("workbench.html#revox-b77") != string::npos &&
-            home.find("At a glance") != string::npos,
-            "Workbench register or real website summary missing");
+    require(home.find("class=\"bench-register\"") == string::npos &&
+            home.find("class=\"landing-lower\"") == string::npos &&
+            home.find("href=\"projects.html\"") != string::npos &&
+            home.find("href=\"workbench.html#revox-b77\"") != string::npos,
+            "Homepage must introduce subjects rather than repeat Workbench content");
     const string brand_icon = read(root / "assets/brand-2026.svg");
     require(brand_icon == read(root / "assets/favicon.svg"),
             "Legacy favicon and canonical brand mark must remain identical");
@@ -667,7 +666,8 @@ void validate(const fs::path& root) {
     require(system_css.find(".project-section") != string::npos &&
             system_css.find(".about-interests") != string::npos &&
             system_css.find(".garage-page .garage-entry") != string::npos &&
-            system_css.find(".home-page .history-facts") != string::npos,
+            system_css.find(".home-editorial") != string::npos &&
+            system_css.find(".about-structure-grid") != string::npos,
             "Shared theme must cover Home, Workbench, Garage and About");
     require(system_css.find(".home-page main>section,.workbench-page main>section") != string::npos &&
             system_css.find(".about-page main>section{padding:52px 0}") != string::npos,
@@ -686,12 +686,13 @@ void validate(const fs::path& root) {
     }
     const string about = first.at("about.html");
     require(about.find("<span class=\"era\">1993</span>") != string::npos &&
-            about.find("I started my website in 1993") != string::npos &&
+            about.find("It began with a Mercedes-Benz 450SEL 6.9 in 1993") != string::npos &&
+            about.find("id=\"how-it-fits\"") != string::npos &&
             about.find("c. 1996") == string::npos &&
             about.find("<span class=\"era\">2016</span>") == string::npos,
             "Website's original 1993 starting year must be consistent across About");
     require(home.find("since 1993.") != string::npos &&
-            first.at("garage.html").find("began in 1993.") != string::npos,
+            first.at("garage.html").find("which I began in 1993.") != string::npos,
             "Homepage and Garage must preserve the 1993 founding year");
     const string& workbench_page = first.at("workbench.html");
     require(workbench_page.find("class=\"workbench-directory\"") != string::npos &&
@@ -702,8 +703,26 @@ void validate(const fs::path& root) {
             first.at("about.html").find("id=\"interests\"") != string::npos &&
             first.at("about.html").find("id=\"principles\"") != string::npos,
             "About reading order or anchors missing");
-    require(home.find("href=\"workbench.html#software\"") != string::npos,
-            "Homepage should introduce distinct workbench subjects rather than duplicate its hardware feature");
+    require(home.find("href=\"projects.html\"") != string::npos &&
+            home.find("class=\"home-editorial\"") != string::npos &&
+            home.find("The workshop has grown.") != string::npos,
+            "Homepage must link to rather than duplicate Workbench and Projects");
+    require(workbench_page.find("id=\"platform\"") != string::npos &&
+            workbench_page.find("id=\"creative\"") != string::npos &&
+            workbench_page.find("id=\"infiltratorfs\"") != string::npos &&
+            workbench_page.find("id=\"software\"") != string::npos &&
+            workbench_page.find("id=\"link\"") != string::npos &&
+            workbench_page.find("id=\"revox-b77\"") != string::npos,
+            "Workbench must explain all six project subjects");
+    require(workbench_page.find("integration package") != string::npos &&
+            workbench_page.find("0.19</dd>") != string::npos &&
+            workbench_page.find("qualified bootable release") != string::npos,
+            "Workbench must describe verified development limitations and current format");
+    require(about.find("id=\"how-it-fits\"") != string::npos &&
+            about.find("Beta Tester of the Month") != string::npos,
+            "About must retain substantial history and clarify the site's sections");
+    require(home.find("104</strong>") == string::npos,
+            "Homepage must not duplicate Projects statistics");
     // Compare every visible repository to the retained GitHub organisation snapshot.
     const string project_html = first.at("projects.html");
     const string catalogue_manifest = read(root / "data/github-portfolio-2026-11-16.tsv");
