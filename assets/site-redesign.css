@@ -46,6 +46,13 @@ main>section{padding:52px 0}
 .section-nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
 .section-nav a{display:inline-flex;align-items:center;min-height:42px;padding:8px 15px;border:1px solid var(--line);border-radius:7px;background:rgba(29,44,54,.65);font:600 14px/1.4 var(--sans)}
 .section-nav a:hover{border-color:var(--accent);background:rgba(30,161,182,.10)}
+/* One chapter directory at the start of a long workshop, not a second menu. */
+.workbench-directory{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:28px}
+.workbench-directory a{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0;min-height:111px;padding:16px 18px;border:1px solid var(--line);border-radius:8px;background:var(--ui-card)}
+.workbench-directory a:hover{border-color:var(--accent);background:linear-gradient(145deg,#233d47,#11232c)}
+.workbench-directory small{font:700 11px/1.5 var(--sans);letter-spacing:.045em;text-transform:uppercase;color:var(--accent)}
+.workbench-directory strong{font:720 18px/1.3 var(--sans);color:var(--text)}
+.workbench-directory span{font:400 13px/1.4 var(--sans);color:var(--muted)}
 .section-heading{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px 42px;align-items:start;margin-bottom:26px}
 .section-heading>.eyebrow{grid-column:1/-1}
 .section-heading h2{margin:0}
@@ -162,6 +169,15 @@ main>section{padding:52px 0}
 .chapter-heading h2{font-size:clamp(34px,4vw,50px);margin:0 0 14px}
 .chapter-heading p:last-child{max-width:920px;font-size:17px}
 .garage-register{display:grid;gap:18px;border:0}
+.garage-jump{border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,rgba(26,42,52,.84),rgba(11,23,30,.92));padding:23px 24px;margin-bottom:24px}
+.garage-jump-heading{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-bottom:17px}
+.garage-jump-heading strong{font:740 21px/1.2 var(--sans)}
+.garage-jump-heading>span{font:400 13px/1.4 var(--sans);color:var(--muted)}
+.garage-jump-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px}
+.garage-jump-links a{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:5px;min-height:63px;padding:9px 12px;border:1px solid var(--line-soft);border-radius:6px;background:rgba(5,16,24,.35)}
+.garage-jump-links a:hover{border-color:var(--accent)}
+.garage-jump-links small{font:600 11px/1.4 var(--sans);color:var(--accent)}
+.garage-jump-links span{font:640 14px/1.35 var(--sans);color:var(--text)}
 .garage-page .garage-entry{margin:0;padding:27px 30px 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ui-card)}
 .garage-page .garage-entry .vehicle-heading{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);grid-template-rows:auto auto auto;gap:4px 32px}
 .garage-page .garage-entry .tag{grid-column:1;grid-row:1;color:var(--accent);font-size:12px;font-weight:650;text-transform:uppercase}
@@ -219,6 +235,8 @@ input[type="search"]{border-radius:7px}
   .vehicle-teaser img{height:65px}
 }
 @media(max-width:860px){
+  .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .garage-jump-links{grid-template-columns:repeat(3,minmax(0,1fr))}
   .shell{width:calc(100% - 42px)}
   nav[aria-label="Primary"]{flex-wrap:wrap;gap:10px;padding:15px 0}
   nav[aria-label="Primary"] .navlinks{width:100%;gap:12px 22px;font-size:14px;justify-content:space-between}
@@ -238,6 +256,16 @@ input[type="search"]{border-radius:7px}
   .about-interests .project-content{grid-template-columns:1fr}
 }
 @media(max-width:600px){
+  .workbench-directory{grid-template-columns:1fr 1fr;gap:8px}
+  .workbench-directory a{padding:13px;min-height:105px}
+  .workbench-directory strong{font-size:16px}
+  .workbench-directory span{font-size:12px}
+  .garage-jump{padding:17px 14px}
+  .garage-jump-heading{display:block;margin-bottom:14px}
+  .garage-jump-heading strong,.garage-jump-heading>span{display:block}
+  .garage-jump-heading>span{margin-top:4px}
+  .garage-jump-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .garage-jump-links a{min-height:60px;padding:9px}
   .shell{width:calc(100% - 32px)}
   nav[aria-label="Primary"] .brand{font-size:24px}
   nav[aria-label="Primary"] .brand::before{width:30px;height:24px;margin-right:8px}

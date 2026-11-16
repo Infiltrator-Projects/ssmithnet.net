@@ -188,6 +188,19 @@ std::vector<GarageCard> read_cards(const string& garage) {
     return found;
 }
 void validate_garage(const fs::path& root, const string& garage) {
+    // All historical cars must have a discoverable jump link without changing their order.
+    const auto jump_start = garage.find("class=\"garage-jump\"");
+    const auto jump_end = garage.find("</nav>", jump_start);
+    require(jump_start != string::npos && jump_end != string::npos,
+            "Garage history needs a vehicle index");
+    const string jump_markup = garage.substr(jump_start, jump_end - jump_start);
+    for (const char* id : {"ba-ltd", "ba-fairmont", "discovery-2", "au-fairmont",
+                           "el-falcon", "peugeot-405-gld", "500-sec", "xf-s-pack",
+                           "450sel-69", "xc-falcon-ute-1", "xc-falcon-ute-2",
+                           "280-se", "lc-torana"}) {
+        require(jump_markup.find("href=\"#" + string(id) + "\"") != string::npos,
+                string("Garage jump index missing ") + id);
+    }
     const auto cards = read_cards(garage);
     std::vector<GarageCard> vehicles, featured;
     for (const auto& car : cards) {
@@ -677,6 +690,17 @@ void validate(const fs::path& root) {
     require(home.find("since 1993.") != string::npos &&
             first.at("garage.html").find("began in 1993.") != string::npos,
             "Homepage and Garage must preserve the 1993 founding year");
+    const string& workbench_page = first.at("workbench.html");
+    require(workbench_page.find("class=\"workbench-directory\"") != string::npos &&
+            workbench_page.find("aria-label=\"Workbench sections\"") != string::npos &&
+            workbench_page.find("href=\"#revox-b77\"") != string::npos,
+            "Workbench subject directory missing");
+    require(first.at("about.html").find("aria-label=\"About sections\"") != string::npos &&
+            first.at("about.html").find("id=\"interests\"") != string::npos &&
+            first.at("about.html").find("id=\"principles\"") != string::npos,
+            "About reading order or anchors missing");
+    require(home.find("href=\"workbench.html#software\"") != string::npos,
+            "Homepage should introduce distinct workbench subjects rather than duplicate its hardware feature");
     const string garage = first.at("garage.html");
     validate_garage(root, garage);
     for (const auto& [relative, content] : first)
