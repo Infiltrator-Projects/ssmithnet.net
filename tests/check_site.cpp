@@ -532,7 +532,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-3") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-4") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -603,6 +603,11 @@ void validate(const fs::path& root) {
                 content.find("class=\"footer-brand\"") != string::npos,
                 relative + ": revised website footer missing");
     }
+    require(home.find("class=\"bench-register\"") != string::npos &&
+            home.find("workbench.html#link") != string::npos &&
+            home.find("workbench.html#revox-b77") != string::npos &&
+            home.find("At a glance") != string::npos,
+            "Workbench register or real website summary missing");
     const string garage = first.at("garage.html");
     validate_garage(root, garage);
     for (const auto& [relative, content] : first)

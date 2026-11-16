@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/favicon.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-3") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-4") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -136,7 +136,7 @@ static string render_home() {
   <div class="hero-accent" aria-hidden="true"><span class="hero-wave"></span><span class="hero-wave-copy"></span></div>
 </section>
 <section class="landing-hubs" aria-label="Explore the site">
-  <a class="hub-tile" href="workbench.html"><img class="hub-symbol" src="assets/graphics/ui-workbench.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Workbench</strong><span>Filesystems, native applications, diagnostics and analogue hardware.</span></span><b aria-hidden="true">↗</b></a>
+  <a class="hub-tile hub-tile-primary" href="workbench.html"><img class="hub-symbol" src="assets/graphics/ui-workbench.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Workbench</strong><span>Filesystems, native applications, diagnostics and analogue hardware.</span></span><b aria-hidden="true">↗</b></a>
   <a class="hub-tile" href="garage.html"><img class="hub-symbol" src="assets/graphics/ui-garage.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Garage</strong><span>My current Mercedes, former cars and their stories.</span></span><b aria-hidden="true">↗</b></a>
   <a class="hub-tile" href="https://infiltrator-projects.github.io/Infiltrator-Repository/"><img class="hub-symbol" src="assets/graphics/ui-code.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Software Centre</strong><span>Downloadable tools, applications and packages.</span></span><b aria-hidden="true">↗</b></a>
   <a class="hub-tile" href="about.html"><img class="hub-symbol" src="assets/graphics/ui-about.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>About</strong><span>The site, its history and the interests behind it.</span></span><b aria-hidden="true">↗</b></a>
@@ -164,19 +164,23 @@ static string render_home() {
 </section>
 <section class="landing-lower" aria-label="Software and site history">
   <article class="home-focus">
-    <p class="eyebrow">On the software bench</p><h2>InfiltratorFS.</h2>
-    <p>Designing a filesystem from first principles means asking what survives a crash, how previous generations are retained, and how the resulting state can be checked.</p>
-    <div class="focus-tags"><span>Copy-on-write</span><span>Checksummed</span><span>Native Linux</span></div>
-    <a class="panel-link" href="workbench.html#infiltratorfs">Explore InfiltratorFS <span aria-hidden="true">→</span></a>
+    <p class="eyebrow">From the workbench</p>
+    <h2>Things I build and keep running.</h2>
+    <div class="bench-register">
+      <a href="workbench.html#infiltratorfs"><span class="bench-number">01</span><span class="bench-copy"><strong>InfiltratorFS</strong><small>Copy-on-write generations, checked data and recovery work.</small></span><b aria-hidden="true">↗</b></a>
+      <a href="workbench.html#link"><span class="bench-number">02</span><span class="bench-copy"><strong>The Link diagnostics family</strong><small>Native vehicle diagnostics developed with my Mercedes.</small></span><b aria-hidden="true">↗</b></a>
+      <a href="workbench.html#revox-b77"><span class="bench-number">03</span><span class="bench-copy"><strong>ReVox B77 Mk II</strong><small>Open-reel tape, analogue mechanics and the dbx 224.</small></span><b aria-hidden="true">↗</b></a>
+    </div>
+    <a class="panel-link" href="workbench.html">Explore the full Workbench <span aria-hidden="true">→</span></a>
   </article>
   <article class="home-history">
-    <p class="eyebrow">A little history</p><h2>Since the 1990s.</h2>
-    <p>This address began with a Mercedes-Benz 450SEL 6.9. Cars, software, watches, open-reel audio and a curiosity about the way things work have shared the same home since.</p>
+    <p class="eyebrow">At a glance</p><h2>Cars, code and history.</h2>
+    <p>A personal website that grew from a Mercedes into a place for building software, working with machinery and preserving older technology.</p>
     <div class="history-facts">
       <div><strong>14</strong><span>Vehicles in the garage history</span></div>
       <div><strong>1990s</strong><span>The original 450SEL 6.9 website</span></div>
       <div><strong>2016</strong><span>Native software projects began</span></div>
-      <div><strong>C++17</strong><span>The site's own static generator</span></div>
+      <div><strong>C++17</strong><span>Native static website generator</span></div>
     </div>
     <a class="panel-link" href="about.html#the-site">The story of this site <span aria-hidden="true">→</span></a>
   </article>
