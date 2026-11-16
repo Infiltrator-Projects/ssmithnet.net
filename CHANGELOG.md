@@ -4,6 +4,8 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
+- Replace accumulated homepage-only CSS patches with a single responsive visual system for the entire website family; unify typography, navigation, project records, vehicle galleries and site history, and prepare the Software Centre to use the same pinned assets.
+
 - Audit all generated pages and the shared presentation: keep the established 1993 origin visible in every page footer, correct the 405 GLD and fourteen-car documentation, and improve narrow-screen history/fact layouts and the local browser review shell.
 
 - Publish the two original photographs of the 1985 500SEC AMG in its Garage record with responsive sizing, captions and accessible alternative text.

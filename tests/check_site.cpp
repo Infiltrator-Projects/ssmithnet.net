@@ -532,7 +532,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-6") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-system1") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -571,7 +571,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261116-6") != string::npos,
+        require(content.find("site-redesign.css?v=20261116-system1") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -645,6 +645,20 @@ void validate(const fs::path& root) {
             brand_icon.find("#27dce9") != string::npos &&
             brand_icon.find("twin-slash") != string::npos,
             "Browser tab icon no longer matches the twin-slash brand identity");
+    // Consolidation: the redesign is one authored system, not cumulative hotfixes.
+    const string system_css = read(root / "assets/site-redesign.css");
+    require(system_css.find("one presentation layer for Home") != string::npos &&
+            system_css.find("--ui-card:") != string::npos &&
+            system_css.find("2026 personal site UI refresh") == string::npos,
+            "Site-wide CSS consolidation regressed");
+    require(system_css.find(".project-section") != string::npos &&
+            system_css.find(".about-interests") != string::npos &&
+            system_css.find(".garage-page .garage-entry") != string::npos &&
+            system_css.find(".home-page .history-facts") != string::npos,
+            "Shared theme must cover Home, Workbench, Garage and About");
+    const string& garage_page = first.at("garage.html");
+    require(garage_page.find("garage.css?v=") < garage_page.find("site-redesign.css?v="),
+            "The shared theme must be the final stylesheet on Garage");
     const string branding_css = read(root / "assets/site-redesign.css");
     require(branding_css.find("background:url(\"brand-2026.svg\")") != string::npos,
             "Header and footer must use the browser-tab logo artwork");

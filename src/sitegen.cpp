@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-6") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-system1") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -329,7 +329,7 @@ static VehicleRecord historic_mercedes() {
 static string render_garage() {
     std::ostringstream o;
     auto start = page_start("Garage", "The current 2011 Mercedes-Benz E 250 CDI Coupé, its full factory datacard, and my complete vehicle history.", "Garage", "garage-page");
-    start.insert(start.find("</head>"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261106-6point9\">");
+    start.insert(start.find("<link rel=\"stylesheet\" href=\"assets/site-redesign.css"), "<link rel=\"stylesheet\" href=\"assets/garage.css?v=garage-20261106-6point9\">");
     o << start;
     const auto current = current_mercedes();
     const auto sec = historic_mercedes();
