@@ -102,7 +102,7 @@ static vector<Car> historical_cars() {
         {"Ford · BA · V8 · LPG","2004 LTD","Ford","LTD","BA","5.4 L V8 · Petrol / LPG","The long-wheelbase BA Ford: a 2004 LTD with the 5.4-litre V8 and dual-fuel LPG."},
         {"Ford · AU Series II · LPG","Fairmont","Ford","Fairmont","AU Series II","4.0 L · Petrol / LPG","An AU Series II Fairmont with the 4.0-litre engine and dual-fuel LPG."},
         {"Land Rover","Discovery 2 TDI","Land Rover","Discovery 2","Discovery II","TDI diesel","The Discovery II brought a four-wheel-drive diesel into a history otherwise dominated by saloons and coupés."},
-        {"Peugeot","504 Diesel","Peugeot","504","504","Diesel · waste motor oil","An old-school diesel that I ran on waste motor oil. The exact variant remains deliberately unspecified."}
+        {"Peugeot · 405 · GLD","405 GLD","Peugeot","405 GLD","405","Diesel · waste motor oil","My white Peugeot 405 GLD with black interior, which I ran on waste motor oil."}
     };
 }
 
