@@ -582,7 +582,6 @@ void validate(const fs::path& root) {
     require(fs::is_regular_file(root / "assets/photos/revox-b77-mkii-dbx224.webp") &&
             fs::file_size(root / "assets/photos/revox-b77-mkii-dbx224.webp") > 10000,
             "ReVox illustration is missing from published sources");
-    const string home = first.at("index.html");
     require(home.find("assets/graphics/ui-workbench.svg") != string::npos &&
             home.find("assets/graphics/ui-garage.svg") != string::npos &&
             home.find("assets/graphics/ui-code.svg") != string::npos &&
