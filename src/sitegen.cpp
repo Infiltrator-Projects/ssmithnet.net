@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-editorial1") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-watch1") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -608,7 +608,7 @@ static string render_about() {
   <p class="eyebrow">About · Online since 1993</p>
   <h1>A place of my own.</h1>
   <p class="lead">I'm Shannon Smith, in Mooroopna, Victoria. This is my personal website, not the front page of a company or a single software product. It began with a Mercedes-Benz 450SEL 6.9 in 1993. The interests grew from there, and the address remained a place to bring them together.</p>
-  <nav class="section-nav" aria-label="About sections"><a href="#the-site">The site's history</a><a href="#interests">Other interests</a><a href="#how-it-fits">How the sections connect</a><a href="#principles">A principle</a></nav>
+  <nav class="section-nav" aria-label="About sections"><a href="#the-site">The site's history</a><a href="#interests">Other interests</a><a href="#daytona">The Daytona</a><a href="#how-it-fits">How the sections connect</a><a href="#principles">A principle</a></nav>
 </section>
 <section id="the-site" class="about-history">
   <header class="section-heading"><p class="eyebrow">The original site</p><h2>From one Mercedes<br>to a lifetime of projects.</h2><p class="section-deck">An ongoing personal record, rather than a succession of unrelated websites.</p></header>
@@ -624,9 +624,20 @@ static string render_about() {
   <header class="section-heading"><p class="eyebrow">Away from the code</p><h2>Machines, music<br>and other interests.</h2><p class="section-deck">The website is wider than the software projects.</p></header>
   <div class="project-content">
     <article class="interest-entry"><h3>Open-reel tape.</h3><p>My ReVox B77 Mk II and dbx 224 combine mechanical transport, analogue recording and signal processing. The sound matters, but so does the physical machinery and understanding how it works. Their own equipment story belongs in the <a href="workbench.html#revox-b77">Workbench</a>.</p></article>
-    <article class="interest-entry"><h3>Watches and precision.</h3><p>A Cosmograph Daytona 126500LN in Oystersteel is another example of enjoying the design and precision of a physical machine—different in scale from a car or tape recorder, but not entirely different in appeal.</p></article>
     <article class="interest-entry"><h3>Films, games and cars.</h3><p>Music, movies and games sit alongside the software work. Original games such as <a href="https://github.com/Infiltrator-Projects/Egypt">Egypt</a> and <a href="https://github.com/Infiltrator-Projects/backyard-racer">Backyard Racer</a> also connect creative interests back to programming. The vehicle history has its own <a href="garage.html">Garage</a>.</p></article>
   </div>
+  <article class="watch-feature" id="daytona" aria-labelledby="daytona-title">
+    <div class="watch-feature-copy">
+      <p class="eyebrow">Mechanical timekeeping</p>
+      <h3 id="daytona-title">My reverse-panda Daytona.</h3>
+      <p>The Cosmograph Daytona 126500LN in Oystersteel has a black dial with contrasting pale chronograph registers and a black tachymeter bezel. The reverse-panda layout is the version I wanted to show here.</p>
+      <p>The attraction is familiar: mechanical precision, carefully finished metal and an instrument whose design reflects its purpose. It's another form of engineering that I enjoy living with, rather than just looking at on a screen.</p>
+    </div>
+    <figure>
+      <img src="assets/photos/daytona-reverse-panda.webp" width="800" height="800" loading="lazy" decoding="async" alt="Close-up of an Oystersteel Daytona with black dial, silver chronograph subdials, black tachymeter bezel and stainless-steel bracelet">
+      <figcaption>My reverse-panda Daytona · Image supplied for this website.</figcaption>
+    </figure>
+  </article>
 </section>
 <section id="how-it-fits" class="about-structure">
   <header class="section-heading"><p class="eyebrow">Finding your way</p><h2>Why the site has<br>separate sections.</h2><p class="section-deck">The sections do different jobs, even when the subjects overlap.</p></header>
