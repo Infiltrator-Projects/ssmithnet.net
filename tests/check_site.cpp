@@ -242,7 +242,8 @@ void validate_garage(const fs::path& root, const string& garage) {
                 "Discovery II and AU Fairmont must reflect owner's 2002 correction");
     }
     require(garage.find("id=\"vehicle-history\"") != string::npos &&
-            garage.find("model generation rather than a verified manufacture year") != string::npos,
+            garage.find("ordered by known manufacture year where recorded") != string::npos &&
+            garage.find("model-era label explains the position") != string::npos,
             "Chronological register or model-era disclosure missing");
     require(garage.find("class=\"year-marker\"") != string::npos &&
             garage.find("class=\"garage-photo-link\"") != string::npos,
