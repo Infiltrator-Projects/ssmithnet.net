@@ -143,3 +143,200 @@ footer{border-top:1px solid rgba(115,149,158,.20);padding-top:34px;color:#afc5cc
  .hub-tile,.ui-action,.vehicle-teaser{transition:none}
  .hub-tile:hover,.ui-action:hover{transform:none}
 }
+
+
+/* November 2026 refinement: stronger rhythm and genuine editorial hierarchy.
+   Every linked element points to a real page. No inert theme/search controls. */
+:root { --content:1380px; --ui-cyan:#29e0eb; --ui-cyan-dim:rgba(41,224,235,.22); --ui-line:rgba(148,183,196,.24); }
+html {scroll-padding-top:92px}
+body {background:radial-gradient(ellipse 65% 33% at 79% 0,rgba(6,83,101,.18),transparent 72%),linear-gradient(180deg,#061018,#0a1118 46%,#070e13 100%);color:#edf4f6}
+.shell {width:min(1380px,calc(100% - 74px))}
+nav[aria-label="Primary"] {
+ position:sticky;top:0;z-index:35;min-height:84px;
+ padding:20px 8px 18px;
+ background:rgba(7,16,23,.92);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+ border-bottom:1px solid var(--ui-line);gap:30px
+}
+nav[aria-label="Primary"] .brand {font:700 clamp(24px,2.3vw,31px)/1.2 var(--sans);letter-spacing:-.04em}
+nav[aria-label="Primary"] .brand::before {width:26px;height:17px;border-left-width:9px;border-right-width:9px;margin-right:14px}
+nav[aria-label="Primary"] .navlinks {gap:clamp(19px,2.5vw,42px);font:500 17px/1.5 var(--sans);align-items:center}
+nav[aria-label="Primary"] .navlinks a {position:relative;padding:13px 0}
+nav[aria-label="Primary"] .navlinks a[aria-current="page"] {box-shadow:0 3px var(--ui-cyan);color:#fff}
+nav[aria-label="Primary"] .navlinks a:hover {color:var(--ui-cyan)}
+main>section {padding:68px 0}
+.home-page .eyebrow {font-size:14px;letter-spacing:.09em}
+.landing-hero {
+ grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);
+ min-height:565px;gap:12px;
+ padding:82px 0 75px!important;overflow:visible
+}
+.landing-hero::before {
+ content:"";position:absolute;z-index:-1;inset:0 -38px 0 auto;width:58%;
+ background:radial-gradient(ellipse 48% 43% at 64% 50%,rgba(17,160,178,.10),transparent 78%);
+ pointer-events:none
+}
+.landing-hero-copy {max-width:770px}
+.landing-hero h1 {
+ font:700 clamp(64px,5.7vw,91px)/1.045 var(--sans);
+ letter-spacing:-.058em;margin:21px 0 28px;max-width:785px
+}
+.landing-hero h1 span {color:var(--ui-cyan);text-shadow:0 0 32px rgba(38,224,234,.10)}
+.landing-intro {font:400 clamp(18px,1.7vw,23px)/1.55 var(--sans);color:#c7d7dd;max-width:640px;margin-bottom:0}
+.landing-actions {gap:17px;margin-top:34px}
+.ui-action {min-height:55px;padding:15px 23px;gap:17px;font-size:16px;border-radius:8px;font-weight:700}
+.ui-action-primary {background:var(--ui-cyan);border-color:var(--ui-cyan)}
+.ui-action-primary:hover {background:#8ef8fa;border-color:#8ef8fa}
+.ui-action-secondary:hover,.ui-action-outline:hover {border-color:var(--ui-cyan)}
+.hero-accent {height:425px;position:relative;overflow:visible;opacity:1;isolation:isolate}
+.hero-accent::before {
+ content:"";position:absolute;inset:2% -4% 0 12%;
+ background:linear-gradient(90deg,rgba(5,16,22,.95),rgba(5,15,21,.47)),url("photos/revox-b77-mkii-dbx224.webp") center 44%/cover no-repeat;
+ filter:blur(19px);opacity:.24;border-radius:30px;mix-blend-mode:screen
+}
+.hero-accent::after {
+ content:"";position:absolute;z-index:-1;inset:13% 0;
+ background:radial-gradient(ellipse at 53% 50%,rgba(33,224,235,.20),transparent 69%);
+ filter:blur(18px)
+}
+.hero-wave {
+ display:block;left:-8%;top:5%;width:118%;height:92%;opacity:.9;transform:none;
+ background:url("graphics/audio-waveform.svg") center/100% auto no-repeat;
+ mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent)
+}
+.hero-wave::before {display:none}
+.hero-wave-copy {display:none}
+.landing-hubs {gap:18px;padding:0 0 31px!important}
+.hub-tile {
+ display:grid;grid-template-columns:55px minmax(0,1fr);grid-template-rows:auto 1fr;
+ align-content:start;column-gap:17px;row-gap:0;
+ min-height:174px;padding:29px 24px 24px;
+ border-radius:12px;background:linear-gradient(145deg,rgba(34,47,57,.92),rgba(16,26,35,.97));
+ box-shadow:0 15px 38px rgba(0,0,0,.11);transition:transform .2s,border-color .2s,box-shadow .2s
+}
+.hub-tile:first-child {border-color:rgba(33,224,233,.82);box-shadow:inset 0 0 26px rgba(23,192,205,.075),0 15px 38px rgba(0,0,0,.11)}
+.hub-tile:hover {border-color:var(--ui-cyan);box-shadow:0 16px 38px rgba(0,0,0,.20),0 0 25px rgba(0,188,210,.08)}
+.hub-tile .hub-symbol {width:43px;height:43px;object-fit:contain;grid-column:1;grid-row:1;margin:0;filter:drop-shadow(0 2px 7px rgba(45,211,222,.12))}
+.hub-tile .hub-content {grid-column:2;grid-row:1/3;display:block;padding-top:2px}
+.hub-tile .hub-content strong {display:block;font:700 22px/1.2 var(--sans);color:#f1f8fa;letter-spacing:-.025em;margin-bottom:9px}
+.hub-tile .hub-content>span {display:block;font-size:15px;line-height:1.48;color:#bed0d8;max-width:235px}
+.hub-tile>b {right:19px;bottom:13px;color:var(--ui-cyan);font-size:21px}
+.landing-showcase {grid-template-columns:minmax(0,1.81fr) minmax(330px,.95fr);gap:20px;padding:0 0 22px!important}
+.home-revox,.home-garage-panel,.home-focus,.home-history {
+ border-color:var(--ui-line);border-radius:13px;
+ background:linear-gradient(145deg,rgba(30,43,53,.90),rgba(12,20,27,.98));
+ box-shadow:0 20px 42px rgba(0,0,0,.15)
+}
+.home-revox {
+ grid-template-columns:minmax(255px,.80fr) minmax(0,1.2fr);
+ align-items:center;column-gap:13px;min-height:508px;
+ padding:38px 25px 31px 35px;
+ background:radial-gradient(ellipse 63% 75% at 78% 50%,rgba(96,109,115,.20),transparent 85%),linear-gradient(145deg,rgba(32,45,55,.92),rgba(11,18,24,.98))
+}
+.showcase-description {align-self:center;max-width:405px}
+.showcase-description .eyebrow {display:inline-flex;align-items:center;min-height:30px;margin:0 0 12px;padding:5px 11px;border:1px solid var(--ui-cyan-dim);border-radius:5px;background:rgba(0,32,42,.27)}
+.showcase-description h2 {font:700 clamp(34px,2.95vw,45px)/1.11 var(--sans);letter-spacing:-.045em;margin:15px 0 20px}
+.showcase-description h2 span {color:#d3e2e7}
+.showcase-description>p:not(.eyebrow) {font-size:17px;line-height:1.58;color:#d0dfe4;margin:0 0 26px}
+.showcase-description .ui-action {font-size:15px;min-height:51px}
+.revox-preview {align-self:center;display:flex;flex-direction:column;justify-content:center;margin:0;min-width:0}
+.revox-preview img {width:100%;height:auto;object-fit:contain;filter:drop-shadow(0 18px 25px rgba(0,0,0,.35));border-radius:7px}
+.revox-preview figcaption {font-size:13px;line-height:1.4;color:#a4bdc5;margin:13px 0 0}
+.home-garage-panel {padding:29px 24px 24px}
+.panel-heading {margin-bottom:20px}
+.panel-heading .eyebrow {display:inline-flex;border:1px solid var(--ui-cyan-dim);border-radius:5px;padding:5px 10px;margin:0 0 10px;font-size:13px}
+.panel-heading h2 {font-size:32px;line-height:1.1;margin:0}
+.vehicle-teaser {grid-template-columns:117px minmax(0,1fr) 16px;gap:14px;min-height:104px;margin:0 0 13px;padding:10px;border-radius:10px}
+.vehicle-teaser img {height:80px;object-fit:cover;border-radius:7px}
+.vehicle-teaser strong {font-size:17px;line-height:1.25}
+.vehicle-teaser small {font-size:13px;line-height:1.4;margin-top:6px}
+.vehicle-teaser b {font-size:20px}
+.panel-link {font-size:16px;min-height:45px;align-items:center}
+.landing-lower {gap:20px;padding:0 0 80px!important}
+.home-focus,.home-history {min-height:330px;padding:30px 34px}
+.landing-lower h2 {font-size:38px;margin:15px 0 18px}
+.landing-lower p:not(.eyebrow) {font-size:17px;line-height:1.6}
+.focus-tags {gap:8px;margin:21px 0 16px}
+.focus-tags span {padding:7px 12px;font-size:13px}
+.history-facts {grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:0;margin:24px 0 12px}
+.history-facts>div {min-height:90px;padding:13px 15px 13px 0;border-top:1px solid var(--ui-line)}
+.history-facts>div+div {border-left:none;padding-left:0}
+.history-facts>div:nth-child(even) {border-left:1px solid var(--ui-line);padding-left:23px}
+.history-facts strong {font-size:30px;line-height:1.15;margin-bottom:6px}
+.history-facts span {font-size:13px;line-height:1.4}
+.site-footer {padding:45px 0 24px;border-top:1px solid var(--ui-line);color:#adbec6}
+.footer-overview {display:grid;grid-template-columns:1fr auto;align-items:start;gap:35px;padding:0 6px 32px}
+.footer-brand {font:700 25px/1.2 var(--sans);letter-spacing:-.035em;color:#f5fafb}
+.footer-brand::before {content:"";display:inline-block;width:20px;height:13px;margin-right:11px;transform:skew(-26deg);border-left:7px solid var(--ui-cyan);border-right:7px solid var(--ui-cyan)}
+.footer-brand span {color:var(--ui-cyan)}
+.footer-identity p {font-size:14px;margin:10px 0 0;color:#9db5bf}
+.footer-navigation {display:flex;flex-wrap:wrap;justify-content:end;gap:24px;padding:8px 0;font-size:15px}
+.footer-navigation a:hover {color:var(--ui-cyan)}
+.site-footer .footerline {font-size:13px;color:#93abb5;border-color:var(--ui-line)}
+/* Preserve the same editorial system on the inner pages without overwhelming
+   the factory datacards and technical source material. */
+.page-intro h1 {letter-spacing:-.048em}
+.analog-section .analog-feature-body {border-color:var(--ui-line)}
+.garage-page .garage-entry {border-color:var(--ui-line)}
+@media(max-width:1160px) {
+ .landing-hero {grid-template-columns:minmax(0,1.08fr) minmax(255px,.92fr)}
+ .landing-hero h1 {font-size:clamp(60px,6vw,82px)}
+ .landing-showcase {grid-template-columns:1fr}
+ .home-revox {min-height:455px}
+ .home-garage-panel {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 12px}
+ .home-garage-panel .panel-heading,.home-garage-panel .panel-link {grid-column:1/-1}
+ .vehicle-teaser {grid-template-columns:94px minmax(0,1fr) 10px}
+ .vehicle-teaser img {height:72px}
+ .vehicle-teaser strong {font-size:15px}
+}
+@media(max-width:860px) {
+ .shell {width:calc(100% - 42px)}
+ nav[aria-label="Primary"] {flex-wrap:wrap;gap:13px;padding:17px 0}
+ nav[aria-label="Primary"] .navlinks {width:100%;gap:12px 24px;justify-content:start;font-size:15px}
+ .landing-hero {grid-template-columns:1fr;min-height:0;padding:66px 0 54px!important}
+ .landing-hero h1 {font-size:clamp(56px,8vw,76px)}
+ .hero-accent {display:none}
+ .landing-hubs {grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+ .hub-tile {min-height:150px;padding:23px 19px}
+ .home-revox {grid-template-columns:minmax(240px,.82fr) minmax(0,1.18fr);padding:27px;min-height:400px}
+ .showcase-description h2 {font-size:37px}
+ .home-garage-panel {display:block}
+ .vehicle-teaser {grid-template-columns:112px minmax(0,1fr) 14px}
+ .vehicle-teaser strong {font-size:17px}
+}
+@media(max-width:640px) {
+ .shell {width:calc(100% - 32px)}
+ nav[aria-label="Primary"] {min-height:0}
+ nav[aria-label="Primary"] .brand {font-size:25px}
+ nav[aria-label="Primary"] .navlinks {font-size:14px;gap:8px 15px;justify-content:space-between}
+ nav[aria-label="Primary"] .navlinks a {padding:8px 0}
+ .landing-hero {padding:48px 0 40px!important}
+ .landing-hero h1 {font-size:clamp(46px,10vw,66px);margin:17px 0 23px}
+ .landing-intro {font-size:19px}
+ .landing-actions {gap:11px;margin-top:27px}
+ .ui-action {padding:12px 17px;min-height:48px;font-size:14px}
+ .landing-hubs {grid-template-columns:1fr;gap:12px;padding-bottom:20px!important}
+ .hub-tile {min-height:118px;padding:19px 20px;grid-template-columns:45px 1fr}
+ .hub-tile .hub-symbol {width:36px;height:36px}
+ .hub-tile .hub-content strong {font-size:19px;margin-bottom:5px}
+ .hub-tile .hub-content>span {font-size:14px;max-width:none}
+ .home-revox {grid-template-columns:1fr;min-height:0;padding:26px 22px 23px;gap:16px}
+ .showcase-description {max-width:none}
+ .showcase-description h2 {font-size:36px}
+ .showcase-description>p:not(.eyebrow) {font-size:16px}
+ .revox-preview {margin-top:10px}
+ .home-garage-panel {padding:23px 19px}
+ .vehicle-teaser {grid-template-columns:90px minmax(0,1fr) 12px;min-height:90px;gap:11px}
+ .vehicle-teaser img {height:65px}
+ .vehicle-teaser strong {font-size:15px}
+ .vehicle-teaser small {font-size:12px}
+ .landing-lower {grid-template-columns:1fr;gap:15px}
+ .home-focus,.home-history {min-height:0;padding:26px 23px}
+ .landing-lower h2 {font-size:34px}
+ .footer-overview {grid-template-columns:1fr;gap:15px}
+ .footer-navigation {justify-content:start;gap:12px 22px}
+ .site-footer .footerline {flex-direction:column;gap:8px}
+}
+@media(prefers-reduced-motion:reduce) {
+ .hub-tile,.ui-action,.vehicle-teaser {transition:none}
+ .hub-tile:hover,.ui-action:hover {transform:none}
+}

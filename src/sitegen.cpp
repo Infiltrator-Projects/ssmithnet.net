@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/favicon.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-2") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-3") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -129,17 +129,17 @@ static string render_home() {
 <section class="landing-hero" aria-labelledby="home-title">
   <div class="landing-hero-copy">
     <p class="eyebrow">Shannon Smith · Mooroopna, Victoria</p>
-    <h1 id="home-title">Projects, cars,<br>software and <span>machines.</span></h1>
+    <h1 id="home-title">Projects, cars,<br>software, and<br><span>machines.</span></h1>
     <p class="landing-intro">A personal corner of the internet for building software, driving interesting machinery and keeping the old technology working.</p>
     <div class="landing-actions"><a class="ui-action ui-action-primary" href="workbench.html">Explore the Workbench <span aria-hidden="true">↗</span></a><a class="ui-action ui-action-secondary" href="garage.html">Visit the Garage <span aria-hidden="true">→</span></a></div>
   </div>
   <div class="hero-accent" aria-hidden="true"><span class="hero-wave"></span><span class="hero-wave-copy"></span></div>
 </section>
 <section class="landing-hubs" aria-label="Explore the site">
-  <a class="hub-tile" href="workbench.html"><span class="hub-symbol" aria-hidden="true">⌘</span><strong>Workbench</strong><span>Filesystems, native applications, diagnostics and analogue hardware.</span><b aria-hidden="true">↗</b></a>
-  <a class="hub-tile" href="garage.html"><span class="hub-symbol" aria-hidden="true">◇</span><strong>Garage</strong><span>My current Mercedes, former cars and their stories.</span><b aria-hidden="true">↗</b></a>
-  <a class="hub-tile" href="https://infiltrator-projects.github.io/Infiltrator-Repository/"><span class="hub-symbol" aria-hidden="true">⌘</span><strong>Software Centre</strong><span>Downloadable tools, applications and packages.</span><b aria-hidden="true">↗</b></a>
-  <a class="hub-tile" href="about.html"><span class="hub-symbol" aria-hidden="true">◎</span><strong>About</strong><span>The site, its history and the interests behind it.</span><b aria-hidden="true">↗</b></a>
+  <a class="hub-tile" href="workbench.html"><img class="hub-symbol" src="assets/graphics/ui-workbench.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Workbench</strong><span>Filesystems, native applications, diagnostics and analogue hardware.</span></span><b aria-hidden="true">↗</b></a>
+  <a class="hub-tile" href="garage.html"><img class="hub-symbol" src="assets/graphics/ui-garage.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Garage</strong><span>My current Mercedes, former cars and their stories.</span></span><b aria-hidden="true">↗</b></a>
+  <a class="hub-tile" href="https://infiltrator-projects.github.io/Infiltrator-Repository/"><img class="hub-symbol" src="assets/graphics/ui-code.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Software Centre</strong><span>Downloadable tools, applications and packages.</span></span><b aria-hidden="true">↗</b></a>
+  <a class="hub-tile" href="about.html"><img class="hub-symbol" src="assets/graphics/ui-about.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>About</strong><span>The site, its history and the interests behind it.</span></span><b aria-hidden="true">↗</b></a>
 </section>
 <section class="landing-showcase" aria-label="Featured collections">
   <article class="home-revox">
@@ -151,7 +151,7 @@ static string render_home() {
     </div>
     <figure class="revox-preview">
       <img src="assets/photos/revox-b77-mkii-dbx224.webp" width="1200" height="900" decoding="async" alt="Clean illustration of my ReVox B77 Mk II reel-to-reel recorder above a dbx Model 224, with two BASF reels and illuminated VU meters">
-      <figcaption>Illustrative redraw based on my own ReVox and dbx equipment.</figcaption>
+      <figcaption>ReVox B77 Mk II and dbx 224 · Redrawn from my own equipment.</figcaption>
     </figure>
   </article>
   <aside class="home-garage-panel" aria-labelledby="home-garage-title">
@@ -172,7 +172,12 @@ static string render_home() {
   <article class="home-history">
     <p class="eyebrow">A little history</p><h2>Since the 1990s.</h2>
     <p>This address began with a Mercedes-Benz 450SEL 6.9. Cars, software, watches, open-reel audio and a curiosity about the way things work have shared the same home since.</p>
-    <div class="history-facts"><div><strong>14</strong><span>Vehicles in the garage history</span></div><div><strong>C++17</strong><span>Generated static website</span></div></div>
+    <div class="history-facts">
+      <div><strong>14</strong><span>Vehicles in the garage history</span></div>
+      <div><strong>1990s</strong><span>The original 450SEL 6.9 website</span></div>
+      <div><strong>2016</strong><span>Native software projects began</span></div>
+      <div><strong>C++17</strong><span>The site's own static generator</span></div>
+    </div>
     <a class="panel-link" href="about.html#the-site">The story of this site <span aria-hidden="true">→</span></a>
   </article>
 </section>

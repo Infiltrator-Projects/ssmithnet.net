@@ -532,7 +532,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-2") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-3") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -582,6 +582,28 @@ void validate(const fs::path& root) {
     require(fs::is_regular_file(root / "assets/photos/revox-b77-mkii-dbx224.webp") &&
             fs::file_size(root / "assets/photos/revox-b77-mkii-dbx224.webp") > 10000,
             "ReVox illustration is missing from published sources");
+    const string home = first.at("index.html");
+    require(home.find("assets/graphics/ui-workbench.svg") != string::npos &&
+            home.find("assets/graphics/ui-garage.svg") != string::npos &&
+            home.find("assets/graphics/ui-code.svg") != string::npos &&
+            home.find("assets/graphics/ui-about.svg") != string::npos,
+            "Homepage destination icons missing");
+    require(home.find("software, and<br><span>machines.</span>") != string::npos &&
+            home.find("1990s") != string::npos &&
+            home.find("2016") != string::npos,
+            "Homepage visual hierarchy or grounded site history missing");
+    for (const char* filename : {"ui-workbench.svg", "ui-garage.svg", "ui-code.svg", "ui-about.svg", "audio-waveform.svg"}) {
+        const fs::path asset = root / "assets/graphics" / filename;
+        require(fs::is_regular_file(asset) && fs::file_size(asset) > 200,
+                string("Homepage visual asset missing: ") + filename);
+    }
+    require(first.at("workbench.html").find("id=\"revox-b77\"") != string::npos,
+            "ReVox workbench section unexpectedly removed");
+    for (const auto& [relative, content] : first) {
+        require(content.find("aria-label=\"Footer\"") != string::npos &&
+                content.find("class=\"footer-brand\"") != string::npos,
+                relative + ": revised website footer missing");
+    }
     const string garage = first.at("garage.html");
     validate_garage(root, garage);
     for (const auto& [relative, content] : first)

@@ -47,7 +47,15 @@ inline std::string navigation(const std::string& active, const std::string& home
     return html + "</div></nav>";
 }
 inline std::string footer(const std::string& note) {
-    return "<footer><div class=\"footerline\"><span>© Shannon Smith · ssmithnet.net</span><span>" +
+    return "<footer class=\"site-footer\"><div class=\"footer-overview\"><div class=\"footer-identity\">"
+           "<a class=\"footer-brand\" href=\"https://ssmithnet.net/index.html\">ssmith<span>net</span>.net</a>"
+           "<p>Software, cars, open-reel audio and the things that keep them running.</p></div>"
+           "<nav aria-label=\"Footer\" class=\"footer-navigation\">"
+           "<a href=\"https://ssmithnet.net/workbench.html\">Workbench</a>"
+           "<a href=\"https://ssmithnet.net/garage.html\">Garage</a>"
+           "<a href=\"https://ssmithnet.net/about.html\">About</a>"
+           "<a href=\"https://github.com/Infiltrator-Projects\">GitHub</a>"
+           "</nav></div><div class=\"footerline\"><span>© Shannon Smith · ssmithnet.net</span><span>" +
            esc(note) + "</span></div></footer></div></body></html>";
 }
 }
