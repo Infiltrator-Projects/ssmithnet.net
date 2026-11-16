@@ -55,3 +55,7 @@ The generator now publishes `projects.html` from the native C++ source with dire
 ## Editorial review across the website — 16 November 2026
 
 Home is an introduction, not a duplicate project register or a second timeline. Workbench now presents six substantive, source-grounded fields, including the distinction between InfiltratorOS integration and a finished standalone operating system, plus InfiltratorFS format 0.19 and platform qualification. Projects remains the dated 104-repository GitHub index. Garage contains the actual vehicle record and distinct first-hand information, and About owns the longer history since 1993. Archive remains the canonicalised About alias; the download landing is brief by purpose. Native checks confirm source/mirror equivalence and editorial invariants, not pixel-perfect browser layout. Software Centre has its own deployment pipeline and package-focused scope.
+
+## UI consistency regression — 16 November 2026
+
+Check shared navigation at 320, 375, 390, 430, 768 and 1280 CSS pixels. In particular, verify the two-row five-link mobile menu, compact Workbench chapter directory, readable text measure, horizontal Garage car index (all thirteen entries remain reachable), compact 220px desktop / 170px mobile Daytona, and Projects search with names, descriptions, families, Clear and empty results. The native source/mirror tests assert link targets and critical UI structure but are not substitutes for actual browser screenshots or touch-device tests.

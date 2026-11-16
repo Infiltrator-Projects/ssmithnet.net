@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-watch2") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261116-polish1") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -97,7 +97,7 @@ static string historical_car(const Car& c) {
     if (is_torana) o << R"(<div class="vehicle-photo-pair" aria-label="Supplied views of the white Holden LC Torana"><figure><a class="garage-photo-link" href="assets/photos/lc-torana-three-quarter.webp" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/lc-torana-three-quarter.webp" width="1021" height="510" loading="lazy" decoding="async" alt="White Holden LC Torana four-door sedan in a front three-quarter view, with external windscreen sun visor, chrome trim, red interior and a tree-lined parking bay"></a><figcaption>LC Torana · three-quarter side view</figcaption></figure><figure><a class="garage-photo-link" href="assets/photos/lc-torana-front.webp" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/lc-torana-front.webp" width="520" height="510" loading="lazy" decoding="async" alt="Front view of a white Holden LC Torana with pointed bonnet, central Holden grille badge, external windscreen sun visor, chrome bumper and blurred registration plate"></a><figcaption>LC Torana · front view</figcaption></figure></div>)";
     if (is_discovery) o << R"(<div class="vehicle-photo-pair" aria-label="Supplied views of the Land Rover Discovery II"><figure><a class="garage-photo-link" href="assets/photos/discovery-2-three-quarter.webp" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/discovery-2-three-quarter.webp" width="642" height="348" loading="lazy" decoding="async" alt="Dark Land Rover Discovery II in a front three-quarter view with roof rails, black grille and silver alloy wheels"></a><figcaption>Discovery 2 · three-quarter side view</figcaption></figure><figure><a class="garage-photo-link" href="assets/photos/discovery-2-front.webp" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/discovery-2-front.webp" width="642" height="387" loading="lazy" decoding="async" alt="Front view of a dark Land Rover Discovery II with rectangular headlights, roof rails and black bumper"></a><figcaption>Discovery 2 · front view</figcaption></figure></div>)";
     if (is_peugeot) o << R"(<div class="vehicle-photo-pair" aria-label="Supplied views of the white Peugeot 405 GLD"><figure><a class="garage-photo-link" href="assets/photos/peugeot-405-gld-three-quarter.webp" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/peugeot-405-gld-three-quarter.webp" width="642" height="348" loading="lazy" decoding="async" alt="White Peugeot 405 GLD four-door saloon in a front three-quarter view, with black side mouldings and grey wheel covers"></a><figcaption>Peugeot 405 GLD · three-quarter side view</figcaption></figure><figure><a class="garage-photo-link" href="assets/photos/peugeot-405-gld-front.webp" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/peugeot-405-gld-front.webp" width="642" height="387" loading="lazy" decoding="async" alt="Front view of a white Peugeot 405 GLD with rectangular headlamps, black bumper and the Peugeot lion badge"></a><figcaption>Peugeot 405 GLD · front view</figcaption></figure></div>)";
-    o << "</article>";
+    o << R"(<a class="vehicle-index-return" href="#garage-index">↑ Back to the vehicle index</a></article>)";
     return o.str();
 }
 
@@ -186,7 +186,7 @@ static string render_projects() {
 </section>
 <section class="repository-browser" id="directory" aria-labelledby="directory-title">
   <div class="repository-browser-header"><div><p class="eyebrow">Every public Git</p><h2 id="directory-title">The repository index.</h2><p>All 104 repositories are linked below. Calendar, clock and filesystem modules are kept together in expandable families so the individual repositories remain discoverable without an endless wall of links.</p></div>
-    <div class="repository-search"><label for="repository-search">Find a repository</label><input id="repository-search" type="search" placeholder="Search repository names" autocomplete="off" aria-controls="repo-families"><output id="repository-count" role="status" aria-live="polite">104 repositories</output></div>
+    <div class="repository-search"><label for="repository-search">Find a repository</label><div class="repository-search-control"><input id="repository-search" type="search" placeholder="Name, purpose or family" autocomplete="off" aria-controls="repo-families" aria-describedby="repository-search-help"><button id="repository-clear" type="button" hidden>Clear</button></div><span class="repository-search-help" id="repository-search-help">Search titles, descriptions or project families.</span><output id="repository-count" role="status" aria-live="polite">104 repositories</output></div>
   </div>
   <nav class="repository-families-nav" aria-label="Jump to project family"><a href="#group-foundations">Operating system &amp; foundations <span>9</span></a><a href="#group-applications">Applications &amp; utilities <span>7</span></a><a href="#group-diagnostics">Vehicle diagnostics <span>6</span></a><a href="#group-creative">Games &amp; creative work <span>3</span></a><a href="#group-publishing">Sites &amp; publishing <span>2</span></a><a href="#group-calendar-modules">Calendar systems <span>31</span></a><a href="#group-clock-modules">Clock &amp; timekeeping modules <span>23</span></a><a href="#group-filesystem-modules">Filesystem engines <span>23</span></a></nav>
   <div id="repo-families" class="repository-families">
@@ -311,31 +311,48 @@ static string render_projects() {
 <a class="repo-entry repo-entry--compact" href="https://github.com/Infiltrator-Projects/Filesystem-ZFS" data-repo-name="Filesystem-ZFS"><strong>Filesystem-ZFS</strong><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 </div></details>
   </div>
+  <div class="repository-empty" id="repository-empty" role="status" hidden><strong>No matching repositories.</strong><p>Try another term or clear the search to see all 104 projects.</p></div>
   <p class="repository-disclosure">Inventory of publicly visible <a href="https://github.com/Infiltrator-Projects">Infiltrator-Projects</a> repositories captured on 16 November 2026. Different repositories have different levels of development and qualification: appearing here does not imply a release or complete functionality. GitHub remains the live source for additions and current status.</p>
 </section>
 <section class="destination-strip projects-outro"><div><p class="eyebrow">Featured engineering work</p><h2>Go deeper in the Workbench.</h2><p>Explore the major projects in more detail, or visit the Software Centre for published Linux packages.</p></div><div class="projects-outro-links"><a class="text-link" href="workbench.html">Workbench ↗</a><a class="text-link" href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre ↗</a></div></section>
 <script>
 (() => {
   const field = document.getElementById('repository-search');
+  const clear = document.getElementById('repository-clear');
+  const empty = document.getElementById('repository-empty');
+  const jumpNav = document.querySelector('.repository-families-nav');
   const entries = Array.from(document.querySelectorAll('.repo-entry'));
   const groups = Array.from(document.querySelectorAll('[data-repo-group]'));
   const status = document.getElementById('repository-count');
-  if (!field || !status) return;
-  field.addEventListener('input', () => {
-    const search = field.value.trim().toLocaleLowerCase();
-    let found = 0;
-    for (const item of entries) {
-      const match = item.dataset.repoName.toLocaleLowerCase().includes(search);
-      item.hidden = !match;
-      if (match) ++found;
+  if (!field || !clear || !empty || !jumpNav || !status) return;
+  const index = groups.map(group => ({
+    group,
+    label: (group.querySelector('.repo-group-heading h3, .repo-group-text strong')?.textContent || '').toLocaleLowerCase(),
+    entries: Array.from(group.querySelectorAll('.repo-entry'))
+  }));
+  function update() {
+    const query = field.value.trim().toLocaleLowerCase();
+    let matches = 0;
+    for (const family of index) {
+      const familyMatch = query.length > 0 && family.label.includes(query);
+      let visible = 0;
+      for (const entry of family.entries) {
+        const searchable = entry.textContent.toLocaleLowerCase() + ' ' + entry.dataset.repoName.toLocaleLowerCase();
+        const show = !query || familyMatch || searchable.includes(query);
+        entry.hidden = !show;
+        if (show) { ++matches; ++visible; }
+      }
+      family.group.hidden = visible === 0;
+      if (family.group.tagName === 'DETAILS') family.group.open = Boolean(query && visible);
     }
-    for (const group of groups) {
-      const hasMatch = Array.from(group.querySelectorAll('.repo-entry')).some(item => !item.hidden);
-      group.hidden = !hasMatch;
-      if (group.tagName === 'DETAILS') group.open = search.length > 0 && hasMatch;
-    }
-    status.textContent = search ? found + ' matching repositories' : entries.length + ' repositories';
-  });
+    clear.hidden = !query;
+    empty.hidden = !query || matches !== 0;
+    jumpNav.hidden = Boolean(query);
+    status.textContent = query ? matches + ' matching repositories' : entries.length + ' repositories';
+  }
+  field.addEventListener('input', update);
+  clear.addEventListener('click', () => { field.value = ''; update(); field.focus(); });
+  update();
 })();
 </script>
 )CATALOG" + page_end("104 public repositories · snapshot 16 November 2026.");
@@ -347,7 +364,7 @@ static string render_workbench() {
   <p class="eyebrow">Workbench · How the projects fit together</p>
   <h1>Engineering work,<br>from the interface down.</h1>
   <p class="lead">The software projects are not one application split into dozens of repositories. Some are independent products, some own reusable engines, and others own a single calendar, clock or filesystem format. This is where the major systems, their boundaries and the work still ahead are explained.</p>
-  <nav class="workbench-directory" aria-label="Workbench sections">
+  <nav class="workbench-directory" id="workbench-topics" aria-label="Workbench sections">
     <a href="#platform"><small>01 · Foundation</small><strong>InfiltratorOS</strong><span>Boot, kernel, Libraries and native file handling</span></a>
     <a href="#infiltratorfs"><small>02 · Storage</small><strong>InfiltratorFS</strong><span>Format, recovery and integrity</span></a>
     <a href="#software"><small>03 · Applications</small><strong>Desktop tools</strong><span>Monitor, defragment, calculate and manage</span></a>
@@ -373,6 +390,7 @@ static string render_workbench() {
     </div>
     <p class="project-boundary">Builds, emulated boots and component tests are evidence of particular milestones, not proof that every subsystem is ready for a general-purpose installation. Current qualification is maintained in each repository.</p>
   </div>
+<a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
 <section id="infiltratorfs" class="project-section">
   <header class="section-heading"><p class="eyebrow">Storage · Original format</p><h2>InfiltratorFS.</h2><p class="section-deck">What should survive a crash, and how can the filesystem prove what survived?</p></header>
@@ -386,6 +404,7 @@ static string render_workbench() {
       <div class="engineering-notes"><article><h3>Keep identity stable</h3><p>Objects carry 128-bit identifiers and the namespace supports UTF-8 names. The transaction and extent model separates logical identity from where bytes happen to be stored.</p></article><article><h3>Share without guessing</h3><p>Reflinks, snapshots and sparse allocation require explicit rules about ownership, history and future writes. A shared extent is a deliberate state, not an accidental consequence of copying.</p></article><article><h3>Test failures as well as success</h3><p>Disposable-image tests can inject I/O interruptions. Mounted Linux performance, writeback behaviour, recovery and the firmware bridge have distinct qualification boundaries.</p></article></div>
     </details>
   </div>
+<a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
 <section id="software" class="project-section">
   <header class="section-heading"><p class="eyebrow">Applications · Practical tools</p><h2>Software that does a specific job.</h2><p class="section-deck">Not every capability belongs inside the operating system itself.</p></header>
@@ -402,6 +421,7 @@ static string render_workbench() {
     </div>
     <p class="project-boundary">The individually owned calendar, clock and filesystem repositories are available in the <a href="projects.html">complete Projects catalogue</a>. Those modules are building blocks, not claims of dozens of separately finished desktop products.</p>
   </div>
+<a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
 <section id="link" class="project-section">
   <header class="section-heading"><p class="eyebrow">Vehicle diagnostics · Shared engine</p><h2>Link and its manufacturer families.</h2><p class="section-deck">An adapter returns bytes. A diagnostic product must establish what they actually mean.</p></header>
@@ -418,6 +438,7 @@ static string render_workbench() {
     </div>
     <details class="technical-detail"><summary>What Discover is for <span aria-hidden="true">+</span></summary><p>The workflow begins with connection and identification, continues through supported module discovery and read-only data requests, and retains captures for interpretation. Reusable interrogation mechanisms belong to Link; Mercedes, Jaguar, BMW, Audi or Ford-specific meanings stay with the corresponding product. This boundary matters whenever a car produces a response the software cannot yet explain.</p></details>
   </div>
+<a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
 <section id="creative" class="project-section">
   <header class="section-heading"><p class="eyebrow">Simulation · Creative tools</p><h2>Games are engineering projects too.</h2><p class="section-deck">Different user experiences, but the same need for coherent models and clear cause and effect.</p></header>
@@ -430,6 +451,7 @@ static string render_workbench() {
       <a href="https://github.com/Infiltrator-Projects/Character-Profiler"><strong>Character Profiler</strong><span>Native iOS character and story development.</span><b aria-hidden="true">↗</b></a>
     </div>
   </div>
+<a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
 <section id="revox-b77" class="project-section analog-section">
   <header class="section-heading"><p class="eyebrow">Analogue · Real hardware</p><h2>ReVox B77 Mk II and dbx 224.</h2><p class="section-deck">A different way of seeing an engineering system work.</p></header>
@@ -442,6 +464,7 @@ static string render_workbench() {
       <dl class="analog-specs"><div><dt>Recorder</dt><dd>ReVox B77 Mk II</dd></div><div><dt>Noise reduction</dt><dd>dbx 224 · Type II</dd></div><div><dt>Connections</dt><dd>Two-channel line input and output</dd></div></dl>
     </div>
   </div>
+<a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
 <section id="repository" class="destination-strip"><div><p class="eyebrow">Publishing is a different job</p><h2>Code is not the same as an installable release.</h2><p>The <a href="projects.html">Projects catalogue</a> maps every public source repository. The <strong>Software Centre</strong> is the distribution surface for approved Linux packages, installation information and the APT repository. It does not imply that every source module has a user-installable application.</p></div><a class="text-link" href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Browse the Software Centre ↗</a></section>
 <section id="principles" class="closing-note"><h2>Verify the work,<br>not just the build.</h2><p>A successful compilation proves a particular build. A deterministic unit test proves the cases it exercised. A boot in QEMU, a mount on test media and a real vehicle capture each establish different evidence. The repositories record those boundaries, and the unfinished work is part of the story.</p></section>
@@ -576,7 +599,7 @@ static string render_garage() {
     o << vehicle_record(current) << "</article></section>";
     o << R"(<section class="garage-chapter" id="vehicle-history" aria-labelledby="vehicle-history-title"><header class="chapter-heading"><p class="eyebrow">The earlier cars · newest to oldest</p><h2 id="vehicle-history-title">A garage history, in order.</h2><p>This is a record of vehicles I owned, not a timeline of when I bought them. They are ordered by known manufacture year where recorded; otherwise the model-era label explains the position. The photos are identified individually as original, supplied reference material or illustrative reconstructions.</p></header>)";
     const auto cars = historical_cars();
-    o << R"(<nav class="garage-jump" aria-label="Jump to a previous car"><div class="garage-jump-heading"><strong>Find a car</strong><span>Thirteen previous vehicles · newest to oldest</span></div><div class="garage-jump-links">)";
+    o << R"(<nav class="garage-jump" id="garage-index" aria-label="Jump to a previous car"><div class="garage-jump-heading"><strong>Find a car</strong><span>Thirteen previous vehicles · newest to oldest</span></div><div class="garage-jump-links">)";
     for (const auto& car : cars) {
         const auto separator = car.year_label.find(" ·");
         const string year = car.year_label.substr(0, separator);
@@ -593,7 +616,7 @@ static string render_garage() {
                                 {"Chassis / Series", "126.044 · C126", ""},
                                 {"Powertrain", "4,973 cc M117.963 V8", ""}}, "car-facts")
               << R"(<div class="vehicle-photo-pair" aria-label="Photographs of the 500SEC AMG"><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-side.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-side.jpg" width="1021" height="409" loading="lazy" decoding="async" alt="Smoke Silver 500SEC AMG photographed from the side, showing the AMG bodywork and five-spoke wheels"></a><figcaption>500SEC AMG · three-quarter side view</figcaption></figure><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-front.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-front.jpg" width="520" height="400" loading="lazy" decoding="async" alt="Front of the Smoke Silver 500SEC AMG with Western Australian registration 1ARK884"></a><figcaption>500SEC AMG · 1ARK884</figcaption></figure></div>)"
-              << vehicle_record(sec) << "</article>";
+              << vehicle_record(sec) << R"(<a class="vehicle-index-return" href="#garage-index">↑ Back to the vehicle index</a></article>)";
         } else {
             o << historical_car(car);
         }

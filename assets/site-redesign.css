@@ -9,7 +9,7 @@
   --accent:#27dce9;--ui-cyan:#27dce9;
   --line:rgba(142,180,192,.29);--line-soft:rgba(142,180,192,.18);
   --wood-strong:rgba(142,180,192,.29);
-  --content:1320px;--radius:11px;
+  --content:1320px;--radius:11px;--measure:74ch;
   --sans:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   --display:var(--sans);--ui-font:var(--sans);
   --ui-line:var(--line);--ui-card:linear-gradient(145deg,#1c2b35 0%,#101b23 100%);
@@ -44,15 +44,15 @@ nav[aria-label="Primary"] .navlinks .nav-software{border-left:0;padding-left:0}
 .page-intro h1{max-width:1000px;margin:12px 0 24px}
 .page-intro .lead{max-width:790px}
 .section-nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
-.section-nav a{display:inline-flex;align-items:center;min-height:42px;padding:8px 15px;border:1px solid var(--line);border-radius:7px;background:rgba(29,44,54,.65);font:600 14px/1.4 var(--sans)}
+.section-nav a{display:inline-flex;align-items:center;min-height:44px;padding:8px 15px;border:1px solid var(--line);border-radius:7px;background:rgba(29,44,54,.65);font:600 14px/1.4 var(--sans)}
 .section-nav a:hover{border-color:var(--accent);background:rgba(30,161,182,.10)}
 /* One chapter directory at the start of a long workshop, not a second menu. */
 .workbench-directory{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:28px}
-.workbench-directory a{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0;min-height:111px;padding:16px 18px;border:1px solid var(--line);border-radius:8px;background:var(--ui-card)}
+.workbench-directory a{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-width:0;min-height:100px;padding:15px 17px;border:1px solid var(--line);border-radius:8px;background:var(--ui-card)}
 .workbench-directory a:hover{border-color:var(--accent);background:linear-gradient(145deg,#233d47,#11232c)}
 .workbench-directory small{font:700 11px/1.5 var(--sans);letter-spacing:.045em;text-transform:uppercase;color:var(--accent)}
 .workbench-directory strong{font:720 18px/1.3 var(--sans);color:var(--text)}
-.workbench-directory span{font:400 13px/1.4 var(--sans);color:var(--muted)}
+.workbench-directory span{font:400 12px/1.45 var(--sans);color:var(--muted)}
 .section-heading{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px 42px;align-items:start;margin-bottom:26px}
 .section-heading>.eyebrow{grid-column:1/-1}
 .section-heading h2{margin:0}
@@ -152,7 +152,10 @@ nav[aria-label="Primary"] .navlinks .nav-software{border-left:0;padding-left:0}
 .workbench-context>strong{font:720 18px/1.4 var(--sans);color:var(--text)}
 .workbench-context p{margin:8px 0 0;font:400 15px/1.6 var(--sans);color:var(--muted)}
 .project-content .project-boundary{padding-top:20px;margin-top:22px;border-top:1px solid var(--line-soft);font:400 14px/1.6 var(--sans);color:var(--muted)}
-.workbench-page .project-content>p{max-width:1040px}
+.workbench-page .project-content{max-width:1160px}
+.workbench-page .project-content>p{max-width:var(--measure)}
+.workbench-page .project-content .workbench-context p{max-width:var(--measure)}
+.workbench-page .family-register{max-width:1050px}
 .workbench-page .project-content>p+p{margin-top:16px}
 .workbench-page .project-section{scroll-margin-top:26px}
 .about-section-intro{font:400 17px/1.65 var(--sans);max-width:945px;margin:0 0 27px}
@@ -161,7 +164,7 @@ nav[aria-label="Primary"] .navlinks .nav-software{border-left:0;padding-left:0}
 .about-structure-grid article{padding:23px 27px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ui-card)}
 .about-structure-grid h3{font-size:24px;margin:0 0 12px}
 .about-structure-grid p{font:400 15px/1.65 var(--sans);margin:0}
-.about-history .event p{max-width:1040px}
+.about-history .event p{max-width:var(--measure)}
 /* Garage: current vehicle is the editorial lead, the others a common archive. */
 .garage-current{padding:29px 0 53px}
 .garage-nav{margin:0 0 35px}
@@ -187,6 +190,10 @@ nav[aria-label="Primary"] .navlinks .nav-software{border-left:0;padding-left:0}
 .garage-jump-links a:hover{border-color:var(--accent)}
 .garage-jump-links small{font:600 11px/1.4 var(--sans);color:var(--accent)}
 .garage-jump-links span{font:640 14px/1.35 var(--sans);color:var(--text)}
+.garage-jump:target{border-color:rgba(39,220,233,.65)}
+.chapter-backlink,.vehicle-index-return{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:19px;padding:7px 0;border-bottom:1px solid var(--line);color:var(--accent);font:650 13px/1.5 var(--sans)}
+.chapter-backlink:hover,.vehicle-index-return:hover{border-color:var(--accent)}
+.workbench-page .project-section:target .section-heading h2,.garage-page .garage-entry:target .vehicle-heading h3{color:var(--accent)}
 .garage-page .garage-entry{margin:0;padding:27px 30px 24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--ui-card)}
 .garage-page .garage-entry .vehicle-heading{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);grid-template-rows:auto auto auto;gap:4px 32px}
 .garage-page .garage-entry .tag{grid-column:1;grid-row:1;color:var(--accent);font-size:12px;font-weight:650;text-transform:uppercase}
@@ -245,6 +252,8 @@ input[type="search"]{border-radius:7px}
 .footer-identity p{font:400 13px/1.5 var(--sans);color:var(--quiet);margin:9px 0 0}
 .footer-navigation{display:flex;align-items:start;flex-wrap:wrap;justify-content:flex-end;gap:22px;padding-top:7px;font:550 13px/1.4 var(--sans)}
 .footer-navigation a:hover{color:var(--accent)}
+.footer-navigation .footer-top{color:var(--accent);font-weight:700}
+.footer-navigation .footer-top:hover{text-decoration:underline;text-underline-offset:5px}
 .site-footer .footerline{display:flex;justify-content:space-between;gap:20px;padding-top:16px;border-top:1px solid var(--line-soft);font:400 12px/1.5 var(--sans);color:var(--quiet)}
 
 /* Complete GitHub portfolio: grouped by real repository ownership.
@@ -265,8 +274,17 @@ input[type="search"]{border-radius:7px}
 .repository-search input{display:block;width:100%;min-width:0;min-height:49px;box-sizing:border-box;padding:12px 14px;border-radius:8px;border:1px solid var(--line);background:#07131b;font:400 16px/1.5 var(--sans);color:var(--text)}
 .repository-search input:focus{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:2px}
 .repository-search output{font:500 13px/1.4 var(--sans);color:var(--muted)}
+.repository-search-control{display:flex;align-items:stretch;gap:8px}
+.repository-search-control input{flex:1;min-width:0}
+.repository-search-control button{flex:none;min-height:49px;padding:10px 14px;border:1px solid var(--accent);border-radius:8px;background:rgba(24,77,88,.30);color:var(--accent);font:700 14px/1.35 var(--sans);cursor:pointer}
+.repository-search-control button:hover{background:rgba(32,150,163,.22)}
+.repository-search-help{font:400 12px/1.4 var(--sans);color:var(--quiet)}
+.repository-empty{padding:25px 27px;border:1px dashed var(--line);border-radius:var(--radius);background:rgba(18,34,43,.62)}
+.repository-empty strong{font:740 20px/1.3 var(--sans);color:var(--text)}
+.repository-empty p{margin:8px 0 0;font-size:14px}
+.repository-empty[hidden],.repository-families-nav[hidden],.repository-search-control button[hidden]{display:none!important}
 .repository-families-nav{display:flex;flex-wrap:wrap;gap:9px;padding:5px 0 27px;margin-bottom:9px}
-.repository-families-nav a{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:7px 12px;border:1px solid var(--line);border-radius:7px;background:rgba(11,28,37,.54);font:600 12px/1.4 var(--sans);color:var(--text)}
+.repository-families-nav a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:7px 12px;border:1px solid var(--line);border-radius:7px;background:rgba(11,28,37,.54);font:600 12px/1.4 var(--sans);color:var(--text)}
 .repository-families-nav a:hover{border-color:var(--accent)}
 .repository-families-nav a span{font-variant-numeric:tabular-nums;color:var(--accent)}
 .repository-families{display:grid;gap:30px}
@@ -276,7 +294,7 @@ input[type="search"]{border-radius:7px}
 .repo-group-heading p{font:400 15px/1.5 var(--sans);max-width:870px;margin:0}
 .repo-group-count{flex:none;font:600 12px/1.4 var(--sans);color:var(--accent);border:1px solid var(--line);padding:7px 10px;border-radius:6px;white-space:nowrap}
 .repo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
-.repo-entry{min-width:0;position:relative;display:flex;flex-direction:column;justify-content:flex-start;min-height:104px;gap:6px;padding:19px 39px 18px 18px;border:1px solid var(--line);border-radius:8px;background:var(--ui-card);color:var(--text)}
+.repo-entry{min-width:0;position:relative;display:flex;flex-direction:column;justify-content:flex-start;min-height:104px;gap:6px;padding:19px 39px 18px 18px;border:1px solid var(--line);border-radius:8px;background:var(--ui-card);color:var(--text);transition:border-color .16s,background-color .16s}
 .repo-entry:hover{border-color:var(--accent);background:linear-gradient(135deg,#213640,#0d1e27)}
 .repo-entry strong{display:block;font:740 17px/1.35 var(--sans);overflow-wrap:anywhere}
 .repo-entry>span:not(.repo-entry-arrow){font:400 13px/1.45 var(--sans);color:var(--muted)}
@@ -356,7 +374,7 @@ input[type="search"]{border-radius:7px}
   .home-editorial{padding:28px 0 49px!important;gap:13px}
   .home-editorial-heading h2{font-size:32px}
   .home-editorial-copy p{font-size:15px}
-  .workbench-intro .workbench-directory{grid-template-columns:1fr}
+  .workbench-intro .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}
   .workbench-intro .workbench-directory a{min-height:0}
   .about-structure-grid article{padding:20px}
 
@@ -368,13 +386,15 @@ input[type="search"]{border-radius:7px}
   .garage-jump-heading{display:block;margin-bottom:14px}
   .garage-jump-heading strong,.garage-jump-heading>span{display:block}
   .garage-jump-heading>span{margin-top:4px}
-  .garage-jump-links{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .garage-jump-links a{min-height:60px;padding:9px}
+  .garage-jump-links{display:flex;overflow-x:auto;overflow-y:hidden;gap:8px;scroll-snap-type:x proximity;overscroll-behavior-x:contain;padding-bottom:11px;scrollbar-color:var(--accent) var(--bg2)}
+  .garage-jump-links a{flex:0 0 155px;min-height:63px;padding:9px;scroll-snap-align:start}
+  .garage-jump-heading::after{content:"Scroll sideways to browse all vehicles ↔";display:block;margin-top:9px;color:var(--accent);font:600 12px/1.4 var(--sans)}
   .shell{width:calc(100% - 32px)}
   nav[aria-label="Primary"] .brand{font-size:24px}
   nav[aria-label="Primary"] .brand::before{width:30px;height:24px;margin-right:8px}
-  nav[aria-label="Primary"] .navlinks{justify-content:flex-start;gap:2px 18px;font-size:13px}
-  nav[aria-label="Primary"] .navlinks a{min-height:39px}
+  nav[aria-label="Primary"] .navlinks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:stretch;gap:0 10px;font-size:13px}
+  nav[aria-label="Primary"] .navlinks a{min-height:44px;justify-content:flex-start}
+  nav[aria-label="Primary"] .navlinks .nav-software{grid-column:span 2}
   .home-page main>section,.workbench-page main>section,.projects-page main>section,.garage-page main>section,.about-page main>section{padding:36px 0}
   .page-intro{padding:40px 0 37px}
   .page-intro h1{font-size:clamp(39px,10vw,51px)}
@@ -418,11 +438,23 @@ input[type="search"]{border-radius:7px}
   .footer-navigation{justify-content:flex-start;gap:12px 22px}
   .site-footer .footerline{flex-direction:column;gap:7px}
 }
-/* Narrow phones get readable history statistics rather than two 100px columns. */
+/* Narrow-phone adjustments maintain readable vehicle facts and compact navigation. */
 @media(max-width:520px){
   .garage-page .garage-entry .car-facts{grid-template-columns:minmax(0,1fr)}
   .garage-page .garage-entry .car-facts dd{overflow-wrap:anywhere}
   .garage-page .vehicle-card--hero h1{font-size:clamp(45px,12vw,64px)}
+}
+@media(min-width:390px) and (max-width:600px){
+  .landing-hubs{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .hub-tile{display:flex;flex-direction:column;align-items:flex-start;gap:12px;min-height:163px;padding:16px 15px}
+  .hub-tile .hub-symbol{width:32px;height:32px}
+  .hub-tile .hub-content strong{font-size:16px}
+  .hub-tile .hub-content>span{font-size:12px}
+}
+@media(max-width:380px){
+  .workbench-intro .workbench-directory{grid-template-columns:minmax(0,1fr)}
+  .repository-search-control{flex-wrap:wrap}
+  .repository-search-control button{min-height:42px}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}

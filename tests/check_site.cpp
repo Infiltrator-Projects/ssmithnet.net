@@ -546,7 +546,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261116-watch2") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261116-polish1") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -585,7 +585,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261116-watch2") != string::npos,
+        require(content.find("site-redesign.css?v=20261116-polish1") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -607,9 +607,16 @@ void validate(const fs::path& root) {
     const string responsive_css = read(root / "assets/site-redesign.css");
     require(responsive_css.find("@media(max-width:600px)") != string::npos &&
             responsive_css.find(".home-editorial{padding:28px 0 49px!important") != string::npos &&
-            responsive_css.find(".workbench-intro .workbench-directory{grid-template-columns:1fr}") != string::npos &&
+            responsive_css.find(".workbench-intro .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}") != string::npos &&
             responsive_css.find(".about-structure-grid{grid-template-columns:1fr}") != string::npos,
             "Responsive editorial sections must stack cleanly on phones");
+    require(responsive_css.find("nav[aria-label=\"Primary\"] .navlinks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))") != string::npos &&
+            responsive_css.find(".garage-jump-links{display:flex;overflow-x:auto;") != string::npos &&
+            responsive_css.find(".repository-empty[hidden]") != string::npos,
+            "Responsive navigation and empty-state visibility controls missing");
+    require(responsive_css.find("--measure:74ch") != string::npos &&
+            responsive_css.find(".workbench-page .project-content>p{max-width:var(--measure)}") != string::npos,
+            "Workbench long-form reading measure is not constrained");
     require(first.at("archive.html") == first.at("about.html"),
             "Legacy Archive must contain full canonical About content");
     require(first.at("archive.html").find("href=\"https://ssmithnet.net/about.html\"") != string::npos,
@@ -700,6 +707,10 @@ void validate(const fs::path& root) {
             system_css.find(".watch-feature figure{width:100%;max-width:220px") != string::npos &&
             system_css.find(".watch-feature figure{max-width:170px;justify-self:start}") != string::npos,
             "Daytona must remain proportionate to About content on desktop and phone");
+    for (const auto& [relative, document] : first) {
+        require(document.find("class=\"footer-top\" href=\"#main\"") != string::npos,
+                relative + ": return to page content missing from footer");
+    }
     const string about = first.at("about.html");
     require(about.find("<span class=\"era\">1993</span>") != string::npos &&
             about.find("It began with a Mercedes-Benz 450SEL 6.9 in 1993") != string::npos &&
@@ -715,6 +726,13 @@ void validate(const fs::path& root) {
             workbench_page.find("aria-label=\"Workbench sections\"") != string::npos &&
             workbench_page.find("href=\"#revox-b77\"") != string::npos,
             "Workbench subject directory missing");
+    require(workbench_page.find("id=\"workbench-topics\"") != string::npos,
+            "Workbench chapter directory must have an anchor");
+    const std::regex back_link_pattern(R"(class="chapter-backlink")");
+    require(static_cast<size_t>(std::distance(
+                std::sregex_iterator(workbench_page.begin(), workbench_page.end(), back_link_pattern),
+                std::sregex_iterator())) == 6,
+            "Every Workbench chapter needs a return link to its topic directory");
     require(first.at("about.html").find("aria-label=\"About sections\"") != string::npos &&
             first.at("about.html").find("id=\"interests\"") != string::npos &&
             first.at("about.html").find("id=\"principles\"") != string::npos,
@@ -781,13 +799,23 @@ void validate(const fs::path& root) {
         std::sregex_iterator()));
     require(entries == 104 && project_html.find("id=\"repository-search\"") != string::npos &&
             project_html.find("id=\"repository-count\"") != string::npos &&
-            project_html.find("addEventListener('input'") != string::npos,
-            "Full catalogue, search controls or progressive enhancement missing");
+            project_html.find("id=\"repository-clear\"") != string::npos &&
+            project_html.find("id=\"repository-empty\"") != string::npos &&
+            project_html.find("family.label.includes(query)") != string::npos &&
+            project_html.find("clear.addEventListener('click'") != string::npos,
+            "Complete catalogue must support description/family search, clearing and no-results feedback");
     require(home.find("href=\"projects.html\"") != string::npos &&
             first.at("workbench.html").find("href=\"projects.html\"") != string::npos &&
             first.at("workbench.html").find("104 repositories") != string::npos,
             "Project catalogue is not discoverable from both Home and Workbench");
     const string garage = first.at("garage.html");
+    require(garage.find("id=\"garage-index\"") != string::npos,
+            "Garage index anchor missing");
+    const std::regex garage_back_pattern(R"(class="vehicle-index-return")");
+    require(static_cast<size_t>(std::distance(
+                std::sregex_iterator(garage.begin(), garage.end(), garage_back_pattern),
+                std::sregex_iterator())) == 13,
+            "Each historical car must return to the vehicle index");
     validate_garage(root, garage);
     for (const auto& [relative, content] : first)
         if (relative != "garage.html")

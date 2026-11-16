@@ -4,6 +4,8 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
+- Polish navigation and readability across the entire website: compact mobile Workbench directory, Garage horizontal car jump list and thirteen return links, six Workbench chapter links, five-link two-row mobile header, readable engineering text widths, and footer return navigation. Extend Projects search to descriptions/families with clear and empty states.
+
 - Reduce the About page Daytona picture to a compact 220px illustration (170px on narrow screens), so it supports rather than overwhelms the surrounding personal interests.
 
 - Rework content across the entire site: remove duplicate homepage project/history summaries, expand Workbench into six source-grounded areas, provide a substantial About narrative, and enrich Garage entries while respecting the separation between the source catalogue and package downloads.

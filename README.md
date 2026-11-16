@@ -64,3 +64,9 @@ The homepage and Workbench introduce featured work and link to the catalogue. Th
 ## Editorial ownership (16 November 2026)
 
 **Home** introduces the site without duplicating its projects or its full history. **Workbench** owns substantial engineering explanation across InfiltratorOS, InfiltratorFS, native applications, diagnostics, games and audio. **Projects** contains the full source repository inventory; it is not an app store. **Garage** preserves chronological vehicle records and identifies photo provenance. **About** owns the 1993 origin, beta-testing history and personal interests. **Software Centre** is the separate release and package distribution surface. **Archive** intentionally aliases About and the Model 11 Sandy page is a short download redirect. Use cross-links instead of repeating complete sections.
+
+## Site-wide usability pass — 16 November 2026
+
+The shared visual system now caps engineering paragraphs at a readable line length, uses a compact two-column Workbench directory on ordinary phone widths, preserves all five primary links in a clear two-row phone header and supports a horizontal vehicle index on smaller displays. Long Workbench chapters and each historic Garage entry provide an explicit return path to their index. The footer of every generated page links back to the main content.
+
+The Projects catalogue searches repository titles, descriptions and project families without requesting GitHub at runtime. A Clear control, visible results count and a no-match explanation make filtering reversible and understandable. The static collection remains browseable without JavaScript. The source generator, committed mirrors and stylesheet are one versioned change; browser pixel-level verification is distinct from successful build tests.
