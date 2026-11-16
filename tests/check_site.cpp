@@ -194,13 +194,13 @@ void validate_garage(const fs::path& root, const string& garage) {
         if (car.classes.count("garage-vehicle")) vehicles.push_back(car);
         if (car.classes.count("vehicle-card")) featured.push_back(car);
     }
-    require(vehicles.size() == 12, "Garage must retain all twelve vehicle records");
+    require(vehicles.size() == 14, "Garage must retain all fourteen vehicle records");
     // Full manufacture-year ordering where documented, with remaining vehicles
     // grouped by visibly labelled model era. Keep chronological order across makes.
-    const std::array<string,12> chronology{{
+    const std::array<string,14> chronology{{
         "e250-cdi","ba-ltd","ba-fairmont","discovery-2","au-fairmont",
         "el-falcon","peugeot-405-gld","500-sec","xf-s-pack",
-        "450sel-69","280-se","lc-torana"
+        "450sel-69","xc-falcon-ute-1","xc-falcon-ute-2","280-se","lc-torana"
     }};
     size_t previous_position = 0;
     for (size_t i = 0; i < chronology.size(); ++i) {
@@ -208,6 +208,25 @@ void validate_garage(const fs::path& root, const string& garage) {
         require(position != string::npos && (i == 0 || position > previous_position),
                 "Garage chronology changed at " + chronology[i]);
         previous_position = position;
+    }
+    for (const char* id : {"xc-falcon-ute-1", "xc-falcon-ute-2"}) {
+        const size_t start = garage.find("id=\"" + string(id) + "\"");
+        require(start != string::npos, "Missing separate XC Falcon ute entry");
+        const auto end = garage.find("</article>", start);
+        require(end != string::npos, "Unclosed XC Falcon ute entry");
+        const string card = garage.substr(start, end - start);
+        require(card.find("blue") != string::npos &&
+                card.find("Six-cylinder") != string::npos &&
+                card.find("1976–1979 · model era") != string::npos,
+                "XC Falcon ute must retain colour, engine and non-invented year label");
+    }
+    for (const char* id : {"discovery-2", "au-fairmont"}) {
+        const size_t start = garage.find("id=\"" + string(id) + "\"");
+        require(start != string::npos, "Missing 2002 vehicle");
+        const auto end = garage.find("</article>", start);
+        const string card = garage.substr(start, end - start);
+        require(card.find("2002 · recorded year") != string::npos,
+                "Discovery II and AU Fairmont must reflect owner's 2002 correction");
     }
     require(garage.find("id=\"vehicle-history\"") != string::npos &&
             garage.find("model generation rather than a verified manufacture year") != string::npos,
@@ -491,7 +510,7 @@ void validate_garage(const fs::path& root, const string& garage) {
             "Technical record structure or script-free policy changed");
     require(garage.find("href=\"assets/garage.css?v=") != string::npos,
             "Garage stylesheet missing");
-    std::cout << "PASS: complete twelve-car Garage history, Mercedes datacards, standardised SEC photos and 69 unique codes\n";
+    std::cout << "PASS: complete fourteen-car Garage history, Mercedes datacards, standardised SEC photos and 69 unique codes\n";
 }
 void validate(const fs::path& root) {
     const fs::path generator = root / "build/sitegen";
