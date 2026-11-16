@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-distinct1") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-boundaries1") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -180,12 +180,12 @@ static string render_projects() {
     return page_start("Projects", "All 104 publicly visible Infiltrator-Projects GitHub repositories: operating systems, applications, diagnostics, calendar and clock modules, filesystem engines, games and publishing.", "Projects", "projects-page") + R"CATALOG(
 <section class="page-intro projects-intro">
   <p class="eyebrow">Source index · Infiltrator-Projects</p><h1>Repository directory.</h1>
-  <p class="lead">Find the source for applications, libraries, boot components, filesystem engines, calendars, clocks and games. For the engineering decisions behind them, read the <a href="workbench.html">Workbench journal</a>.</p>
+  <p class="lead">Browse public source code by repository name, purpose or family. The catalogue includes application projects as well as the libraries and individual modules that support them.</p>
   <p class="projects-index-meta"><strong>104 public repositories</strong><span>8 families</span><span>Inventory captured 16 November 2026</span></p>
-  <nav class="projects-utility-nav" aria-label="Repository directory actions"><a href="#directory">Go to search ↓</a><a href="workbench.html">Engineering journal ↗</a><a href="https://github.com/Infiltrator-Projects">GitHub organisation ↗</a></nav>
+  <nav class="projects-utility-nav" aria-label="Related destinations"><a href="workbench.html">Read the engineering journal ↗</a><a href="https://github.com/Infiltrator-Projects">Open the live GitHub organisation ↗</a></nav>
 </section>
 <section class="repository-browser" id="directory" aria-labelledby="directory-title">
-  <div class="repository-browser-header"><div><p class="eyebrow">Browse and filter</p><h2 id="directory-title">Find source code.</h2><p>Search by name or description, or jump directly to a family. Individual calendar, clock and filesystem engines are grouped into expandable sections.</p></div>
+  <div class="repository-browser-header"><div><p class="eyebrow">Search and browse</p><h2 id="directory-title">Find a repository.</h2><p>Choose a family below or filter by project name or purpose. Calendar, clock and filesystem engines are grouped into expandable lists.</p></div>
     <div class="repository-search"><label for="repository-search">Find a repository</label><div class="repository-search-control"><input id="repository-search" type="search" placeholder="Name, purpose or family" autocomplete="off" aria-controls="repo-families" aria-describedby="repository-search-help"><button id="repository-clear" type="button" hidden>Clear</button></div><span class="repository-search-help" id="repository-search-help">Search titles, descriptions or project families.</span><output id="repository-count" role="status" aria-live="polite">104 repositories</output></div>
   </div>
   <nav class="repository-families-nav" aria-label="Jump to project family"><a href="#group-foundations">Operating system &amp; foundations <span>9</span></a><a href="#group-applications">Applications &amp; utilities <span>7</span></a><a href="#group-diagnostics">Vehicle diagnostics <span>6</span></a><a href="#group-creative">Games &amp; creative work <span>3</span></a><a href="#group-publishing">Sites &amp; publishing <span>2</span></a><a href="#group-calendar-modules">Calendar systems <span>31</span></a><a href="#group-clock-modules">Clock &amp; timekeeping modules <span>23</span></a><a href="#group-filesystem-modules">Filesystem engines <span>23</span></a></nav>
@@ -314,7 +314,7 @@ static string render_projects() {
   <div class="repository-empty" id="repository-empty" role="status" hidden><strong>No matching repositories.</strong><p>Try another term or clear the search to see all 104 projects.</p></div>
   <p class="repository-disclosure">Inventory of publicly visible <a href="https://github.com/Infiltrator-Projects">Infiltrator-Projects</a> repositories captured on 16 November 2026. Different repositories have different levels of development and qualification: appearing here does not imply a release or complete functionality. GitHub remains the live source for additions and current status.</p>
 </section>
-<section class="projects-endnote"><p>Repositories are source code, not necessarily installable releases. <a href="workbench.html">Read the engineering journal</a> for design explanations, or visit the <a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre</a> for published packages.</p></section>
+<section class="projects-endnote"><p>Not every source repository is a finished application. For published, installable Linux packages, use the <a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre</a>.</p></section>
 <script>
 (() => {
   const field = document.getElementById('repository-search');
@@ -363,7 +363,7 @@ static string render_workbench() {
 <section class="page-intro workbench-intro">
   <p class="eyebrow">Workbench · Engineering journal</p>
   <h1>Inside the engineering.</h1>
-  <p class="lead">Design decisions, system boundaries, experiments and what the tests actually establish. These are the stories behind the software and machinery—not another list of repositories.</p>
+  <p class="lead">How should a filesystem recover after a crash? Where does a boot manager's responsibility end? What makes a vehicle response trustworthy? These engineering notes follow the decisions, experiments and evidence behind the work.</p>
   <nav class="workbench-directory" id="workbench-topics" aria-label="Workbench sections">
     <a href="#platform"><small>01 · Foundation</small><strong>InfiltratorOS</strong><span>Boot, kernel, Libraries and native file handling</span></a>
     <a href="#infiltratorfs"><small>02 · Storage</small><strong>InfiltratorFS</strong><span>Format, recovery and integrity</span></a>
@@ -447,7 +447,7 @@ static string render_workbench() {
     <div><p class="eyebrow">The equipment</p><h3>Open-reel recording, with separate noise reduction.</h3>
       <p>The ReVox B77 Mk II is a two-channel open-reel tape recorder. Its moving reels, transport controls and VU meters make the recording process visible in a way that software often conceals. There are separate left and right line inputs and outputs on the back of my machine.</p>
       <p>The dbx Model 224 is an external Type II encode/decode noise-reduction unit. It is part of the recording and playback signal path, not a replacement for the recorder's mechanical transport. The two machines have different jobs, but their settings and connections matter together.</p>
-      <p>The image here is an illustration of my actual equipment. The website's hardware section is about the machines and their operation, rather than a sales listing or a claim that the redraw is a documentary photograph.</p>
+      <p>The redraw shows the equipment together, but the real interest is in the recording chain: a mechanical tape transport, separate left and right channels, and an external noise-reduction stage that must be set correctly for recording and playback.</p>
       <dl class="analog-specs"><div><dt>Recorder</dt><dd>ReVox B77 Mk II</dd></div><div><dt>Noise reduction</dt><dd>dbx 224 · Type II</dd></div><div><dt>Connections</dt><dd>Two-channel line input and output</dd></div></dl>
     </div>
   </div>
@@ -617,24 +617,24 @@ static string render_about() {
 <section class="page-intro">
   <p class="eyebrow">About · Online since 1993</p>
   <h1>A place of my own.</h1>
-  <p class="lead">I'm Shannon Smith, in Mooroopna, Victoria. This is my personal website, not the front page of a company or a single software product. It began with a Mercedes-Benz 450SEL 6.9 in 1993. The interests grew from there, and the address remained a place to bring them together.</p>
-  <nav class="section-nav" aria-label="About sections"><a href="#the-site">The site's history</a><a href="#interests">Other interests</a><a href="#daytona">The Daytona</a><a href="#how-it-fits">How the sections connect</a><a href="#principles">A principle</a></nav>
+  <p class="lead">I'm Shannon Smith, in Mooroopna, Victoria. This has been my personal corner of the internet since 1993—a place for the cars I've owned, software I've built, open-reel audio, watches and the machinery I enjoy understanding.</p>
+  <nav class="section-nav" aria-label="About sections"><a href="#the-site">The site's history</a><a href="#interests">Other interests</a><a href="#daytona">The Daytona</a><a href="#how-it-fits">The common thread</a><a href="#principles">A principle</a></nav>
 </section>
 <section id="the-site" class="about-history">
   <header class="section-heading"><p class="eyebrow">The original site</p><h2>From one Mercedes<br>to a lifetime of projects.</h2><p class="section-deck">An ongoing personal record, rather than a succession of unrelated websites.</p></header>
-  <p class="about-section-intro">The history below is about what the site has been used for, not a claim that every project dates back to 1993. I keep the vehicle story, software source and other machines under the same name because the connections between them matter.</p>
+  <p class="about-section-intro">The site began with one particular car and grew to record other interests over time. Its history is the story of that gradual expansion, not a claim that every project dates back to the beginning.</p>
   <div class="timeline">
     <article class="event"><span class="era">1993</span><div><h3>The 450SEL 6.9 and the Infiltrator website.</h3><p>The original subject was my Mercedes-Benz W116 450SEL 6.9. Its engineering, specification and character gave the site something worth documenting. That beginning matters: the web page was personal first, and it still is. The <a href="garage.html#450sel-69">Garage</a> retains that vehicle alongside the others I have owned.</p></div></article>
     <article class="event"><span class="era">Beta-testing years</span><div><h3>Windows, Solaris and games.</h3><p>I was involved in voluntary beta testing of Microsoft Windows ME, Solaris and EA game projects. The Windows ME work included a Beta Tester of the Month award. Testing meant spending time with unfinished software and reporting what actually happened—not merely judging its intended feature list.</p></div></article>
     <article class="event"><span class="era">The software workshop</span><div><h3>From applications to their foundations.</h3><p>The software work expanded to include System Monitor, Defragmenter, Calendar, Calculator, vehicle diagnostics and InfiltratorFS. More recently the structure has grown into separately owned operating-system components, shared libraries, filesystem engines and specialist modules. These are different layers of work, not dozens of names for the same application.</p></div></article>
-    <article class="event"><span class="era">Today</span><div><h3>One website, several kinds of evidence.</h3><p>Some pages are about source code; others are about cars, recorded factory details or physical audio equipment. The current Mercedes E 250 CDI links the Garage directly to MBLink development, while the B77 and dbx 224 are reminders that hardware can be interesting in its own right. The purpose is to keep the material accessible in its proper context.</p></div></article>
+    <article class="event"><span class="era">Today</span><div><h3>One website, several kinds of evidence.</h3><p>The Mercedes E 250 CDI is both a car I drive and an evidence vehicle for MBLink development. The ReVox B77 and dbx 224 are another kind of engineering interest: hands-on equipment that does not need to become a software project to deserve attention.</p></div></article>
   </div>
 </section>
 <section id="interests" class="about-interests">
   <header class="section-heading"><p class="eyebrow">Away from the code</p><h2>Machines, music<br>and other interests.</h2><p class="section-deck">The website is wider than the software projects.</p></header>
   <div class="project-content">
     <article class="interest-entry"><h3>Open-reel tape.</h3><p>My ReVox B77 Mk II and dbx 224 combine mechanical transport, analogue recording and signal processing. The sound matters, but so does the physical machinery and understanding how it works. Their own equipment story belongs in the <a href="workbench.html#revox-b77">Workbench</a>.</p></article>
-    <article class="interest-entry"><h3>Films, games and cars.</h3><p>Music, movies and games sit alongside the software work. Original games such as <a href="https://github.com/Infiltrator-Projects/Egypt">Egypt</a> and <a href="https://github.com/Infiltrator-Projects/backyard-racer">Backyard Racer</a> also connect creative interests back to programming. The vehicle history has its own <a href="garage.html">Garage</a>.</p></article>
+    <article class="interest-entry"><h3>Films, games and cars.</h3><p>Music, films and games are part of the picture alongside the cars. Some ideas have also led to my own simulation projects, but enjoying those subjects came first. The <a href="garage.html">Garage</a> contains the record of the vehicles I have owned.</p></article>
   </div>
   <article class="watch-feature" id="daytona" aria-labelledby="daytona-title">
     <div class="watch-feature-copy">
@@ -649,13 +649,11 @@ static string render_about() {
     </figure>
   </article>
 </section>
-<section id="how-it-fits" class="about-structure">
-  <header class="section-heading"><p class="eyebrow">Finding your way</p><h2>Why the site has<br>separate sections.</h2><p class="section-deck">The sections do different jobs, even when the subjects overlap.</p></header>
-  <div class="about-structure-grid">
-    <article><h3><a href="workbench.html">Workbench</a></h3><p>The long-form engineering explanations: why a design exists, where ownership lies, what a component currently does and what has not yet been qualified. This is where a filesystem or diagnostic protocol deserves more than a two-line project blurb.</p></article>
-    <article><h3><a href="projects.html">Projects</a></h3><p>The full public GitHub directory. Repositories are grouped by what they own, including calendar, clock and filesystem modules. It is a source catalogue, not a claim that every Git is a finished application.</p></article>
-    <article><h3><a href="garage.html">Garage</a></h3><p>The current Mercedes and a chronological record of thirteen earlier vehicles, with exact specifications where they are known and model-era dates clearly distinguished where individual manufacture dates are missing.</p></article>
-    <article><h3><a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre</a></h3><p>The distribution side: published Linux packages, repository trust and installation through APT. That is intentionally different from the complete source index, which also includes experiments, libraries and work still in development.</p></article>
+<section id="how-it-fits" class="about-thread">
+  <header class="section-heading"><p class="eyebrow">The common thread</p><h2>Different machines.<br>Same curiosity.</h2><p class="section-deck">They don't have to be the same kind of project to belong here.</p></header>
+  <div class="about-thread-body">
+    <p>A filesystem raises questions about what can survive a failure. Vehicle diagnostics asks what a machine is actually reporting. An open-reel deck makes the signal path visible, and a mechanical watch is precision engineering small enough to wear. The interesting part is understanding how each behaves, not just knowing its specifications.</p>
+    <p>Some interests become code; others remain cars, music or physical equipment. I have kept them together on this site because one pursuit need not replace another. The original 450SEL 6.9 story still belongs here alongside the software and everything that followed.</p>
   </div>
 </section>
 <section id="principles" class="quote-section"><p class="eyebrow">A personal principle</p><blockquote class="quote">“I am free, no matter what rules surround me. If I find them tolerable, I tolerate them; if I find them too obnoxious, I break them. I am free because I know that I alone am morally responsible for everything I do.”<cite>— Robert A. Heinlein</cite></blockquote></section>

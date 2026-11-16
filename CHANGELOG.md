@@ -4,6 +4,8 @@ This file records user-visible, compatibility, architecture and validation chang
 
 ## Unreleased
 
+- Remove remaining page-role overlap and CSS edge bleed: replace the About site-map cards with a personal common-thread section, tighten self-referential Workbench and Projects copy, and resolve old CSS overrides that restored unwanted padding and borders.
+
 - Differentiate Workbench from Projects: replace Workbench's four GitHub-card grids with engineering diagrams and design notes, present Workbench as an editorial technical journal, and reduce Projects to a functional 104-repository search directory with its own distinct visual layout.
 
 - Polish navigation and readability across the entire website: compact mobile Workbench directory, Garage horizontal car jump list and thirteen return links, six Workbench chapter links, five-link two-row mobile header, readable engineering text widths, and footer return navigation. Extend Projects search to descriptions/families with clear and empty states.

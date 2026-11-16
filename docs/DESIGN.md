@@ -166,3 +166,7 @@ Keep the presentation layer consolidated in `assets/site-redesign.css` (one rule
 ### Workbench versus Projects — enforced separation
 
 **Workbench** owns decisions, interfaces, experiments and qualification evidence. Its chapters can link to the relevant source family but must not duplicate its repository list. **Projects** owns finding the actual Git repository, with one listing per real Git, a category index and search. The two pages share branding but not content layout. Do not reintroduce the four Workbench GitHub-card grids; add reasoning and observable engineering details to Workbench, or update the searchable source catalogue in Projects.
+
+### No duplicate website map on About
+
+About is a personal history, not a second site navigation guide. Its shared-interest section describes why software, cars, open-reel recording and watchmaking coexist; it must not repeat summaries of Workbench, Projects, Garage and Software Centre. Workbench writes technical material, and Projects provides source lookup. Page-specific overrides are declared after generic presentation rules, so later legacy selectors cannot silently undo compact pages.

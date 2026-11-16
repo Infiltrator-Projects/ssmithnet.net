@@ -546,7 +546,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261117-distinct1") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261117-boundaries1") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -585,7 +585,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261117-distinct1") != string::npos,
+        require(content.find("site-redesign.css?v=20261117-boundaries1") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -608,7 +608,7 @@ void validate(const fs::path& root) {
     require(responsive_css.find("@media(max-width:600px)") != string::npos &&
             responsive_css.find(".home-editorial{padding:28px 0 49px!important") != string::npos &&
             responsive_css.find(".workbench-intro .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}") != string::npos &&
-            responsive_css.find(".about-structure-grid{grid-template-columns:1fr}") != string::npos,
+            responsive_css.find(".about-thread-body{max-width:910px") != string::npos,
             "Responsive editorial sections must stack cleanly on phones");
     require(responsive_css.find("nav[aria-label=\"Primary\"] .navlinks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))") != string::npos &&
             responsive_css.find(".garage-jump-links{display:flex;overflow-x:auto;") != string::npos &&
@@ -676,7 +676,7 @@ void validate(const fs::path& root) {
             system_css.find(".about-interests") != string::npos &&
             system_css.find(".garage-page .garage-entry") != string::npos &&
             system_css.find(".home-editorial") != string::npos &&
-            system_css.find(".about-structure-grid") != string::npos,
+            system_css.find(".about-thread-body") != string::npos,
             "Shared theme must cover Home, Workbench, Garage and About");
     require(system_css.find(".home-page main>section,.workbench-page main>section") != string::npos &&
             system_css.find(".about-page main>section{padding:52px 0}") != string::npos,
@@ -713,7 +713,7 @@ void validate(const fs::path& root) {
     }
     const string about = first.at("about.html");
     require(about.find("<span class=\"era\">1993</span>") != string::npos &&
-            about.find("It began with a Mercedes-Benz 450SEL 6.9 in 1993") != string::npos &&
+            about.find("since 1993—a place for the cars") != string::npos &&
             about.find("id=\"how-it-fits\"") != string::npos &&
             about.find("c. 1996") == string::npos &&
             about.find("<span class=\"era\">2016</span>") == string::npos,
@@ -808,6 +808,29 @@ void validate(const fs::path& root) {
             workbench_page.find("href=\"projects.html\"") != string::npos &&
             workbench_page.find("href=\"projects.html#group-foundations\"") != string::npos,
             "Project index must remain discoverable from Home and engineering chapters");
+    require(about.find("class=\"about-thread\"") != string::npos &&
+            about.find("class=\"about-structure-grid\"") == string::npos &&
+            about.find("Different machines.<br>Same curiosity.") != string::npos &&
+            about.find("Why the site has<br>separate sections.") == string::npos,
+            "About must tell the personal story rather than repeat the website navigation");
+    require(workbench_page.find("These are the stories behind") == string::npos &&
+            workbench_page.find("The website's hardware section") == string::npos &&
+            workbench_page.find("How should a filesystem recover after a crash?") != string::npos,
+            "Workbench must be technical writing, not self-referential site explanation");
+    require(project_html.find("Go to search") == string::npos &&
+            project_html.find("href=\"#directory\"") == string::npos &&
+            project_html.find("Find a repository.") != string::npos &&
+            project_html.find("104 public repositories") != string::npos,
+            "Projects must be a direct repository lookup, not a duplicate navigation panel");
+    const auto generic_portfolio = system_css.find("/* Complete GitHub portfolio:");
+    const auto editorial_overrides = system_css.find("/* Workbench is an editorial engineering journal");
+    require(generic_portfolio != string::npos && editorial_overrides != string::npos &&
+            editorial_overrides > generic_portfolio &&
+            system_css.find(".projects-page .repository-browser{border-top:0;padding-top:23px}") > editorial_overrides &&
+            system_css.find(".about-structure-grid") == string::npos &&
+            system_css.find(".about-page .about-interests .project-content{padding:0;border:0") != string::npos,
+            "Page-specific CSS must follow generic layouts; retired About cards must not bleed through");
+
     require(workbench_page.find("class=\"family-register\"") == string::npos &&
             workbench_page.find("class=\"engineering-map\"") != string::npos &&
             workbench_page.find("class=\"engineering-process\"") != string::npos &&
