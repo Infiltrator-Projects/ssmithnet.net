@@ -1,3 +1,9 @@
+## 17 November 2026 — Professional background on About
+
+- Added a concise ICT career section covering confirmed roles in education, community services, health, multi-site corporate operations, network engineering and teaching.
+- Included verified ICT qualifications without publishing a full CV, employment dates, personal contact details or sensitive infrastructure information.
+- Kept the existing About structure and Archive alias, with generator, responsive CSS and tests updated together.
+
 ## 17 November 2026 — Featured work and site discoverability
 
 - Added a labelled software architecture illustration to Home rather than fabricating an application screenshot.

@@ -620,3 +620,25 @@ input[type="search"]{border-radius:7px}
   .workbench-progress-list li{gap:16px}
   .about-contact{padding:26px 0 30px!important}
 }
+
+
+/* About: professional background is part of the personal narrative, not a full CV. */
+.about-page .about-professional{padding:44px 0 47px;border-top:1px solid var(--line);scroll-margin-top:24px}
+.about-professional .section-heading{margin-bottom:17px}
+.about-professional-intro{font:400 16px/1.7 var(--sans);max-width:79ch;color:var(--muted);margin:0 0 24px}
+.professional-history{border-top:1px solid var(--line)}
+.professional-role{display:grid;grid-template-columns:135px minmax(0,1fr);gap:22px;border-bottom:1px solid var(--line);padding:20px 0}
+.professional-period{font:650 12px/1.55 var(--sans);letter-spacing:.035em;color:var(--quiet);padding-top:3px}
+.professional-role h3{font:710 clamp(18px,1.65vw,21px)/1.33 var(--sans);color:var(--text);margin:0 0 4px}
+.professional-organisation{font:600 13px/1.55 var(--sans);color:var(--accent);margin:0 0 7px}
+.professional-role p:not(.professional-organisation){font:400 14px/1.65 var(--sans);color:var(--muted);max-width:73ch;margin:0}
+.professional-education{display:grid;grid-template-columns:135px minmax(0,1fr);gap:22px;padding:21px 0 0}
+.professional-education h3{font:680 14px/1.5 var(--sans);margin:0;color:var(--text)}
+.professional-education p{font:400 14px/1.65 var(--sans);color:var(--muted);max-width:78ch;margin:0}
+@media(max-width:650px){
+  .about-page .about-professional{padding:31px 0 36px}
+  .about-professional-intro{font-size:15px}
+  .professional-role,.professional-education{grid-template-columns:1fr;gap:4px}
+  .professional-role{padding:17px 0}
+  .professional-education{padding-top:18px}
+}

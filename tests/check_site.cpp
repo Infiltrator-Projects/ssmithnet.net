@@ -565,7 +565,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261117-portfolio4") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261117-career5") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -604,7 +604,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261117-portfolio4") != string::npos,
+        require(content.find("site-redesign.css?v=20261117-career5") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -662,6 +662,16 @@ void validate(const fs::path& root) {
             workbench_current.find("Dated snapshot") != string::npos &&
             workbench_current.find("Boot/commit/72f423eba5") != string::npos,
             "Development snapshot must cite real dated commits");
+    require(about_current.find("id=\"professional-background\"") != string::npos &&
+            about_current.find("href=\"#professional-background\"") != string::npos &&
+            about_current.find("St Augustine's College") != string::npos &&
+            about_current.find("Rumbalara Aboriginal Co-operative") != string::npos &&
+            about_current.find("Goulburn Valley Health") != string::npos &&
+            about_current.find("Stellar Call Centres") != string::npos &&
+            about_current.find("Curtin University") != string::npos &&
+            about_current.find("Diploma of Information Technology") != string::npos &&
+            about_current.find("0410 786 597") == string::npos,
+            "Professional history must be grounded and omit private contact information");
     require(about_current.find("id=\"contact\"") != string::npos &&
             about_current.find("href=\"https://github.com/The-First-Infiltrator\"") != string::npos,
             "About must provide a public Github contact path");
@@ -732,6 +742,9 @@ void validate(const fs::path& root) {
             system_css.find(".home-editorial") != string::npos &&
             system_css.find(".about-thread-body") != string::npos,
             "Shared theme must cover Home, Workbench, Garage and About");
+    require(system_css.find(".about-page .about-professional{padding:44px") != string::npos &&
+            system_css.find(".professional-role{display:grid") != string::npos,
+            "Professional biography responsive styling missing");
     require(system_css.find(".home-page main>section,.workbench-page main>section") != string::npos &&
             system_css.find(".about-page main>section{padding:52px 0}") != string::npos,
             "Global section spacing must not override the Software Centre catalogue");

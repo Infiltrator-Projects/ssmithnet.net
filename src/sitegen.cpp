@@ -60,7 +60,7 @@ static string page_start(const string& title, const string& description, const s
         "<meta name=\"twitter:card\" content=\"summary_large_image\">";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") + social_meta +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-portfolio4") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-career5") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -683,7 +683,7 @@ static string render_about() {
   <p class="eyebrow">About · Online since 1993</p>
   <h1>A place of my own.</h1>
   <p class="lead">I'm Shannon Smith, in Mooroopna, Victoria. This has been my personal corner of the internet since 1993—a place for the cars I've owned, software I've built, open-reel audio, watches and the machinery I enjoy understanding.</p>
-  <nav class="section-nav" aria-label="About sections"><a href="#the-site">The site's history</a><a href="#interests">Other interests</a><a href="#daytona">The Daytona</a><a href="#how-it-fits">The common thread</a><a href="#contact">Get in touch</a><a href="#principles">A principle</a></nav>
+  <nav class="section-nav" aria-label="About sections"><a href="#the-site">The site's history</a><a href="#professional-background">ICT career</a><a href="#interests">Other interests</a><a href="#daytona">The Daytona</a><a href="#how-it-fits">The common thread</a><a href="#contact">Get in touch</a><a href="#principles">A principle</a></nav>
 </section>
 <section id="the-site" class="about-history">
   <header class="section-heading"><p class="eyebrow">The original site</p><h2>From one Mercedes<br>to a lifetime of projects.</h2><p class="section-deck">An ongoing personal record, rather than a succession of unrelated websites.</p></header>
@@ -694,6 +694,18 @@ static string render_about() {
     <article class="event"><span class="era">The software workshop</span><div><h3>From applications to their foundations.</h3><p>The software work expanded to include System Monitor, Defragmenter, Calendar, Calculator, vehicle diagnostics and InfiltratorFS. More recently the structure has grown into separately owned operating-system components, shared libraries, filesystem engines and specialist modules. These are different layers of work, not dozens of names for the same application. <a href="workbench.html#platform">The Workbench explains the architectural boundaries</a>, while <a href="projects.html#group-foundations">Projects lists the separate source repositories</a>.</p></div></article>
     <article class="event"><span class="era">Today</span><div><h3>One website, several kinds of evidence.</h3><p>The Mercedes E 250 CDI is both a car I drive and an evidence vehicle for MBLink development. The ReVox B77 and dbx 224 are another kind of engineering interest: hands-on equipment that does not need to become a software project to deserve attention.</p></div></article>
   </div>
+</section>
+<section id="professional-background" class="about-professional" aria-labelledby="professional-background-title">
+  <header class="section-heading"><p class="eyebrow">Professional background · ICT</p><h2 id="professional-background-title">Keeping systems working<br>for real people.</h2><p class="section-deck">More than two decades of ICT management, infrastructure, support and technical delivery, alongside the software I develop independently.</p></header>
+  <p class="about-professional-intro">My work has taken me through corporate contact centres, health, community services and education. I've led ICT teams, administered infrastructure and supported people who simply need their technology to work. It's a different kind of engineering from designing a filesystem, but the same attention to reliability, practical outcomes and understanding the system applies.</p>
+  <div class="professional-history" aria-label="Selected professional ICT roles">
+    <article class="professional-role"><span class="professional-period">Current</span><div><h3>ICT Systems Administrator</h3><p class="professional-organisation">St Augustine's College · Kyabram</p><p>Supporting school ICT infrastructure, systems and everyday technology for teaching and administration.</p></div></article>
+    <article class="professional-role"><span class="professional-period">Previously</span><div><h3>ICT Manager</h3><p class="professional-organisation">Rumbalara Aboriginal Co-operative · Mooroopna</p><p>Led day-to-day ICT operations and improvement work for a community-controlled organisation, combining management, infrastructure, suppliers, policy and hands-on support.</p></div></article>
+    <article class="professional-role"><span class="professional-period">Earlier</span><div><h3>Senior Technical Support Officer</h3><p class="professional-organisation">Goulburn Valley Health · Shepparton</p><p>Worked within a large health ICT team on servers, networks, business systems and service continuity where access, reliability and confidentiality mattered.</p></div></article>
+    <article class="professional-role"><span class="professional-period">Earlier</span><div><h3>Technical Services Manager / Regional ICT Manager</h3><p class="professional-organisation">Stellar Call Centres · Melbourne</p><p>Managed multi-site ICT operations, technical teams and infrastructure projects, from day-to-day support to new deployments and system standards.</p></div></article>
+    <article class="professional-role"><span class="professional-period">Foundations</span><div><h3>Network engineering and teaching</h3><p class="professional-organisation">Millennium Security · Equinox Global · Curtin University</p><p>Worked on networking and technical solutions for business and education clients in Perth, and taught international students in Curtin's Business IT stream under contract.</p></div></article>
+  </div>
+  <div class="professional-education"><h3>Training and qualifications.</h3><p>Diploma of Information Technology (Advanced Stream), Certificates IV and III in Information Technology, Microsoft MCSE + Internet and ITIL V3. The qualifications sit alongside years spent administering systems, managing services and working directly with users.</p></div>
 </section>
 <section id="interests" class="about-interests">
   <header class="section-heading"><p class="eyebrow">Away from the code</p><h2>Machines, music<br>and other interests.</h2><p class="section-deck">The website is wider than the software projects.</p></header>
