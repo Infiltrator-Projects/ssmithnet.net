@@ -233,6 +233,16 @@ void validate_garage(const fs::path& root, const string& garage) {
                 card.find("1976–1979 · model era") != string::npos,
                 "XC Falcon ute must retain colour, engine and non-invented year label");
     }
+    // The two requested XC #1 views must not be silently omitted on regeneration.
+    const size_t xc1_start = garage.find("id=\"xc-falcon-ute-1\"");
+    const size_t xc1_end = garage.find("</article>", xc1_start);
+    const string xc1 = garage.substr(xc1_start, xc1_end - xc1_start);
+    require(xc1.find("xc-falcon-ute-1-three-quarter.avif") != string::npos &&
+            xc1.find("xc-falcon-ute-1-front.avif") != string::npos &&
+            xc1.find("grille deliberately debadged") != string::npos &&
+            fs::exists(root / "assets/photos/xc-falcon-ute-1-three-quarter.avif") &&
+            fs::exists(root / "assets/photos/xc-falcon-ute-1-front.avif"),
+            "XC Falcon ute one needs both of its distinct debadged reconstructed photos");
     for (const char* id : {"discovery-2", "au-fairmont"}) {
         const size_t start = garage.find("id=\"" + string(id) + "\"");
         require(start != string::npos, "Missing 2002 vehicle");
