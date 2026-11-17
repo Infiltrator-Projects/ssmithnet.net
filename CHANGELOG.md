@@ -1,3 +1,12 @@
+## 17 November 2026 — Featured work and site discoverability
+
+- Added a labelled software architecture illustration to Home rather than fabricating an application screenshot.
+- Added four featured project explanations above the complete 104-repository directory.
+- Added a dated three-commit engineering progress snapshot to Workbench, with actual source commit links.
+- Added a public GitHub contact pathway on About while preserving the Archive alias.
+- Added a static sitemap and robots.txt, social previews for Home/Garage, and noindex on the standalone Model 11 Sandy redirect.
+- Updated the C++ generator, page mirrors, site stylesheet, publication workflow, and checks together.
+
 ## 17 November 2026 — Follow the work from purpose to code
 
 - Reworked the Home editorial into three short, first-person routes: OS interfaces, Mercedes/MBLink diagnostic evidence, and creative models. No additional project gallery or repeated GitHub directory was introduced.

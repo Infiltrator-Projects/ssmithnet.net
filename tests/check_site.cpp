@@ -565,7 +565,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261117-story3") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261117-portfolio4") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -604,7 +604,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261117-story3") != string::npos,
+        require(content.find("site-redesign.css?v=20261117-portfolio4") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -641,6 +641,41 @@ void validate(const fs::path& root) {
     require(first.at("archive.html").find("href=\"https://ssmithnet.net/about.html\"") != string::npos,
             "Legacy Archive must point to canonical About URL");
     const string home = first.at("index.html");
+
+    // Check that the public portfolio demonstrates the real work without
+    // fabricating UI screenshots or replacing the complete code directory.
+    const string& workbench_current = first.at("workbench.html");
+    const string& projects_current = first.at("projects.html");
+    const string& about_current = first.at("about.html");
+    require(home.find("id=\"home-software-title\"") != string::npos &&
+            home.find("src=\"assets/graphics/software-architecture.svg\"") != string::npos &&
+            home.find("not a screenshot") != string::npos &&
+            fs::is_regular_file(root / "assets/graphics/software-architecture.svg"),
+            "Home must show a truthful, explicitly labelled software architecture diagram");
+    require(projects_current.find("id=\"featured-work\"") != string::npos &&
+            projects_current.find("id=\"directory\"") > projects_current.find("id=\"featured-work\"") &&
+            projects_current.find("System Monitor") != string::npos &&
+            projects_current.find("href=\"https://github.com/Infiltrator-Projects/MBLink\"") != string::npos,
+            "Featured projects must introduce rather than replace the searchable code directory");
+    require(workbench_current.find("id=\"current-work\"") != string::npos &&
+            workbench_current.find("datetime=\"2026-11-17\"") != string::npos &&
+            workbench_current.find("Dated snapshot") != string::npos &&
+            workbench_current.find("Boot/commit/72f423eba5") != string::npos,
+            "Development snapshot must cite real dated commits");
+    require(about_current.find("id=\"contact\"") != string::npos &&
+            about_current.find("href=\"https://github.com/The-First-Infiltrator\"") != string::npos,
+            "About must provide a public Github contact path");
+    require(first.at("downloads/model-11-sandy/index.html").find("name=\"robots\" content=\"noindex,follow\"") != string::npos,
+            "Standalone direct download page should not be indexed as a main website page");
+    require(fs::is_regular_file(root / "robots.txt") &&
+            read(root / "robots.txt").find("Sitemap: https://ssmithnet.net/sitemap.xml") != string::npos &&
+            fs::is_regular_file(root / "sitemap.xml") &&
+            read(root / "sitemap.xml").find("https://ssmithnet.net/projects.html") != string::npos,
+            "Search discovery files must be provided and correct");
+    require(home.find("property=\"og:image\"") != string::npos &&
+            first.at("garage.html").find("property=\"og:image\"") != string::npos,
+            "Existing site images should be used as legitimate social previews");
+
     require(home.find("Projects, cars,") != string::npos &&
             home.find("ReVox B77 Mk II") != string::npos &&
             home.find("assets/photos/revox-b77-mkii-dbx224.webp") != string::npos &&

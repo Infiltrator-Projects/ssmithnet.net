@@ -52,9 +52,15 @@ static void write(const fs::path& p, const string& s) {
 static string page_start(const string& title, const string& description, const string& active, const string& body_class = "") {
     const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Projects" ? "projects.html" : active == "Garage" ? "garage.html" : active == "Download" ? "downloads/model-11-sandy/" : "about.html";
     const string prefix = active == "Download" ? "../../" : "";
-    return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
+    // Use existing site imagery for social previews; never claim an invented app screenshot.
+    const string social_image = active == "Home" ? "revox-b77-mkii-dbx224.webp" :
+                                active == "Garage" ? "e250-cdi-three-quarter.webp" : "";
+    const string social_meta = social_image.empty() ? "" :
+        "<meta property=\"og:image\" content=\"https://ssmithnet.net/assets/photos/" + social_image + "\">" +
+        "<meta name=\"twitter:card\" content=\"summary_large_image\">";
+    return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") + social_meta +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-story3") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-portfolio4") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -147,6 +153,20 @@ static string render_home() {
   <a class="hub-tile" href="projects.html"><img class="hub-symbol" src="assets/graphics/ui-code.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>Projects</strong><span>The full source catalogue: applications, modules, games and infrastructure.</span></span><b aria-hidden="true">↗</b></a>
   <a class="hub-tile" href="about.html"><img class="hub-symbol" src="assets/graphics/ui-about.svg" alt="" width="48" height="48" loading="lazy" decoding="async"><span class="hub-content"><strong>About</strong><span>The site, its history and the interests behind it.</span></span><b aria-hidden="true">↗</b></a>
 </section>
+
+<section class="home-software" aria-labelledby="home-software-title">
+  <div class="home-software-copy">
+    <p class="eyebrow">Featured engineering · Software foundations</p>
+    <h2 id="home-software-title">I build the parts below the interface.</h2>
+    <p>InfiltratorFS is my own filesystem design. Libraries supplies common contracts; Boot and Files consume filesystem capabilities in different environments; InfiltratorOS brings the components together. Each project has its own source, tests and qualification limits.</p>
+    <p>It's the sort of work I enjoy most: finding out what each layer must do, making the boundaries explicit and testing what actually works rather than relying on a successful build.</p>
+    <div class="home-software-links"><a href="workbench.html#platform">How the architecture works ↗</a><a href="workbench.html#infiltratorfs">Inside InfiltratorFS ↗</a><a href="projects.html#featured-work">Explore featured code ↗</a></div>
+  </div>
+  <figure class="home-software-diagram">
+    <img src="assets/graphics/software-architecture.svg" width="1200" height="620" loading="lazy" decoding="async" alt="Architecture map: Libraries and Common V2 provide shared contracts to filesystem engines; the engines are consumed by Boot and Files while InfiltratorOS integrates the components.">
+    <figcaption>A map of responsibilities, not a screenshot or a claim that every integration is qualified.</figcaption>
+  </figure>
+</section>
 <section class="landing-showcase" aria-label="Featured collections">
   <article class="home-revox">
     <div class="showcase-description">
@@ -206,6 +226,16 @@ static string render_projects() {
   <p class="projects-reading-hint">A repository may be an application, a shared library or one filesystem engine—not necessarily something ready to install. Each major family links back to its engineering explanation; the entries below link to the actual code.</p>
   <p class="projects-index-meta"><strong>104 public repositories</strong><span>8 families</span><span>Inventory captured 16 November 2026</span></p>
   <nav class="projects-utility-nav" aria-label="Related destinations"><a href="workbench.html">Read the engineering journal ↗</a><a href="https://github.com/Infiltrator-Projects">Open the live GitHub organisation ↗</a></nav>
+</section>
+
+<section class="projects-featured" id="featured-work" aria-labelledby="featured-work-title">
+  <header class="projects-featured-heading"><div><p class="eyebrow">Four places to start</p><h2 id="featured-work-title">Selected engineering work.</h2><p>These are entry points into the larger codebase, not a ranking of completed products. Each has its own qualification and development history.</p></div><a href="#directory">Browse all 104 repositories ↓</a></header>
+  <div class="projects-featured-list">
+    <article><span class="feature-number">01 / Storage</span><h3>InfiltratorFS</h3><p>My clean-sheet filesystem: generation-based copy-on-write, checkpoints, snapshots, and integrity checks. The interesting question is what data and metadata survive an interrupted operation.</p><div class="feature-links"><a href="workbench.html#infiltratorfs">Architecture and limits ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS">Source ↗</a></div></article>
+    <article><span class="feature-number">02 / Foundations</span><h3>InfiltratorOS</h3><p>A developing operating environment with independent Boot, Kernel, Files, and filesystem components. I am testing the contracts between them rather than treating one passing subsystem as a finished OS.</p><div class="feature-links"><a href="workbench.html#platform">How the layers fit ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorOS">Source ↗</a></div></article>
+    <article><span class="feature-number">03 / Native applications</span><h3>System Monitor</h3><p>A native tool for inspecting the running machine through operating-system interfaces. Its implementation and tests belong in the same conversation as the results shown to users.</p><div class="feature-links"><a href="workbench.html#software">Application approach ↗</a><a href="https://github.com/Infiltrator-Projects/System-Monitor">Source ↗</a></div></article>
+    <article><span class="feature-number">04 / Vehicle diagnostics</span><h3>MBLink</h3><p>Mercedes-Benz diagnostics built on the shared Link engine, informed by work with my own C207 E 250 CDI. Identification, capture, and interpretation are different responsibilities.</p><div class="feature-links"><a href="workbench.html#link">Read the diagnostic method ↗</a><a href="https://github.com/Infiltrator-Projects/MBLink">Source ↗</a></div></article>
+  </div>
 </section>
 <section class="repository-browser" id="directory" aria-labelledby="directory-title">
   <div class="repository-browser-header"><div><p class="eyebrow">Search and browse</p><h2 id="directory-title">Find a repository.</h2><p>Choose a family below or filter by project name or purpose. Calendar, clock and filesystem engines are grouped into expandable lists.</p></div>
@@ -397,6 +427,16 @@ static string render_workbench() {
     <a href="#revox-b77"><small>06 · Audio</small><strong>ReVox B77 Mk II</strong><span>Open-reel mechanics and dbx processing</span></a>
   </nav>
   <p class="workbench-index-link"><a href="projects.html">Looking for source code? Browse Projects <span aria-hidden="true">↗</span></a></p>
+</section>
+
+<section class="workbench-progress" id="current-work" aria-labelledby="current-work-title">
+  <header><div><p class="eyebrow">Development snapshot · 17 November 2026</p><h2 id="current-work-title">What I'm working on.</h2><p>Recent changes in the actual repositories. Each entry links to a specific commit; it records work undertaken, not a declaration that the whole project is finished.</p></div><a href="https://github.com/orgs/Infiltrator-Projects/repositories">See the repositories ↗</a></header>
+  <ol class="workbench-progress-list">
+    <li><time datetime="2026-11-17">17 Nov</time><div><strong>Boot · Secure Boot updater</strong><p>Updated the native installer workflow for an existing Secure Boot signing identity.</p><a href="https://github.com/Infiltrator-Projects/Boot/commit/72f423eba57ca6da5132236db065f6b165fd88c8">Inspect commit ↗</a></div></li>
+    <li><time datetime="2026-11-14">14 Nov</time><div><strong>InfiltratorFS · Common V2 contract</strong><p>Aligned the filesystem integration with the corrected Common V2 host contract.</p><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/commit/9e17f257d7f5a042dbe8cd64321ed59ca61a138e">Inspect commit ↗</a></div></li>
+    <li><time datetime="2026-11-12">12 Nov</time><div><strong>Calendar · Release qualification</strong><p>Connected the native provider checker to Cinnamon release qualification.</p><a href="https://github.com/Infiltrator-Projects/Calendar/commit/50b4cfd105ad73fcfda93a368289a974cedb76fd">Inspect commit ↗</a></div></li>
+  </ol>
+  <p class="workbench-progress-caveat">Dated snapshot; the linked repositories are the source of current status and newer changes.</p>
 </section>
 <section id="platform" class="project-section">
   <header class="section-heading"><p class="eyebrow">Foundation · Operating system</p><h2>InfiltratorOS is more than a desktop theme.</h2><p class="section-deck">A collection of individually owned components intended to work as one operating environment.</p></header>
@@ -643,7 +683,7 @@ static string render_about() {
   <p class="eyebrow">About · Online since 1993</p>
   <h1>A place of my own.</h1>
   <p class="lead">I'm Shannon Smith, in Mooroopna, Victoria. This has been my personal corner of the internet since 1993—a place for the cars I've owned, software I've built, open-reel audio, watches and the machinery I enjoy understanding.</p>
-  <nav class="section-nav" aria-label="About sections"><a href="#the-site">The site's history</a><a href="#interests">Other interests</a><a href="#daytona">The Daytona</a><a href="#how-it-fits">The common thread</a><a href="#principles">A principle</a></nav>
+  <nav class="section-nav" aria-label="About sections"><a href="#the-site">The site's history</a><a href="#interests">Other interests</a><a href="#daytona">The Daytona</a><a href="#how-it-fits">The common thread</a><a href="#contact">Get in touch</a><a href="#principles">A principle</a></nav>
 </section>
 <section id="the-site" class="about-history">
   <header class="section-heading"><p class="eyebrow">The original site</p><h2>From one Mercedes<br>to a lifetime of projects.</h2><p class="section-deck">An ongoing personal record, rather than a succession of unrelated websites.</p></header>
@@ -681,6 +721,13 @@ static string render_about() {
     <p>Some interests become code; others remain cars, music or physical equipment. I have kept them together on this site because one pursuit need not replace another. The original 450SEL 6.9 story still belongs here alongside the software and everything that followed.</p>
   </div>
 </section>
+
+<section class="about-contact" id="contact" aria-labelledby="about-contact-title">
+  <div><p class="eyebrow">Talk about the work</p><h2 id="about-contact-title">Questions, code, and collaboration.</h2></div>
+  <div><p>Much of the work here is public because I want it to be inspectable. If you're interested in a particular project, the relevant GitHub repository is the best place for technical questions, issues and discussions. My public GitHub profile is another way to find what I'm working on.</p>
+    <div class="about-contact-links"><a href="https://github.com/The-First-Infiltrator">My GitHub profile ↗</a><a href="projects.html#directory">Find the right repository ↗</a></div>
+  </div>
+</section>
 <section id="principles" class="quote-section"><p class="eyebrow">A personal principle</p><blockquote class="quote">“I am free, no matter what rules surround me. If I find them tolerable, I tolerate them; if I find them too obnoxious, I break them. I am free because I know that I alone am morally responsible for everything I do.”<cite>— Robert A. Heinlein</cite></blockquote></section>
 )ABOUT" + page_end("Since 1993. Still here.");
 }
@@ -689,7 +736,7 @@ static string render_download() {
     const string url = "https://github.com/Infiltrator-Projects/ssmithnet.net/releases/download/model-11-sandy-v1.0.0/Model_11_Sandy_v.1.0.0.zip";
     auto page = page_start("Model 11 Sandy v1.0.0", "Download Model 11 Sandy v1.0.0.", "Download");
     const auto head_end = page.find("</head>");
-    page.insert(head_end, "<meta http-equiv=\"refresh\" content=\"2;url=" + esc(url) + "\">");
+    page.insert(head_end, "<meta name=\"robots\" content=\"noindex,follow\"><meta http-equiv=\"refresh\" content=\"2;url=" + esc(url) + "\">");
     return page + "<section class=\"page-intro\"><div class=\"kicker\">Download</div><h1>Model 11 Sandy<br> v1.0.0</h1><p class=\"lead\">Your download should begin automatically.</p><p><a class=\"text-link\" href=\"" + esc(url) + "\">Download the ZIP now <span aria-hidden=\"true\">↗</span></a></p></section>" + page_end("Direct download");
 }
 

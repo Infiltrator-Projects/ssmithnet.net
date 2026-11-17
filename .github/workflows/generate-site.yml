@@ -9,6 +9,8 @@ on:
       - 'include/**'
       - 'tests/**'
       - 'CNAME'
+      - 'robots.txt'
+      - 'sitemap.xml'
       - 'Makefile'
       - 'docs/**'
       - 'README.md'
@@ -67,7 +69,12 @@ jobs:
           ./build/sitegen public
           cp -a assets public/assets
           cp CNAME public/CNAME
+          cp robots.txt public/robots.txt
+          cp sitemap.xml public/sitemap.xml
           touch public/.nojekyll
+          test -s public/robots.txt
+          test -s public/sitemap.xml
+          test -s public/assets/graphics/software-architecture.svg
           test -s public/index.html
           test -s public/workbench.html
           test -s public/projects.html
