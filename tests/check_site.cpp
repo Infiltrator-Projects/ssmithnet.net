@@ -243,6 +243,15 @@ void validate_garage(const fs::path& root, const string& garage) {
             fs::exists(root / "assets/photos/xc-falcon-ute-1-three-quarter.avif") &&
             fs::exists(root / "assets/photos/xc-falcon-ute-1-front.avif"),
             "XC Falcon ute one needs both of its distinct debadged reconstructed photos");
+    const size_t xc2_start = garage.find("id=\"xc-falcon-ute-2\"");
+    const size_t xc2_end = garage.find("</article>", xc2_start);
+    const string xc2 = garage.substr(xc2_start, xc2_end - xc2_start);
+    require(xc2.find("xc-falcon-ute-2-three-quarter.avif") != string::npos &&
+            xc2.find("xc-falcon-ute-2-front.avif") != string::npos &&
+            xc2.find("retained its Ford oval badge") != string::npos &&
+            fs::exists(root / "assets/photos/xc-falcon-ute-2-three-quarter.avif") &&
+            fs::exists(root / "assets/photos/xc-falcon-ute-2-front.avif"),
+            "XC Falcon ute two needs both distinct photos with Ford badging retained");
     for (const char* id : {"discovery-2", "au-fairmont"}) {
         const size_t start = garage.find("id=\"" + string(id) + "\"");
         require(start != string::npos, "Missing 2002 vehicle");
