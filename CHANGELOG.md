@@ -1,3 +1,11 @@
+## 17 November 2026 — Follow the work from purpose to code
+
+- Reworked the Home editorial into three short, first-person routes: OS interfaces, Mercedes/MBLink diagnostic evidence, and creative models. No additional project gallery or repeated GitHub directory was introduced.
+- Clarified the Workbench's technical reading path and the distinction between an on-disk format engine, qualified Boot support, Files and the separate Kernel qualification path.
+- Added context links from major Projects families back to engineering chapters and connected the About software timeline to those chapters and source listings.
+- Fixed older native-test expectations for stylesheet cache versions and the retired mobile Workbench layout; refreshed CSS cache keys across all mirrored pages and the C++ generator.
+- No vehicle record, image, repository count, package qualification or historical date was changed.
+
 ## 17 November 2026 — CSS clarification
 
 - Removed superseded responsive Workbench and Projects CSS declarations, reducing cascade conflicts after the editorial redesign.

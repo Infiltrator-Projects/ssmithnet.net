@@ -545,3 +545,26 @@ input[type="search"]{border-radius:7px}
   html{scroll-behavior:auto}
   *,*::before,*::after{scroll-behavior:auto;transition:none!important}
 }
+
+
+/* Narrative journeys connect evidence to source without duplicating the Projects catalogue. */
+.home-threads{display:grid;grid-template-columns:minmax(0,1fr);gap:0;width:100%;margin:3px 0 7px}
+.home-thread{padding:16px 0 18px;border-top:1px solid var(--line)}
+.home-thread:last-child{border-bottom:1px solid var(--line)}
+.home-thread h3{font:720 clamp(17px,1.7vw,20px)/1.32 var(--sans);margin:0 0 7px;color:var(--text)}
+.home-editorial-copy .home-thread p{max-width:68ch;font:400 14px/1.65 var(--sans);color:var(--muted);margin:0 0 9px}
+.home-thread-links{display:flex;align-items:center;flex-wrap:wrap;column-gap:20px;row-gap:3px}
+.home-thread-links a{display:inline-flex;align-items:center;min-height:32px;font:650 13px/1.35 var(--sans);color:var(--accent);text-underline-offset:4px}
+.home-thread-links a:hover{text-decoration:underline}
+.workbench-reader-note{margin:11px 0 22px;max-width:76ch;color:var(--muted);font:400 15px/1.58 var(--sans)}
+.workbench-page .project-content .engineering-throughline{max-width:var(--measure);margin:20px 0 16px;padding:0 0 0 17px;border-left:2px solid var(--line);font:400 15px/1.65 var(--sans);color:var(--muted)}
+.engineering-throughline strong{color:var(--text)}
+.projects-reading-hint{font:400 14px/1.6 var(--sans);color:var(--muted);max-width:77ch;margin:8px 0 0}
+.repo-group-context-link{display:inline;color:var(--accent);font-weight:640;text-decoration:underline;text-underline-offset:4px;text-decoration-color:rgba(39,220,233,.35)}
+.repo-group-context-link:hover{text-decoration-color:var(--accent)}
+@media(max-width:650px){
+  .home-thread{padding:15px 0}
+  .home-thread-links{column-gap:12px}
+  .workbench-reader-note{font-size:14px}
+  .workbench-page .project-content .engineering-throughline{padding-left:13px;font-size:14px}
+}

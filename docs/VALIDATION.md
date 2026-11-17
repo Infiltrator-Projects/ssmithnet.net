@@ -73,3 +73,9 @@ The editorial Workbench/Projects CSS was previously declared before older generi
 ## Editorial CSS maintenance — 17 November 2026
 
 Removed superseded Workbench directory, Projects browser and compact-disclosure rules. Projects keeps a visible expand affordance at phone width, and About's interest material uses flat editorial rails rather than inset card decoration. Generated pages and the C++ generator share the new stylesheet cache key. Native checks cover the selectors and output equivalence; actual browser viewport screenshots are still required before claiming visual certification.
+
+## Portfolio narrative and CSS validation — 17 November 2026
+
+The Home editorial section now shows three specific connections, not a second repository grid: InfiltratorOS component responsibilities, E 250 CDI/MBLink evidence, and the persistent-state questions in creative software. Workbench retains six detailed technical chapters and adds a short reading guide plus a qualified example of separated file-format responsibilities. Projects remains the full 104-repository directory with contextual links back to the relevant chapters; About links its software history to those pages. Existing Garage vehicle records and imagery are unchanged.
+
+The native site validator now checks these cross-page routes, stylesheet hooks and existing links. Two obsolete stylesheet cache-key assertions and an obsolete two-column Workbench-mobile CSS assertion were corrected to reflect the currently maintained presentation. All generated mirrors and src/sitegen.cpp reference 20261117-story3. Browser viewport inspection remains distinct from native source and link checks.

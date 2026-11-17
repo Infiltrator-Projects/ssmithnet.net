@@ -565,7 +565,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261117-boundaries1") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261117-story3") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -604,7 +604,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261117-boundaries1") != string::npos,
+        require(content.find("site-redesign.css?v=20261117-story3") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -626,7 +626,7 @@ void validate(const fs::path& root) {
     const string responsive_css = read(root / "assets/site-redesign.css");
     require(responsive_css.find("@media(max-width:600px)") != string::npos &&
             responsive_css.find(".home-editorial{padding:28px 0 49px!important") != string::npos &&
-            responsive_css.find(".workbench-intro .workbench-directory{grid-template-columns:repeat(2,minmax(0,1fr))}") != string::npos &&
+            responsive_css.find(".workbench-page .workbench-intro .workbench-directory{grid-template-columns:1fr;gap:0}") != string::npos &&
             responsive_css.find(".about-thread-body{max-width:910px") != string::npos,
             "Responsive editorial sections must stack cleanly on phones");
     require(responsive_css.find("nav[aria-label=\"Primary\"] .navlinks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))") != string::npos &&
@@ -658,7 +658,7 @@ void validate(const fs::path& root) {
             "Homepage destination icons missing");
     require(home.find("software, and<br><span>machines.</span>") != string::npos &&
             home.find("class=\"home-editorial\"") != string::npos &&
-            home.find("In 1993 this website started") != string::npos &&
+            home.find("This began with my Mercedes-Benz 450SEL 6.9 in 1993.") != string::npos &&
             home.find("2016") == string::npos,
             "Homepage visual hierarchy or grounded site history missing");
     for (const char* filename : {"ui-workbench.svg", "ui-garage.svg", "ui-code.svg", "ui-about.svg", "audio-waveform.svg"}) {
@@ -758,8 +758,34 @@ void validate(const fs::path& root) {
             "About reading order or anchors missing");
     require(home.find("href=\"projects.html\"") != string::npos &&
             home.find("class=\"home-editorial\"") != string::npos &&
-            home.find("The workshop has grown.") != string::npos,
+            home.find("Follow the questions.") != string::npos,
             "Homepage must link to rather than duplicate Workbench and Projects");
+    // This is one navigable story: a short, first-person explanation leads to
+    // engineering evidence and then the separate source directory.
+    const string& projects_page = first.at("projects.html");
+    require(home.find("class=\"home-threads\"") != string::npos &&
+            home.find("href=\"workbench.html#platform\"") != string::npos &&
+            home.find("href=\"projects.html#group-foundations\"") != string::npos &&
+            home.find("href=\"garage.html#e250-cdi\"") != string::npos &&
+            home.find("href=\"workbench.html#link\"") != string::npos &&
+            home.find("href=\"projects.html#group-creative\"") != string::npos,
+            "Home must connect project purpose, engineering notes and source without cloned listings");
+    require(workbench_page.find("class=\"workbench-reader-note\"") != string::npos &&
+            workbench_page.find("class=\"engineering-throughline\"") != string::npos &&
+            workbench_page.find("href=\"projects.html#group-filesystem-modules\"") != string::npos,
+            "Workbench must explain responsibilities and point to its independently owned engines");
+    require(projects_page.find("class=\"projects-reading-hint\"") != string::npos &&
+            projects_page.find("class=\"repo-group-context-link\" href=\"workbench.html#platform\"") != string::npos &&
+            projects_page.find("class=\"repo-group-context-link\" href=\"workbench.html#link\"") != string::npos &&
+            projects_page.find("class=\"repo-group-context-link\" href=\"workbench.html#creative\"") != string::npos,
+            "Project source groups must lead back to their explanations");
+    require(about.find("href=\"workbench.html#platform\"") != string::npos &&
+            about.find("href=\"projects.html#group-foundations\"") != string::npos,
+            "About's software history must connect to the engineering and code without duplicating them");
+    require(system_css.find(".home-threads{display:grid") != string::npos &&
+            system_css.find(".repo-group-context-link{display:inline") != string::npos &&
+            system_css.find(".workbench-reader-note{margin:11px") != string::npos,
+            "New editorial wayfinding must be styled without another card catalogue");
     require(workbench_page.find("id=\"platform\"") != string::npos &&
             workbench_page.find("id=\"creative\"") != string::npos &&
             workbench_page.find("id=\"infiltratorfs\"") != string::npos &&

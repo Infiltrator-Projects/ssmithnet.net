@@ -54,7 +54,7 @@ static string page_start(const string& title, const string& description, const s
     const string prefix = active == "Download" ? "../../" : "";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-clarity2") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-story3") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -171,11 +171,27 @@ static string render_home() {
 <section class="home-editorial" aria-labelledby="home-editorial-title">
   <div class="home-editorial-heading">
     <p class="eyebrow">One place, many lines of work</p>
-    <h2 id="home-editorial-title">The workshop has grown.<br>The address has stayed.</h2>
+    <h2 id="home-editorial-title">Follow the questions.<br>Find the work.</h2>
   </div>
   <div class="home-editorial-copy">
-    <p>In 1993 this website started with my Mercedes-Benz 450SEL 6.9. It did not begin as a software storefront or a list of repositories. Since then the interests have expanded, but they still belong together: how systems are designed, how machines behave and what remains useful over time.</p>
-    <p>Here, <a href="workbench.html">Workbench</a> is where I explain the engineering, <a href="projects.html">Projects</a> is the complete GitHub source inventory, <a href="garage.html">Garage</a> records the vehicles, and <a href="about.html">About</a> tells the longer story. The <a href="https://infiltrator-projects.github.io/Infiltrator-Repository/">Software Centre</a> is specifically for published packages.</p>
+    <p>This began with my Mercedes-Benz 450SEL 6.9 in 1993. The work has since grown into filesystems, diagnostic tools and simulations, but I still want to understand how things behave and show what I can actually verify. Some questions become code; others remain machines worth documenting.</p>
+    <div class="home-threads" aria-label="Follow the connections between projects">
+      <article class="home-thread">
+        <h3>From an operating system to its parts.</h3>
+        <p>InfiltratorOS coordinates distinct components. InfiltratorFS owns its on-disk format; Libraries defines shared interfaces; Boot, Kernel and Files each have a different job. Their boundaries are as important as the code.</p>
+        <div class="home-thread-links"><a href="workbench.html#platform">Understand the architecture ↗</a><a href="projects.html#group-foundations">Inspect the source ↗</a></div>
+      </article>
+      <article class="home-thread">
+        <h3>From a car to its diagnostic evidence.</h3>
+        <p>My E 250 CDI is part of the Garage history and a real development vehicle for MBLink. The manufacturer application uses the shared Link engine, while readings and unknown responses need evidence before interpretation.</p>
+        <div class="home-thread-links"><a href="garage.html#e250-cdi">See the car ↗</a><a href="workbench.html#link">Follow the diagnostics ↗</a></div>
+      </article>
+      <article class="home-thread">
+        <h3>From an idea to a working model.</h3>
+        <p>Egypt, Backyard Racer and Character Profiler ask different questions, but each needs to remember its world consistently. The engineering notes explain the models; the repositories contain their implementation.</p>
+        <div class="home-thread-links"><a href="workbench.html#creative">Explore the design ↗</a><a href="projects.html#group-creative">Read the code ↗</a></div>
+      </article>
+    </div>
     <a class="text-link" href="about.html#the-site">Read how the site began <span aria-hidden="true">↗</span></a>
   </div>
 </section>
@@ -187,6 +203,7 @@ static string render_projects() {
 <section class="page-intro projects-intro">
   <p class="eyebrow">Source index · Infiltrator-Projects</p><h1>Repository directory.</h1>
   <p class="lead">Browse public source code by repository name, purpose or family. The catalogue includes application projects as well as the libraries and individual modules that support them.</p>
+  <p class="projects-reading-hint">A repository may be an application, a shared library or one filesystem engine—not necessarily something ready to install. Each major family links back to its engineering explanation; the entries below link to the actual code.</p>
   <p class="projects-index-meta"><strong>104 public repositories</strong><span>8 families</span><span>Inventory captured 16 November 2026</span></p>
   <nav class="projects-utility-nav" aria-label="Related destinations"><a href="workbench.html">Read the engineering journal ↗</a><a href="https://github.com/Infiltrator-Projects">Open the live GitHub organisation ↗</a></nav>
 </section>
@@ -196,7 +213,7 @@ static string render_projects() {
   </div>
   <nav class="repository-families-nav" aria-label="Jump to project family"><a href="#group-foundations">Operating system &amp; foundations <span>9</span></a><a href="#group-applications">Applications &amp; utilities <span>7</span></a><a href="#group-diagnostics">Vehicle diagnostics <span>6</span></a><a href="#group-creative">Games &amp; creative work <span>3</span></a><a href="#group-publishing">Sites &amp; publishing <span>2</span></a><a href="#group-calendar-modules">Calendar systems <span>31</span></a><a href="#group-clock-modules">Clock &amp; timekeeping modules <span>23</span></a><a href="#group-filesystem-modules">Filesystem engines <span>23</span></a></nav>
   <div id="repo-families" class="repository-families">
-<section class="repo-group" id="group-foundations" data-repo-group><header class="repo-group-heading"><div><h3>Operating system &amp; foundations</h3><p>Common libraries, OS integration, the boot environment, file management and InfiltratorFS.</p></div><span class="repo-group-count">9 repositories</span></header><div class="repo-grid">
+<section class="repo-group" id="group-foundations" data-repo-group><header class="repo-group-heading"><div><h3>Operating system &amp; foundations</h3><p>Common libraries, OS integration, the boot environment, file management and InfiltratorFS. <a class="repo-group-context-link" href="workbench.html#platform">How the system layers fit together ↗</a></p></div><span class="repo-group-count">9 repositories</span></header><div class="repo-grid">
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/Boot" data-repo-name="Boot"><strong>Boot</strong><span>Firmware-stage boot manager and Common V2 filesystem support.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/Files" data-repo-name="Files"><strong>Files</strong><span>Native file-management project.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/Filesystems" data-repo-name="Filesystems"><strong>Filesystems</strong><span>Transitional catalogue; engines are owned by the separate filesystem repositories.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
@@ -216,7 +233,7 @@ static string render_projects() {
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/Slicer" data-repo-name="Slicer"><strong>Slicer</strong><span>Source repository and project notes.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/System-Monitor" data-repo-name="System-Monitor"><strong>System-Monitor</strong><span>Native Linux system and hardware inspection.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 </div></section>
-<section class="repo-group" id="group-diagnostics" data-repo-group><header class="repo-group-heading"><div><h3>Vehicle diagnostics</h3><p>The shared Link engine and separate Mercedes-Benz, Jaguar, BMW, Audi and Ford applications.</p></div><span class="repo-group-count">6 repositories</span></header><div class="repo-grid">
+<section class="repo-group" id="group-diagnostics" data-repo-group><header class="repo-group-heading"><div><h3>Vehicle diagnostics</h3><p>The shared Link engine and separate Mercedes-Benz, Jaguar, BMW, Audi and Ford applications. <a class="repo-group-context-link" href="workbench.html#link">How diagnostic evidence is interpreted ↗</a></p></div><span class="repo-group-count">6 repositories</span></header><div class="repo-grid">
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/AUDILink" data-repo-name="AUDILink"><strong>AUDILink</strong><span>Audi diagnostic application built on Link.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/BMWLink" data-repo-name="BMWLink"><strong>BMWLink</strong><span>BMW diagnostic application built on Link.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/FORDLink" data-repo-name="FORDLink"><strong>FORDLink</strong><span>Ford diagnostic application built on Link.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
@@ -224,7 +241,7 @@ static string render_projects() {
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/Link" data-repo-name="Link"><strong>Link</strong><span>Shared C11 vehicle-diagnostics engine.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/MBLink" data-repo-name="MBLink"><strong>MBLink</strong><span>Mercedes-Benz diagnostic application built on Link.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 </div></section>
-<section class="repo-group" id="group-creative" data-repo-group><header class="repo-group-heading"><div><h3>Games &amp; creative work</h3><p>Original vehicle and civilisation simulations alongside character-development software.</p></div><span class="repo-group-count">3 repositories</span></header><div class="repo-grid">
+<section class="repo-group" id="group-creative" data-repo-group><header class="repo-group-heading"><div><h3>Games &amp; creative work</h3><p>Original vehicle and civilisation simulations alongside character-development software. <a class="repo-group-context-link" href="workbench.html#creative">The models behind the projects ↗</a></p></div><span class="repo-group-count">3 repositories</span></header><div class="repo-grid">
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/backyard-racer" data-repo-name="backyard-racer"><strong>backyard-racer</strong><span>Car building, garage management and street-racing simulation.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/Character-Profiler" data-repo-name="Character-Profiler"><strong>Character-Profiler</strong><span>iPhone character-development and story-bible app.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
 <a class="repo-entry" href="https://github.com/Infiltrator-Projects/Egypt" data-repo-name="Egypt"><strong>Egypt</strong><span>Original Egyptian city-building and civilisation simulation.</span><span class="repo-entry-arrow" aria-hidden="true">↗</span></a>
@@ -370,6 +387,7 @@ static string render_workbench() {
   <p class="eyebrow">Workbench · Engineering journal</p>
   <h1>Inside the engineering.</h1>
   <p class="lead">How should a filesystem recover after a crash? Where does a boot manager's responsibility end? What makes a vehicle response trustworthy? These engineering notes follow the decisions, experiments and evidence behind the work.</p>
+  <p class="workbench-reader-note">Start with the question that led to a project, then follow its architecture, limits and evidence. The repository links take you to the implementation without turning this journal into another code directory.</p>
   <nav class="workbench-directory" id="workbench-topics" aria-label="Workbench sections">
     <a href="#platform"><small>01 · Foundation</small><strong>InfiltratorOS</strong><span>Boot, kernel, Libraries and native file handling</span></a>
     <a href="#infiltratorfs"><small>02 · Storage</small><strong>InfiltratorFS</strong><span>Format, recovery and integrity</span></a>
@@ -391,6 +409,7 @@ static string render_workbench() {
       <div><span class="engineering-step">02 · System layers</span><h3>Boot, Kernel and InfiltratorOS</h3><p>Separate boot, kernel and installation responsibilities. Passing one component test does not qualify the whole operating environment.</p></div>
       <div><span class="engineering-step">03 · User tools</span><h3>Files and Software</h3><p>File operations, package discovery and updates belong in applications rather than firmware or filesystem code.</p></div>
     </div>
+    <p class="engineering-throughline"><strong>Follow one responsibility:</strong> a filesystem engine defines the on-disk rules; a qualified Boot reader needs to understand that format during startup; Files handles file operations in the running environment. Kernel development follows its own qualification path. Sharing an interface does not make those components interchangeable.</p>
     <p class="workbench-source-link"><a href="projects.html#group-foundations">See the operating-system source repositories <span aria-hidden="true">↗</span></a></p>
     <p class="project-boundary">Builds, emulated boots and component tests are evidence of particular milestones, not proof that every subsystem is ready for a general-purpose installation. Current qualification is maintained in each repository.</p>
   </div>
@@ -403,7 +422,7 @@ static string render_workbench() {
     <p>Copy-on-write transactions publish new generations without immediately destroying earlier state. Checkpoints, snapshots and reflinks provide ways to retain or share data; sparse files and extent metadata make allocation explicit. CRC64 and SHA-256 form separate metadata and logical-data integrity mechanisms. Inspection, checking and scrub tools expose verification rather than assuming that a successful write call settles the question.</p>
     <dl class="inline-facts"><div><dt>Current on-disk format</dt><dd>0.19</dd></div><div><dt>Transactions</dt><dd>Generation-based CoW</dd></div><div><dt>Qualification</dt><dd>Platform-specific evidence</dd></div></dl>
     <p>The Linux path includes a native VFS driver and the project has a driverless Windows Explorer access bridge. The experimental Common V2 module shares the portable format engine with a hosted implementation and a read-only BOOT profile. A production-qualified firmware installation and a native Windows filesystem driver are not yet established.</p>
-    <div class="resource-links"><a href="https://github.com/Infiltrator-Projects/InfiltratorFS">Source repository ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/QUALIFICATION.md">Qualification evidence ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/ROADMAP.md">Roadmap ↗</a></div>
+    <div class="resource-links"><a href="https://github.com/Infiltrator-Projects/InfiltratorFS">Source repository ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/QUALIFICATION.md">Qualification evidence ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS/blob/main/docs/ROADMAP.md">Roadmap ↗</a><a href="projects.html#group-filesystem-modules">Other filesystem engines ↗</a></div>
     <details class="technical-detail"><summary>More on the filesystem's design <span aria-hidden="true">+</span></summary>
       <div class="engineering-notes"><article><h3>Keep identity stable</h3><p>Objects carry 128-bit identifiers and the namespace supports UTF-8 names. The transaction and extent model separates logical identity from where bytes happen to be stored.</p></article><article><h3>Share without guessing</h3><p>Reflinks, snapshots and sparse allocation require explicit rules about ownership, history and future writes. A shared extent is a deliberate state, not an accidental consequence of copying.</p></article><article><h3>Test failures as well as success</h3><p>Disposable-image tests can inject I/O interruptions. Mounted Linux performance, writeback behaviour, recovery and the firmware bridge have distinct qualification boundaries.</p></article></div>
     </details>
@@ -632,7 +651,7 @@ static string render_about() {
   <div class="timeline">
     <article class="event"><span class="era">1993</span><div><h3>The 450SEL 6.9 and the Infiltrator website.</h3><p>The original subject was my Mercedes-Benz W116 450SEL 6.9. Its engineering, specification and character gave the site something worth documenting. That beginning matters: the web page was personal first, and it still is. The <a href="garage.html#450sel-69">Garage</a> retains that vehicle alongside the others I have owned.</p></div></article>
     <article class="event"><span class="era">Beta-testing years</span><div><h3>Windows, Solaris and games.</h3><p>I was involved in voluntary beta testing of Microsoft Windows ME, Solaris and EA game projects. The Windows ME work included a Beta Tester of the Month award. Testing meant spending time with unfinished software and reporting what actually happened—not merely judging its intended feature list.</p></div></article>
-    <article class="event"><span class="era">The software workshop</span><div><h3>From applications to their foundations.</h3><p>The software work expanded to include System Monitor, Defragmenter, Calendar, Calculator, vehicle diagnostics and InfiltratorFS. More recently the structure has grown into separately owned operating-system components, shared libraries, filesystem engines and specialist modules. These are different layers of work, not dozens of names for the same application.</p></div></article>
+    <article class="event"><span class="era">The software workshop</span><div><h3>From applications to their foundations.</h3><p>The software work expanded to include System Monitor, Defragmenter, Calendar, Calculator, vehicle diagnostics and InfiltratorFS. More recently the structure has grown into separately owned operating-system components, shared libraries, filesystem engines and specialist modules. These are different layers of work, not dozens of names for the same application. <a href="workbench.html#platform">The Workbench explains the architectural boundaries</a>, while <a href="projects.html#group-foundations">Projects lists the separate source repositories</a>.</p></div></article>
     <article class="event"><span class="era">Today</span><div><h3>One website, several kinds of evidence.</h3><p>The Mercedes E 250 CDI is both a car I drive and an evidence vehicle for MBLink development. The ReVox B77 and dbx 224 are another kind of engineering interest: hands-on equipment that does not need to become a software project to deserve attention.</p></div></article>
   </div>
 </section>
