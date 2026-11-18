@@ -299,17 +299,12 @@ void validate_garage(const fs::path& root, const string& garage) {
         "Paint", "Upholstery"};
     require(current.spec_labels == specs && sec.spec_labels == specs,
             "Mercedes factory specification label parity failed");
-    const std::array<std::pair<string,string>, 7> current_fields{{
-        {"VIN", "WDD2073032F129158"}, {"Original delivery", "Australia"},
-        {"Engine number", "651911 30 638336"}, {"Transmission number", "722646 08 520376"},
-        {"Release", "13 May 2011"}, {"Delivery", "13 May 2011"},
-        {"Registration", "YSF597"}
+    const std::array<std::pair<string,string>, 4> current_fields{{
+        {"Original delivery", "Australia"}, {"Release", "13 May 2011"},
+        {"Delivery", "13 May 2011"}, {"Registration", "YSF597"}
     }};
-    const std::array<std::pair<string,string>, 8> sec_fields{{
-        {"VIN", "WDB1260442A171593"}, {"Original delivery", "United Kingdom"},
-        {"Engine number", "117963 22 081711"},
-        {"Transmission number", "722311 02 661254"},
-        {"Production", "Approximately June 1985"},
+    const std::array<std::pair<string,string>, 5> sec_fields{{
+        {"Original delivery", "United Kingdom"}, {"Production", "Approximately June 1985"},
         {"Order location", "Great Britain"}, {"Registration", "1ARK884"},
         {"Acquired", "17 December 2002"}
     }};
@@ -320,6 +315,10 @@ void validate_garage(const fs::path& root, const string& garage) {
     };
     for (const auto& [label,value] : current_fields) exact(current,label,value);
     for (const auto& [label,value] : sec_fields) exact(sec,label,value);
+    for (const auto& car : {current, sec}) {
+        for (const char* label : {"VIN", "Engine number", "Transmission number", "Order number", "Production number"})
+            require(car.fields.find(label) == car.fields.end(), "Public Mercedes datacard contains an exact serial identifier");
+    }
     auto production = current.fields.find("Production");
     require(production != current.fields.end() && production->second.rfind("12 May 2011", 0) == 0,
             "Production date must remain separate from delivery/release date");
@@ -373,8 +372,8 @@ void validate_garage(const fs::path& root, const string& garage) {
             count("class=\"vehicle-photo-pair\"") == 1,
             "SEC must mirror the E 250 two-photo gallery layout");
     const std::array<std::pair<string,string>, 2> photos{{
-        {"500sec-amg-side.jpg", "width=\"1021\" height=\"409\""},
-        {"500sec-amg-front.jpg", "width=\"520\" height=\"400\""}
+        {"500sec-amg-three-quarter.webp", "width=\"1021\" height=\"409\""},
+        {"500sec-amg-front.webp", "width=\"520\" height=\"400\""}
     }};
     for (const auto& [filename, dimensions] : photos) {
         require(count("src=\"assets/photos/" + filename + "\"") == 1 &&
@@ -565,7 +564,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261117-career5") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261118-polish6") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -604,7 +603,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261117-career5") != string::npos,
+        require(content.find("site-redesign.css?v=20261118-polish6") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -649,8 +648,9 @@ void validate(const fs::path& root) {
     const string& about_current = first.at("about.html");
     require(home.find("id=\"home-software-title\"") != string::npos &&
             home.find("src=\"assets/graphics/software-architecture.svg\"") != string::npos &&
-            home.find("not a screenshot") != string::npos &&
-            fs::is_regular_file(root / "assets/graphics/software-architecture.svg"),
+            home.find("srcset=\"assets/graphics/software-architecture-mobile.svg\"") != string::npos &&
+            fs::is_regular_file(root / "assets/graphics/software-architecture.svg") &&
+            fs::is_regular_file(root / "assets/graphics/software-architecture-mobile.svg"),
             "Home must show a truthful, explicitly labelled software architecture diagram");
     require(projects_current.find("id=\"featured-work\"") != string::npos &&
             projects_current.find("id=\"directory\"") > projects_current.find("id=\"featured-work\"") &&
@@ -675,6 +675,9 @@ void validate(const fs::path& root) {
     require(about_current.find("id=\"contact\"") != string::npos &&
             about_current.find("href=\"https://github.com/The-First-Infiltrator\"") != string::npos,
             "About must provide a public Github contact path");
+    require(first.at("downloads/model-11-sandy/index.html").find("A 365 MB ZIP archive.") != string::npos &&
+            first.at("downloads/model-11-sandy/index.html").find("http-equiv=\"refresh\"") == string::npos,
+            "The large download must clearly disclose its size and require a click");
     require(first.at("downloads/model-11-sandy/index.html").find("name=\"robots\" content=\"noindex,follow\"") != string::npos,
             "Standalone direct download page should not be indexed as a main website page");
     require(fs::is_regular_file(root / "robots.txt") &&
@@ -703,7 +706,7 @@ void validate(const fs::path& root) {
             "Homepage destination icons missing");
     require(home.find("software, and<br><span>machines.</span>") != string::npos &&
             home.find("class=\"home-editorial\"") != string::npos &&
-            home.find("This began with my Mercedes-Benz 450SEL 6.9 in 1993.") != string::npos &&
+            home.find("I began with a page about my 450SEL 6.9.") != string::npos &&
             home.find("2016") == string::npos,
             "Homepage visual hierarchy or grounded site history missing");
     for (const char* filename : {"ui-workbench.svg", "ui-garage.svg", "ui-code.svg", "ui-about.svg", "audio-waveform.svg"}) {
@@ -742,6 +745,9 @@ void validate(const fs::path& root) {
             system_css.find(".home-editorial") != string::npos &&
             system_css.find(".about-thread-body") != string::npos,
             "Shared theme must cover Home, Workbench, Garage and About");
+    require(read(root / "assets/site.css").find("@font-face") == string::npos &&
+            read(root / "assets/site.css").find("MB Corpo") == string::npos,
+            "Public pages must not bundle unlicensed corporate font files");
     require(system_css.find(".about-page .about-professional{padding:44px") != string::npos &&
             system_css.find(".professional-role{display:grid") != string::npos,
             "Professional biography responsive styling missing");
@@ -806,18 +812,15 @@ void validate(const fs::path& root) {
             "About reading order or anchors missing");
     require(home.find("href=\"projects.html\"") != string::npos &&
             home.find("class=\"home-editorial\"") != string::npos &&
-            home.find("Follow the questions.") != string::npos,
+            home.find("Since 1993.<br>Still curious.") != string::npos,
             "Homepage must link to rather than duplicate Workbench and Projects");
-    // This is one navigable story: a short, first-person explanation leads to
-    // engineering evidence and then the separate source directory.
+    // Home introduces the work once; Workbench and Projects own the details.
     const string& projects_page = first.at("projects.html");
-    require(home.find("class=\"home-threads\"") != string::npos &&
+    require(home.find("class=\"home-threads\"") == string::npos &&
             home.find("href=\"workbench.html#platform\"") != string::npos &&
-            home.find("href=\"projects.html#group-foundations\"") != string::npos &&
-            home.find("href=\"garage.html#e250-cdi\"") != string::npos &&
-            home.find("href=\"workbench.html#link\"") != string::npos &&
-            home.find("href=\"projects.html#group-creative\"") != string::npos,
-            "Home must connect project purpose, engineering notes and source without cloned listings");
+            home.find("href=\"projects.html#featured-work\"") != string::npos &&
+            home.find("href=\"about.html#the-site\"") != string::npos,
+            "Homepage must be concise and connect visitors to the deeper pages");
     require(workbench_page.find("class=\"workbench-reader-note\"") != string::npos &&
             workbench_page.find("class=\"engineering-throughline\"") != string::npos &&
             workbench_page.find("href=\"projects.html#group-filesystem-modules\"") != string::npos,
@@ -830,7 +833,7 @@ void validate(const fs::path& root) {
     require(about.find("href=\"workbench.html#platform\"") != string::npos &&
             about.find("href=\"projects.html#group-foundations\"") != string::npos,
             "About's software history must connect to the engineering and code without duplicating them");
-    require(system_css.find(".home-threads{display:grid") != string::npos &&
+    require(system_css.find(".home-software-diagram picture{display:block") != string::npos &&
             system_css.find(".repo-group-context-link{display:inline") != string::npos &&
             system_css.find(".workbench-reader-note{margin:11px") != string::npos,
             "New editorial wayfinding must be styled without another card catalogue");

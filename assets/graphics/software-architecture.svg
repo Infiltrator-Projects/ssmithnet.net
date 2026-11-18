@@ -1,26 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="t d">
-<title id="t">Infiltrator software architecture</title><desc id="d">Shared interfaces from Libraries and Common V2 are used by filesystem engines. Boot and Files consume the engines in different contexts; InfiltratorOS integrates independently maintained components.</desc>
-<rect width="1200" height="620" fill="#0b151b"/><g font-family="Arial,Helvetica,sans-serif">
-<text x="62" y="62" fill="#88a8b1" font-size="20" font-weight="bold" letter-spacing="3">INFILTRATOR · SOFTWARE SYSTEMS</text>
-<text x="62" y="110" fill="#f4f7f7" font-size="38" font-weight="bold">Separate responsibilities. Shared contracts.</text>
-<text x="62" y="152" fill="#b2c5cc" font-size="22">A conceptual map of the interfaces — not a runtime screenshot.</text>
-<g stroke="#3e6772" stroke-width="2" fill="none"><path d="M 379 277 H 421"/><path d="M 782 277 H 828"/><path d="M 803 277 V 427 H 828"/><path d="M 379 277 H 401 V 440 H 421"/></g>
-<g fill="#27dce9"><path d="M 414 270 L 427 277 L 414 284 Z"/><path d="M 821 270 L 834 277 L 821 284 Z"/><path d="M 821 420 L 834 427 L 821 434 Z"/></g>
-<rect x="62" y="203" width="316" height="148" rx="12" fill="#17303a" stroke="#366976" stroke-width="2"/>
-<text x="89" y="248" font-size="28" font-weight="bold" fill="#f4f7f7">Libraries / Common V2</text>
-<text x="89" y="284" font-size="21" fill="#bad0d5">Shared interfaces</text><text x="89" y="315" font-size="21" fill="#bad0d5">and portable contracts</text>
-<rect x="430" y="203" width="352" height="148" rx="12" fill="#14323a" stroke="#27dce9" stroke-width="2"/>
-<text x="458" y="249" font-size="29" font-weight="bold" fill="#f4f7f7">Filesystem engines</text>
-<text x="458" y="286" font-size="21" fill="#bad0d5">Format and on-disk rules</text><text x="458" y="317" font-size="21" fill="#bad0d5">independently owned</text>
-<rect x="836" y="203" width="302" height="148" rx="12" fill="#17303a" stroke="#366976" stroke-width="2"/>
-<text x="865" y="249" font-size="29" font-weight="bold" fill="#f4f7f7">Boot</text>
-<text x="865" y="286" font-size="21" fill="#bad0d5">Firmware-stage access</text><text x="865" y="317" font-size="21" fill="#bad0d5">and system selection</text>
-<rect x="836" y="374" width="302" height="120" rx="12" fill="#17303a" stroke="#366976" stroke-width="2"/>
-<text x="865" y="417" font-size="29" font-weight="bold" fill="#f4f7f7">Files</text>
-<text x="865" y="452" font-size="21" fill="#bad0d5">Native file operations</text>
-<rect x="62" y="397" width="715" height="97" rx="12" fill="#141f27" stroke="#40535e" stroke-width="2"/>
-<text x="89" y="436" font-size="27" font-weight="bold" fill="#f4f7f7">InfiltratorOS</text>
-<text x="89" y="468" font-size="21" fill="#bad0d5">Integrates components; it does not replace their individual responsibilities.</text>
-<line x1="62" y1="535" x2="1138" y2="535" stroke="#33505a" stroke-width="2"/>
-<text x="62" y="572" font-size="19" fill="#9bb1bb">Implementation, test coverage and qualification differ by component.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 580" role="img" aria-labelledby="title desc">
+<title id="title">Infiltrator software component responsibilities</title>
+<desc id="desc">Libraries supplies shared contracts to filesystem engines. Boot and Files use the engines in different environments. InfiltratorOS coordinates the overall system.</desc>
+<rect width="680" height="580" fill="#0b151b"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<text x="38" y="48" fill="#28dce9" font-size="17" font-weight="bold" letter-spacing="2">INFILTRATOR SOFTWARE</text>
+<text x="38" y="87" fill="#f1f6f8" font-size="30" font-weight="bold">Clear boundaries, shared interfaces.</text>
+<rect x="38" y="119" width="604" height="83" rx="10" fill="#17303a" stroke="#527381" stroke-width="2"/>
+<text x="61" y="153" fill="#f5f8f9" font-size="25" font-weight="bold">Libraries / Common V2</text>
+<text x="61" y="181" fill="#c4d4db" font-size="19">Contracts shared across components</text>
+<path d="M340 202 V236" stroke="#27dce9" stroke-width="3"/><path d="M331 228 L340 240 L349 228" fill="none" stroke="#27dce9" stroke-width="3" stroke-linejoin="round"/>
+<rect x="38" y="242" width="604" height="92" rx="10" fill="#12353c" stroke="#27dce9" stroke-width="2"/>
+<text x="61" y="278" fill="#f5f8f9" font-size="26" font-weight="bold">Filesystem engines</text>
+<text x="61" y="309" fill="#c4d4db" font-size="19">Each format owns its storage behaviour</text>
+<path d="M178 334 V370 M499 334 V370" stroke="#27dce9" stroke-width="3"/>
+<path d="M169 362 L178 374 L187 362 M490 362 L499 374 L508 362" fill="none" stroke="#27dce9" stroke-width="3" stroke-linejoin="round"/>
+<rect x="38" y="378" width="288" height="97" rx="10" fill="#17303a" stroke="#527381" stroke-width="2"/>
+<text x="59" y="414" fill="#f5f8f9" font-size="25" font-weight="bold">Boot</text>
+<text x="59" y="445" fill="#c4d4db" font-size="18">Firmware-stage filesystem use</text>
+<rect x="354" y="378" width="288" height="97" rx="10" fill="#17303a" stroke="#527381" stroke-width="2"/>
+<text x="377" y="414" fill="#f5f8f9" font-size="25" font-weight="bold">Files</text>
+<text x="377" y="445" fill="#c4d4db" font-size="18">File operations in the OS</text>
+<rect x="38" y="499" width="604" height="58" rx="10" fill="#1c2830" stroke="#527381" stroke-width="2"/>
+<text x="59" y="522" fill="#f5f8f9" font-size="22" font-weight="bold">InfiltratorOS</text>
+<text x="245" y="522" fill="#c4d4db" font-size="18">Integrates the components</text>
+<text x="59" y="545" fill="#9caeb8" font-size="15">Kernel development follows its own qualification path</text>
 </g></svg>

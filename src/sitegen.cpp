@@ -60,7 +60,7 @@ static string page_start(const string& title, const string& description, const s
         "<meta name=\"twitter:card\" content=\"summary_large_image\">";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") + social_meta +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261117-career5") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261118-polish6") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -163,8 +163,11 @@ static string render_home() {
     <div class="home-software-links"><a href="workbench.html#platform">How the architecture works ↗</a><a href="workbench.html#infiltratorfs">Inside InfiltratorFS ↗</a><a href="projects.html#featured-work">Explore featured code ↗</a></div>
   </div>
   <figure class="home-software-diagram">
-    <img src="assets/graphics/software-architecture.svg" width="1200" height="620" loading="lazy" decoding="async" alt="Architecture map: Libraries and Common V2 provide shared contracts to filesystem engines; the engines are consumed by Boot and Files while InfiltratorOS integrates the components.">
-    <figcaption>A map of responsibilities, not a screenshot or a claim that every integration is qualified.</figcaption>
+    <picture>
+      <source media="(max-width: 650px)" srcset="assets/graphics/software-architecture-mobile.svg">
+      <img src="assets/graphics/software-architecture.svg" width="680" height="520" loading="lazy" decoding="async" alt="Architecture schematic: Libraries defines shared contracts, filesystem engines own formats, Boot and Files use those engines, and InfiltratorOS coordinates the components.">
+    </picture>
+    <figcaption>Component responsibilities, from shared interfaces to integration.</figcaption>
   </figure>
 </section>
 <section class="landing-showcase" aria-label="Featured collections">
@@ -190,29 +193,12 @@ static string render_home() {
 </section>
 <section class="home-editorial" aria-labelledby="home-editorial-title">
   <div class="home-editorial-heading">
-    <p class="eyebrow">One place, many lines of work</p>
-    <h2 id="home-editorial-title">Follow the questions.<br>Find the work.</h2>
+    <p class="eyebrow">The story so far</p>
+    <h2 id="home-editorial-title">Since 1993.<br>Still curious.</h2>
   </div>
   <div class="home-editorial-copy">
-    <p>This began with my Mercedes-Benz 450SEL 6.9 in 1993. The work has since grown into filesystems, diagnostic tools and simulations, but I still want to understand how things behave and show what I can actually verify. Some questions become code; others remain machines worth documenting.</p>
-    <div class="home-threads" aria-label="Follow the connections between projects">
-      <article class="home-thread">
-        <h3>From an operating system to its parts.</h3>
-        <p>InfiltratorOS coordinates distinct components. InfiltratorFS owns its on-disk format; Libraries defines shared interfaces; Boot, Kernel and Files each have a different job. Their boundaries are as important as the code.</p>
-        <div class="home-thread-links"><a href="workbench.html#platform">Understand the architecture ↗</a><a href="projects.html#group-foundations">Inspect the source ↗</a></div>
-      </article>
-      <article class="home-thread">
-        <h3>From a car to its diagnostic evidence.</h3>
-        <p>My E 250 CDI is part of the Garage history and a real development vehicle for MBLink. The manufacturer application uses the shared Link engine, while readings and unknown responses need evidence before interpretation.</p>
-        <div class="home-thread-links"><a href="garage.html#e250-cdi">See the car ↗</a><a href="workbench.html#link">Follow the diagnostics ↗</a></div>
-      </article>
-      <article class="home-thread">
-        <h3>From an idea to a working model.</h3>
-        <p>Egypt, Backyard Racer and Character Profiler ask different questions, but each needs to remember its world consistently. The engineering notes explain the models; the repositories contain their implementation.</p>
-        <div class="home-thread-links"><a href="workbench.html#creative">Explore the design ↗</a><a href="projects.html#group-creative">Read the code ↗</a></div>
-      </article>
-    </div>
-    <a class="text-link" href="about.html#the-site">Read how the site began <span aria-hidden="true">↗</span></a>
+    <p>I began with a page about my 450SEL 6.9. The interests have grown into filesystems, software, cars and analogue machinery, but this is still a place to keep the work and its history together.</p>
+    <a class="text-link" href="about.html#the-site">How the website began <span aria-hidden="true">↗</span></a>
   </div>
 </section>
 )site" + page_end("A personal corner of the internet, since 1993.");
@@ -229,7 +215,7 @@ static string render_projects() {
 </section>
 
 <section class="projects-featured" id="featured-work" aria-labelledby="featured-work-title">
-  <header class="projects-featured-heading"><div><p class="eyebrow">Four places to start</p><h2 id="featured-work-title">Selected engineering work.</h2><p>These are entry points into the larger codebase, not a ranking of completed products. Each has its own qualification and development history.</p></div></header>
+  <header class="projects-featured-heading"><div><p class="eyebrow">Four places to start</p><h2 id="featured-work-title">Selected engineering work.</h2><p>These four projects are starting points into the wider codebase. Each links to its engineering notes and source.</p></div></header>
   <div class="projects-featured-list">
     <article><span class="feature-number">01 / Storage</span><h3>InfiltratorFS</h3><p>My clean-sheet filesystem: generation-based copy-on-write, checkpoints, snapshots, and integrity checks. The interesting question is what data and metadata survive an interrupted operation.</p><div class="feature-links"><a href="workbench.html#infiltratorfs">Architecture and limits ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorFS">Source ↗</a></div></article>
     <article><span class="feature-number">02 / Foundations</span><h3>InfiltratorOS</h3><p>A developing operating environment with independent Boot, Kernel, Files, and filesystem components. I am testing the contracts between them rather than treating one passing subsystem as a finished OS.</p><div class="feature-links"><a href="workbench.html#platform">How the layers fit ↗</a><a href="https://github.com/Infiltrator-Projects/InfiltratorOS">Source ↗</a></div></article>
@@ -417,7 +403,7 @@ static string render_workbench() {
   <p class="eyebrow">Workbench · Engineering journal</p>
   <h1>Inside the engineering.</h1>
   <p class="lead">How should a filesystem recover after a crash? Where does a boot manager's responsibility end? What makes a vehicle response trustworthy? These engineering notes follow the decisions, experiments and evidence behind the work.</p>
-  <p class="workbench-reader-note">Start with the question that led to a project, then follow its architecture, limits and evidence. The repository links take you to the implementation without turning this journal into another code directory.</p>
+  <p class="workbench-reader-note">Start with the question that led to a project, then follow its architecture, limits and evidence. Repository links lead from each explanation to its implementation.</p>
   <nav class="workbench-directory" id="workbench-topics" aria-label="Workbench sections">
     <a href="#platform"><small>01 · Foundation</small><strong>InfiltratorOS</strong><span>Boot, kernel, Libraries and native file handling</span></a>
     <a href="#infiltratorfs"><small>02 · Storage</small><strong>InfiltratorFS</strong><span>Format, recovery and integrity</span></a>
@@ -439,11 +425,11 @@ static string render_workbench() {
   <p class="workbench-progress-caveat">Dated snapshot; the linked repositories are the source of current status and newer changes.</p>
 </section>
 <section id="platform" class="project-section">
-  <header class="section-heading"><p class="eyebrow">Foundation · Operating system</p><h2>InfiltratorOS is more than a desktop theme.</h2><p class="section-deck">A collection of individually owned components intended to work as one operating environment.</p></header>
+  <header class="section-heading"><p class="eyebrow">Foundation · Operating system</p><h2>Building an operating environment, layer by layer.</h2><p class="section-deck">A collection of individually owned components intended to work as one operating environment.</p></header>
   <div class="project-content">
-    <p>InfiltratorOS is the integration point, not a duplicate home for every subsystem. Its current deliverable is an amd64 integration package for a Debian/Linux Mint environment. It establishes the layout, shared resources and installation sequence for independently maintained components. A completed standalone operating system and graphical Setup installer are still future milestones.</p>
+    <p>InfiltratorOS integrates components maintained in separate repositories. Its current deliverable is an amd64 integration package for a Debian/Linux Mint environment. It establishes the layout, shared resources and installation sequence for independently maintained components. A completed standalone operating system and graphical Setup installer are still future milestones.</p>
     <p>The architectural split matters. <strong>Libraries</strong> supplies portable C11 mechanisms and public contracts. <strong>Boot</strong> handles the firmware-stage selection of operating systems and uses filesystem-specific Common V2 shared objects. The separate <strong>Kernel</strong> repository tracks the native-kernel development path, with a qualified QEMU milestone but no claim that the resulting kernel is ready for everyday hardware. <strong>Files</strong> is a native file manager, and <strong>Software</strong> owns application discovery, package operations and update workflows.</p>
-    <div class="workbench-context"><strong>Why separate repositories?</strong><p>Ownership stays explicit: a filesystem repository defines the behaviour of its format, the common layer defines the interface, and the loader or application consumes the capability. The old central Filesystems repository is transitional while the engines move to their independent homes.</p></div>
+    <div class="workbench-context"><strong>One component, one responsibility.</strong><p>Ownership stays explicit: a filesystem repository defines the behaviour of its format, the common layer defines the interface, and the loader or application consumes the capability. The old central Filesystems repository is transitional while the engines move to their independent homes.</p></div>
     <div class="engineering-map" aria-label="The responsibilities within InfiltratorOS">
       <div><span class="engineering-step">01 · Contracts</span><h3>Libraries</h3><p>Portable C11 facilities and the Common V2 interfaces used by format engines and their clients.</p></div>
       <div><span class="engineering-step">02 · System layers</span><h3>Boot, Kernel and InfiltratorOS</h3><p>Separate boot, kernel and installation responsibilities. Passing one component test does not qualify the whole operating environment.</p></div>
@@ -476,7 +462,7 @@ static string render_workbench() {
     <p><strong>Calculator</strong>, <strong>Files</strong> and <strong>Software</strong> address different daily tasks: calculation, file operations and package management. <strong>RunnerScope</strong> follows self-hosted GitHub Actions runners; <strong>PowerShell-HAL</strong> inserts generated commands for inspection rather than executing them automatically. They can share neutral facilities from Libraries while retaining their own product behaviour and release evidence.</p>
     <div class="engineering-note"><p class="eyebrow">The important boundary</p><h3>One application should not secretly reimplement another engine.</h3><p>Defragmenter can analyse an allocation map, but a filesystem module must own its actual format and writes. Calendar owns the user interface, while the separate time and calendar modules own their rules. The native tools can share low-level facilities without becoming a single inseparable program.</p><p>That separation is also a testing boundary: a successful interface build is not evidence that an unfamiliar filesystem's write path is qualified.</p></div>
     <p class="workbench-source-link"><a href="projects.html#group-applications">Browse application source <span aria-hidden="true">↗</span></a> · <a href="projects.html#group-calendar-modules">Calendar modules <span aria-hidden="true">↗</span></a> · <a href="projects.html#group-clock-modules">Clock modules <span aria-hidden="true">↗</span></a></p>
-    <p class="project-boundary">The project directory lists every module separately, but the technical qualification remains with the application and its engine. A repository is not automatically an installable product.</p>
+    <p class="project-boundary">The project directory lists every module separately, but the technical qualification remains with the application and its engine. Published packages and source repositories are separate destinations.</p>
   </div>
 <a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
@@ -536,7 +522,7 @@ static string vehicle_facts(const vector<VehicleFact>& facts, const string& clas
 
 static string vehicle_record(const VehicleRecord& car) {
     std::ostringstream o;
-    vector<VehicleFact> identity = {{"VIN", car.vin, ""}, {"Original delivery", car.market, ""}};
+    vector<VehicleFact> identity = {{"Original delivery", car.market, ""}};
     identity.insert(identity.end(), car.identity.begin(), car.identity.end());
     o << "<details class=\"vehicle-record technical-detail\"><summary>Full vehicle record <span aria-hidden=\"true\">+</span></summary>"
       << "<div class=\"vehicle-record-body\">" << vehicle_facts(car.specifications, "vehicle-specifications")
@@ -561,7 +547,7 @@ static string vehicle_record(const VehicleRecord& car) {
 
 static VehicleRecord current_mercedes() {
     return {
-        "e250-cdi", "E 250 CDI", "BlueEFFICIENCY Coupé · C207", "2011", "WDD2073032F129158", "Australia",
+        "e250-cdi", "E 250 CDI", "BlueEFFICIENCY Coupé · C207", "2011", "", "Australia",
         "Bremen-built, right-hand-drive pre-facelift E-Class coupé.", true,
         {{"Chassis / Baumuster", "C207 · 207.303", "Right-hand drive"},
          {"Engine", "2,143 cc diesel", "OM651"},
@@ -569,9 +555,7 @@ static VehicleRecord current_mercedes() {
          {"Transmission", "5-speed automatic", "722.646"},
          {"Paint", "Obsidian Black", "197U"},
          {"Upholstery", "Black / Anthracite", "Leather · 251A"}},
-        {{"Make", "Mercedes-Benz", ""}, {"Model", "E 250 CDI Coupé", ""},
-         {"Engine number", "651911 30 638336", ""}, {"Transmission number", "722646 08 520376", ""},
-         {"Order number", "0 1 901 08524", ""}, {"Production number", "1789426", ""}},
+        {{"Make", "Mercedes-Benz", ""}, {"Model", "E 250 CDI Coupé", ""}},
         // Keep the previously recorded production date distinct from the
         // decoder's release/delivery dates; they describe different events.
         {{"Production", "12 May 2011", "Previously recorded"}, {"Release", "13 May 2011", ""},
@@ -619,7 +603,7 @@ static VehicleRecord current_mercedes() {
 
 static VehicleRecord historic_mercedes() {
     return {
-        "500-sec", "500 SEC AMG", "Factory 500 SEC · C126", "1985", "WDB1260442A171593", "United Kingdom",
+        "500-sec", "500 SEC AMG", "Factory 500 SEC · C126", "1985", "", "United Kingdom",
         "The UK-delivered, pre-facelift C126 before its AMG conversion.", false,
         {{"Chassis / Baumuster", "C126 · 126.044", "Right-hand drive"},
          {"Engine", "4,973 cc V8", "M117.963"},
@@ -627,9 +611,7 @@ static VehicleRecord historic_mercedes() {
          {"Transmission", "4-speed automatic", "722.311"},
          {"Paint", "Smoke Silver Metallic", "702U"},
          {"Upholstery", "Beige leather", "275 · datacard description"}},
-        {{"Make", "Mercedes-Benz", ""}, {"Model", "500 SEC", ""},
-         {"Engine number", "117963 22 081711", ""}, {"Transmission number", "722311 02 661254", ""},
-         {"Order number", "0 5 537 55057", ""}},
+        {{"Make", "Mercedes-Benz", ""}, {"Model", "500 SEC", ""}},
         {{"Production", "Approximately June 1985", ""}, {"Release", "Not recorded", ""},
          {"Delivery", "Not recorded", ""}, {"Order location", "Great Britain", ""},
          {"Factory", "Sindelfingen", ""}},
@@ -667,7 +649,7 @@ static string render_garage() {
             o << vehicle_facts({{"Make", "Mercedes-Benz", ""}, {"Model", "500SEC", ""},
                                 {"Chassis / Series", "126.044 · C126", ""},
                                 {"Powertrain", "4,973 cc M117.963 V8", ""}}, "car-facts")
-              << R"(<div class="vehicle-photo-pair" aria-label="Photographs of the 500SEC AMG"><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-side.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-side.jpg" width="1021" height="409" loading="lazy" decoding="async" alt="Smoke Silver 500SEC AMG photographed from the side, showing the AMG bodywork and five-spoke wheels"></a><figcaption>500SEC AMG · three-quarter side view</figcaption></figure><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-front.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-front.jpg" width="520" height="400" loading="lazy" decoding="async" alt="Front of the Smoke Silver 500SEC AMG with Western Australian registration 1ARK884"></a><figcaption>500SEC AMG · 1ARK884</figcaption></figure></div>)"
+              << R"(<div class="vehicle-photo-pair" aria-label="Photographs of the 500SEC AMG"><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-side.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-three-quarter.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Smoke Silver 500SEC AMG photographed from the side, showing the AMG bodywork and five-spoke wheels"></a><figcaption>500SEC AMG · three-quarter side view</figcaption></figure><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-front.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-front.webp" width="520" height="400" loading="lazy" decoding="async" alt="Front of the Smoke Silver 500SEC AMG with Western Australian registration 1ARK884"></a><figcaption>500SEC AMG · 1ARK884</figcaption></figure></div>)"
               << vehicle_record(sec) << R"(<a class="vehicle-index-return" href="#garage-index">↑ Back to the vehicle index</a></article>)";
         } else {
             o << historical_car(car);
@@ -748,8 +730,8 @@ static string render_download() {
     const string url = "https://github.com/Infiltrator-Projects/ssmithnet.net/releases/download/model-11-sandy-v1.0.0/Model_11_Sandy_v.1.0.0.zip";
     auto page = page_start("Model 11 Sandy v1.0.0", "Download Model 11 Sandy v1.0.0.", "Download");
     const auto head_end = page.find("</head>");
-    page.insert(head_end, "<meta name=\"robots\" content=\"noindex,follow\"><meta http-equiv=\"refresh\" content=\"2;url=" + esc(url) + "\">");
-    return page + "<section class=\"page-intro\"><div class=\"kicker\">Download</div><h1>Model 11 Sandy<br> v1.0.0</h1><p class=\"lead\">Your download should begin automatically.</p><p><a class=\"text-link\" href=\"" + esc(url) + "\">Download the ZIP now <span aria-hidden=\"true\">↗</span></a></p></section>" + page_end("Direct download");
+    page.insert(head_end, "<meta name=\"robots\" content=\"noindex,follow\">");
+    return page + "<section class=\"page-intro\"><div class=\"kicker\">Download</div><h1>Model 11 Sandy<br> v1.0.0</h1><p class=\"lead\">A 365 MB ZIP archive. Select the link below to start the download.</p><p><a class=\"text-link\" href=\"" + esc(url) + "\">Download the ZIP now <span aria-hidden=\"true\">↗</span></a></p></section>" + page_end("Direct download");
 }
 
 int main(int argc, char** argv) {

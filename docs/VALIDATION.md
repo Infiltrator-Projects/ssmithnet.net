@@ -89,3 +89,17 @@ The native check-site assertions cover these pages, assets, and links. The site 
 ## About professional background — 17 November 2026
 
 About now contains a concise professional history between the website's history and its other personal interests. It represents the user's current St Augustine's College ICT Systems Administrator role; previous Rumbalara, Goulburn Valley Health and Stellar Call Centres work; early Millennium Security/Equinox Global networking and Curtin teaching; and verified qualifications. The section omits internal employer infrastructure, personal contact information and employment dates. Native checks validate the career facts, section anchor, styling, and About/Archive mirror.
+
+## 18 November 2026 — Final content, privacy, font and performance pass
+
+The Home architecture diagram uses a 680-unit desktop SVG and a dedicated 390-unit mobile SVG selected with picture/source so the labels remain readable when the page narrows. Home's 1993 continuity note remains, but the second set of software/car project summaries has been removed.
+
+The 500SEC AMG gallery now uses the output of the native JPEG-to-WebP preparation process for its inline image elements and leaves the original JPEGs as full-size links. Both generated WebPs are verified by make check before publication.
+
+The Mercedes factory summaries retain the equipment codes and verified specifications while public HTML no longer contains exact VINs, engine/transmission serials or order/production identifiers. The registration strings already depicted in owner-supplied automotive imagery remain visible by design. This removes current website output but does not expunge immutable historical Git commits; do not claim history has been rewritten.
+
+MB Corpo is proprietary, and no licence permitting its redistribution with this website was established. The website has long used system UI typography in its final stylesheet; the unused historical font faces and binaries are omitted from the current tree and publication. Both native checks now enforce that fact.
+
+The Model 11 Sandy ZIP is approximately 365,049,429 bytes; visitors must click the download link after reading the size notice. The previously automatic two-second redirect has been removed.
+
+The retired Home thread styling has been removed from site-redesign.css and the native checks enforce concise introductory navigation. Desktop and narrow-device visual checks are still needed before describing the site as fully browser-reviewed.
