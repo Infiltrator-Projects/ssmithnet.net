@@ -252,6 +252,11 @@ void validate_garage(const fs::path& root, const string& garage) {
             fs::exists(root / "assets/photos/xc-falcon-ute-2-three-quarter.avif") &&
             fs::exists(root / "assets/photos/xc-falcon-ute-2-front.avif"),
             "XC Falcon ute two needs both distinct photos with Ford badging retained");
+    require(xc1.find("width=\"640\" height=\"480\"") != string::npos &&
+            xc1.find("width=\"640\" height=\"640\"") != string::npos &&
+            xc2.find("width=\"640\" height=\"480\"") != string::npos &&
+            xc2.find("width=\"640\" height=\"640\"") != string::npos,
+            "XC Falcon image dimensions must match the 640-pixel AVIF assets");
     // Reject the old 300-pixel placeholder AVIF assets in the public Garage.
     // They preserve the two distinct cars and grille-badge treatments at
     // a real 640-pixel delivery resolution.
