@@ -252,6 +252,16 @@ void validate_garage(const fs::path& root, const string& garage) {
             fs::exists(root / "assets/photos/xc-falcon-ute-2-three-quarter.avif") &&
             fs::exists(root / "assets/photos/xc-falcon-ute-2-front.avif"),
             "XC Falcon ute two needs both distinct photos with Ford badging retained");
+    // Reject the old 300-pixel placeholder AVIF assets in the public Garage.
+    // They preserve the two distinct cars and grille-badge treatments at
+    // a real 640-pixel delivery resolution.
+    for (const char* filename : {
+            "xc-falcon-ute-1-three-quarter.avif", "xc-falcon-ute-1-front.avif",
+            "xc-falcon-ute-2-three-quarter.avif", "xc-falcon-ute-2-front.avif"}) {
+        const fs::path photo = root / "assets/photos" / filename;
+        require(fs::is_regular_file(photo) && fs::file_size(photo) >= 6000,
+                string("XC Falcon image is missing or still only a tiny preview: ") + filename);
+    }
     for (const char* id : {"discovery-2", "au-fairmont"}) {
         const size_t start = garage.find("id=\"" + string(id) + "\"");
         require(start != string::npos, "Missing 2002 vehicle");

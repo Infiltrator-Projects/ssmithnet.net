@@ -103,3 +103,7 @@ MB Corpo is proprietary, and no licence permitting its redistribution with this 
 The Model 11 Sandy ZIP is approximately 365,049,429 bytes; visitors must click the download link after reading the size notice. The previously automatic two-second redirect has been removed.
 
 The retired Home thread styling has been removed from site-redesign.css and the native checks enforce concise introductory navigation. Desktop and narrow-device visual checks are still needed before describing the site as fully browser-reviewed.
+
+## Garage XC Falcon replacement files — 18 November 2026
+
+The four previously committed 300-pixel AVIF placeholders were replaced using the approved original reconstructions. Both vehicles now have 640-pixel delivery images: three-quarter views 640 × 480 and front views 640 × 640, retaining XC ute 1's intentionally debadged grille and XC ute 2's Ford badge. Git blob SHAs were checked against the original locally encoded AVIF bytes. The existing Gallery markup, two-card chronology and reconstruction captions are unchanged. The native validation now rejects tiny (<6000-byte) AVIF placeholder files.
