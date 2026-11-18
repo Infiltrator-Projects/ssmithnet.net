@@ -712,13 +712,14 @@ void validate(const fs::path& root) {
 
     require(home.find("Projects, cars,") != string::npos &&
             home.find("ReVox B77 Mk II") != string::npos &&
-            home.find("assets/photos/revox-b77-mkii-dbx224.webp") != string::npos &&
+            home.find("Technics SU-Z400") != string::npos &&
+            home.find("assets/photos/revox-b77-mkii-dbx224-technics-su-z400.webp") != string::npos &&
             home.find("2002 Discovery II") != string::npos,
             "Refreshed homepage content missing or contains wrong garage history");
     require(first.at("workbench.html").find("id=\"revox-b77\"") != string::npos,
             "ReVox hardware section is not reachable from the homepage");
-    require(fs::is_regular_file(root / "assets/photos/revox-b77-mkii-dbx224.webp") &&
-            fs::file_size(root / "assets/photos/revox-b77-mkii-dbx224.webp") > 10000,
+    require(fs::is_regular_file(root / "assets/photos/revox-b77-mkii-dbx224-technics-su-z400.webp") &&
+            fs::file_size(root / "assets/photos/revox-b77-mkii-dbx224-technics-su-z400.webp") > 10000,
             "ReVox illustration is missing from published sources");
     require(home.find("assets/graphics/ui-workbench.svg") != string::npos &&
             home.find("assets/graphics/ui-garage.svg") != string::npos &&

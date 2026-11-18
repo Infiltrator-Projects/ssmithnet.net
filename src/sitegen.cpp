@@ -53,7 +53,7 @@ static string page_start(const string& title, const string& description, const s
     const string filename = active == "Home" ? "" : active == "Workbench" ? "workbench.html" : active == "Projects" ? "projects.html" : active == "Garage" ? "garage.html" : active == "Download" ? "downloads/model-11-sandy/" : "about.html";
     const string prefix = active == "Download" ? "../../" : "";
     // Use existing site imagery for social previews; never claim an invented app screenshot.
-    const string social_image = active == "Home" ? "revox-b77-mkii-dbx224.webp" :
+    const string social_image = active == "Home" ? "revox-b77-mkii-dbx224-technics-su-z400.webp" :
                                 active == "Garage" ? "e250-cdi-three-quarter.webp" : "";
     const string social_meta = social_image.empty() ? "" :
         "<meta property=\"og:image\" content=\"https://ssmithnet.net/assets/photos/" + social_image + "\">" +
@@ -174,13 +174,13 @@ static string render_home() {
   <article class="home-revox">
     <div class="showcase-description">
       <p class="eyebrow">Featured hardware · Open-reel audio</p>
-      <h2>ReVox B77 Mk II <span>+ dbx 224</span></h2>
-      <p>My B77 Mk II and its dbx 224 are here because tape remains a hands-on piece of engineering: transport mechanics, recording levels, signal processing and a sound you can physically handle. The Workbench has the equipment story.</p>
+      <h2>ReVox B77 Mk II <span>+ dbx 224 + Technics SU-Z400</span></h2>
+      <p>My ReVox B77 Mk II, dbx 224 and Technics SU-Z400 represent three distinct parts of my analogue setup: tape transport, external Type II noise reduction and stereo amplification. The redrawn artwork includes the BASF tape reel and my silver metal reel. The Workbench has the equipment story.</p>
       <a class="ui-action ui-action-outline" href="workbench.html#revox-b77">Explore the tape setup <span aria-hidden="true">↗</span></a>
     </div>
     <figure class="revox-preview">
-      <img src="assets/photos/revox-b77-mkii-dbx224.webp" width="1200" height="900" decoding="async" alt="Clean illustration of my ReVox B77 Mk II reel-to-reel recorder above a dbx Model 224, with two BASF reels and illuminated VU meters">
-      <figcaption>ReVox B77 Mk II and dbx 224 · Redrawn from my own equipment.</figcaption>
+      <img src="assets/photos/revox-b77-mkii-dbx224-technics-su-z400.webp" width="1200" height="900" decoding="async" alt="Illustration of my ReVox B77 Mk II with BASF tape reel on the left, silver metal reel on the right and illuminated VU meters; the dbx 224 and Technics SU-Z400 amplifier are below">
+      <figcaption>ReVox B77 Mk II · dbx 224 · Technics SU-Z400 · redrawn from my own equipment.</figcaption>
     </figure>
   </article>
   <aside class="home-garage-panel" aria-labelledby="home-garage-title">
@@ -410,7 +410,7 @@ static string render_workbench() {
     <a href="#software"><small>03 · Applications</small><strong>Desktop tools</strong><span>Monitor, defragment, calculate and manage</span></a>
     <a href="#link"><small>04 · Vehicles</small><strong>Link diagnostics</strong><span>Protocols and manufacturer knowledge</span></a>
     <a href="#creative"><small>05 · Simulation</small><strong>Games & creative</strong><span>City building, racing and character stories</span></a>
-    <a href="#revox-b77"><small>06 · Audio</small><strong>ReVox B77 Mk II</strong><span>Open-reel mechanics and dbx processing</span></a>
+    <a href="#revox-b77"><small>06 · Audio</small><strong>ReVox B77 Mk II</strong><span>Reels, dbx processing and Technics amplification</span></a>
   </nav>
   <p class="workbench-index-link"><a href="projects.html">Looking for source code? Browse Projects <span aria-hidden="true">↗</span></a></p>
 </section>
@@ -492,14 +492,15 @@ static string render_workbench() {
 <a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
 </section>
 <section id="revox-b77" class="project-section analog-section">
-  <header class="section-heading"><p class="eyebrow">Analogue · Real hardware</p><h2>ReVox B77 Mk II and dbx 224.</h2><p class="section-deck">A different way of seeing an engineering system work.</p></header>
+  <header class="section-heading"><p class="eyebrow">Analogue · Real hardware</p><h2>ReVox B77 Mk II, dbx 224 and Technics SU-Z400.</h2><p class="section-deck">A different way of seeing an engineering system work.</p></header>
   <div class="analog-feature-body">
-    <figure><img src="assets/photos/revox-b77-mkii-dbx224.webp" width="1200" height="900" loading="lazy" decoding="async" alt="Illustrated ReVox B77 Mk II recorder with BASF reels, paired with dbx 224 noise reduction"><figcaption>A clean redraw based on my own recorder and dbx unit, not an original photograph.</figcaption></figure>
-    <div><p class="eyebrow">The equipment</p><h3>Open-reel recording, with separate noise reduction.</h3>
+    <figure><img src="assets/photos/revox-b77-mkii-dbx224-technics-su-z400.webp" width="1200" height="900" loading="lazy" decoding="async" alt="Redrawn ReVox B77 Mk II with BASF reel and silver metal reel, above a dbx 224 and Technics SU-Z400 integrated amplifier"><figcaption>A clean redraw based on my own recorder, metal reel, dbx unit and Technics amplifier, not an original photograph.</figcaption></figure>
+    <div><p class="eyebrow">The equipment</p><h3>Open-reel recording, noise reduction and amplification.</h3>
       <p>The ReVox B77 Mk II is a two-channel open-reel tape recorder. Its moving reels, transport controls and VU meters make the recording process visible in a way that software often conceals. There are separate left and right line inputs and outputs on the back of my machine.</p>
-      <p>The dbx Model 224 is an external Type II encode/decode noise-reduction unit. It is part of the recording and playback signal path, not a replacement for the recorder's mechanical transport. The two machines have different jobs, but their settings and connections matter together.</p>
-      <p>The redraw shows the equipment together, but the real interest is in the recording chain: a mechanical tape transport, separate left and right channels, and an external noise-reduction stage that must be set correctly for recording and playback.</p>
-      <dl class="analog-specs"><div><dt>Recorder</dt><dd>ReVox B77 Mk II</dd></div><div><dt>Noise reduction</dt><dd>dbx 224 · Type II</dd></div><div><dt>Connections</dt><dd>Two-channel line input and output</dd></div></dl>
+      <p>The dbx Model 224 is an external Type II encode/decode noise-reduction unit. It is part of the recording and playback signal path, not a replacement for the recorder's mechanical transport. The recorder and noise-reduction processor have different jobs, but their settings and connections matter together.</p>
+      <p>The Technics SU-Z400 is my stereo integrated amplifier, with front-panel bass, treble, balance and volume sliders. It sits beneath the dbx unit in my setup and represents the listening and amplification side of the equipment.</p>
+      <p>The redraw follows my photographs: a BASF reel and the distinctive silver metal reel on the B77, its illuminated meters, the dbx 224 below and the Technics amplifier beneath that. It is a depiction of the hardware, not a claim about the exact current cable routing.</p>
+      <dl class="analog-specs"><div><dt>Recorder</dt><dd>ReVox B77 Mk II</dd></div><div><dt>Noise reduction</dt><dd>dbx 224 · Type II</dd></div><div><dt>Amplifier</dt><dd>Technics SU-Z400</dd></div><div><dt>Reels</dt><dd>BASF and silver metal reel</dd></div><div><dt>Deck connections</dt><dd>Two-channel line input and output</dd></div></dl>
     </div>
   </div>
 <a class="chapter-backlink" href="#workbench-topics">↑ Back to Workbench topics</a>
@@ -678,7 +679,7 @@ static string render_about() {
     <article class="event"><span class="era">1993</span><div><h3>The 450SEL 6.9 and the Infiltrator website.</h3><p>The original subject was my Mercedes-Benz W116 450SEL 6.9. Its engineering, specification and character gave the site something worth documenting. That beginning matters: the web page was personal first, and it still is. The <a href="garage.html#450sel-69">Garage</a> retains that vehicle alongside the others I have owned.</p></div></article>
     <article class="event"><span class="era">Beta-testing years</span><div><h3>Windows, Solaris and games.</h3><p>I was involved in voluntary beta testing of Microsoft Windows ME, Solaris and EA game projects. The Windows ME work included a Beta Tester of the Month award. Testing meant spending time with unfinished software and reporting what actually happened—not merely judging its intended feature list.</p></div></article>
     <article class="event"><span class="era">The software workshop</span><div><h3>From applications to their foundations.</h3><p>The software work expanded to include System Monitor, Defragmenter, Calendar, Calculator, vehicle diagnostics and InfiltratorFS. More recently the structure has grown into separately owned operating-system components, shared libraries, filesystem engines and specialist modules. These are different layers of work, not dozens of names for the same application. <a href="workbench.html#platform">The Workbench explains the architectural boundaries</a>, while <a href="projects.html#group-foundations">Projects lists the separate source repositories</a>.</p></div></article>
-    <article class="event"><span class="era">Today</span><div><h3>One website, several kinds of evidence.</h3><p>The Mercedes E 250 CDI is both a car I drive and an evidence vehicle for MBLink development. The ReVox B77 and dbx 224 are another kind of engineering interest: hands-on equipment that does not need to become a software project to deserve attention.</p></div></article>
+    <article class="event"><span class="era">Today</span><div><h3>One website, several kinds of evidence.</h3><p>The Mercedes E 250 CDI is both a car I drive and an evidence vehicle for MBLink development. My ReVox B77 Mk II, dbx 224 and Technics SU-Z400 are another kind of engineering interest: hands-on equipment that does not need to become a software project to deserve attention.</p></div></article>
   </div>
 </section>
 <section id="professional-background" class="about-professional" aria-labelledby="professional-background-title">
@@ -696,7 +697,7 @@ static string render_about() {
 <section id="interests" class="about-interests">
   <header class="section-heading"><p class="eyebrow">Away from the code</p><h2>Machines, music<br>and other interests.</h2><p class="section-deck">The website is wider than the software projects.</p></header>
   <div class="project-content">
-    <article class="interest-entry"><h3>Open-reel tape.</h3><p>My ReVox B77 Mk II and dbx 224 combine mechanical transport, analogue recording and signal processing. The sound matters, but so does the physical machinery and understanding how it works. Their own equipment story belongs in the <a href="workbench.html#revox-b77">Workbench</a>.</p></article>
+    <article class="interest-entry"><h3>Open-reel tape.</h3><p>My ReVox B77 Mk II, dbx 224 and Technics SU-Z400 bring together tape transport, analogue recording, Type II noise reduction and stereo amplification. The silver metal reel is part of the equipment I enjoy as much as the sound and the engineering behind it. Their own equipment story belongs in the <a href="workbench.html#revox-b77">Workbench</a>.</p></article>
     <article class="interest-entry"><h3>Films, games and cars.</h3><p>Music, films and games are part of the picture alongside the cars. Some ideas have also led to my own simulation projects, but enjoying those subjects came first. The <a href="garage.html">Garage</a> contains the record of the vehicles I have owned.</p></article>
   </div>
   <article class="watch-feature" id="daytona" aria-labelledby="daytona-title">
