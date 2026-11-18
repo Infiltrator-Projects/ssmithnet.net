@@ -115,3 +115,5 @@ The final style layer now uses the owner's specified MB Corpo A condensed displa
 The 500SEC AMG inline gallery now uses the two original tracked JPEG files as both preview and full-size links; neither display depends on generated WebP delivery files or Pages workflow timing. Generator output, committed HTML and regression tests agree.
 
 The font choice is an approved project design requirement; the ability to redistribute the binary typefaces has not been independently established by a licence document.
+
+The generated `archive.html` alias is byte-for-byte identical to the current `about.html` mirror; this is required by the C++ generator and tested by `make check`. A stale alias discovered during the font rollout was corrected before the final native revalidation.
