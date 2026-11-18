@@ -10,8 +10,8 @@
   --line:rgba(142,180,192,.29);--line-soft:rgba(142,180,192,.18);
   --wood-strong:rgba(142,180,192,.29);
   --content:1320px;--radius:11px;--measure:74ch;
-  --sans:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
-  --display:var(--sans);--ui-font:var(--sans);
+  --infiltratr-font-ui:"MB Corpo S";--infiltratr-font-brand:"MB Corpo A";
+  --sans:"MB Corpo S";--display:"MB Corpo A";--ui-font:var(--sans);
   --ui-line:var(--line);--ui-card:linear-gradient(145deg,#1c2b35 0%,#101b23 100%);
 }
 html{scroll-padding-top:22px}

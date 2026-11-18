@@ -393,8 +393,8 @@ void validate_garage(const fs::path& root, const string& garage) {
             count("class=\"vehicle-photo-pair\"") == 1,
             "SEC must mirror the E 250 two-photo gallery layout");
     const std::array<std::pair<string,string>, 2> photos{{
-        {"500sec-amg-three-quarter.webp", "width=\"1021\" height=\"409\""},
-        {"500sec-amg-front.webp", "width=\"520\" height=\"400\""}
+        {"500sec-amg-side.jpg", "width=\"1021\" height=\"409\""},
+        {"500sec-amg-front.jpg", "width=\"520\" height=\"400\""}
     }};
     for (const auto& [filename, dimensions] : photos) {
         require(count("src=\"assets/photos/" + filename + "\"") == 1 &&
@@ -403,6 +403,9 @@ void validate_garage(const fs::path& root, const string& garage) {
                 fs::file_size(root / "assets/photos" / filename) > 1000,
                 "SEC displayed photo or dimensions missing: " + filename);
     }
+    require(markup.find("<img src=\"assets/photos/500sec-amg-three-quarter.webp\"") == string::npos &&
+            markup.find("<img src=\"assets/photos/500sec-amg-front.webp\"") == string::npos,
+            "SEC gallery must display the two tracked source JPEGs, not unpublished WebP derivatives");
     require(fs::is_regular_file(root / "assets/photos/500sec-amg-side.jpg") &&
             fs::is_regular_file(root / "assets/photos/500sec-amg-front.jpg"),
             "Original unmodified SEC photographic sources must remain available");
@@ -585,7 +588,7 @@ void validate(const fs::path& root) {
         require(generated == read(root / relative),
                 relative + ": committed generated mirror is stale; regenerate with make");
         first[relative] = generated;
-        require(generated.find("site-redesign.css?v=20261118-polish6") != string::npos, relative + ": refreshed UI stylesheet missing");
+        require(generated.find("site-redesign.css?v=20261118-mb7") != string::npos, relative + ": refreshed UI stylesheet missing");
         const Page page = parse_page(generated);
         inspected[relative] = page;
         require(page.h1 == 1, relative + ": expected exactly one h1");
@@ -624,7 +627,7 @@ void validate(const fs::path& root) {
     for (const auto& [relative, content] : first) {
         require(content.find("Online since 1993.") != string::npos,
                 relative + ": shared 1993 founding history missing");
-        require(content.find("site-redesign.css?v=20261118-polish6") != string::npos,
+        require(content.find("site-redesign.css?v=20261118-mb7") != string::npos,
                 relative + ": updated mobile presentation was not referenced");
     }
     const string design_doc = read(root / "docs/DESIGN.md");
@@ -767,9 +770,11 @@ void validate(const fs::path& root) {
             system_css.find(".home-editorial") != string::npos &&
             system_css.find(".about-thread-body") != string::npos,
             "Shared theme must cover Home, Workbench, Garage and About");
-    require(read(root / "assets/site.css").find("@font-face") == string::npos &&
-            read(root / "assets/site.css").find("MB Corpo") == string::npos,
-            "Public pages must not bundle unlicensed corporate font files");
+    const string site_font_css = read(root / "assets/site.css");
+    require(site_font_css.find("font-family:\"MB Corpo A\"") != string::npos &&
+            site_font_css.find("font-family:\"MB Corpo S\"") != string::npos &&
+            site_font_css.find("--sans:\"MB Corpo S\";--display:\"MB Corpo A\"") != string::npos,
+            "Approved Mercedes display and body fonts must be loaded and selected");
     require(system_css.find(".about-page .about-professional{padding:44px") != string::npos &&
             system_css.find(".professional-role{display:grid") != string::npos,
             "Professional biography responsive styling missing");

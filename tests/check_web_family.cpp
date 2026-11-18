@@ -158,20 +158,43 @@ void check(const fs::path& root) {
                 relative + ": unexpanded template marker");
     }
     const std::string css = read(root / "assets/site.css");
-    // Public website assets must not redistribute proprietary font binaries.
-    require(css.find("@font-face") == std::string::npos &&
-            css.find("MB Corpo") == std::string::npos &&
-            css.find("mb-corpo-") == std::string::npos,
-            "Proprietary web fonts were reintroduced into the public baseline");
-    require(!fs::exists(root / "assets/fonts/mb-corpo-a-cond-regular.woff2") &&
-            !fs::exists(root / "assets/fonts/mb-corpo-s-regular.woff2") &&
-            !fs::exists(root / "assets/fonts/mb-corpo-s-bold.woff2"),
-            "Proprietary font binaries must not be published");
-    require(css.find("--sans:var(--infiltratr-font-ui,system-ui,sans-serif)") != std::string::npos,
-            "Baseline typography needs a system font fallback");
+    // Exactly three approved MB Corpo faces are distributed and served.
+    constexpr std::array<const char*, 3> approved_fonts{
+        "mb-corpo-a-cond-regular.woff2",
+        "mb-corpo-s-regular.woff2",
+        "mb-corpo-s-bold.woff2"};
+    for (const char* name : approved_fonts) {
+        require(css.find(name) != std::string::npos, std::string("Approved MB font missing from CSS: ") + name);
+        const std::string bytes = read(root / "assets/fonts" / name);
+        require(bytes.size() >= 4 && bytes.substr(0, 4) == "wOF2",
+                std::string("Invalid or missing original MB WOFF2 face: ") + name);
+    }
+    size_t faces = 0, offset = 0;
+    while ((offset = css.find("@font-face", offset)) != std::string::npos) {
+        ++faces;
+        offset += 10;
+    }
+    require(faces == 3, "The site must load only its three approved MB Corpo font faces");
+    std::size_t file_count = 0;
+    for (const auto& entry : fs::directory_iterator(root / "assets/fonts")) {
+        require(entry.is_regular_file(), "Unexpected folder among approved font files");
+        const auto name = entry.path().filename().string();
+        require(std::find_if(approved_fonts.begin(), approved_fonts.end(), [&](const char* approved) {
+                    return name == approved;
+                }) != approved_fonts.end(), "Unapproved font file in published asset tree: " + name);
+        ++file_count;
+    }
+    require(file_count == approved_fonts.size(), "Approved MB typeface inventory mismatch");
+    const std::string final_css = read(root / "assets/site-redesign.css");
+    require(final_css.find("--sans:\"MB Corpo S\";--display:\"MB Corpo A\"") != std::string::npos &&
+            final_css.find("--infiltratr-font-ui:\"MB Corpo S\";--infiltratr-font-brand:\"MB Corpo A\"") != std::string::npos,
+            "Final active CSS must actually select the approved MB Corpo faces");
+    for (const char* generic : {"Segoe UI", "Roboto", "Liberation Sans", "Arial", "-apple-system"})
+        require(final_css.find(generic) == std::string::npos,
+                std::string("Unapproved font name in final site stylesheet: ") + generic);
     require(std::regex_search(css, std::regex(R"(--accent\s*:\s*#00adef\b)", std::regex::icase)),
             "Official Mercedes app blue #00ADEF must remain");
-    std::cout << "PASS: shared navigation, metadata, landmarks, assets and redistributable font stack across "
+    std::cout << "PASS: shared navigation, metadata, landmarks, assets and exactly three approved MB Corpo faces across "
               << checked << " pages\n";
 }
 } // namespace

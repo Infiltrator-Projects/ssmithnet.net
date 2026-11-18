@@ -8,7 +8,7 @@ The deployed site is deliberately boring at runtime: static HTML, local assets a
 
 `src/sitegen.cpp` is the authoritative deterministic C++17 site generator. It owns the shared page structure, navigation, standardised car cards and repeated presentation logic for Home, Workbench, Projects, Garage, About and the download landing page.
 
-Shared neutral presentation and infrastructure come from the immutable Common revision owned by [Makefile](Makefile) and [the Pages workflow](.github/workflows/generate-site.yml) rather than being reimplemented here. COMMON owns the canonical graphite/silver design tokens and web adapter, generic output escaping, generic durable file publication and the product-neutral GitHub Pages deployment action. This site owns its personal content, page composition, Workbench/Garage/About information architecture, system font stack, cyan/warm-material treatment and original graphics.
+Shared neutral presentation and infrastructure come from the immutable Common revision owned by [Makefile](Makefile) and [the Pages workflow](.github/workflows/generate-site.yml) rather than being reimplemented here. COMMON owns the canonical graphite/silver design tokens and web adapter, generic output escaping, generic durable file publication and the product-neutral GitHub Pages deployment action. This site owns its personal content, page composition, Workbench/Garage/About information architecture, selected MB Corpo A/S typography, cyan/warm-material treatment and original graphics.
 
 GitHub Pages is published from the generated GitHub Actions artifact. Actions builds the generator on an Ubuntu runner, verifies the committed Common web snapshot before the build modifies it, validates the generated site, creates a clean `public/` tree, adds the local assets and custom-domain file, and hands that directory to COMMON's reusable Pages deployment action.
 
@@ -51,7 +51,7 @@ The project prefers durable, understandable machinery over fashionable web stack
 
 ## Website family
 
-`include/site-family.hpp` and `assets/` are the canonical identity shared with Package Repository: page metadata, wordmark, cross-site navigation, footer, system typography, colour/spacing conventions and accessible controls. The repository consumes an immutable, byte-verified snapshot, keeping both sites self-contained at runtime. Personal editorial composition and catalogue-specific behaviour remain with their respective products.
+`include/site-family.hpp` and `assets/` are the canonical identity shared with Package Repository: page metadata, wordmark, cross-site navigation, footer, three MB Corpo faces, colour/spacing conventions and accessible controls. The repository consumes an immutable, byte-verified snapshot, keeping both sites self-contained at runtime. Personal editorial composition and catalogue-specific behaviour remain with their respective products.
 
 `tests/check_web_family.cpp` is the shared output contract. It validates navigation, metadata, landmarks, local resources and actual WOFF2 assets on both published trees. A change to the family is complete when the repository snapshot and its pinned source commit are updated and both sites pass this check. Common supplies neutral primitives underneath the family; its exact revision belongs to the build and deployment configuration linked above.
 

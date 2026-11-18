@@ -29,7 +29,7 @@ inline std::string head(const std::string& title, const std::string& description
         "\"><meta property=\"og:description\" content=\"" + esc(description) +
         "\"><meta property=\"og:url\" content=\"" + esc(canonical) +
         "\"><link rel=\"stylesheet\" href=\"" + esc(assets) + "infiltrator-web-v1.css?v=common-1.19.3\">"
-        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site.css?v=family-20261016-refined\">"
+        "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site.css?v=family-20261118-mb7\">"
         "<link rel=\"stylesheet\" href=\"" + esc(assets) + "site-overrides.css?v=family-20261016-refined\">";
 }
 inline std::string navigation(const std::string& active, const std::string& home = "") {

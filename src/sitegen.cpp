@@ -60,7 +60,7 @@ static string page_start(const string& title, const string& description, const s
         "<meta name=\"twitter:card\" content=\"summary_large_image\">";
     return infiltrator_web::head(title + " — ssmithnet.net", description, "https://ssmithnet.net/" + filename, prefix + "assets/") + social_meta +
         "<link rel=\"icon\" type=\"image/svg+xml\" href=\"" + esc(prefix + "assets/brand-2026.svg") + "\">" +
-        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261118-polish6") + "\">" +
+        "<link rel=\"stylesheet\" href=\"" + esc(prefix + "assets/site-redesign.css?v=20261118-mb7") + "\">" +
         "</head><body class=\"" + esc(body_class) + "\">" + infiltrator_web::navigation(active, prefix) + "<main id=\"main\">";
 }
 
@@ -654,7 +654,7 @@ static string render_garage() {
             o << vehicle_facts({{"Make", "Mercedes-Benz", ""}, {"Model", "500SEC", ""},
                                 {"Chassis / Series", "126.044 · C126", ""},
                                 {"Powertrain", "4,973 cc M117.963 V8", ""}}, "car-facts")
-              << R"(<div class="vehicle-photo-pair" aria-label="Photographs of the 500SEC AMG"><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-side.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-three-quarter.webp" width="1021" height="409" loading="lazy" decoding="async" alt="Smoke Silver 500SEC AMG photographed from the side, showing the AMG bodywork and five-spoke wheels"></a><figcaption>500SEC AMG · three-quarter side view</figcaption></figure><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-front.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-front.webp" width="520" height="400" loading="lazy" decoding="async" alt="Front of the Smoke Silver 500SEC AMG with Western Australian registration 1ARK884"></a><figcaption>500SEC AMG · 1ARK884</figcaption></figure></div>)"
+              << R"(<div class="vehicle-photo-pair" aria-label="Photographs of the 500SEC AMG"><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-side.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-side.jpg" width="1021" height="409" loading="lazy" decoding="async" alt="Smoke Silver 500SEC AMG photographed from the side, showing the AMG bodywork and five-spoke wheels"></a><figcaption>500SEC AMG · three-quarter side view</figcaption></figure><figure><a class="garage-photo-link" href="assets/photos/500sec-amg-front.jpg" aria-label="Open full-sized vehicle photograph"><img src="assets/photos/500sec-amg-front.jpg" width="520" height="400" loading="lazy" decoding="async" alt="Front of the Smoke Silver 500SEC AMG with Western Australian registration 1ARK884"></a><figcaption>500SEC AMG · 1ARK884</figcaption></figure></div>)"
               << vehicle_record(sec) << R"(<a class="vehicle-index-return" href="#garage-index">↑ Back to the vehicle index</a></article>)";
         } else {
             o << historical_car(car);

@@ -1,3 +1,10 @@
+## 18 November 2026 — Repair Mercedes photographs and restore approved typefaces
+
+- Fixed both missing 500SEC AMG gallery images by referring directly to the original repository JPEGs in both generated and committed markup.
+- Reinstated only the three MB Corpo faces previously selected for the site: Corpo A Condensed regular, Corpo S regular and Corpo S bold.
+- Corrected final CSS and font checks so the website actually uses MB fonts rather than the substituted system stack.
+- Preserved the current design, full vehicle research and unrelated site improvements. Ownership/redistribution licence for the original font files remains unverified.
+
 ## 18 November 2026 — Restore complete Mercedes factory identities
 
 - Restored both Mercedes factory identity records exactly as documented before the editorial cleanup: VINs, engine and transmission numbers, order numbers, and the E 250 CDI production number.

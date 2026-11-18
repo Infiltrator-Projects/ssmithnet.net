@@ -2,7 +2,7 @@
 <title id="title">Infiltrator software components, mobile layout</title>
 <desc id="desc">Libraries defines the shared contract, filesystem engines own their formats, Boot and Files consume the engines, and InfiltratorOS integrates the system.</desc>
 <rect width="390" height="600" fill="#0b151b"/>
-<g font-family="Arial,Helvetica,sans-serif">
+<g font-family="MB Corpo S">
 <text x="22" y="36" fill="#27dce9" font-size="15" font-weight="bold" letter-spacing="1.6">INFILTRATOR SOFTWARE</text>
 <text x="22" y="68" fill="#f4f7f8" font-size="24" font-weight="bold">Shared contracts.</text>
 <text x="22" y="95" fill="#f4f7f8" font-size="24" font-weight="bold">Separate responsibilities.</text>

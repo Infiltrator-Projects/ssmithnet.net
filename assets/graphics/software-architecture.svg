@@ -2,7 +2,7 @@
 <title id="title">Infiltrator software component responsibilities</title>
 <desc id="desc">Libraries supplies shared contracts to filesystem engines. Boot and Files use the engines in different environments. InfiltratorOS coordinates the overall system.</desc>
 <rect width="680" height="580" fill="#0b151b"/>
-<g font-family="Arial,Helvetica,sans-serif">
+<g font-family="MB Corpo S">
 <text x="38" y="48" fill="#28dce9" font-size="17" font-weight="bold" letter-spacing="2">INFILTRATOR SOFTWARE</text>
 <text x="38" y="87" fill="#f1f6f8" font-size="30" font-weight="bold">Clear boundaries, shared interfaces.</text>
 <rect x="38" y="119" width="604" height="83" rx="10" fill="#17303a" stroke="#527381" stroke-width="2"/>

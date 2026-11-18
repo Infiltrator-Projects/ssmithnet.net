@@ -107,3 +107,11 @@ The retired Home thread styling has been removed from site-redesign.css and the 
 ## Garage XC Falcon replacement files — 18 November 2026
 
 The four previously committed 300-pixel AVIF placeholders were replaced using the approved original reconstructions. Both vehicles now have 640-pixel delivery images: three-quarter views 640 × 480 and front views 640 × 640, retaining XC ute 1's intentionally debadged grille and XC ute 2's Ford badge. Git blob SHAs were checked against the original locally encoded AVIF bytes. The existing Gallery markup, two-card chronology and reconstruction captions are unchanged. The native validation now rejects tiny (<6000-byte) AVIF placeholder files.
+
+## 18 November 2026 — MB Corpo typography and original 500SEC photographs
+
+The final style layer now uses the owner's specified MB Corpo A condensed display face and MB Corpo S regular/bold body faces; no Roboto, Liberation Sans, Arial or generic system face is declared in the final stylesheet. The three WOFF2 files are the exact historical repository blobs, and the build checks that no other font assets are present. The two architecture diagram SVGs name the MB Corpo S family. External-image SVG font rendering may still vary between browsers; no graphical font-pixel comparison was performed.
+
+The 500SEC AMG inline gallery now uses the two original tracked JPEG files as both preview and full-size links; neither display depends on generated WebP delivery files or Pages workflow timing. Generator output, committed HTML and regression tests agree.
+
+The font choice is an approved project design requirement; the ability to redistribute the binary typefaces has not been independently established by a licence document.
