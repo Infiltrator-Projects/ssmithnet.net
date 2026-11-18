@@ -522,7 +522,7 @@ static string vehicle_facts(const vector<VehicleFact>& facts, const string& clas
 
 static string vehicle_record(const VehicleRecord& car) {
     std::ostringstream o;
-    vector<VehicleFact> identity = {{"Original delivery", car.market, ""}};
+    vector<VehicleFact> identity = {{"VIN", car.vin, ""}, {"Original delivery", car.market, ""}};
     identity.insert(identity.end(), car.identity.begin(), car.identity.end());
     o << "<details class=\"vehicle-record technical-detail\"><summary>Full vehicle record <span aria-hidden=\"true\">+</span></summary>"
       << "<div class=\"vehicle-record-body\">" << vehicle_facts(car.specifications, "vehicle-specifications")
@@ -547,7 +547,7 @@ static string vehicle_record(const VehicleRecord& car) {
 
 static VehicleRecord current_mercedes() {
     return {
-        "e250-cdi", "E 250 CDI", "BlueEFFICIENCY Coupé · C207", "2011", "", "Australia",
+        "e250-cdi", "E 250 CDI", "BlueEFFICIENCY Coupé · C207", "2011", "WDD2073032F129158", "Australia",
         "Bremen-built, right-hand-drive pre-facelift E-Class coupé.", true,
         {{"Chassis / Baumuster", "C207 · 207.303", "Right-hand drive"},
          {"Engine", "2,143 cc diesel", "OM651"},
@@ -555,7 +555,9 @@ static VehicleRecord current_mercedes() {
          {"Transmission", "5-speed automatic", "722.646"},
          {"Paint", "Obsidian Black", "197U"},
          {"Upholstery", "Black / Anthracite", "Leather · 251A"}},
-        {{"Make", "Mercedes-Benz", ""}, {"Model", "E 250 CDI Coupé", ""}},
+        {{"Make", "Mercedes-Benz", ""}, {"Model", "E 250 CDI Coupé", ""},
+         {"Engine number", "651911 30 638336", ""}, {"Transmission number", "722646 08 520376", ""},
+         {"Order number", "0 1 901 08524", ""}, {"Production number", "1789426", ""}},
         // Keep the previously recorded production date distinct from the
         // decoder's release/delivery dates; they describe different events.
         {{"Production", "12 May 2011", "Previously recorded"}, {"Release", "13 May 2011", ""},
@@ -603,7 +605,7 @@ static VehicleRecord current_mercedes() {
 
 static VehicleRecord historic_mercedes() {
     return {
-        "500-sec", "500 SEC AMG", "Factory 500 SEC · C126", "1985", "", "United Kingdom",
+        "500-sec", "500 SEC AMG", "Factory 500 SEC · C126", "1985", "WDB1260442A171593", "United Kingdom",
         "The UK-delivered, pre-facelift C126 before its AMG conversion.", false,
         {{"Chassis / Baumuster", "C126 · 126.044", "Right-hand drive"},
          {"Engine", "4,973 cc V8", "M117.963"},
@@ -611,7 +613,9 @@ static VehicleRecord historic_mercedes() {
          {"Transmission", "4-speed automatic", "722.311"},
          {"Paint", "Smoke Silver Metallic", "702U"},
          {"Upholstery", "Beige leather", "275 · datacard description"}},
-        {{"Make", "Mercedes-Benz", ""}, {"Model", "500 SEC", ""}},
+        {{"Make", "Mercedes-Benz", ""}, {"Model", "500 SEC", ""},
+         {"Engine number", "117963 22 081711", ""}, {"Transmission number", "722311 02 661254", ""},
+         {"Order number", "0 5 537 55057", ""}},
         {{"Production", "Approximately June 1985", ""}, {"Release", "Not recorded", ""},
          {"Delivery", "Not recorded", ""}, {"Order location", "Great Britain", ""},
          {"Factory", "Sindelfingen", ""}},

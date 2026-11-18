@@ -96,7 +96,7 @@ The Home architecture diagram uses a 680-unit desktop SVG and a dedicated 390-un
 
 The 500SEC AMG gallery now uses the output of the native JPEG-to-WebP preparation process for its inline image elements and leaves the original JPEGs as full-size links. Both generated WebPs are verified by make check before publication.
 
-The Mercedes factory summaries retain the equipment codes and verified specifications while public HTML no longer contains exact VINs, engine/transmission serials or order/production identifiers. The registration strings already depicted in owner-supplied automotive imagery remain visible by design. This removes current website output but does not expunge immutable historical Git commits; do not claim history has been rewritten.
+The Mercedes factory summaries retain the original verified VINs, engine/transmission serials, order and production identifiers, dates, specifications and equipment. These details were briefly removed without the owner's approval and have now been restored verbatim from the preserved Git revision. Regression checks assert their exact values; editorial refactoring must not silently alter or remove the recorded datacard information.
 
 MB Corpo is proprietary, and no licence permitting its redistribution with this website was established. The website has long used system UI typography in its final stylesheet; the unused historical font faces and binaries are omitted from the current tree and publication. Both native checks now enforce that fact.
 

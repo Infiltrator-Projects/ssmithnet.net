@@ -1,3 +1,10 @@
+## 18 November 2026 — Restore complete Mercedes factory identities
+
+- Restored both Mercedes factory identity records exactly as documented before the editorial cleanup: VINs, engine and transmission numbers, order numbers, and the E 250 CDI production number.
+- Reinstated the original vehicle-record rendering and the specific regression checks to prevent any future unrequested deletion.
+- The full Garage data belongs to the owner's historical research. The earlier removal in this day's changelog was a mistake and is superseded by this restoration.
+- Kept all subsequent site refinements, WebP and XC image improvements, and mobile styling intact.
+
 ## 18 November 2026 — Quality and privacy refinements
 
 - Replaced the tiny type in the original software architecture diagram with separate readable desktop and mobile SVG compositions.
